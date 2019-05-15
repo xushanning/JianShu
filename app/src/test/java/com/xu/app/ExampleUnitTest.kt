@@ -1,4 +1,4 @@
-package com.xu.jianshu
+package com.xu.app
 
 import org.junit.Test
 
