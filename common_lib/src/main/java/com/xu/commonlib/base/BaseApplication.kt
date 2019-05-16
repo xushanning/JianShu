@@ -1,4 +1,4 @@
-package com.xu.commonlib.base.app
+package com.xu.commonlib.base
 
 import android.app.Application
 import com.orhanobut.logger.AndroidLogAdapter
