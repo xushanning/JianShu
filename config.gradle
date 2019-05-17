@@ -15,7 +15,8 @@ ext {
             rxCache      : "2.3.5",
             rxlifecycle  : "2.2.1",
             kotlinVersion: "1.3.21",
-            room         : "1.1.1"
+            room         : "1.1.1",
+            dagger       : "2.22.1"
     ]
     dependencies = [
             //kotlin
@@ -81,6 +82,9 @@ ext {
 
             //AOP
             singleClick                : "org.aspectj:aspectjrt:1.8.13",
+            dagger                     : "com.google.dagger:dagger-android-support:${dependVersion.dagger}",
+            daggerProcessor            : "com.google.dagger:dagger-android-processor:${dependVersion.dagger}",
+            daggerCompiler             : "com.google.dagger:dagger-compiler:${dependVersion.dagger}",
 
             //debug
             logger                     : "com.orhanobut:logger:2.2.0",

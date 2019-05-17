@@ -34,8 +34,14 @@ dependencies {
     api rootProject.ext.dependencies["rxJava"]
     api rootProject.ext.dependencies["rxAndroid"]
     api rootProject.ext.dependencies["rxBinding"]
+    api rootProject.ext.dependencies["rxlifecycle"]
+    api rootProject.ext.dependencies["rxlifecycleComponents"]
 
     api rootProject.ext.dependencies["quickAdapter"]
 
     api rootProject.ext.dependencies["logger"]
+
+    api rootProject.ext.dependencies["dagger"]
+    api rootProject.ext.dependencies["arouterApi"]
+
 }
