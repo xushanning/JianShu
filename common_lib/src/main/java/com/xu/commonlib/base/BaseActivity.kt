@@ -1,7 +1,8 @@
 package com.xu.commonlib.base
 
 import android.os.Bundle
-import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
+import com.jaeger.library.StatusBarUtil
+import com.trello.rxlifecycle3.components.support.RxAppCompatActivity
 import com.xu.commonlib.mvp.IBaseView
 
 /**
@@ -12,9 +13,12 @@ abstract class BaseActivity : RxAppCompatActivity(), IBaseView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(setLayoutId())
+        StatusBarUtil.setTranslucentForImageViewInFragment(this, 0, null)
     }
 
     abstract fun setLayoutId(): Int
+
+    abstract fun initView()
 
     override fun showDialog(content: String) {
     }

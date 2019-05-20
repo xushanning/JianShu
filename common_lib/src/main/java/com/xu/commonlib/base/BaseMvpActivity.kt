@@ -1,7 +1,7 @@
 package com.xu.commonlib.base
 
 import android.os.Bundle
-import com.trello.rxlifecycle2.LifecycleTransformer
+import com.trello.rxlifecycle3.LifecycleTransformer
 import com.xu.commonlib.mvp.IBaseMvpView
 import com.xu.commonlib.mvp.IBasePresenter
 import com.xu.commonlib.mvp.IBaseView
