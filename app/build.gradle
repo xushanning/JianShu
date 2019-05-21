@@ -36,7 +36,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
 
 
-    implementation project(path: ':common_res')
+
     implementation project(path: ':common_lib')
     implementation project(path: ':module_jianshu')
 

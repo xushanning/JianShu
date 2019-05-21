@@ -1,6 +1,7 @@
 package com.xu.commonlib.base
 
 import android.app.Application
+import com.alibaba.android.arouter.launcher.ARouter
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.FormatStrategy
 import com.orhanobut.logger.Logger
@@ -15,6 +16,7 @@ class BaseApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         initLogger()
+        initARouter()
     }
 
     /**
@@ -33,4 +35,16 @@ class BaseApplication : Application() {
             }
         })
     }
+
+    /**
+     * 初始化ARouter
+     */
+    private fun initARouter() {
+        if (BuildConfig.DEBUG) {
+            ARouter.openLog()
+            ARouter.openDebug()
+        }
+        ARouter.init(this)
+    }
+
 }

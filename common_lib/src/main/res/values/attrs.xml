@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomToolbar">
+        <!--是否显示返回键-->
+        <attr name="showBack" format="boolean"/>
+        <attr name="barTitle" format="reference"/>
+    </declare-styleable>
+
+</resources>
