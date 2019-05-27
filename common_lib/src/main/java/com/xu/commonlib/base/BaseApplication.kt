@@ -7,12 +7,16 @@ import com.orhanobut.logger.FormatStrategy
 import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
 import com.xu.commonlib.BuildConfig
+import com.xu.commonlib.di.component.AppComponent
 import com.xu.commonlib.utlis.LoggerStrategy
 
 /**
  * @author 言吾許
  */
 class BaseApplication : Application() {
+    private lateinit var appComponent: AppComponent
+
+
     override fun onCreate() {
         super.onCreate()
         initLogger()
@@ -45,6 +49,10 @@ class BaseApplication : Application() {
             ARouter.openDebug()
         }
         ARouter.init(this)
+    }
+
+    private fun initAppComponent() {
+
     }
 
 }

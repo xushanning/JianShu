@@ -19,7 +19,7 @@ class HomeActivity : BaseActivity() {
     }
 
     override fun initView() {
-        //重点
+        //防重点
         bt_repeat_click.singleClick {
             ARouter.getInstance()
                 .build(ARouterPath.jianshuRepeatClick)

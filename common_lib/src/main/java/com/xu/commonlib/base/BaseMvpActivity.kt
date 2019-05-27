@@ -1,26 +1,26 @@
 package com.xu.commonlib.base
 
-import android.os.Bundle
 import com.trello.rxlifecycle3.LifecycleTransformer
-import com.xu.commonlib.mvp.IBaseMvpView
-import com.xu.commonlib.mvp.IBasePresenter
-import com.xu.commonlib.mvp.IBaseView
-import javax.inject.Inject
+import com.xu.commonlib.mvp.IPresenter
+import com.xu.commonlib.mvp.IView
 
 /**
  * @author 言吾許
  */
-abstract class BaseMvpActivity<P : IBasePresenter<IBaseView>> : BaseActivity(), IBaseMvpView {
+@Suppress("UNCHECKED_CAST")
+abstract class BaseMvpActivity<in V : IView, P : IPresenter<V>> : BaseActivity(), IView {
 
 
-    @Inject
     lateinit var mPresenter: P
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        mPresenter.attachView(this)
+
+    override fun initView() {
+        mPresenter = setPresenter()
+        mPresenter.attachView(this as V)
 
     }
+
+    abstract fun setPresenter(): P
 
 
     override fun <T> bindToLife(): LifecycleTransformer<T> {

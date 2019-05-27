@@ -5,7 +5,7 @@ import com.trello.rxlifecycle3.LifecycleTransformer
 /**
  * @author 言吾許
  */
-interface IBaseMvpView : IBaseView {
+interface IView : IBaseView {
     /**
      * 绑定声明周期
      */

@@ -36,9 +36,9 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
 
 
-
     implementation project(path: ':common_lib')
     implementation project(path: ':module_jianshu')
+    implementation project(path: ':module_sport')
 
     kapt rootProject.ext.dependencies["daggerProcessor"]
     kapt rootProject.ext.dependencies["daggerCompiler"]

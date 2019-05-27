@@ -11,7 +11,7 @@
             android:supportsRtl="true"
             tools:replace="android:theme"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name="com.xu.module.jianshu.ui.home.HomeActivity">
+        <activity android:name="com.xu.module.sport.ui.activity.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

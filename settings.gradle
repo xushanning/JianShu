@@ -1,1 +1,1 @@
-include ':app', ':common_lib', ':module_jianshu'
+include ':app', ':common_lib', ':module_jianshu', ':module_sport'

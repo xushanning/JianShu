@@ -44,6 +44,10 @@ dependencies {
     api rootProject.ext.dependencies["rxlifecycle"]
     api rootProject.ext.dependencies["rxlifecycleComponents"]
 
+    api rootProject.ext.dependencies["retrofitAdapter"]
+    api rootProject.ext.dependencies["retrofitConverter"]
+    api rootProject.ext.dependencies["okhttpLog"]
+
     api rootProject.ext.dependencies["statusBar"]
 
     api rootProject.ext.dependencies["quickAdapter"]

@@ -1,0 +1,16 @@
+apply from: "../component_build.gradle"
+
+android {
+    resourcePrefix "s_"
+}
+
+
+dependencies {
+    androidTestImplementation 'androidx.test:core:1.1.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
+    implementation project(path: ':common_lib')
+
+    kapt rootProject.ext.dependencies["daggerProcessor"]
+    kapt rootProject.ext.dependencies["daggerCompiler"]
+    kapt rootProject.ext.dependencies["arouterProcessor"]
+}

@@ -12,4 +12,10 @@ object ARouterPath {
      * 防重点
      */
     const val jianshuRepeatClick = "/jianshu/repeatClick"
+
+
+    /**
+     * 运动main
+     */
+    const val sportMain = "/sport/main"
 }

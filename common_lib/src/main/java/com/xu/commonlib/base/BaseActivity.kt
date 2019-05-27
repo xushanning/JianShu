@@ -26,6 +26,8 @@ abstract class BaseActivity : RxAppCompatActivity(), IBaseView {
 
     abstract fun setLayoutId(): Int
 
+   // abstract fun setComponent()
+
     abstract fun initView()
 
     open fun onBackClick() {

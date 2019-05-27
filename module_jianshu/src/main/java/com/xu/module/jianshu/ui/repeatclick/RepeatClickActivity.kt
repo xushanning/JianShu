@@ -32,10 +32,7 @@ class RepeatClickActivity : BaseActivity() {
         tv_view_click_count.text = getString(R.string.j_view_click_count, 0)
         tv_recycler_click_count.text = getString(R.string.j_recycler_click_count, 0)
         tv_child_repeat_click.text = getString(R.string.j_child_click_count, 0)
-        bt_repeat_click.singleClick {
-            viewClickCount++
-            tv_view_click_count.text = getString(R.string.j_view_click_count, viewClickCount)
-        }
+
 
         val data = ArrayList<String>().apply {
             add("1")
@@ -46,6 +43,12 @@ class RepeatClickActivity : BaseActivity() {
         val quickAdapter = RepeatQuickAdapter(data)
         rv_repeat_click.adapter = quickAdapter
         rv_repeat_click.layoutManager = LinearLayoutManager(this)
+
+        //view防重点击
+        bt_repeat_click.singleClick {
+            viewClickCount++
+            tv_view_click_count.text = getString(R.string.j_view_click_count, viewClickCount)
+        }
 
         //item防重点击
         quickAdapter.singleItemClick {
