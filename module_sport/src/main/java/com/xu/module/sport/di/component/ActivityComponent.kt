@@ -2,7 +2,7 @@ package com.xu.module.sport.di.component
 
 import com.xu.commonlib.di.component.AppComponent
 import com.xu.commonlib.di.scope.ActivityScope
-import com.xu.module.sport.di.module.MainModule
+import com.xu.module.sport.di.module.ActivityModule
 import com.xu.module.sport.ui.activity.main.MainActivity
 import dagger.Component
 
@@ -10,7 +10,7 @@ import dagger.Component
  * @author 言吾許
  */
 @ActivityScope
-@Component(modules = [MainModule::class], dependencies = [AppComponent::class])
-interface MainComponent {
+@Component(modules = [ActivityModule::class], dependencies = [AppComponent::class])
+interface ActivityComponent {
     fun inject(main: MainActivity)
 }

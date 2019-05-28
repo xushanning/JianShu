@@ -1,4 +1,4 @@
-package com.xu.module.jianshu.module
+package com.xu.module.jianshu.di.module
 
 import dagger.Module
 

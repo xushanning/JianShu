@@ -32,6 +32,9 @@ dependencies {
     androidTestImplementation 'androidx.test:core:1.1.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
 
+    kapt rootProject.ext.dependencies["daggerProcessor"]
+    kapt rootProject.ext.dependencies["daggerCompiler"]
+
 
     api rootProject.ext.dependencies["appcompat"]
     api rootProject.ext.dependencies["constraintLayout"]

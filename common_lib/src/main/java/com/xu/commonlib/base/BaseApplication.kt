@@ -8,19 +8,26 @@ import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
 import com.xu.commonlib.BuildConfig
 import com.xu.commonlib.di.component.AppComponent
+import com.xu.commonlib.di.component.DaggerAppComponent
+import com.xu.commonlib.di.module.AppModule
+import com.xu.commonlib.di.module.ClientModule
 import com.xu.commonlib.utlis.LoggerStrategy
 
 /**
  * @author 言吾許
  */
 class BaseApplication : Application() {
-    private lateinit var appComponent: AppComponent
 
 
     override fun onCreate() {
         super.onCreate()
         initLogger()
         initARouter()
+        initAppComponent()
+    }
+
+    companion object {
+        lateinit var appComponent: AppComponent
     }
 
     /**
@@ -52,7 +59,11 @@ class BaseApplication : Application() {
     }
 
     private fun initAppComponent() {
-
+        appComponent = DaggerAppComponent
+            .builder()
+            .appModule(AppModule(this))
+            .clientModule(ClientModule())
+            .build()
     }
 
 }

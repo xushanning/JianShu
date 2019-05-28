@@ -3,6 +3,7 @@ package com.xu.commonlib.di.module
 import android.app.Application
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.xu.commonlib.base.BaseApplication
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -11,19 +12,15 @@ import javax.inject.Singleton
  * @author 言吾許
  */
 @Module
-class AppModule(application: Application) {
-    private var mApplication: Application = application
+class AppModule(application: BaseApplication) {
+    private var mApplication: BaseApplication = application
 
 
     @Provides
-    fun provideApplication(): Application {
+    fun provideApplicationContext(): BaseApplication {
         return mApplication
     }
 
-    @Provides
-    fun provideContext(): Application {
-        return mApplication
-    }
 
     @Provides
     @Singleton

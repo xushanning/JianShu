@@ -12,5 +12,6 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [AppModule::class, ClientModule::class])
 interface AppComponent {
-    fun application(): BaseApplication
+    //对外提供application
+    fun getContext(): BaseApplication
 }

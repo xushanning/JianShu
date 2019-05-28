@@ -21,12 +21,15 @@ abstract class BaseActivity : RxAppCompatActivity(), IBaseView {
         imgBack?.singleClick {
             onBackClick()
         }
+        initMvp()
         initView()
     }
 
     abstract fun setLayoutId(): Int
 
-   // abstract fun setComponent()
+    open fun initMvp() {
+
+    }
 
     abstract fun initView()
 

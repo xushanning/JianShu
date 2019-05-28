@@ -13,7 +13,7 @@ interface IMainContract {
     }
 
     interface IMainPresenter : IPresenter<IMainView> {
-
+        fun sayHello()
     }
 
     interface IMainModel : IModel {
