@@ -9,11 +9,10 @@ import javax.inject.Inject
  */
 class MainPresenter @Inject constructor() : BasePresenter<IMainContract.IMainView, IMainContract.IMainModel>(),
     IMainContract.IMainPresenter {
-    override fun setModel(): IMainContract.IMainModel {
-        return MainModel()
-    }
+
 
     override fun sayHello() {
         Logger.d("hello")
+        mModel.sayWoCao()
     }
 }

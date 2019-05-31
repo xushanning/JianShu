@@ -17,6 +17,6 @@ interface IMainContract {
     }
 
     interface IMainModel : IModel {
-
+        fun sayWoCao()
     }
 }

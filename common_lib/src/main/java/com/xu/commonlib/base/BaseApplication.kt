@@ -1,34 +1,27 @@
 package com.xu.commonlib.base
 
-import android.app.Application
 import com.alibaba.android.arouter.launcher.ARouter
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.FormatStrategy
 import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
 import com.xu.commonlib.BuildConfig
-import com.xu.commonlib.di.component.AppComponent
-import com.xu.commonlib.di.component.DaggerAppComponent
-import com.xu.commonlib.di.module.AppModule
-import com.xu.commonlib.di.module.ClientModule
 import com.xu.commonlib.utlis.LoggerStrategy
+import dagger.android.DaggerApplication
 
 /**
  * @author 言吾許
  */
-class BaseApplication : Application() {
+abstract class BaseApplication : DaggerApplication() {
 
 
     override fun onCreate() {
         super.onCreate()
         initLogger()
         initARouter()
-        initAppComponent()
+
     }
 
-    companion object {
-        lateinit var appComponent: AppComponent
-    }
 
     /**
      * 初始化logger
@@ -38,7 +31,7 @@ class BaseApplication : Application() {
             .newBuilder()
             .showThreadInfo(false)
             .logStrategy(LoggerStrategy())
-            .tag("hezhang")
+            .tag("yanwu")
             .build()
         Logger.addLogAdapter(object : AndroidLogAdapter(formatStrategy) {
             override fun isLoggable(priority: Int, tag: String?): Boolean {
@@ -58,12 +51,6 @@ class BaseApplication : Application() {
         ARouter.init(this)
     }
 
-    private fun initAppComponent() {
-        appComponent = DaggerAppComponent
-            .builder()
-            .appModule(AppModule(this))
-            .clientModule(ClientModule())
-            .build()
-    }
+
 
 }
