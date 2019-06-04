@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="s_color_blue">#33a3dc</color>
+    <color name="s_color_red">#d71345</color>
+    <color name="s_main_tab_select">#000000</color>
+    <color name="s_main_tab_un_select">#999999</color>
+</resources>

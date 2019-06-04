@@ -3,6 +3,9 @@ package com.xu.module.sport.di
 import com.xu.module.sport.ui.activity.main.IMainContract
 import com.xu.module.sport.ui.activity.main.MainModel
 import com.xu.module.sport.ui.activity.main.MainPresenter
+import com.xu.module.sport.ui.activity.realtime.IRealTimeTrajectoryContract
+import com.xu.module.sport.ui.activity.realtime.RealTimeTrajectoryModel
+import com.xu.module.sport.ui.activity.realtime.RealTimeTrajectoryPresenter
 import com.xu.module.sport.ui.fragment.sport.ISportContract
 import com.xu.module.sport.ui.fragment.sport.SportModel
 import com.xu.module.sport.ui.fragment.sport.SportPresenter
@@ -29,4 +32,9 @@ abstract class ActivityModule {
     @Binds
     abstract fun provideSportModel(sportModel: SportModel): ISportContract.ISportModel
 
+    @Binds
+    abstract fun provideRealTimeTrajectoryPresenter(presenter: RealTimeTrajectoryPresenter): IRealTimeTrajectoryContract.IRealTimeTrajectoryPresenter
+
+    @Binds
+    abstract fun provideRealTimeTrajectoryModel(model: RealTimeTrajectoryModel): IRealTimeTrajectoryContract.IRealTimeTrajectoryModel
 }

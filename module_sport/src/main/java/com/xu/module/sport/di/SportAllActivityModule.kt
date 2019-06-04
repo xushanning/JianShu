@@ -3,6 +3,7 @@ package com.xu.module.sport.di
 import com.xu.commonlib.di.scope.ActivityScope
 import com.xu.commonlib.di.scope.FragmentScope
 import com.xu.module.sport.ui.activity.main.MainActivity
+import com.xu.module.sport.ui.activity.realtime.RealTimeTrajectoryActivity
 import com.xu.module.sport.ui.fragment.sport.SportFragment
 import com.xu.module.sport.ui.fragment.sport.SportModel
 import dagger.Module
@@ -22,4 +23,8 @@ abstract class SportAllActivityModule {
     @FragmentScope
     @ContributesAndroidInjector(modules = [ActivityModule::class])
     abstract fun contributeSportFragment(): SportFragment
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [ActivityModule::class])
+    abstract fun contributeRealTimeTrajectoryActivity(): RealTimeTrajectoryActivity
 }

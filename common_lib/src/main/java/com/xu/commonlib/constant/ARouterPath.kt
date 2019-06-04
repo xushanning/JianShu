@@ -18,6 +18,10 @@ object ARouterPath {
      * 运动main
      */
     const val sportMain = "/sport/main"
+    /**
+     * 实时轨迹
+     */
+    const val sportRealTimeTrajectory = "/sport/realTimeTrajectory"
 
     /**
      * 运动sport
