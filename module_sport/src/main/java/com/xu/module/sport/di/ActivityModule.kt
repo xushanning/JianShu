@@ -3,6 +3,9 @@ package com.xu.module.sport.di
 import com.xu.module.sport.ui.activity.main.IMainContract
 import com.xu.module.sport.ui.activity.main.MainModel
 import com.xu.module.sport.ui.activity.main.MainPresenter
+import com.xu.module.sport.ui.fragment.sport.ISportContract
+import com.xu.module.sport.ui.fragment.sport.SportModel
+import com.xu.module.sport.ui.fragment.sport.SportPresenter
 import dagger.Binds
 import dagger.Module
 
@@ -14,12 +17,16 @@ import dagger.Module
 @Module
 abstract class ActivityModule {
 
-
     @Binds
     abstract fun provideMainPresenter(mainPresenter: MainPresenter): IMainContract.IMainPresenter
 
     @Binds
-    abstract fun provideMainModule(mainModel: MainModel): IMainContract.IMainModel
+    abstract fun provideMainModel(mainModel: MainModel): IMainContract.IMainModel
 
+    @Binds
+    abstract fun provideSportPresenter(sportPresenter: SportPresenter): ISportContract.ISportPresenter
+
+    @Binds
+    abstract fun provideSportModel(sportModel: SportModel): ISportContract.ISportModel
 
 }

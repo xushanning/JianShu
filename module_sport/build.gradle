@@ -13,4 +13,7 @@ dependencies {
     kapt rootProject.ext.dependencies["daggerProcessor"]
     kapt rootProject.ext.dependencies["daggerCompiler"]
     kapt rootProject.ext.dependencies["arouterProcessor"]
+
+    //目前只有sport module用到地图
+    api rootProject.ext.dependencies["map"]
 }

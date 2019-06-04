@@ -1,9 +1,12 @@
 package com.xu.commonlib.di.module
 
 import android.content.Context
+import androidx.room.Room
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.xu.commonlib.base.BaseApplication
+import com.xu.commonlib.db.constant.TableConstant
+import com.xu.commonlib.db.db.AppDatabase
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -22,6 +25,16 @@ abstract class AppModule {
         @Singleton
         fun provideGson(): Gson {
             return GsonBuilder().create()
+        }
+
+        //提供room数据库
+        @JvmStatic
+        @Provides
+        @Singleton
+        fun provideRoom(context: Context): AppDatabase {
+            return Room
+                .databaseBuilder(context, AppDatabase::class.java, TableConstant.DB_NAME)
+                .build()
         }
     }
 

@@ -18,4 +18,13 @@ object ARouterPath {
      * 运动main
      */
     const val sportMain = "/sport/main"
+
+    /**
+     * 运动sport
+     */
+    const val sportSport = "/sport/sport"
+    /**
+     * 运动home页面
+     */
+    const val sportHome = "/sport/home"
 }

@@ -14,7 +14,9 @@ android {
         multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
+        ndk {
+            abiFilters "armeabi-v7a"
+        }
     }
 
     buildTypes {
@@ -60,5 +62,10 @@ dependencies {
 
     api rootProject.ext.dependencies["dagger"]
     api rootProject.ext.dependencies["arouterApi"]
+
+    api rootProject.ext.dependencies["room"]
+    api rootProject.ext.dependencies["roomRx"]
+
+
 
 }
