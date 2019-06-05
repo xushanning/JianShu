@@ -4,8 +4,8 @@ import com.xu.commonlib.di.scope.ActivityScope
 import com.xu.commonlib.di.scope.FragmentScope
 import com.xu.module.sport.ui.activity.main.MainActivity
 import com.xu.module.sport.ui.activity.realtime.RealTimeTrajectoryActivity
+import com.xu.module.sport.ui.fragment.home.HomeFragment
 import com.xu.module.sport.ui.fragment.sport.SportFragment
-import com.xu.module.sport.ui.fragment.sport.SportModel
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -13,18 +13,23 @@ import dagger.android.ContributesAndroidInjector
  * @author 言吾許
  */
 @Module
-abstract class SportAllActivityModule {
+abstract class SportModule {
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = [ActivityModule::class])
+    @ContributesAndroidInjector(modules = [BindsModule::class])
     abstract fun contributeMainActivity(): MainActivity
 
 
     @FragmentScope
-    @ContributesAndroidInjector(modules = [ActivityModule::class])
+    @ContributesAndroidInjector(modules = [BindsModule::class])
     abstract fun contributeSportFragment(): SportFragment
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = [ActivityModule::class])
+    @ContributesAndroidInjector(modules = [BindsModule::class])
     abstract fun contributeRealTimeTrajectoryActivity(): RealTimeTrajectoryActivity
+
+
+    @FragmentScope
+    @ContributesAndroidInjector(modules = [BindsModule::class])
+    abstract fun comtributeHomeFragment(): HomeFragment
 }

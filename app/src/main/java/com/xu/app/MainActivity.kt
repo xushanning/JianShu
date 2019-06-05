@@ -1,5 +1,6 @@
 package com.xu.app
 
+import android.os.Bundle
 import com.xu.commonlib.base.BaseActivity
 
 class MainActivity : BaseActivity() {
@@ -9,7 +10,7 @@ class MainActivity : BaseActivity() {
         return R.layout.activity_main
     }
 
-    override fun initView() {
+    override fun initView(savedInstanceState: Bundle?) {
 
     }
 }

@@ -16,22 +16,28 @@ abstract class BaseActivity : RxAppCompatActivity(), IBaseView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(setLayoutId())
-        StatusBarUtil.setTranslucentForImageViewInFragment(this, 0, null)
+        setStatusBar()
         val imgBack: ImageView? = findViewById(R.id.iv_back)
         imgBack?.singleClick {
             onBackClick()
         }
         initMvp()
-        initView()
+        initView(savedInstanceState)
     }
 
     abstract fun setLayoutId(): Int
+    /**
+     * 设置沉浸式状态栏
+     */
+    open fun setStatusBar() {
+        StatusBarUtil.setTranslucentForImageViewInFragment(this, 0, null)
+    }
 
     open fun initMvp() {
 
     }
 
-    abstract fun initView()
+    abstract fun initView(savedInstanceState: Bundle?)
 
     open fun onBackClick() {
         finish()

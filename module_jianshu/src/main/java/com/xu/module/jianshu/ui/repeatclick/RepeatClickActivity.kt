@@ -1,5 +1,6 @@
 package com.xu.module.jianshu.ui.repeatclick
 
+import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.orhanobut.logger.Logger
@@ -28,7 +29,7 @@ class RepeatClickActivity : BaseActivity() {
         return R.layout.j_activity_repeat_click
     }
 
-    override fun initView() {
+    override fun initView(savedInstanceState: Bundle?) {
         tv_view_click_count.text = getString(R.string.j_view_click_count, 0)
         tv_recycler_click_count.text = getString(R.string.j_recycler_click_count, 0)
         tv_child_repeat_click.text = getString(R.string.j_child_click_count, 0)

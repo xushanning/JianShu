@@ -1,5 +1,6 @@
 package com.xu.module.jianshu.ui.home
 
+import android.os.Bundle
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.xu.commonlib.base.BaseActivity
@@ -18,7 +19,7 @@ class HomeActivity : BaseActivity() {
         return R.layout.j_activity_home
     }
 
-    override fun initView() {
+    override fun initView(savedInstanceState: Bundle?) {
         //防重点
         bt_repeat_click.singleClick {
             ARouter.getInstance()

@@ -1,16 +1,19 @@
 package com.xu.module.sport.ui.activity.main
 
+import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
-import com.google.android.material.tabs.TabLayout
 import com.google.gson.Gson
+import com.orhanobut.logger.Logger
 import com.xu.commonlib.base.BaseApplication
 import com.xu.commonlib.base.BaseMvpActivity
 import com.xu.commonlib.constant.ARouterPath
@@ -37,9 +40,10 @@ class MainActivity : BaseMvpActivity<IMainContract.IMainView, IMainContract.IMai
         return R.layout.s_activity_main
     }
 
-    override fun initView() {
+    override fun initView(savedInstanceState: Bundle?) {
         initTabLayout()
     }
+
 
     /**
      * 初始化tab
@@ -48,7 +52,7 @@ class MainActivity : BaseMvpActivity<IMainContract.IMainView, IMainContract.IMai
 
         val fragmentList = ArrayList<Fragment>()
             .apply {
-                val fragment1 = ARouter.getInstance().build(ARouterPath.sportSport).navigation() as Fragment
+                val fragment1 = ARouter.getInstance().build(ARouterPath.sportHome).navigation() as Fragment
                 val fragment2 = ARouter.getInstance().build(ARouterPath.sportSport).navigation() as Fragment
                 val fragment3 = ARouter.getInstance().build(ARouterPath.sportSport).navigation() as Fragment
                 val fragment4 = ARouter.getInstance().build(ARouterPath.sportSport).navigation() as Fragment
@@ -72,24 +76,7 @@ class MainActivity : BaseMvpActivity<IMainContract.IMainView, IMainContract.IMai
         tl_main.setupWithViewPager(vp_main)
         vp_main.adapter = pagerAdapter
 
-        tl_main.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabReselected(p0: TabLayout.Tab?) {
 
-            }
-
-            override fun onTabUnselected(p0: TabLayout.Tab?) {
-            }
-
-            override fun onTabSelected(p0: TabLayout.Tab) {
-                if (p0.position == 2) {
-                    ARouter.getInstance()
-                        .build(ARouterPath.sportRealTimeTrajectory)
-                        .withTransition(R.anim.s_slide_in_bottom, R.anim.s_slide_in_bottom)
-                        .navigation()
-                }
-            }
-
-        })
 
         for (i in tabName.indices) {
             val tab = tl_main.getTabAt(i)
@@ -98,9 +85,25 @@ class MainActivity : BaseMvpActivity<IMainContract.IMainView, IMainContract.IMai
             val imgTab = view.findViewById<ImageView>(R.id.img_tab)
 
             if (i == 2) {
-                val tlItemBg = view.findViewById<ConstraintLayout>(R.id.cl_tab_item)
+                val tlItemBg = view.findViewById<View>(R.id.v_bg)
                 tlItemBg.setBackgroundColor(ContextCompat.getColor(this, R.color.s_color_blue))
                 tvName.setTextColor(ContextCompat.getColor(this, android.R.color.white))
+                view.tag = i
+                view.setOnClickListener {
+                    if (view.tag as Int == 2) {
+                        //转场动画
+                        val compat = ActivityOptionsCompat.makeCustomAnimation(
+                            this,
+                            R.anim.s_slide_bottom_top,
+                            R.anim.s_slide_un_move
+                        )
+                        ARouter.getInstance()
+                            .build(ARouterPath.sportRealTimeTrajectory)
+                            .withFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+                            .withOptionsCompat(compat)
+                            .navigation(this@MainActivity)
+                    }
+                }
             }
 
             if (i == 1 || i == 3 || i == 4) {
@@ -113,5 +116,6 @@ class MainActivity : BaseMvpActivity<IMainContract.IMainView, IMainContract.IMai
         }
 
     }
+
 
 }

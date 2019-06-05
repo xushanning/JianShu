@@ -4,7 +4,7 @@ package com.xu.app
 import com.xu.commonlib.base.BaseApplication
 import com.xu.commonlib.di.module.AppModule
 import com.xu.commonlib.di.module.ClientModule
-import com.xu.module.sport.di.SportAllActivityModule
+import com.xu.module.sport.di.SportModule
 import dagger.Component
 import dagger.android.AndroidInjectionModule
 import dagger.android.AndroidInjector
@@ -21,7 +21,7 @@ import javax.inject.Singleton
         AndroidSupportInjectionModule::class,
         AppModule::class,//全局module
         ClientModule::class,//第三方库的module
-        SportAllActivityModule::class
+        SportModule::class
     ]
 )
 interface AppComponent : AndroidInjector<BaseApplication> {

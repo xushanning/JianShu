@@ -4,4 +4,5 @@
     <color name="s_color_red">#d71345</color>
     <color name="s_main_tab_select">#000000</color>
     <color name="s_main_tab_un_select">#999999</color>
+    <color name="s_ea">#EAEAEA</color>
 </resources>
