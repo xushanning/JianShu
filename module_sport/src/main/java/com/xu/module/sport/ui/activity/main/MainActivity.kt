@@ -10,6 +10,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.google.gson.Gson
@@ -72,10 +73,10 @@ class MainActivity : BaseMvpActivity<IMainContract.IMainView, IMainContract.IMai
                 add(R.drawable.s_selector_home)
                 add(R.drawable.s_selector_home)
             }
+
         val pagerAdapter = MainPagerAdapter(supportFragmentManager, fragmentList)
         tl_main.setupWithViewPager(vp_main)
         vp_main.adapter = pagerAdapter
-
 
 
         for (i in tabName.indices) {

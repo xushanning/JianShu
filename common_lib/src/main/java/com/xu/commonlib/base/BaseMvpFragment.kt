@@ -15,7 +15,7 @@ abstract class BaseMvpFragment<in V : IView, P : IPresenter<V>> : BaseFragment()
     @Inject
     lateinit var mPresenter: P
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
         super.onAttach(context)
     }

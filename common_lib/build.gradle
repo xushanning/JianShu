@@ -41,6 +41,7 @@ dependencies {
     api rootProject.ext.dependencies["appcompat"]
     api rootProject.ext.dependencies["constraintLayout"]
     api rootProject.ext.dependencies["recyclerView"]
+    api rootProject.ext.dependencies["viewpager2"]
 
     api rootProject.ext.dependencies["kotlin"]
     api rootProject.ext.dependencies["rxJava"]
@@ -65,7 +66,6 @@ dependencies {
 
     api rootProject.ext.dependencies["room"]
     api rootProject.ext.dependencies["roomRx"]
-
 
 
 }
