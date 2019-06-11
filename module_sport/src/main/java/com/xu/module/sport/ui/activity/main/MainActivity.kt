@@ -2,19 +2,17 @@ package com.xu.module.sport.ui.activity.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.google.gson.Gson
-import com.orhanobut.logger.Logger
 import com.xu.commonlib.base.BaseApplication
 import com.xu.commonlib.base.BaseMvpActivity
 import com.xu.commonlib.constant.ARouterPath
@@ -116,6 +114,15 @@ class MainActivity : BaseMvpActivity<IMainContract.IMainView, IMainContract.IMai
             tab!!.customView = view
         }
 
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            showToast("退出吗？")
+            return true
+        }
+        return super.onKeyDown(keyCode, event)
     }
 
 

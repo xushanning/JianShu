@@ -3,11 +3,14 @@ package com.xu.module.sport.ui.activity.realtime
 import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
+import android.view.View
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.jaeger.library.StatusBarUtil
+import com.orhanobut.logger.Logger
 import com.xu.commonlib.base.BaseMvpActivity
 import com.xu.commonlib.constant.ARouterPath
 import com.xu.commonlib.utlis.extention.singleClick
@@ -38,6 +41,19 @@ class RealTimeTrajectoryActivity :
         v_back.singleClick {
             jumpToMain()
         }
+        //bottom sheet
+        val behavior = BottomSheetBehavior.from(sv_bottom_sheet)
+        behavior.isHideable = false
+        behavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+            override fun onSlide(p0: View, p1: Float) {
+                Logger.d(p1)
+            }
+
+            override fun onStateChanged(p0: View, p1: Int) {
+
+            }
+
+        })
     }
 
     override fun onDestroy() {
