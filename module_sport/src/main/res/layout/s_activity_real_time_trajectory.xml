@@ -2,7 +2,6 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -41,11 +40,12 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.core.widget.NestedScrollView
-            app:behavior_hideable="true"
-            android:id="@+id/sv_bottom_sheet"
             app:behavior_peekHeight="90dp"
-            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+            android:id="@+id/sv_bottom_sheet"
+            app:behavior_hideable="true"
+            app:behavior_skipCollapsed="true"
             android:layout_width="match_parent"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
             android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -53,6 +53,7 @@
                 android:layout_height="wrap_content">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+
                     android:id="@+id/cl_head"
                     android:background="@android:color/transparent"
                     android:layout_width="0dp"
@@ -101,7 +102,7 @@
                             android:id="@+id/s_textview2"
                             app:layout_constraintStart_toEndOf="@+id/s_textview3"
                             app:layout_constraintHorizontal_bias="0.5"
-                            app:layout_constraintEnd_toStartOf="@+id/s_textview4"
+                            app:layout_constraintEnd_toStartOf="@+id/tv_time"
                             app:layout_constraintBottom_toBottomOf="@+id/s_textview3"/>
 
                     <TextView
@@ -125,7 +126,7 @@
                             android:textSize="30sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/s_textview4"
+                            android:id="@+id/tv_time"
                             app:layout_constraintStart_toEndOf="@+id/s_textview2"
                             app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintBottom_toBottomOf="@+id/s_textview2"/>
@@ -154,8 +155,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/s_textview7"
-                            app:layout_constraintStart_toStartOf="@+id/s_textview4"
-                            app:layout_constraintEnd_toEndOf="@+id/s_textview4"
+                            app:layout_constraintStart_toStartOf="@+id/tv_time"
+                            app:layout_constraintEnd_toEndOf="@+id/tv_time"
                             app:layout_constraintTop_toTopOf="@+id/s_textview6"
                             app:layout_constraintBottom_toBottomOf="@+id/s_textview6"/>
 
@@ -164,17 +165,61 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-            <TextView
-                    android:layout_width="0dp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:background="@android:color/white"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:text="这个是下面的"
-                    android:textColor="#fff"
-                    android:background="@color/design_default_color_primary"
-                    android:gravity="center"
                     app:layout_constraintTop_toBottomOf="@+id/cl_head"
-                    android:layout_height="300dp"/>
+                    android:layout_height="wrap_content">
+
+                <View
+                        android:layout_marginTop="16dp"
+                        android:id="@+id/v_start"
+                        android:layout_marginBottom="50dp"
+                        android:background="@drawable/s_circle_blue"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"/>
+
+                <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:id="@+id/tv_start"
+                        android:gravity="center"
+                        app:layout_constraintTop_toTopOf="@+id/v_start"
+                        app:layout_constraintBottom_toBottomOf="@+id/v_start"
+                        app:layout_constraintEnd_toEndOf="@+id/v_start"
+                        app:layout_constraintStart_toStartOf="@+id/v_start"
+                        android:textColor="@android:color/white"
+                        android:text="@string/s_start"
+                        android:textSize="18sp"/>
+
+                <com.xu.module.sport.widget.SlideFinishView
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginEnd="40dp"
+                        android:id="@+id/sfv_finish_sport"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/s_shape_slide_lock_bg"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:lock_drawable="@mipmap/s_stop_sport"
+                        app:lock_radius="30dp"
+                        app:lock_tips_tx="滑动结束"
+                        app:lock_tips_tx_color="#ffffff"
+                        app:locl_tips_tx_size="18sp"
+                        android:layout_marginBottom="50dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>

@@ -13,6 +13,7 @@ import com.jaeger.library.StatusBarUtil
 import com.orhanobut.logger.Logger
 import com.xu.commonlib.base.BaseMvpActivity
 import com.xu.commonlib.constant.ARouterPath
+import com.xu.commonlib.utlis.extention.afterMeasured
 import com.xu.commonlib.utlis.extention.singleClick
 import com.xu.module.sport.R
 import kotlinx.android.synthetic.main.s_activity_real_time_trajectory.*
@@ -25,6 +26,10 @@ import kotlinx.android.synthetic.main.s_activity_real_time_trajectory.*
 class RealTimeTrajectoryActivity :
     BaseMvpActivity<IRealTimeTrajectoryContract.IRealTimeTrajectoryView, IRealTimeTrajectoryContract.IRealTimeTrajectoryPresenter>(),
     IRealTimeTrajectoryContract.IRealTimeTrajectoryView {
+    private var originalWidth = 0
+    private var originalHeight = 0
+
+
     override fun setLayoutId(): Int {
         return R.layout.s_activity_real_time_trajectory
     }
@@ -34,15 +39,28 @@ class RealTimeTrajectoryActivity :
         StatusBarUtil.setColor(this, ContextCompat.getColor(this, android.R.color.transparent), 0)
     }
 
-    override fun initView(savedInstanceState: Bundle?) {
 
+    override fun initView(savedInstanceState: Bundle?) {
+        //获取view的位置
+        tv_time.afterMeasured {
+            originalWidth = left
+            originalHeight = top
+
+            Logger.d(originalHeight)
+        }
 
         mv_real_time.onCreate(savedInstanceState)
+        initMap()
         v_back.singleClick {
             jumpToMain()
         }
+        sv_bottom_sheet.isNestedScrollingEnabled = false
+        //sfv_finish_sport.isNestedScrollingEnabled = false
         //bottom sheet
         val behavior = BottomSheetBehavior.from(sv_bottom_sheet)
+        //默认打开
+        behavior.state = BottomSheetBehavior.STATE_EXPANDED
+        //设置不能下滑彻底消失
         behavior.isHideable = false
         behavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onSlide(p0: View, p1: Float) {
@@ -50,10 +68,36 @@ class RealTimeTrajectoryActivity :
             }
 
             override fun onStateChanged(p0: View, p1: Int) {
+                //状态改变，重新测量view
+                if (p1 == BottomSheetBehavior.STATE_EXPANDED || p1 == BottomSheetBehavior.STATE_COLLAPSED) {
+                    originalWidth = tv_time.left
+                    originalHeight = tv_time.top
+                }
 
             }
 
         })
+        sfv_finish_sport.setOnLockListener {
+            v_start.visibility = View.VISIBLE
+            tv_start.visibility = View.VISIBLE
+            sfv_finish_sport.visibility = View.GONE
+            Logger.d("解锁成功")
+        }
+
+        //开始运动
+        v_start.singleClick {
+            v_start.visibility = View.GONE
+            tv_start.visibility = View.GONE
+            sfv_finish_sport.visibility = View.VISIBLE
+            Logger.d("开始运动")
+        }
+    }
+
+
+    private fun initMap() {
+        val uiSetting = mv_real_time.map.uiSettings
+        uiSetting.isRotateGesturesEnabled = false
+        uiSetting.isTiltGesturesEnabled = false
     }
 
     override fun onDestroy() {
