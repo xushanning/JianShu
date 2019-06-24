@@ -12,6 +12,9 @@
             <option value="$PROJECT_DIR$/common_lib" />
             <option value="$PROJECT_DIR$/module_jianshu" />
             <option value="$PROJECT_DIR$/module_sport" />
+            <option value="$PROJECT_DIR$/vrouter_annotation" />
+            <option value="$PROJECT_DIR$/vrouter_api" />
+            <option value="$PROJECT_DIR$/vrouter_complier" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

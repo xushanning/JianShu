@@ -37,6 +37,8 @@ dependencies {
     kapt rootProject.ext.dependencies["daggerProcessor"]
     kapt rootProject.ext.dependencies["daggerCompiler"]
 
+    api project(':vrouter_api')
+
 
     api rootProject.ext.dependencies["appcompat"]
     api rootProject.ext.dependencies["constraintLayout"]
