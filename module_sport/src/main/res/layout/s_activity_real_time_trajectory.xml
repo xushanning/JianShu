@@ -83,7 +83,7 @@
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:background="@android:color/white"
                         app:layout_constraintTop_toBottomOf="@+id/ll_pull_up"
                         app:layout_constraintStart_toStartOf="parent"
@@ -209,7 +209,7 @@
                         android:layout_marginTop="8dp"
                         android:background="@drawable/s_shape_slide_lock_bg"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:lock_drawable="@mipmap/s_stop_sport"
+                        app:lock_drawable="@mipmap/lock_icon_02"
                         app:lock_radius="30dp"
                         app:lock_tips_tx="滑动结束"
                         app:lock_tips_tx_color="#ffffff"

@@ -29,11 +29,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity
-                android:name=".ui.activity.realtime.RealTimeTrajectoryActivity"
-                >
+        <activity android:name=".ui.activity.realtime.RealTimeTrajectoryActivity"/>
 
-        </activity>
+        <service android:name=".service.SportService"/>
     </application>
 
 </manifest>

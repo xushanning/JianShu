@@ -1,1 +1,1 @@
-include ':app', ':common_lib', ':module_jianshu', ':module_sport', ':vrouter_api', ':vrouter_complier', ':vrouter_annotation'
+include ':app', ':common_lib', ':module_jianshu', ':module_sport', ':vrouter_api', ':vrouter_complier', ':vrouter_annotation', ':common_res'
