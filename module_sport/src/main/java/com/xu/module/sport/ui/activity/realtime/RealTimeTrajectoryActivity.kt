@@ -1,11 +1,7 @@
 package com.xu.module.sport.ui.activity.realtime
 
-import android.content.ComponentName
-import android.content.Context
 import android.content.Intent
-import android.content.ServiceConnection
 import android.os.Bundle
-import android.os.IBinder
 import android.view.KeyEvent
 import android.view.View
 import androidx.core.app.ActivityOptionsCompat
@@ -20,8 +16,6 @@ import com.xu.commonlib.constant.ARouterPath
 import com.xu.commonlib.utlis.extention.afterMeasured
 import com.xu.commonlib.utlis.extention.singleClick
 import com.xu.module.sport.R
-import com.xu.module.sport.service.ISportBind
-import com.xu.module.sport.service.SportService
 import kotlinx.android.synthetic.main.s_activity_real_time_trajectory.*
 
 /**
@@ -31,11 +25,9 @@ import kotlinx.android.synthetic.main.s_activity_real_time_trajectory.*
 @Route(path = ARouterPath.sportRealTimeTrajectory)
 class RealTimeTrajectoryActivity :
     BaseMvpActivity<IRealTimeTrajectoryContract.IRealTimeTrajectoryView, IRealTimeTrajectoryContract.IRealTimeTrajectoryPresenter>(),
-    IRealTimeTrajectoryContract.IRealTimeTrajectoryView, SportService.OnLocationChangeListener {
+    IRealTimeTrajectoryContract.IRealTimeTrajectoryView {
     private var originalWidth = 0
     private var originalHeight = 0
-
-    private var service: ISportBind? = null
 
 
     override fun setLayoutId(): Int {
@@ -96,24 +88,7 @@ class RealTimeTrajectoryActivity :
 
         //开始运动
         v_start.singleClick {
-            val intent = Intent(this, SportService::class.java)
-            bindService(intent, object : ServiceConnection {
-                override fun onServiceDisconnected(name: ComponentName?) {
-
-                }
-
-                override fun onServiceConnected(name: ComponentName?, binder: IBinder?) {
-                    service = binder as SportService.SportBind
-                    service?.startSport()
-                    service?.getSportService()?.setOnLocationChangeListener(this@RealTimeTrajectoryActivity)
-                    v_start.visibility = View.GONE
-                    tv_start.visibility = View.GONE
-                    sfv_finish_sport.visibility = View.VISIBLE
-                }
-
-            }, Context.BIND_AUTO_CREATE)
-
-
+            mPresenter.startSport(this)
         }
     }
 
@@ -124,12 +99,6 @@ class RealTimeTrajectoryActivity :
         uiSetting.isTiltGesturesEnabled = false
     }
 
-
-    override fun onLocationChange(latitude: Double) {
-        //运动位置变换回调
-
-
-    }
 
     override fun onDestroy() {
         super.onDestroy()
