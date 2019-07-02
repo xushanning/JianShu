@@ -1,6 +1,7 @@
 package com.xu.module.sport.ui.activity.realtime
 
 import android.content.Context
+import com.amap.api.maps.model.LatLng
 import com.xu.commonlib.mvp.IModel
 import com.xu.commonlib.mvp.IPresenter
 import com.xu.commonlib.mvp.IView
@@ -10,7 +11,13 @@ import com.xu.commonlib.mvp.IView
  */
 interface IRealTimeTrajectoryContract {
     interface IRealTimeTrajectoryView : IView {
+        fun sportStarted()
 
+        fun sportStopped()
+        /**
+         * 展示运动轨迹
+         */
+        fun displayTrajectory(point: LatLng)
     }
 
     interface IRealTimeTrajectoryPresenter : IPresenter<IRealTimeTrajectoryView> {
@@ -22,7 +29,7 @@ interface IRealTimeTrajectoryContract {
         /**
          * 结束运动
          */
-        fun stopSport()
+        fun stopSport(context: Context)
     }
 
     interface IRealTimeTrajectoryModel : IModel {

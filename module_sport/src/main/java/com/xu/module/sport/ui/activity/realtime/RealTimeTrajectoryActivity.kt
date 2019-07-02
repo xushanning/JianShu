@@ -1,6 +1,8 @@
 package com.xu.module.sport.ui.activity.realtime
 
 import android.content.Intent
+import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
@@ -8,6 +10,10 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
+import com.amap.api.maps.model.BitmapDescriptorFactory
+import com.amap.api.maps.model.LatLng
+import com.amap.api.maps.model.MarkerOptions
+import com.amap.api.maps.model.PolylineOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.jaeger.library.StatusBarUtil
 import com.orhanobut.logger.Logger
@@ -28,6 +34,8 @@ class RealTimeTrajectoryActivity :
     IRealTimeTrajectoryContract.IRealTimeTrajectoryView {
     private var originalWidth = 0
     private var originalHeight = 0
+
+    private var lineOptions: PolylineOptions? = null
 
 
     override fun setLayoutId(): Int {
@@ -80,16 +88,15 @@ class RealTimeTrajectoryActivity :
 
         })
         sfv_finish_sport.setOnLockListener {
-            v_start.visibility = View.VISIBLE
-            tv_start.visibility = View.VISIBLE
-            sfv_finish_sport.visibility = View.GONE
-            Logger.d("解锁成功")
+            mPresenter.stopSport(this)
         }
 
         //开始运动
         v_start.singleClick {
             mPresenter.startSport(this)
+
         }
+
     }
 
 
@@ -99,6 +106,33 @@ class RealTimeTrajectoryActivity :
         uiSetting.isTiltGesturesEnabled = false
     }
 
+    override fun sportStarted() {
+        v_start.visibility = View.GONE
+        tv_start.visibility = View.GONE
+        sfv_finish_sport.visibility = View.VISIBLE
+    }
+
+    override fun sportStopped() {
+        v_start.visibility = View.VISIBLE
+        tv_start.visibility = View.VISIBLE
+        sfv_finish_sport.visibility = View.GONE
+        Logger.d("解锁成功")
+    }
+
+    override fun displayTrajectory(point: LatLng) {
+        if (lineOptions == null) {
+            lineOptions = PolylineOptions().width(10f).color(Color.argb(255, 1, 1, 1))
+            mv_real_time.map.addPolyline(lineOptions)
+            mv_real_time.map.addMarker(
+                MarkerOptions().position(point).icon(
+                    BitmapDescriptorFactory.fromBitmap(
+                        BitmapFactory.decodeResource(resources, R.drawable.s_vector_location)
+                    )
+                )
+            )
+        }
+        lineOptions?.add(point)
+    }
 
     override fun onDestroy() {
         super.onDestroy()

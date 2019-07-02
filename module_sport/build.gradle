@@ -16,4 +16,5 @@ dependencies {
 
     //目前只有sport module用到地图
     api rootProject.ext.dependencies["map"]
+    api rootProject.ext.dependencies["location"]
 }

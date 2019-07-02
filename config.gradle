@@ -96,7 +96,8 @@ ext {
             roomRx                     : "androidx.room:room-rxjava2:${dependVersion.room}",
 
             //高德地图
-            map                        : "com.amap.api:3dmap:6.8.0"
+            map                        : "com.amap.api:3dmap:6.8.0",
+            location                   : "com.amap.api:location:4.6.0"
 
     ]
 }
