@@ -51,6 +51,7 @@ dependencies {
     api rootProject.ext.dependencies["rxBinding"]
     api rootProject.ext.dependencies["rxlifecycle"]
     api rootProject.ext.dependencies["rxlifecycleComponents"]
+    api rootProject.ext.dependencies["rxPermission"]
 
     api rootProject.ext.dependencies["retrofitAdapter"]
     api rootProject.ext.dependencies["retrofitConverter"]

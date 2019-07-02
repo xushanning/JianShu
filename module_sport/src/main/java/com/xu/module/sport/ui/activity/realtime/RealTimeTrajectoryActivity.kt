@@ -1,5 +1,6 @@
 package com.xu.module.sport.ui.activity.realtime
 
+import android.Manifest
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.Color
@@ -16,12 +17,16 @@ import com.amap.api.maps.model.MarkerOptions
 import com.amap.api.maps.model.PolylineOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.jaeger.library.StatusBarUtil
+import com.jakewharton.rxbinding2.view.RxView
 import com.orhanobut.logger.Logger
+import com.tbruyelle.rxpermissions2.RxPermissions
 import com.xu.commonlib.base.BaseMvpActivity
 import com.xu.commonlib.constant.ARouterPath
+import com.xu.commonlib.utlis.GpsUtil
 import com.xu.commonlib.utlis.extention.afterMeasured
 import com.xu.commonlib.utlis.extention.singleClick
 import com.xu.module.sport.R
+import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.s_activity_real_time_trajectory.*
 
 /**
@@ -36,6 +41,7 @@ class RealTimeTrajectoryActivity :
     private var originalHeight = 0
 
     private var lineOptions: PolylineOptions? = null
+    private var permissionDis: Disposable? = null
 
 
     override fun setLayoutId(): Int {
@@ -91,11 +97,34 @@ class RealTimeTrajectoryActivity :
             mPresenter.stopSport(this)
         }
 
+
         //开始运动
-        v_start.singleClick {
+        permissionDis = RxView.clicks(v_start)
+            .compose(RxPermissions(this).ensure(Manifest.permission.ACCESS_FINE_LOCATION))
+            .subscribe {
+                Logger.d(it)
+                if (it) {
+                    checkGpsOpen()
+                } else {
+                    //不允许，就不能用此功能
+
+                }
+            }
+
+
+    }
+
+    /**
+     * 检查gps是否打开
+     */
+    private fun checkGpsOpen() {
+        if (GpsUtil.isOpen(applicationContext)) {
             mPresenter.startSport(this)
+        } else {
+            //提示用户打开gps
 
         }
+
 
     }
 
@@ -137,6 +166,7 @@ class RealTimeTrajectoryActivity :
     override fun onDestroy() {
         super.onDestroy()
         mv_real_time.onDestroy()
+        permissionDis?.dispose()
     }
 
     override fun onResume() {
