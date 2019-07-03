@@ -5,13 +5,14 @@ import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.os.IBinder
-import android.view.View
+import androidx.core.content.ContextCompat
 import com.amap.api.maps.model.LatLng
-import com.orhanobut.logger.Logger
+import com.amap.api.maps.model.MarkerOptions
+import com.amap.api.maps.model.PolylineOptions
 import com.xu.commonlib.mvp.BasePresenter
+import com.xu.module.sport.R
 import com.xu.module.sport.service.ISportBind
 import com.xu.module.sport.service.SportService
-import kotlinx.android.synthetic.main.s_activity_real_time_trajectory.*
 import javax.inject.Inject
 
 /**
@@ -21,6 +22,12 @@ class RealTimeTrajectoryPresenter @Inject constructor() :
     BasePresenter<IRealTimeTrajectoryContract.IRealTimeTrajectoryView, IRealTimeTrajectoryContract.IRealTimeTrajectoryModel>(),
     IRealTimeTrajectoryContract.IRealTimeTrajectoryPresenter, SportService.OnLocationChangeListener {
     private var service: ISportBind? = null
+
+    private lateinit var context: Context
+    /**
+     * 轨迹点集合
+     */
+    private lateinit var pointList: MutableList<LatLng>
 
 
     private val connection = object : ServiceConnection {
@@ -38,6 +45,8 @@ class RealTimeTrajectoryPresenter @Inject constructor() :
     }
 
     override fun startSport(context: Context) {
+        this.context = context
+        pointList = ArrayList()
         val intent = Intent(context, SportService::class.java)
         context.bindService(intent, connection, Context.BIND_AUTO_CREATE)
     }
@@ -48,13 +57,39 @@ class RealTimeTrajectoryPresenter @Inject constructor() :
 
     }
 
-    override fun onLocationChange(latitude: Double, longitude: Double, speed: Float, altitude: Double, usedTime: Long) {
-        //运动位置变换回调
-        Logger.d(latitude)
-        Logger.d(longitude)
-        if (latitude != 0.0 && longitude != 0.0) {
-            mView.displayTrajectory(LatLng(latitude, longitude))
-        }
+    override fun onLocationChange(
+        latestPoint: LatLng,
+        lastPoint: LatLng?,
+        pause: Boolean,
+        speed: Float,
+        altitude: Double,
+        sportTime: String
+    ) {
+        mView.refreshTime(sportTime)
+        if (pause) {
+            //todo 显示暂停的样式
 
+        }
+        pointList.add(latestPoint)
+
+        //点平滑移动
+        val movePoints = ArrayList<LatLng>()
+        if (lastPoint != null) {
+            movePoints.add(lastPoint)
+            movePoints.add(latestPoint)
+            mView.smoothMove(movePoints)
+        }
+        //更新轨迹线
+        val lineOptions = PolylineOptions().addAll(pointList).width(10f)
+            .color(ContextCompat.getColor(context, R.color.s_color_blue))
+        mView.displayTrajectory(lineOptions)
+
+
+    }
+
+    override fun startPoint(startPoint: LatLng) {
+        val startOptions = MarkerOptions().position(startPoint).anchor(0.5f, 0.5f)
+        val currentOptions = MarkerOptions().position(startPoint).anchor(0.5f, 0.5f)
+        mView.displayStartPoint(startOptions, currentOptions)
     }
 }

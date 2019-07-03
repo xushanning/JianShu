@@ -2,6 +2,8 @@ package com.xu.module.sport.ui.activity.realtime
 
 import android.content.Context
 import com.amap.api.maps.model.LatLng
+import com.amap.api.maps.model.MarkerOptions
+import com.amap.api.maps.model.PolylineOptions
 import com.xu.commonlib.mvp.IModel
 import com.xu.commonlib.mvp.IPresenter
 import com.xu.commonlib.mvp.IView
@@ -17,7 +19,25 @@ interface IRealTimeTrajectoryContract {
         /**
          * 展示运动轨迹
          */
-        fun displayTrajectory(point: LatLng)
+        fun displayTrajectory(lineOptions: PolylineOptions)
+
+        /**
+         * 绘制开始点
+         * @param startOption 开始点
+         * @param currentOption 当前点
+         */
+        fun displayStartPoint(startOption: MarkerOptions, currentOption: MarkerOptions)
+
+
+        /**
+         * 平滑移动当前位置
+         */
+        fun smoothMove(movePoint: List<LatLng>)
+
+        /**
+         * 刷新时间
+         */
+        fun refreshTime(sportTime: String)
     }
 
     interface IRealTimeTrajectoryPresenter : IPresenter<IRealTimeTrajectoryView> {

@@ -2,8 +2,6 @@ package com.xu.module.sport.ui.activity.realtime
 
 import android.Manifest
 import android.content.Intent
-import android.graphics.BitmapFactory
-import android.graphics.Color
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
@@ -11,10 +9,10 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
-import com.amap.api.maps.model.BitmapDescriptorFactory
-import com.amap.api.maps.model.LatLng
-import com.amap.api.maps.model.MarkerOptions
-import com.amap.api.maps.model.PolylineOptions
+import com.amap.api.maps.AMap
+import com.amap.api.maps.model.*
+import com.amap.api.maps.utils.overlay.MovingPointOverlay
+import com.amap.api.maps.utils.overlay.SmoothMoveMarker
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.jaeger.library.StatusBarUtil
 import com.jakewharton.rxbinding2.view.RxView
@@ -23,6 +21,7 @@ import com.tbruyelle.rxpermissions2.RxPermissions
 import com.xu.commonlib.base.BaseMvpActivity
 import com.xu.commonlib.constant.ARouterPath
 import com.xu.commonlib.utlis.GpsUtil
+import com.xu.commonlib.utlis.VectorUtil
 import com.xu.commonlib.utlis.extention.afterMeasured
 import com.xu.commonlib.utlis.extention.singleClick
 import com.xu.module.sport.R
@@ -39,9 +38,17 @@ class RealTimeTrajectoryActivity :
     IRealTimeTrajectoryContract.IRealTimeTrajectoryView {
     private var originalWidth = 0
     private var originalHeight = 0
-
-    private var lineOptions: PolylineOptions? = null
+    /**
+     * 轨迹line
+     */
+    private var trajectoryLine: Polyline? = null
     private var permissionDis: Disposable? = null
+
+    private lateinit var aMap: AMap
+
+    private var smoothMarker: MovingPointOverlay? = null
+
+    private lateinit var currentMarker: Marker
 
 
     override fun setLayoutId(): Int {
@@ -130,7 +137,8 @@ class RealTimeTrajectoryActivity :
 
 
     private fun initMap() {
-        val uiSetting = mv_real_time.map.uiSettings
+        aMap = mv_real_time.map
+        val uiSetting = aMap.uiSettings
         uiSetting.isRotateGesturesEnabled = false
         uiSetting.isTiltGesturesEnabled = false
     }
@@ -148,19 +156,44 @@ class RealTimeTrajectoryActivity :
         Logger.d("解锁成功")
     }
 
-    override fun displayTrajectory(point: LatLng) {
-        if (lineOptions == null) {
-            lineOptions = PolylineOptions().width(10f).color(Color.argb(255, 1, 1, 1))
-            mv_real_time.map.addPolyline(lineOptions)
-            mv_real_time.map.addMarker(
-                MarkerOptions().position(point).icon(
-                    BitmapDescriptorFactory.fromBitmap(
-                        BitmapFactory.decodeResource(resources, R.drawable.s_vector_location)
-                    )
+
+    override fun displayStartPoint(startOption: MarkerOptions, currentOption: MarkerOptions) {
+        aMap.addMarker(
+            startOption.icon(
+                BitmapDescriptorFactory.fromBitmap(
+                    VectorUtil.vectorToBitmap(applicationContext, R.drawable.s_vector_start_location)
                 )
             )
+        )
+        currentMarker = aMap.addMarker(
+            currentOption.icon(
+                BitmapDescriptorFactory.fromBitmap(
+                    VectorUtil.vectorToBitmap(applicationContext, R.drawable.s_vector_current_location)
+                )
+            )
+        )
+    }
+
+    override fun displayTrajectory(lineOptions: PolylineOptions) {
+        if (trajectoryLine != null) {
+            //如果有轨迹，那么先移除，高德地图并没有提供update line的方法，只能重新绘制
+            trajectoryLine?.remove()
         }
-        lineOptions?.add(point)
+        trajectoryLine = aMap.addPolyline(lineOptions)
+
+    }
+
+    override fun smoothMove(movePoint: List<LatLng>) {
+        if (smoothMarker == null) {
+            smoothMarker = MovingPointOverlay(aMap, currentMarker)
+            smoothMarker?.setTotalDuration(1)
+        }
+        smoothMarker?.setPoints(movePoint)
+        smoothMarker?.startSmoothMove()
+    }
+
+    override fun refreshTime(sportTime: String) {
+        tv_time.text = sportTime
     }
 
     override fun onDestroy() {
