@@ -1,4 +1,4 @@
-package com.xu.commonlib.db.constant
+package com.xu.commonlib.constant
 
 /**
  * @author 言吾許
@@ -13,6 +13,6 @@ object TableConstant {
     /**
      * 运动类表
      */
-    const val TABLE_SPORT = ""
+    const val TABLE_SPORT = "sport"
 
 }

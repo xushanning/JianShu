@@ -1,6 +1,5 @@
 package com.xu.module.sport.service
 
-import android.app.Service
 import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Binder
@@ -11,18 +10,34 @@ import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
 import com.amap.api.location.AMapLocationListener
 import com.amap.api.maps.model.LatLng
+import com.google.gson.Gson
 import com.orhanobut.logger.Logger
+import com.xu.commonlib.db.dao.ISportDao
+import com.xu.commonlib.db.entity.PointBean
+import com.xu.commonlib.db.entity.TrajectoryEntity
 import com.xu.commonlib.utlis.TimeUtil
 import com.xu.commonlib.utlis.TransformUtil
 import com.xu.module.sport.R
+import dagger.android.DaggerService
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
+import java.util.*
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 /**
  * @author 言吾許
  */
-class SportService : Service(), AMapLocationListener {
+class SportService : DaggerService(), AMapLocationListener {
+
+    @Inject
+    lateinit var sportDao: ISportDao
+
+
+    /**
+     * 当前运动轨迹的id
+     */
+    private lateinit var trajectoryId: String
 
     private var onLocationChangeListener: OnLocationChangeListener? = null
 
@@ -31,6 +46,12 @@ class SportService : Service(), AMapLocationListener {
     private var locationClientOption: AMapLocationClientOption? = null
 
     private var mediaPlayer: MediaPlayer? = null
+
+    private lateinit var entity: TrajectoryEntity
+    /**
+     *  存储轨迹点
+     */
+    private lateinit var trajectoryPoints: MutableList<PointBean>
 
     /**
      * 计时的dis
@@ -41,16 +62,16 @@ class SportService : Service(), AMapLocationListener {
     /**
      * 轨迹点集合
      */
-    private lateinit var pointList: MutableList<LatLng>
+  //  private lateinit var pointList: MutableList<LatLng>
 
     /**
      * 最新纬度
      */
-    private var latestLatitude = 0.0
+//    private var latestLatitude = 0.0
     /**
      * 最新经度
      */
-    private var latestLongitude = 0.0
+//    private var latestLongitude = 0.0
     /**
      * 最新速度
      */
@@ -83,8 +104,14 @@ class SportService : Service(), AMapLocationListener {
 
 
     companion object {
-        //定位间隔2000毫秒
+        /**
+         * 定位间隔2000毫秒
+         */
         const val LOCATION_INTERVAL = 2000L
+        /**
+         * 更新数据库间隔 单位：秒
+         */
+        const val UPDATE_DB_INTERVAL = 3
         /**
          * 暂停阈值
          */
@@ -99,8 +126,9 @@ class SportService : Service(), AMapLocationListener {
     inner class SportBind : Binder(), ISportBind {
         override fun startSport() {
             Logger.d("开始运动")
-            pointList = ArrayList()
+          //  pointList = ArrayList()
             initLocation()
+            generateNewTrajectory()
             startTimer()
             startMusic()
         }
@@ -182,7 +210,7 @@ class SportService : Service(), AMapLocationListener {
 
                 }
                 lastPoint = latestPoint
-
+                updateDb(it)
             }, { Logger.d(it.message) })
     }
 
@@ -206,13 +234,54 @@ class SportService : Service(), AMapLocationListener {
         if (location?.errorCode == 0) {
             //定位成功
             latestPoint = LatLng(location.latitude, location.longitude)
-            pointList.add(latestPoint!!)
-            latestLatitude = location.latitude
-            latestLongitude = location.longitude
+           // pointList.add(latestPoint!!)
+            trajectoryPoints.add(
+                PointBean(
+                    location.latitude,
+                    location.longitude,
+                    location.altitude,
+                    System.currentTimeMillis()
+                )
+            )
+//            latestLatitude = location.latitude
+//            latestLongitude = location.longitude
             lastSpeed = location.speed
             lastAltitude = location.altitude
         } else {
             Logger.d("定位出错:" + location?.errorInfo)
+        }
+    }
+
+    /**
+     * 初始化一条
+     */
+    private fun generateNewTrajectory() {
+        trajectoryPoints = ArrayList()
+        entity = TrajectoryEntity()
+        trajectoryId = generateTrajectoryId()
+        entity.trajectoryId = trajectoryId
+        entity.startTime = System.currentTimeMillis()
+        sportDao.saveSportTrajectory(entity)
+    }
+
+    /**
+     * 生成轨迹id
+     */
+    private fun generateTrajectoryId(): String {
+        val s = UUID.randomUUID().toString()
+        return s.substring(0, 8) + s.substring(9, 13) + s.substring(14, 18) + s.substring(19, 23) + s.substring(24)
+    }
+
+    /**
+     *  更新数据库轨迹数据
+     */
+    private fun updateDb(second: Long) {
+        if (second.toInt() % UPDATE_DB_INTERVAL == 0) {
+            entity.sportTime = sportTime
+            entity.totalTime = totalTime
+            entity.lastInsertTime = System.currentTimeMillis()
+            entity.trajectoryPoints = trajectoryPoints
+            sportDao.updateSportTrajectory(entity)
         }
     }
 

@@ -1,6 +1,7 @@
 package com.xu.module.sport.ui.activity.realtime
 
 import android.content.Context
+import android.view.animation.AlphaAnimation
 import com.amap.api.maps.model.LatLng
 import com.amap.api.maps.model.MarkerOptions
 import com.amap.api.maps.model.PolylineOptions
@@ -36,8 +37,20 @@ interface IRealTimeTrajectoryContract {
 
         /**
          * 刷新时间
+         * @param speed 速度
+         * @param sportTime 运动时间
          */
-        fun refreshTime(sportTime: String)
+        fun refreshDashBoard(sportTime: String, speed: String)
+
+        /**
+         * 开启暂停的闪烁动画
+         */
+        fun startAnimator(animator: AlphaAnimation)
+
+        /**
+         * 更新activity中最新的点位
+         */
+        fun latestPoint(point: LatLng)
     }
 
     interface IRealTimeTrajectoryPresenter : IPresenter<IRealTimeTrajectoryView> {

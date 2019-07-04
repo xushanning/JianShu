@@ -5,7 +5,8 @@ import androidx.room.Room
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.xu.commonlib.base.BaseApplication
-import com.xu.commonlib.db.constant.TableConstant
+import com.xu.commonlib.constant.TableConstant
+import com.xu.commonlib.db.dao.ISportDao
 import com.xu.commonlib.db.db.AppDatabase
 import dagger.Binds
 import dagger.Module
@@ -34,7 +35,17 @@ abstract class AppModule {
         fun provideRoom(context: Context): AppDatabase {
             return Room
                 .databaseBuilder(context, AppDatabase::class.java, TableConstant.DB_NAME)
+                .allowMainThreadQueries()
                 .build()
+
+        }
+
+        //提供运动dao
+        @JvmStatic
+        @Provides
+        @Singleton
+        fun privideSportDao(database: AppDatabase): ISportDao {
+            return database.sportDao()
         }
     }
 

@@ -1,14 +1,17 @@
 package com.xu.module.sport.ui.activity.realtime
 
+import android.animation.ValueAnimator
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.os.IBinder
+import android.view.animation.AlphaAnimation
 import androidx.core.content.ContextCompat
 import com.amap.api.maps.model.LatLng
 import com.amap.api.maps.model.MarkerOptions
 import com.amap.api.maps.model.PolylineOptions
+import com.orhanobut.logger.Logger
 import com.xu.commonlib.mvp.BasePresenter
 import com.xu.module.sport.R
 import com.xu.module.sport.service.ISportBind
@@ -28,6 +31,8 @@ class RealTimeTrajectoryPresenter @Inject constructor() :
      * 轨迹点集合
      */
     private lateinit var pointList: MutableList<LatLng>
+
+    private var animator: AlphaAnimation? = null
 
 
     private val connection = object : ServiceConnection {
@@ -65,10 +70,12 @@ class RealTimeTrajectoryPresenter @Inject constructor() :
         altitude: Double,
         sportTime: String
     ) {
-        mView.refreshTime(sportTime)
+        mView.refreshDashBoard(sportTime, speed.toString())
+        mView.latestPoint(latestPoint)
         if (pause) {
-            //todo 显示暂停的样式
-
+            startFlicker()
+        } else {
+            stopFlicker()
         }
         pointList.add(latestPoint)
 
@@ -92,4 +99,38 @@ class RealTimeTrajectoryPresenter @Inject constructor() :
         val currentOptions = MarkerOptions().position(startPoint).anchor(0.5f, 0.5f)
         mView.displayStartPoint(startOptions, currentOptions)
     }
+
+    /**
+     * 开始暂停view的闪烁
+     */
+    private fun startFlicker() {
+        //已经在运行中，那么return
+        if (animator != null && animator!!.hasStarted()) {
+            return
+        }
+
+        if (animator == null) {
+            animator = AlphaAnimation(0f, 0.5f)
+            animator?.duration = 1000
+            //恢复成初始的状态
+            animator?.fillBefore = true
+            animator?.repeatCount = ValueAnimator.INFINITE
+            animator?.repeatMode = ValueAnimator.REVERSE
+        }
+        mView.startAnimator(animator!!)
+        Logger.d("开始动画了")
+    }
+
+    /**
+     * 停止闪烁
+     */
+    private fun stopFlicker() {
+        if (animator != null && animator!!.hasStarted()) {
+            animator?.cancel()
+            Logger.d("停止动画")
+            //恢复pause view的隐藏状态
+        }
+    }
+
+
 }

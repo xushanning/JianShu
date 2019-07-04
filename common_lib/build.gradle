@@ -17,6 +17,11 @@ android {
         ndk {
             abiFilters "armeabi-v7a"
         }
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
 
     buildTypes {
@@ -36,6 +41,7 @@ dependencies {
 
     kapt rootProject.ext.dependencies["daggerProcessor"]
     kapt rootProject.ext.dependencies["daggerCompiler"]
+    kapt rootProject.ext.dependencies["roomCompiler"]
 
     api project(':vrouter_api')
 
@@ -69,6 +75,7 @@ dependencies {
 
     api rootProject.ext.dependencies["room"]
     api rootProject.ext.dependencies["roomRx"]
+    debugImplementation rootProject.ext.dependencies["dbDebug"]
 
 
 }

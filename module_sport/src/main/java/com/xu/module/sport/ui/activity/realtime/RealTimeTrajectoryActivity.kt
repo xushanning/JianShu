@@ -5,14 +5,19 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
+import android.view.animation.AlphaAnimation
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
+import com.amap.api.location.AMapLocation
+import com.amap.api.location.AMapLocationClient
+import com.amap.api.location.AMapLocationClientOption
+import com.amap.api.location.AMapLocationListener
 import com.amap.api.maps.AMap
+import com.amap.api.maps.CameraUpdateFactory
 import com.amap.api.maps.model.*
 import com.amap.api.maps.utils.overlay.MovingPointOverlay
-import com.amap.api.maps.utils.overlay.SmoothMoveMarker
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.jaeger.library.StatusBarUtil
 import com.jakewharton.rxbinding2.view.RxView
@@ -27,6 +32,7 @@ import com.xu.commonlib.utlis.extention.singleClick
 import com.xu.module.sport.R
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.s_activity_real_time_trajectory.*
+import java.util.concurrent.TimeUnit
 
 /**
  * @author 言吾許
@@ -35,7 +41,7 @@ import kotlinx.android.synthetic.main.s_activity_real_time_trajectory.*
 @Route(path = ARouterPath.sportRealTimeTrajectory)
 class RealTimeTrajectoryActivity :
     BaseMvpActivity<IRealTimeTrajectoryContract.IRealTimeTrajectoryView, IRealTimeTrajectoryContract.IRealTimeTrajectoryPresenter>(),
-    IRealTimeTrajectoryContract.IRealTimeTrajectoryView {
+    IRealTimeTrajectoryContract.IRealTimeTrajectoryView, AMapLocationListener {
     private var originalWidth = 0
     private var originalHeight = 0
     /**
@@ -43,6 +49,7 @@ class RealTimeTrajectoryActivity :
      */
     private var trajectoryLine: Polyline? = null
     private var permissionDis: Disposable? = null
+    private var oncePermission: Disposable? = null
 
     private lateinit var aMap: AMap
 
@@ -50,6 +57,15 @@ class RealTimeTrajectoryActivity :
 
     private lateinit var currentMarker: Marker
 
+    private var locationClient: AMapLocationClient? = null
+    private var locationClientOption: AMapLocationClientOption? = null
+
+    /**
+     * 默认的zoom
+     */
+    private var mapZoom = 16f
+
+    private var latestPoint: LatLng? = null
 
     override fun setLayoutId(): Int {
         return R.layout.s_activity_real_time_trajectory
@@ -107,8 +123,9 @@ class RealTimeTrajectoryActivity :
 
         //开始运动
         permissionDis = RxView.clicks(v_start)
+            .throttleFirst(2, TimeUnit.SECONDS)
             .compose(RxPermissions(this).ensure(Manifest.permission.ACCESS_FINE_LOCATION))
-            .subscribe {
+            .subscribe({
                 Logger.d(it)
                 if (it) {
                     checkGpsOpen()
@@ -116,9 +133,14 @@ class RealTimeTrajectoryActivity :
                     //不允许，就不能用此功能
 
                 }
-            }
+            }, { Logger.d(it.message) })
 
 
+    }
+
+    override fun startAnimator(animator: AlphaAnimation) {
+        tv_pause.visibility = View.VISIBLE
+        tv_pause.startAnimation(animator)
     }
 
     /**
@@ -131,8 +153,6 @@ class RealTimeTrajectoryActivity :
             //提示用户打开gps
 
         }
-
-
     }
 
 
@@ -141,6 +161,50 @@ class RealTimeTrajectoryActivity :
         val uiSetting = aMap.uiSettings
         uiSetting.isRotateGesturesEnabled = false
         uiSetting.isTiltGesturesEnabled = false
+        aMap.setOnCameraChangeListener(object : AMap.OnCameraChangeListener {
+            override fun onCameraChangeFinish(p0: CameraPosition) {
+                this@RealTimeTrajectoryActivity.mapZoom = p0.zoom
+            }
+
+            override fun onCameraChange(p0: CameraPosition?) {
+            }
+
+        })
+        oncePermission = RxPermissions(this)
+            .request(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS)
+            .subscribe {
+                if (it) {
+                    startOnceLocation()
+                } else {
+
+                }
+            }
+    }
+
+    /**
+     * 只进行一次定位
+     */
+    private fun startOnceLocation() {
+        locationClient = AMapLocationClient(applicationContext)
+        locationClientOption = AMapLocationClientOption()
+        //设置模式为定位一次
+        locationClientOption?.locationPurpose = AMapLocationClientOption.AMapLocationPurpose.SignIn
+        //高精度定位
+        locationClientOption?.locationMode = AMapLocationClientOption.AMapLocationMode.Hight_Accuracy
+        //不需要返回地址信息
+        locationClientOption?.isMockEnable = false
+        locationClient?.setLocationOption(locationClientOption)
+        locationClient?.setLocationListener(this)
+        locationClient?.stopLocation()
+        locationClient?.startLocation()
+    }
+
+    override fun onLocationChanged(p0: AMapLocation?) {
+        if (p0?.errorCode == 0) {
+            latestPoint = LatLng(p0.latitude, p0.longitude)
+            locationClient?.stopLocation()
+            moveCamera()
+        }
     }
 
     override fun sportStarted() {
@@ -192,19 +256,34 @@ class RealTimeTrajectoryActivity :
         smoothMarker?.startSmoothMove()
     }
 
-    override fun refreshTime(sportTime: String) {
+    override fun latestPoint(point: LatLng) {
+        this.latestPoint = point
+    }
+
+    override fun refreshDashBoard(sportTime: String, speed: String) {
         tv_time.text = sportTime
+        tv_speed.text = speed
     }
 
     override fun onDestroy() {
         super.onDestroy()
         mv_real_time.onDestroy()
         permissionDis?.dispose()
+        oncePermission?.dispose()
+        locationClient?.onDestroy()
     }
 
     override fun onResume() {
         super.onResume()
         mv_real_time.onResume()
+        moveCamera()
+
+    }
+
+    private fun moveCamera() {
+        if (latestPoint != null) {
+            aMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latestPoint, mapZoom))
+        }
     }
 
     override fun onPause() {
