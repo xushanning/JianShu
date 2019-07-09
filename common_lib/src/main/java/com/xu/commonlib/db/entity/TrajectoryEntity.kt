@@ -47,4 +47,16 @@ class TrajectoryEntity {
      * 点位信息
      */
     var trajectoryPoints: List<PointBean>? = null
+    /**
+     * 运动的年份
+     */
+    var year: Int? = null
+    /**
+     * 运动的月份
+     */
+    var month: Int? = null
+    /**
+     * 哪一天运动的
+     */
+    var day: Int? = null
 }

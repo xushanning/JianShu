@@ -5,21 +5,21 @@ import javax.inject.Inject
 
 /**
  * @author 言吾許
+ * 没有model的presenter
  */
-abstract class BasePresenter<V : IView, M : IModel> : IPresenter<V> {
+//todo 怎么才能和basePresenter合并成一个，允许model为null的情况呢？
+abstract class BaseNoModelPresenter<V : IView> : IPresenter<V> {
     lateinit var mView: V
-    @Inject
-    lateinit var mModel: M
 
-    protected var mCompositeDisposable = CompositeDisposable()
+
+    private var mCompositeDisposable: CompositeDisposable? = null
 
     override fun attachView(mView: V) {
         this.mView = mView
     }
 
     override fun detachView() {
-        mModel.onDetach()
-        mCompositeDisposable.dispose()
+
     }
 
 }

@@ -22,6 +22,10 @@ object ARouterPath {
      * 实时轨迹
      */
     const val sportRealTimeTrajectory = "/sport/realTimeTrajectory"
+    /**
+     * 历史轨迹列表页面
+     */
+    const val sportHistoryList = "/sport/historyList"
 
     /**
      * 运动sport

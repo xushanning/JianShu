@@ -1,5 +1,8 @@
 package com.xu.module.sport.di
 
+import com.xu.module.sport.ui.activity.history.HistoryListPresenter
+import com.xu.module.sport.ui.activity.history.IHistoryListContract
+import com.xu.module.sport.ui.activity.history.HistoryListModel
 import com.xu.module.sport.ui.activity.main.IMainContract
 import com.xu.module.sport.ui.activity.main.MainModel
 import com.xu.module.sport.ui.activity.main.MainPresenter
@@ -28,6 +31,13 @@ abstract class BindsModule {
 
     @Binds
     abstract fun provideMainModel(mainModel: MainModel): IMainContract.IMainModel
+
+    //历史记录list
+    @Binds
+    abstract fun provideHistoryListPresenter(historyListPresenter: HistoryListPresenter): IHistoryListContract.IHistoryListPresenter
+
+    @Binds
+    abstract fun provideHistoryListModel(historyListModel:HistoryListModel): IHistoryListContract.IHistoryListModel
 
     //运动fragment
     @Binds

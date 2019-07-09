@@ -35,6 +35,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activity.realtime.RealTimeTrajectoryActivity"/>
+        <activity android:name=".ui.activity.history.HistoryListActivity"/>
 
         <service android:name=".service.SportService"/>
         <service android:name="com.amap.api.location.APSService"/>

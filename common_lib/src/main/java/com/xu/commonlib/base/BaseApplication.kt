@@ -1,5 +1,7 @@
 package com.xu.commonlib.base
 
+import android.content.Context
+import androidx.multidex.MultiDex
 import com.alibaba.android.arouter.launcher.ARouter
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.FormatStrategy
@@ -14,6 +16,10 @@ import dagger.android.DaggerApplication
  */
 abstract class BaseApplication : DaggerApplication() {
 
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        MultiDex.install(this)
+    }
 
     override fun onCreate() {
         super.onCreate()
@@ -50,7 +56,6 @@ abstract class BaseApplication : DaggerApplication() {
         }
         ARouter.init(this)
     }
-
 
 
 }

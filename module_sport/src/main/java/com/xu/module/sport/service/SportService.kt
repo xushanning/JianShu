@@ -62,7 +62,7 @@ class SportService : DaggerService(), AMapLocationListener {
     /**
      * 轨迹点集合
      */
-  //  private lateinit var pointList: MutableList<LatLng>
+    //  private lateinit var pointList: MutableList<LatLng>
 
     /**
      * 最新纬度
@@ -126,7 +126,7 @@ class SportService : DaggerService(), AMapLocationListener {
     inner class SportBind : Binder(), ISportBind {
         override fun startSport() {
             Logger.d("开始运动")
-          //  pointList = ArrayList()
+            //  pointList = ArrayList()
             initLocation()
             generateNewTrajectory()
             startTimer()
@@ -234,7 +234,7 @@ class SportService : DaggerService(), AMapLocationListener {
         if (location?.errorCode == 0) {
             //定位成功
             latestPoint = LatLng(location.latitude, location.longitude)
-           // pointList.add(latestPoint!!)
+            // pointList.add(latestPoint!!)
             trajectoryPoints.add(
                 PointBean(
                     location.latitude,
@@ -261,6 +261,13 @@ class SportService : DaggerService(), AMapLocationListener {
         trajectoryId = generateTrajectoryId()
         entity.trajectoryId = trajectoryId
         entity.startTime = System.currentTimeMillis()
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH) + 1
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+        entity.year = year
+        entity.month = month
+        entity.day = day
         sportDao.saveSportTrajectory(entity)
     }
 
