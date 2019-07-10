@@ -6,7 +6,6 @@ import androidx.room.Query
 import androidx.room.Update
 import com.xu.commonlib.db.entity.TrajectoryEntity
 import io.reactivex.Flowable
-import java.time.Month
 
 /**
  * @author 言吾許
@@ -33,7 +32,7 @@ interface ISportDao {
      * 查询某年某月的运动记录
      */
     @Query("select * from  sport where year ==:year and month==:month")
-    fun queryHistoryByMonth(year: Int, month: Month): Flowable<List<TrajectoryEntity>>
+    fun queryHistoryByMonth(year: Int, month: Int): Flowable<List<TrajectoryEntity>>
 
     @Insert
     fun saveSportTrajectory(entity: TrajectoryEntity)

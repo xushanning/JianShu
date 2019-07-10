@@ -1,14 +1,12 @@
 package com.xu.module.sport.ui.activity.history
 
 import com.orhanobut.logger.Logger
-import com.xu.commonlib.db.entity.TrajectoryEntity
 import com.xu.commonlib.mvp.BasePresenter
 import com.xu.commonlib.utlis.TransformUtil
 import com.xu.module.sport.util.ApiException
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import java.time.Month
 import javax.inject.Inject
 
 /**
@@ -17,10 +15,10 @@ import javax.inject.Inject
 class HistoryListPresenter @Inject constructor() :
     BasePresenter<IHistoryListContract.IHistoryListView, IHistoryListContract.IHistoryListModel>(),
     IHistoryListContract.IHistoryListPresenter {
+
     override fun getSportYear() {
         val yearDis = mModel.getSportYear()
             .map {
-
                 val yearList = ArrayList<Int>()
                 it.forEach { entity ->
                     yearList.add(entity.year!!)
@@ -32,28 +30,19 @@ class HistoryListPresenter @Inject constructor() :
                 } else {
                     resultList
                 }
-
             }
-            .observeOn(AndroidSchedulers.mainThread())
-            .map {
-                mView.loadSportYear(it)
-                it[it.size - 1]
-            }
-            .observeOn(Schedulers.io())
-            .flatMap { mModel.getSportMonthByYear(it) }
             .compose(TransformUtil.defaultFlowableSchedulers())
-            .subscribe({
+            .compose(mView.bindToLife())
+            .subscribe({ mView.loadSportYear(it)},{Logger.d(it.message)})
 
-            }, { Logger.d(it.message) })
 
         mCompositeDisposable.add(yearDis)
 
     }
 
-    //todo 上下两个部分代码重复，可以合并
 
     override fun getSportMonthByYear(year: Int) {
-        val monthDis = mModel.getSportMonthByYear(year)
+        val monthDis =mModel.getSportMonthByYear(year)
             .map {
                 val monthList = ArrayList<Int>()
                 it.forEach { entity ->
@@ -61,13 +50,22 @@ class HistoryListPresenter @Inject constructor() :
                 }
                 monthList.distinct().sorted()
             }
-            .subscribe()
+            .compose(TransformUtil.defaultFlowableSchedulers())
+            .compose(mView.bindToLife())
+            .subscribe({
+                Logger.d("点击的年份的时候加载")
+                mView.loadSportMonth(it)
+            }, { Logger.d(it.message) })
         mCompositeDisposable.add(monthDis)
     }
 
-    override fun getSportHistoryByMonth(year: Int, month: Month) {
+
+
+    override fun getSportHistoryByMonth(year: Int, month: Int) {
         val monthDis = mModel.getSportHistoryByMonth(year, month)
-            .subscribe()
+            .compose(TransformUtil.defaultFlowableSchedulers())
+            .compose(mView.bindToLife())
+            .subscribe({ mView.loadSportHistoryList(it) }, { Logger.d(it.message) })
         mCompositeDisposable.add(monthDis)
     }
 }

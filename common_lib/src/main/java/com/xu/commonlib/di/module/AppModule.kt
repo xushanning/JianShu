@@ -35,7 +35,6 @@ abstract class AppModule {
         fun provideRoom(context: Context): AppDatabase {
             return Room
                 .databaseBuilder(context, AppDatabase::class.java, TableConstant.DB_NAME)
-                .allowMainThreadQueries()
                 .build()
 
         }
