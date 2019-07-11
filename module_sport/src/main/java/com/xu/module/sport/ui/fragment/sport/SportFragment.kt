@@ -21,10 +21,6 @@ class SportFragment : BaseMvpFragment<ISportContract.ISportView, ISportContract.
     }
 
     override fun initView(view: View) {
-        button8.singleClick {
-            ARouter.getInstance()
-                .build(ARouterPath.sportHistoryList)
-                .navigation()
-        }
+
     }
 }

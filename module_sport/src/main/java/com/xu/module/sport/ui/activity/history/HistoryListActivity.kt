@@ -3,13 +3,18 @@ package com.xu.module.sport.ui.activity.history
 import android.os.Bundle
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.orhanobut.logger.Logger
+import com.oushangfeng.pinnedsectionitemdecoration.PinnedHeaderItemDecoration
 import com.xu.commonlib.base.BaseMvpActivity
 import com.xu.commonlib.constant.ARouterPath
 import com.xu.commonlib.db.entity.TrajectoryEntity
+import com.xu.commonlib.utlis.TransformUtil
 import com.xu.commonlib.utlis.extention.singleClick
 import com.xu.commonlib.utlis.extention.tabSelected
 import com.xu.module.sport.R
+import io.reactivex.Observable
+import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.s_activity_history_trajectory.*
+import java.util.concurrent.TimeUnit
 
 
 /**
@@ -27,6 +32,8 @@ class HistoryListActivity :
 
     private var yearPosition = 0
 
+    private var yearTimeDis: Disposable? = null
+
 
     override fun setLayoutId(): Int {
         return R.layout.s_activity_history_trajectory
@@ -37,6 +44,7 @@ class HistoryListActivity :
             finish()
         }
         initTabLayout()
+        initRecyclerView()
         mPresenter.getSportYear()
     }
 
@@ -55,22 +63,27 @@ class HistoryListActivity :
 
     }
 
+    private fun initRecyclerView() {
+        rv_history.addItemDecoration(
+            PinnedHeaderItemDecoration
+                .Builder(HistoryListAdapter.TYPE_HEADER)
+
+                .create()
+        )
+    }
+
     override fun loadSportYear(yearList: List<Int>) {
         this.yearList = yearList
         yearPosition = yearList.size - 1
         yearList.forEach {
             tl_year.addTab(tl_year.newTab().setText(it.toString()))
         }
-        //todo 这里并没有移动到最后去
-        tl_year.getTabAt(yearList.size - 1)?.select()
-        tl_year.setScrollPosition(yearList.size - 1, 0f, true)
-        val classZ = tl_year.javaClass
-        //https://blog.csdn.net/aigestudio/article/details/47155769
-//        try {
-//            val animateToTab = classZ.getDeclaredMethod("animateToTab",)
-//        } catch (e: Exception) {
-//
-//        }
+
+        yearTimeDis = Observable.timer(10, TimeUnit.MILLISECONDS)
+            .compose(TransformUtil.defaultSchedulers())
+            .subscribe({
+                tl_year.getTabAt(yearList.size - 1)?.select()
+            }, { Logger.d(it.message) })
 
     }
 
@@ -80,11 +93,16 @@ class HistoryListActivity :
         mPresenter.getSportHistoryByMonth(yearList!![yearPosition], monthList[monthList.size - 1])
         tl_month.removeAllTabs()
         monthList.forEach {
-            tl_month.addTab(tl_month.newTab().setText(it.toString()))
+            tl_month.addTab(tl_month.newTab().setText(it.toString() + "月"))
         }
     }
 
     override fun loadSportHistoryList(historyList: List<TrajectoryEntity>) {
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        yearTimeDis?.dispose()
     }
 }

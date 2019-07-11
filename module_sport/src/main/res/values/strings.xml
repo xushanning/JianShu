@@ -5,4 +5,12 @@
     <string name="s_time">运动时间</string>
     <string name="s_start">开始</string>
     <string name="s_auto_pause">自动暂停</string>
+
+    <string name="s_sport_mileage">%1$d月 里程(km)</string>
+    <string name="s_sport_time">时间</string>
+    <string name="s_sport_count">次数</string>
+    <string name="s_sport_hort">热度</string>
+    <string name="s_sport_date">%1$s %2$s  %3$s</string>
+    <string name="s_kilometer">公里</string>
+    <string name="s_centigrade">℃</string>
 </resources>

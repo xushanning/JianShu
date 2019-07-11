@@ -4,5 +4,16 @@
         <item name="tabPaddingStart">0dp</item>
         <item name="tabPaddingEnd">0dp</item>
         <item name="android:textSize">16sp</item>
+        <item name="tabMaxWidth">50dp</item>
+    </style>
+
+    <style name="s_month_tab" parent="Widget.Design.TabLayout">
+        <item name="tabPaddingStart">0dp</item>
+        <item name="tabPaddingEnd">0dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="tabGravity">fill</item>
+        <item name="tabMaxWidth">50dp</item>
+        <item name="tabIndicatorColor">@color/s_color_blue</item>
+        <item name="tabSelectedTextColor">@color/s_color_blue</item>
     </style>
 </resources>
