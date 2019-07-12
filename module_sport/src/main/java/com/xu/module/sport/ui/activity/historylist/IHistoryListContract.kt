@@ -1,4 +1,4 @@
-package com.xu.module.sport.ui.activity.history
+package com.xu.module.sport.ui.activity.historylist
 
 import com.xu.commonlib.db.entity.TrajectoryEntity
 import com.xu.commonlib.mvp.IModel

@@ -37,7 +37,7 @@ class TrajectoryEntity {
     /**
      * 开始时间的时间戳
      */
-    var startTime: Long? = null
+    var startTime = 0L
     /**
      * 最后一次入库的时间戳
      * 如果complete为true的话，那么此字段代表结束时间
@@ -50,13 +50,17 @@ class TrajectoryEntity {
     /**
      * 运动的年份
      */
-    var year: Int? = null
+    var year = 2018
     /**
      * 运动的月份
      */
-    var month: Int? = null
+    var month = 1
     /**
      * 哪一天运动的
      */
-    var day: Int? = null
+    var day = 1
+    /**
+     * 本次运动的热度(默认为0),在结束一次运动的时候计算
+     */
+    var heat = 0
 }

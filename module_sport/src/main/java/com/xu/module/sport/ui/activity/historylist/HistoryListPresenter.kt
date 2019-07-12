@@ -1,12 +1,9 @@
-package com.xu.module.sport.ui.activity.history
+package com.xu.module.sport.ui.activity.historylist
 
 import com.orhanobut.logger.Logger
 import com.xu.commonlib.mvp.BasePresenter
 import com.xu.commonlib.utlis.TransformUtil
 import com.xu.module.sport.util.ApiException
-import io.reactivex.Flowable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 /**

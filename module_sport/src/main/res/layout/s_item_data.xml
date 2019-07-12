@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:typeface="serif"
             android:textStyle="bold"
-            android:id="@+id/s_textview10"
+            android:id="@+id/tv_mileage"
             app:layout_constraintStart_toStartOf="@+id/tv_sport_date"
             app:layout_constraintEnd_toEndOf="@+id/tv_sport_date"
             android:layout_marginTop="8dp"
@@ -61,16 +61,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/s_textview11"
-            app:layout_constraintStart_toEndOf="@+id/s_textview10"
+            app:layout_constraintStart_toEndOf="@+id/tv_mileage"
             android:layout_marginStart="8dp"
-            app:layout_constraintBaseline_toBaselineOf="@+id/s_textview10"/>
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv_mileage"/>
 
     <TextView
             android:text="@string/res_default_string"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/s_color_red"
-            android:id="@+id/s_textview12"
+            android:id="@+id/tv_heat"
             android:typeface="serif"
             android:textStyle="bold"
             app:layout_constraintBaseline_toBaselineOf="@+id/s_textview11"
@@ -88,8 +88,8 @@
             android:layout_height="wrap_content"
             android:textColor="@color/s_color_red"
             android:id="@+id/s_textview13"
-            app:layout_constraintBaseline_toBaselineOf="@+id/s_textview12"
-            app:layout_constraintStart_toEndOf="@+id/s_textview12"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv_heat"
+            app:layout_constraintStart_toEndOf="@+id/tv_heat"
             />
 
     <TextView
@@ -97,7 +97,7 @@
             android:textColor="@color/res_99"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/s_textview14"
+            android:id="@+id/tv_comment_count"
             app:layout_constraintBottom_toBottomOf="@+id/s_imageview3"
             app:layout_constraintTop_toTopOf="@+id/s_imageview3"
             app:layout_constraintStart_toEndOf="@+id/s_imageview3"
@@ -109,10 +109,10 @@
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/s_vector_comment"
             android:id="@+id/s_imageview3"
-            app:layout_constraintStart_toStartOf="@+id/s_textview10"
+            app:layout_constraintStart_toStartOf="@+id/tv_mileage"
             android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/s_textview10"
-            app:layout_constraintEnd_toEndOf="@+id/s_textview10"
+            app:layout_constraintTop_toBottomOf="@+id/tv_mileage"
+            app:layout_constraintEnd_toEndOf="@+id/tv_mileage"
             app:layout_constraintHorizontal_bias="0.0"/>
 
     <ImageView
@@ -133,7 +133,7 @@
             android:textColor="@color/res_99"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/s_textview15"
+            android:id="@+id/tv_appreciate"
             app:layout_constraintStart_toEndOf="@+id/s_imageview4"
             android:layout_marginStart="2dp"
             app:layout_constraintTop_toTopOf="@+id/s_imageview4"

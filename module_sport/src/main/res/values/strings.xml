@@ -10,7 +10,12 @@
     <string name="s_sport_time">时间</string>
     <string name="s_sport_count">次数</string>
     <string name="s_sport_hort">热度</string>
-    <string name="s_sport_date">%1$s %2$s  %3$s</string>
+    <string name="s_sport_date">%1$s-%2$s-%3$s %4$s %5$s</string>
     <string name="s_kilometer">公里</string>
     <string name="s_centigrade">℃</string>
+    <string name="s_morning">上午</string>
+    <string name="s_noon">中午</string>
+    <string name="s_afternoon">下午</string>
+    <string name="s_night">晚上</string>
+    <string name="s_before_dawn">凌晨</string>
 </resources>

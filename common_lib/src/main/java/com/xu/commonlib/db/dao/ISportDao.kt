@@ -34,6 +34,12 @@ interface ISportDao {
     @Query("select * from  sport where year ==:year and month==:month")
     fun queryHistoryByMonth(year: Int, month: Int): Flowable<List<TrajectoryEntity>>
 
+    /**
+     * 通过轨迹id查询此条轨迹的详情
+     */
+    @Query("select * from sport where trajectoryId==:trajectoryId")
+    fun queryHistoryById(trajectoryId: String): Flowable<TrajectoryEntity>
+
     @Insert
     fun saveSportTrajectory(entity: TrajectoryEntity)
 

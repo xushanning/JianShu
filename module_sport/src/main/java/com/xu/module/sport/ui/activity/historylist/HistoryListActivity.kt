@@ -1,7 +1,8 @@
-package com.xu.module.sport.ui.activity.history
+package com.xu.module.sport.ui.activity.historylist
 
 import android.os.Bundle
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
 import com.orhanobut.logger.Logger
 import com.oushangfeng.pinnedsectionitemdecoration.PinnedHeaderItemDecoration
 import com.xu.commonlib.base.BaseMvpActivity
@@ -9,6 +10,7 @@ import com.xu.commonlib.constant.ARouterPath
 import com.xu.commonlib.db.entity.TrajectoryEntity
 import com.xu.commonlib.utlis.TransformUtil
 import com.xu.commonlib.utlis.extention.singleClick
+import com.xu.commonlib.utlis.extention.singleItemClick
 import com.xu.commonlib.utlis.extention.tabSelected
 import com.xu.module.sport.R
 import io.reactivex.Observable
@@ -33,6 +35,8 @@ class HistoryListActivity :
     private var yearPosition = 0
 
     private var yearTimeDis: Disposable? = null
+
+    private var quickAdapter = HistoryListAdapter(ArrayList())
 
 
     override fun setLayoutId(): Int {
@@ -64,12 +68,23 @@ class HistoryListActivity :
     }
 
     private fun initRecyclerView() {
+        //吸顶
         rv_history.addItemDecoration(
             PinnedHeaderItemDecoration
                 .Builder(HistoryListAdapter.TYPE_HEADER)
 
                 .create()
         )
+        quickAdapter.singleItemClick {
+            if (quickAdapter.getItemViewType(it) == HistoryListAdapter.TYPE_DATA) {
+                val trajectoryId = quickAdapter.data[it].trajectoryEntity.trajectoryId
+                ARouter.getInstance()
+                    .build(ARouterPath.sportHistory)
+                    .withString("trajectoryId", trajectoryId)
+                    .navigation()
+
+            }
+        }
     }
 
     override fun loadSportYear(yearList: List<Int>) {

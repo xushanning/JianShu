@@ -26,6 +26,10 @@ object ARouterPath {
      * 历史轨迹列表页面
      */
     const val sportHistoryList = "/sport/historyList"
+    /**
+     * 历史轨迹详情页
+     */
+    const val sportHistory = "/sport/history"
 
     /**
      * 运动sport
