@@ -24,6 +24,6 @@ class HistoryDetailActivity :
     }
 
     override fun initView(savedInstanceState: Bundle?) {
-
+        mPresenter.getDetailById(trajectoryId!!)
     }
 }

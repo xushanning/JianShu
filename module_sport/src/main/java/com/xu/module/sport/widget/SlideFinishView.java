@@ -9,6 +9,8 @@ import android.os.Build;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.TextView;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import com.orhanobut.logger.Logger;
@@ -17,7 +19,7 @@ import com.xu.module.sport.R;
 /**
  * @author 言吾許
  */
-public class SlideFinishView extends View {
+public class SlideFinishView extends AppCompatTextView {
     private Bitmap mLockBitmap;
     private int mLockDrawableId;
     private Paint mPaint;

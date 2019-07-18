@@ -11,6 +11,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/common_lib" />
             <option value="$PROJECT_DIR$/common_res" />
+            <option value="$PROJECT_DIR$/module_algorithm" />
             <option value="$PROJECT_DIR$/module_jianshu" />
             <option value="$PROJECT_DIR$/module_sport" />
             <option value="$PROJECT_DIR$/vrouter_annotation" />

@@ -1,0 +1,13 @@
+apply from: "../component_build.gradle"
+
+android {
+    resourcePrefix "a_"
+}
+
+
+dependencies {
+    androidTestImplementation 'androidx.test:core:1.2.0'
+    testImplementation 'androidx.test.ext:junit:1.1.1'
+    implementation project(path: ':common_res')
+
+}

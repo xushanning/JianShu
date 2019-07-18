@@ -40,9 +40,16 @@ interface ISportDao {
     @Query("select * from sport where trajectoryId==:trajectoryId")
     fun queryHistoryById(trajectoryId: String): Flowable<TrajectoryEntity>
 
+    /**
+     *  保存实时轨迹
+     */
     @Insert
     fun saveSportTrajectory(entity: TrajectoryEntity)
 
+    /**
+     * 更新轨迹
+     * 根据主键进行更新
+     */
     @Update
     fun updateSportTrajectory(entity: TrajectoryEntity)
 }

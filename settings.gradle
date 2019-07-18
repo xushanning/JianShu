@@ -1,1 +1,10 @@
-include ':app', ':common_lib', ':module_jianshu', ':module_sport', ':vrouter_api', ':vrouter_complier', ':vrouter_annotation', ':common_res'
+include ':app',
+        ':common_lib',
+        ':module_jianshu',
+        ':module_sport',
+        ':vrouter_api',
+        ':vrouter_complier',
+        ':vrouter_annotation',
+        ':common_res',
+        //算法模块
+        ':module_algorithm'
