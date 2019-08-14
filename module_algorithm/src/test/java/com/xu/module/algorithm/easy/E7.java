@@ -6,7 +6,7 @@ import org.junit.Test;
 /**
  * @author 言吾許
  */
-public class E2 {
+public class E7 {
     /**
      * 给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。
      * 123  321

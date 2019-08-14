@@ -1,5 +1,6 @@
 package com.xu.module.algorithm.easy
 
+import com.xu.module.algorithm.proxy.JavaProxy
 import org.junit.Test
 
 
