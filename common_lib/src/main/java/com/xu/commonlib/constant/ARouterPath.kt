@@ -12,6 +12,10 @@ object ARouterPath {
      * 防重点
      */
     const val jianshuRepeatClick = "/jianshu/repeatClick"
+    /**
+     * 模拟retrofit
+     */
+    const val jianshuRetrofit = "/jianshu/retrofit"
 
 
     /**

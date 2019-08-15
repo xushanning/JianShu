@@ -28,7 +28,14 @@ class HomeActivity : BaseActivity() {
         }
         //scrollview嵌套RecyclerView嵌套数据ANR
         bt_anr.singleClick {
+            showToast("没想到吧。。啥都没有")
+            showToast("其实是懒。。没写")
+        }
 
+        bt_retrofit.singleClick {
+            ARouter.getInstance()
+                .build(ARouterPath.jianshuRetrofit)
+                .navigation()
         }
     }
 }

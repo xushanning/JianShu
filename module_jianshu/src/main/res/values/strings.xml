@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">module_jianshu</string>
     <string name="j_home_title">简书首页</string>
+    <string name="j_retrofit_title">模拟retrofit</string>
     <string name="j_repeat_click_title">防重点测试</string>
     <string name="j_view_click_count">view点击次数:%1$d次</string>
     <string name="j_recycler_click_count">item点击次数:%1$d次</string>
