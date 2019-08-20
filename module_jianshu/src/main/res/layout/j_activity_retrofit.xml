@@ -7,7 +7,7 @@
 
 
     <Button
-            android:text="模拟网络请求"
+            android:text="获取公众号列表"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/bt_net"

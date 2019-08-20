@@ -1,7 +1,9 @@
 package com.xu.module.jianshu.ui.retrofit
 
 import com.orhanobut.logger.Logger
-import okhttp3.*
+import okhttp3.Call
+import okhttp3.OkHttpClient
+import okhttp3.Request
 import java.lang.reflect.Proxy
 
 /**
@@ -9,62 +11,57 @@ import java.lang.reflect.Proxy
  * 模拟retrofit实现过程
  */
 @Suppress("UNCHECKED_CAST")
-class Retrofit(var callFactory: Call.Factory, var baseUrl: HttpUrl) {
+class Retrofit(var callFactory: Call.Factory, var baseUrl: String) {
 
 
     fun <T> create(service: Class<T>): T {
         return Proxy.newProxyInstance(
             service.classLoader, arrayOf(service)
-        ) { _, method, args ->
-            //真正的retrofit会把网络请求逻辑放在其他类中处理
-
+        ) { _, method, _ ->
             //解析注解
             val annotations = method.annotations
             if (annotations.isEmpty()) {
                 throw IllegalStateException("annotation required.")
             }
-
-            //判断post get等
-            val netType = annotations[0].toString()
             annotations.forEach {
-                when (it) {
-                    GET::class.java -> {
-                        it as GET
-                        Logger.d(it.value)
+                Logger.d(it.toString())
+                Logger.d(it is GET)
+                return@newProxyInstance when (it) {
+                    is GET -> {
+                        handlerGet(it.value)
                     }
-                    POST::class.java -> {
-                        it as POST
-                        Logger.d(it.value)
+                    is POST -> {
+                        //不处理，只模拟GET
+                    }
+                    else -> {
+
                     }
                 }
             }
-
-            Logger.d(netType)
-            // 解析参数 args
-            args.forEach {
-                Logger.d(it)
-            }
-
-
-            val body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), "")
-            //写死的post
-            val request = Request.Builder()
-                .url(baseUrl)
-                .post(body)
-                .build()
-            callFactory.newCall(request)
         } as T
+    }
+
+    /**
+     * 处理get请求
+     */
+    private fun handlerGet(url: String): Call {
+        val request = Request.Builder()
+            .url(baseUrl + url)
+            .get()
+            .build()
+        //这里没有做返回类型转换，默认都返回call
+        return callFactory.newCall(request)
     }
 
 
     class Builder {
-        private var baseUrl: HttpUrl? = null
+        private var baseUrl: String? = null
         private var callFactory: Call.Factory? = null
         /**
          * 模拟传入baseUrl
          */
         fun baseUrl(baseUrl: String): Builder {
-            this.baseUrl = HttpUrl.parse(baseUrl)
+            this.baseUrl = baseUrl
             return this
         }
 
