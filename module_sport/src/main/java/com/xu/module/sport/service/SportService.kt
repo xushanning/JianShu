@@ -20,6 +20,7 @@ import com.xu.commonlib.utlis.TransformUtil
 import com.xu.module.sport.R
 import dagger.android.DaggerService
 import io.reactivex.Observable
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -46,6 +47,8 @@ class SportService : DaggerService(), AMapLocationListener {
     private var locationClientOption: AMapLocationClientOption? = null
 
     private var mediaPlayer: MediaPlayer? = null
+
+    private var mCompositeDisposable = CompositeDisposable()
 
     private lateinit var entity: TrajectoryEntity
     /**
@@ -107,15 +110,15 @@ class SportService : DaggerService(), AMapLocationListener {
         /**
          * 定位间隔2000毫秒
          */
-        const val LOCATION_INTERVAL = 2000L
+        private const val LOCATION_INTERVAL = 2000L
         /**
          * 更新数据库间隔 单位：秒
          */
-        const val UPDATE_DB_INTERVAL = 3
+        private const val UPDATE_DB_INTERVAL = 3
         /**
          * 暂停阈值
          */
-        const val PAUSE_THRESHOLD = 3
+        private const val PAUSE_THRESHOLD = 3
     }
 
     override fun onBind(intent: Intent?): IBinder? {
@@ -169,7 +172,8 @@ class SportService : DaggerService(), AMapLocationListener {
      * 开始计时，并发送数据
      */
     private fun startTimer() {
-        timerDis = Observable.interval(0, 1, TimeUnit.SECONDS)
+        timerDis = Observable
+            .interval(0, 1, TimeUnit.SECONDS)
             .compose(TransformUtil.defaultSchedulers())
             .subscribe({
                 totalTime++
@@ -268,7 +272,10 @@ class SportService : DaggerService(), AMapLocationListener {
         entity.year = year
         entity.month = month
         entity.day = day
-        sportDao.saveSportTrajectory(entity)
+        val newDis = sportDao.saveSportTrajectory(entity)
+            .compose(TransformUtil.defaultCompletableSchedulers())
+            .subscribe({}, { Logger.d(it.message) })
+        mCompositeDisposable.add(newDis)
     }
 
     /**
@@ -288,7 +295,10 @@ class SportService : DaggerService(), AMapLocationListener {
             entity.totalTime = totalTime
             entity.lastInsertTime = System.currentTimeMillis()
             entity.trajectoryPoints = trajectoryPoints
-            sportDao.updateSportTrajectory(entity)
+            val updateDis = sportDao.updateSportTrajectory(entity)
+                .compose(TransformUtil.defaultCompletableSchedulers())
+                .subscribe({}, { Logger.d(it.message) })
+            mCompositeDisposable.add(updateDis)
         }
     }
 
@@ -322,6 +332,7 @@ class SportService : DaggerService(), AMapLocationListener {
 
     override fun onDestroy() {
         super.onDestroy()
+        mCompositeDisposable.dispose()
         mediaPlayer?.stop()
         mediaPlayer?.release()
         timerDis?.dispose()

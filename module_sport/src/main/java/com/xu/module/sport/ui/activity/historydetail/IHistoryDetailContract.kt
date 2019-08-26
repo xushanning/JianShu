@@ -11,7 +11,10 @@ import io.reactivex.Flowable
  */
 interface IHistoryDetailContract {
     interface IHistoryDetailView : IView {
-
+        /**
+         * 加载详情数据
+         */
+        fun loadDetail(bean: TrajectoryEntity)
     }
 
     interface IHistoryDetailPresenter : IPresenter<IHistoryDetailView> {

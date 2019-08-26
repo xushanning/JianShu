@@ -26,7 +26,7 @@ interface IHistoryListContract {
         /**
          * 加载运动历史列表
          */
-        fun loadSportHistoryList(historyList: List<TrajectoryEntity>)
+        fun loadSportHistoryList(historyList: List<HistoryItemEntity>)
     }
 
     interface IHistoryListPresenter : IPresenter<IHistoryListView> {

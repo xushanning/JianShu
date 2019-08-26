@@ -1,13 +1,12 @@
 package com.xu.module.sport.ui.activity.historylist
 
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.orhanobut.logger.Logger
-import com.oushangfeng.pinnedsectionitemdecoration.PinnedHeaderItemDecoration
 import com.xu.commonlib.base.BaseMvpActivity
 import com.xu.commonlib.constant.ARouterPath
-import com.xu.commonlib.db.entity.TrajectoryEntity
 import com.xu.commonlib.utlis.TransformUtil
 import com.xu.commonlib.utlis.extention.singleClick
 import com.xu.commonlib.utlis.extention.singleItemClick
@@ -69,15 +68,17 @@ class HistoryListActivity :
 
     private fun initRecyclerView() {
         //吸顶
-        rv_history.addItemDecoration(
-            PinnedHeaderItemDecoration
-                .Builder(HistoryListAdapter.TYPE_HEADER)
-
-                .create()
-        )
+//        rv_history.addItemDecoration(
+//            PinnedHeaderItemDecoration
+//                .Builder(HistoryListAdapter.TYPE_HEADER)
+//
+//                .create()
+//        )
+        rv_history.adapter = quickAdapter
+        rv_history.layoutManager = LinearLayoutManager(this)
         quickAdapter.singleItemClick {
             if (quickAdapter.getItemViewType(it) == HistoryListAdapter.TYPE_DATA) {
-                val trajectoryId = quickAdapter.data[it].trajectoryEntity.trajectoryId
+                val trajectoryId = quickAdapter.data[it].trajectoryEntity?.trajectoryId
                 ARouter.getInstance()
                     .build(ARouterPath.sportHistory)
                     .withString("trajectoryId", trajectoryId)
@@ -112,8 +113,8 @@ class HistoryListActivity :
         }
     }
 
-    override fun loadSportHistoryList(historyList: List<TrajectoryEntity>) {
-
+    override fun loadSportHistoryList(historyList: List<HistoryItemEntity>) {
+        quickAdapter.setNewData(historyList)
     }
 
     override fun onDestroy() {

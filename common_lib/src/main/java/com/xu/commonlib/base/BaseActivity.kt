@@ -2,6 +2,7 @@ package com.xu.commonlib.base
 
 import android.os.Bundle
 import android.widget.ImageView
+import com.alibaba.android.arouter.launcher.ARouter
 import com.jaeger.library.StatusBarUtil
 import com.trello.rxlifecycle3.components.support.RxAppCompatActivity
 import com.xu.commonlib.R
@@ -15,6 +16,7 @@ abstract class BaseActivity : RxAppCompatActivity(), IBaseView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        ARouter.getInstance().inject(this)
         setContentView(setLayoutId())
         setStatusBar()
         val imgBack: ImageView? = findViewById(R.id.iv_back)

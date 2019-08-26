@@ -30,7 +30,7 @@ class HistoryListPresenter @Inject constructor() :
             }
             .compose(TransformUtil.defaultFlowableSchedulers())
             .compose(mView.bindToLife())
-            .subscribe({ mView.loadSportYear(it)},{Logger.d(it.message)})
+            .subscribe({ mView.loadSportYear(it) }, { Logger.d(it.message) })
 
 
         mCompositeDisposable.add(yearDis)
@@ -39,7 +39,7 @@ class HistoryListPresenter @Inject constructor() :
 
 
     override fun getSportMonthByYear(year: Int) {
-        val monthDis =mModel.getSportMonthByYear(year)
+        val monthDis = mModel.getSportMonthByYear(year)
             .map {
                 val monthList = ArrayList<Int>()
                 it.forEach { entity ->
@@ -57,9 +57,16 @@ class HistoryListPresenter @Inject constructor() :
     }
 
 
-
     override fun getSportHistoryByMonth(year: Int, month: Int) {
         val monthDis = mModel.getSportHistoryByMonth(year, month)
+            .map {
+                val data = ArrayList<HistoryItemEntity>()
+                it.forEach { item ->
+                    val entity = HistoryItemEntity(HistoryListAdapter.TYPE_DATA, item, null)
+                    data.add(entity)
+                }
+                data
+            }
             .compose(TransformUtil.defaultFlowableSchedulers())
             .compose(mView.bindToLife())
             .subscribe({ mView.loadSportHistoryList(it) }, { Logger.d(it.message) })

@@ -9,8 +9,8 @@ import java.util.*
  * @author 言吾許
  * 吸附 adapter
  */
-class HistoryListAdapter(data: List<HistoryBean>) :
-    BaseMultiItemQuickAdapter<HistoryBean, BaseViewHolder>(data) {
+class HistoryListAdapter(data: List<HistoryItemEntity>) :
+    BaseMultiItemQuickAdapter<HistoryItemEntity, BaseViewHolder>(data) {
     companion object {
         const val TYPE_HEADER = 1
         const val TYPE_DATA = 2
@@ -21,17 +21,17 @@ class HistoryListAdapter(data: List<HistoryBean>) :
         addItemType(TYPE_DATA, R.layout.s_item_data)
     }
 
-    override fun convert(helper: BaseViewHolder, item: HistoryBean) {
+    override fun convert(helper: BaseViewHolder, item: HistoryItemEntity) {
         when (item.itemType) {
             TYPE_HEADER -> {
-                val headBean = item.headBean
+                val headBean = item.headBean!!
                 helper.setText(R.id.tv_mileage, headBean.monthMileage)
                     .setText(R.id.tv_sport_duration, headBean.monthDuration)
                     .setText(R.id.tv_sport_count, headBean.monthCount)
                     .setText(R.id.tv_sport_heat, headBean.monthHeat)
             }
             TYPE_DATA -> {
-                val dataBean = item.trajectoryEntity
+                val dataBean = item.trajectoryEntity!!
                 helper.setText(
                     R.id.tv_sport_date,
                     mContext.getString(
@@ -62,8 +62,7 @@ class HistoryListAdapter(data: List<HistoryBean>) :
     private fun getDate(startTime: Long): String {
         val date = Calendar.getInstance()
         date.time = Date(startTime)
-        val hour = date.get(Calendar.HOUR_OF_DAY)
-        return when (hour) {
+        return when (date.get(Calendar.HOUR_OF_DAY)) {
             in 7..11 -> mContext.getString(R.string.s_morning)
             in 12..12 -> mContext.getString(R.string.s_noon)
             in 14..18 -> mContext.getString(R.string.s_afternoon)

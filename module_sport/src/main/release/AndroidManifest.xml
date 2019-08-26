@@ -26,12 +26,16 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             tools:replace="android:theme">
         <activity
-                android:name=".ui.activity.main.MainActivity"
-                >
+                android:name=".ui.activity.main.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
 
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity android:name=".ui.activity.realtime.RealTimeTrajectoryActivity"/>
         <activity android:name=".ui.activity.historylist.HistoryListActivity"/>
+        <activity android:name=".ui.activity.historydetail.HistoryDetailActivity"/>
 
         <service android:name=".service.SportService"/>
         <service android:name="com.amap.api.location.APSService"/>

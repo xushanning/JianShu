@@ -16,7 +16,7 @@ class HistoryDetailPresenter @Inject constructor() :
             .compose(TransformUtil.defaultFlowableSchedulers())
             .compose(mView.bindToLife())
             .subscribe({
-
+                mView.loadDetail(it)
             }, { Logger.d(it.message) })
         mCompositeDisposable.add(historyDis)
     }

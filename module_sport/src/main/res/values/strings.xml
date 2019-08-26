@@ -1,5 +1,5 @@
 <resources>
-    <string name="s_app_name">module_sport</string>
+    <string name="s_app_name">行者</string>
     <string name="s_speed">时速(km/h)</string>
     <string name="s_mileage">里程(km)</string>
     <string name="s_time">运动时间</string>
@@ -18,4 +18,14 @@
     <string name="s_afternoon">下午</string>
     <string name="s_night">晚上</string>
     <string name="s_before_dawn">凌晨</string>
+    <!--详情页-->
+    <string name="s_trajectory_detail_title">轨迹详情</string>
+    <string name="s_trajectory_detail_climb">爬升</string>
+    <string name="s_trajectory_detail_km">km</string>
+    <string name="s_trajectory_detail_m">m</string>
+    <string name="s_trajectory_detail_time">时间</string>
+    <string name="s_trajectory_detail_mileage">里程</string>
+    <string name="s_trajectory_detail_speed">均速</string>
+    <string name="s_trajectory_detail_km_h">km/h</string>
+    <string name="s_trajectory_detail_centigrade">℃</string>
 </resources>

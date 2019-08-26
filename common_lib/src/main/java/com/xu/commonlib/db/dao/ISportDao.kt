@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import com.xu.commonlib.db.entity.TrajectoryEntity
+import io.reactivex.Completable
 import io.reactivex.Flowable
 
 /**
@@ -44,12 +45,12 @@ interface ISportDao {
      *  保存实时轨迹
      */
     @Insert
-    fun saveSportTrajectory(entity: TrajectoryEntity)
+    fun saveSportTrajectory(entity: TrajectoryEntity): Completable
 
     /**
      * 更新轨迹
      * 根据主键进行更新
      */
     @Update
-    fun updateSportTrajectory(entity: TrajectoryEntity)
+    fun updateSportTrajectory(entity: TrajectoryEntity): Completable
 }
