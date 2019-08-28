@@ -89,7 +89,7 @@
                 android:text="@string/res_default_string"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/s_textview14"
+                android:id="@+id/tv_mileage"
                 app:layout_constraintStart_toEndOf="@+id/s_textview12"
                 app:layout_constraintTop_toTopOf="@+id/s_textview12"
                 app:layout_constraintBottom_toBottomOf="@+id/s_textview12"
@@ -100,7 +100,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/s_textview15"
-                app:layout_constraintStart_toEndOf="@+id/s_textview14"
+                app:layout_constraintStart_toEndOf="@+id/tv_mileage"
                 app:layout_constraintTop_toTopOf="@+id/s_textview12"
                 app:layout_constraintBottom_toBottomOf="@+id/s_textview12"
                 />
@@ -115,7 +115,7 @@
                 android:layout_marginStart="8dp"
                 app:layout_constraintStart_toEndOf="@+id/s_textview10"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintEnd_toStartOf="@+id/s_textview17"
+                app:layout_constraintEnd_toStartOf="@+id/tv_time"
                 app:layout_constraintTop_toTopOf="@+id/tv_1"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_1"/>
 
@@ -123,7 +123,7 @@
                 android:text="@string/res_default_string"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/s_textview17"
+                android:id="@+id/tv_time"
                 app:layout_constraintStart_toEndOf="@+id/s_textview16"
                 app:layout_constraintTop_toTopOf="@+id/tv_1"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_1"
@@ -137,7 +137,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/s_textview18"
                 app:layout_constraintStart_toStartOf="@+id/s_textview16"
-                app:layout_constraintEnd_toStartOf="@+id/s_textview17"
+                app:layout_constraintEnd_toStartOf="@+id/tv_time"
                 app:layout_constraintTop_toTopOf="@+id/s_textview12"
                 app:layout_constraintBottom_toBottomOf="@+id/s_textview12"
                 />
@@ -146,10 +146,10 @@
                 android:text="@string/res_default_string"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/s_textview19"
+                android:id="@+id/tv_speed"
                 app:layout_constraintStart_toEndOf="@+id/s_textview18"
-                app:layout_constraintTop_toTopOf="@+id/s_textview14"
-                app:layout_constraintBottom_toBottomOf="@+id/s_textview14"
+                app:layout_constraintTop_toTopOf="@+id/tv_mileage"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_mileage"
                 />
 
         <TextView
@@ -157,9 +157,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/s_textview20"
-                app:layout_constraintStart_toEndOf="@+id/s_textview19"
-                app:layout_constraintTop_toTopOf="@+id/s_textview14"
-                app:layout_constraintBottom_toBottomOf="@+id/s_textview14"
+                app:layout_constraintStart_toEndOf="@+id/tv_speed"
+                app:layout_constraintTop_toTopOf="@+id/tv_mileage"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_mileage"
                 />
 
         <TextView
@@ -167,7 +167,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintHorizontal_chainStyle="packed"
-                android:id="@+id/s_textview21"
+                android:id="@+id/tv_heat"
                 app:layout_constraintStart_toStartOf="@+id/s_guideline2"
                 app:layout_constraintStart_toEndOf="@+id/s_guideline3"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -185,9 +185,9 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:id="@+id/s_textview22"
-                app:layout_constraintStart_toEndOf="@+id/s_textview21"
+                app:layout_constraintStart_toEndOf="@+id/tv_heat"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintBaseline_toBaselineOf="@+id/s_textview21"/>
+                app:layout_constraintBaseline_toBaselineOf="@+id/tv_heat"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.amap.api.maps.MapView

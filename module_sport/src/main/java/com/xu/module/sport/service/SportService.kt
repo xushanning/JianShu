@@ -138,6 +138,9 @@ class SportService : DaggerService(), AMapLocationListener {
 
         override fun stopSport() {
             locationClient?.stopLocation()
+            timerDis?.dispose()
+            //todo 判断是否距离或者时间是否过短，如果过短，那么删掉记录
+            updateDb(true)
         }
 
         override fun continueSport() {
@@ -214,7 +217,7 @@ class SportService : DaggerService(), AMapLocationListener {
 
                 }
                 lastPoint = latestPoint
-                updateDb(it)
+                updateDb(false)
             }, { Logger.d(it.message) })
     }
 
@@ -238,7 +241,6 @@ class SportService : DaggerService(), AMapLocationListener {
         if (location?.errorCode == 0) {
             //定位成功
             latestPoint = LatLng(location.latitude, location.longitude)
-            // pointList.add(latestPoint!!)
             trajectoryPoints.add(
                 PointBean(
                     location.latitude,
@@ -247,8 +249,6 @@ class SportService : DaggerService(), AMapLocationListener {
                     System.currentTimeMillis()
                 )
             )
-//            latestLatitude = location.latitude
-//            latestLongitude = location.longitude
             lastSpeed = location.speed
             lastAltitude = location.altitude
         } else {
@@ -289,15 +289,18 @@ class SportService : DaggerService(), AMapLocationListener {
     /**
      *  更新数据库轨迹数据
      */
-    private fun updateDb(second: Long) {
-        if (second.toInt() % UPDATE_DB_INTERVAL == 0) {
+    private fun updateDb(complete: Boolean) {
+        if (totalTime.toInt() % UPDATE_DB_INTERVAL == 0) {
             entity.sportTime = sportTime
             entity.totalTime = totalTime
+            entity.complete = complete
             entity.lastInsertTime = System.currentTimeMillis()
             entity.trajectoryPoints = trajectoryPoints
             val updateDis = sportDao.updateSportTrajectory(entity)
                 .compose(TransformUtil.defaultCompletableSchedulers())
-                .subscribe({}, { Logger.d(it.message) })
+                .subscribe({
+                    stopSelf()
+                }, { Logger.d(it.message) })
             mCompositeDisposable.add(updateDis)
         }
     }

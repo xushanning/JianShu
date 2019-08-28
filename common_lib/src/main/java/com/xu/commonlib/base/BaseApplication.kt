@@ -16,6 +16,10 @@ import dagger.android.DaggerApplication
  */
 abstract class BaseApplication : DaggerApplication() {
 
+    companion object {
+        var context: BaseApplication? = null
+    }
+
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
         MultiDex.install(this)
@@ -23,6 +27,7 @@ abstract class BaseApplication : DaggerApplication() {
 
     override fun onCreate() {
         super.onCreate()
+        context = this
         initLogger()
         initARouter()
 

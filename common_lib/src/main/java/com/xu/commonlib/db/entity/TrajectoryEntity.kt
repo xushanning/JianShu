@@ -21,15 +21,15 @@ class TrajectoryEntity {
     /**
      * 运动时间
      */
-    var sportTime: Long? = null
+    var sportTime: Long = 0L
     /**
      * 总时长
      */
-    var totalTime: Long? = null
+    var totalTime: Long = 0L
     /**
      * 运动的里程
      */
-    var sportMileage: Long? = null
+    var sportMileage: Long = 0L
     /**
      * 运动是否已经结束 默认未结束
      */

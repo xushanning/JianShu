@@ -34,6 +34,8 @@ class RealTimeTrajectoryPresenter @Inject constructor() :
 
     private var animator: AlphaAnimation? = null
 
+    private var isBindService = false
+
 
     private val connection = object : ServiceConnection {
         override fun onServiceDisconnected(name: ComponentName?) {
@@ -53,13 +55,15 @@ class RealTimeTrajectoryPresenter @Inject constructor() :
         this.context = context
         pointList = ArrayList()
         val intent = Intent(context, SportService::class.java)
-        context.bindService(intent, connection, Context.BIND_AUTO_CREATE)
+        isBindService = context.bindService(intent, connection, Context.BIND_AUTO_CREATE)
     }
 
     override fun stopSport(context: Context) {
         service?.stopSport()
-        context.unbindService(connection)
-
+        if (isBindService){
+            context.unbindService(connection)
+        }
+        isBindService=false
     }
 
     override fun onLocationChange(

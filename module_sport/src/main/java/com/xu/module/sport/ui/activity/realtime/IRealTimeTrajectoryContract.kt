@@ -65,7 +65,5 @@ interface IRealTimeTrajectoryContract {
         fun stopSport(context: Context)
     }
 
-    interface IRealTimeTrajectoryModel : IModel {
-
-    }
+    interface IRealTimeTrajectoryModel : IModel
 }
