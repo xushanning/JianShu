@@ -9,6 +9,7 @@ import com.amap.api.location.AMapLocation
 import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
 import com.amap.api.location.AMapLocationListener
+import com.amap.api.maps.AMapUtils
 import com.amap.api.maps.model.LatLng
 import com.google.gson.Gson
 import com.orhanobut.logger.Logger
@@ -95,6 +96,10 @@ class SportService : DaggerService(), AMapLocationListener {
     private var lastPoint: LatLng? = null
 
     private var latestPoint: LatLng? = null
+    /**
+     * 运动距离：默认为0
+     */
+    private var sportMileage = 0f
 
     /**
      * 相同点返回的次数
@@ -139,12 +144,17 @@ class SportService : DaggerService(), AMapLocationListener {
         override fun stopSport() {
             locationClient?.stopLocation()
             timerDis?.dispose()
-            //todo 判断是否距离或者时间是否过短，如果过短，那么删掉记录
             updateDb(true)
         }
 
         override fun continueSport() {
 
+        }
+
+        override fun deleteTooShortTrajectory() {
+            //首先 解除计时
+            timerDis?.dispose()
+            deleteCurrentTrajectory()
         }
 
         override fun getSportService(): SportService {
@@ -191,6 +201,8 @@ class SportService : DaggerService(), AMapLocationListener {
                     } else {
                         //两个点不同，复位次数统计
                         sameLocationCount = 0
+                        //计算距离
+                        sportMileage += AMapUtils.calculateLineDistance(lastPoint, latestPoint)
                     }
                 }
                 //判断是否应该暂停
@@ -212,7 +224,8 @@ class SportService : DaggerService(), AMapLocationListener {
                         pause,
                         lastSpeed,
                         lastAltitude,
-                        TimeUtil.getTime(sportTime)
+                        TimeUtil.getTime(sportTime),
+                        sportMileage
                     )
 
                 }
@@ -296,6 +309,7 @@ class SportService : DaggerService(), AMapLocationListener {
             entity.complete = complete
             entity.lastInsertTime = System.currentTimeMillis()
             entity.trajectoryPoints = trajectoryPoints
+            entity.sportMileage = sportMileage
             val updateDis = sportDao.updateSportTrajectory(entity)
                 .compose(TransformUtil.defaultCompletableSchedulers())
                 .subscribe({
@@ -303,6 +317,16 @@ class SportService : DaggerService(), AMapLocationListener {
                 }, { Logger.d(it.message) })
             mCompositeDisposable.add(updateDis)
         }
+    }
+
+    /**
+     * 轨迹过短，删除此条数据
+     */
+    private fun deleteCurrentTrajectory() {
+        val deleteDis = sportDao.deleteSportTrajectory(entity)
+            .compose(TransformUtil.defaultSingleSchedulers())
+            .subscribe({ stopSelf() }, { Logger.d(it.message) })
+        mCompositeDisposable.add(deleteDis)
     }
 
     fun setOnLocationChangeListener(onLocationChangeListener: OnLocationChangeListener) {
@@ -317,6 +341,7 @@ class SportService : DaggerService(), AMapLocationListener {
          * @param altitude 海拔
          * @param pause 是否暂停
          * @param sportTime 已经用时，单位:秒
+         * @param sportMileage 运动距离
          */
         fun onLocationChange(
             latestPoint: LatLng,
@@ -324,7 +349,8 @@ class SportService : DaggerService(), AMapLocationListener {
             pause: Boolean,
             speed: Float,
             altitude: Double,
-            sportTime: String
+            sportTime: String,
+            sportMileage: Float
         )
 
         /**

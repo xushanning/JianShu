@@ -29,7 +29,7 @@ class TrajectoryEntity {
     /**
      * 运动的里程
      */
-    var sportMileage: Long = 0L
+    var sportMileage: Float = 0f
     /**
      * 运动是否已经结束 默认未结束
      */

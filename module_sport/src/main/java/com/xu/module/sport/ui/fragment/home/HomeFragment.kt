@@ -52,7 +52,7 @@ class HomeFragment : BaseMvpFragment<IHomeContract.IHomeView, IHomeContract.IHom
         entity.trajectoryId = generateTrajectoryId()
         entity.sportTime = random(1, 3600).toLong()
         entity.totalTime = random(100, 100000).toLong()
-        entity.sportMileage = random(1000, 100000).toLong()
+        entity.sportMileage = random(1000, 100000).toFloat()
         entity.complete = true
         entity.startTime = 1566465010329
         entity.lastInsertTime = 1566466010329

@@ -73,7 +73,7 @@ class HistoryDetailPresenter @Inject constructor() :
         mCompositeDisposable.add(historyDis)
     }
 
-    private fun getMileageKm(mileage: Long): String {
+    private fun getMileageKm(mileage: Float): String {
         return String.format("%.2f", mileage / 1000f)
     }
 

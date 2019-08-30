@@ -1,12 +1,10 @@
 package com.xu.commonlib.db.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import com.xu.commonlib.db.entity.TrajectoryEntity
 import io.reactivex.Completable
 import io.reactivex.Flowable
+import io.reactivex.Single
 
 /**
  * @author 言吾許
@@ -53,4 +51,10 @@ interface ISportDao {
      */
     @Update
     fun updateSportTrajectory(entity: TrajectoryEntity): Completable
+
+    /**
+     * 删除某条轨迹
+     */
+    @Delete
+    fun deleteSportTrajectory(entity: TrajectoryEntity): Single<Int>
 }

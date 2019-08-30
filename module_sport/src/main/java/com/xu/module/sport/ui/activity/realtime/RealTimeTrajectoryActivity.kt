@@ -239,12 +239,9 @@ class RealTimeTrajectoryActivity :
     }
 
     override fun displayTrajectory(lineOptions: PolylineOptions) {
-        if (trajectoryLine != null) {
-            //如果有轨迹，那么先移除，高德地图并没有提供update line的方法，只能重新绘制
-            trajectoryLine?.remove()
-        }
+        //如果有轨迹，那么先移除，高德地图并没有提供update line的方法，只能重新绘制
+        trajectoryLine?.remove()
         trajectoryLine = aMap.addPolyline(lineOptions)
-
     }
 
     override fun smoothMove(movePoint: List<LatLng>) {

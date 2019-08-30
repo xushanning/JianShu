@@ -61,8 +61,9 @@ interface IRealTimeTrajectoryContract {
 
         /**
          * 结束运动
+         * @param context 上下文
          */
-        fun stopSport(context: Context)
+        fun stopSport(context: Context )
     }
 
     interface IRealTimeTrajectoryModel : IModel

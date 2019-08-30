@@ -35,6 +35,17 @@ class RealTimeTrajectoryPresenter @Inject constructor() :
     private var animator: AlphaAnimation? = null
 
     private var isBindService = false
+    /**
+     * 运动距离
+     */
+    private var sportMileage = 0f
+
+    companion object {
+        /**
+         * 最短有效距离为100米
+         */
+        private const val SHORTEST_MILEAGE = 100f
+    }
 
 
     private val connection = object : ServiceConnection {
@@ -59,11 +70,16 @@ class RealTimeTrajectoryPresenter @Inject constructor() :
     }
 
     override fun stopSport(context: Context) {
-        service?.stopSport()
-        if (isBindService){
-            context.unbindService(connection)
+        if (sportMileage < SHORTEST_MILEAGE) {
+            //无效
+            service?.deleteTooShortTrajectory()
+        } else {
+            service?.stopSport()
+            if (isBindService) {
+                context.unbindService(connection)
+            }
+            isBindService = false
         }
-        isBindService=false
     }
 
     override fun onLocationChange(
@@ -72,8 +88,10 @@ class RealTimeTrajectoryPresenter @Inject constructor() :
         pause: Boolean,
         speed: Float,
         altitude: Double,
-        sportTime: String
+        sportTime: String,
+        sportMileage: Float
     ) {
+        this.sportMileage = sportMileage
         mView.refreshDashBoard(sportTime, speed.toString())
         mView.latestPoint(latestPoint)
         if (pause) {
