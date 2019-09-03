@@ -168,6 +168,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 android:id="@+id/tv_heat"
+                android:textColor="@color/s_color_red"
                 app:layout_constraintStart_toStartOf="@+id/s_guideline2"
                 app:layout_constraintStart_toEndOf="@+id/s_guideline3"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -175,8 +176,9 @@
                 android:layout_marginTop="8dp"
                 app:layout_constraintTop_toTopOf="@+id/s_textview12"
                 android:layout_marginBottom="8dp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_1"
-                android:textSize="25sp"
+                android:textSize="28sp"
                 tools:text="48"/>
 
         <TextView
@@ -184,6 +186,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:textColor="@color/s_color_red"
                 android:id="@+id/s_textview22"
                 app:layout_constraintStart_toEndOf="@+id/tv_heat"
                 app:layout_constraintHorizontal_bias="0.5"

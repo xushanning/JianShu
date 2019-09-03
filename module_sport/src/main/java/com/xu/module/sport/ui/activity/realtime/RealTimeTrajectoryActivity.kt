@@ -8,6 +8,7 @@ import android.view.View
 import android.view.animation.AlphaAnimation
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
+import com.afollestad.materialdialogs.MaterialDialog
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.amap.api.location.AMapLocation
@@ -30,6 +31,7 @@ import com.xu.commonlib.utlis.VectorUtil
 import com.xu.commonlib.utlis.extention.afterMeasured
 import com.xu.commonlib.utlis.extention.singleClick
 import com.xu.module.sport.R
+import com.xu.module.sport.widget.slide.SlideToggleView
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.s_activity_real_time_trajectory.*
 import java.util.concurrent.TimeUnit
@@ -116,9 +118,18 @@ class RealTimeTrajectoryActivity :
             }
 
         })
-        sfv_finish_sport.setOnLockListener {
-            mPresenter.stopSport(this)
-        }
+
+        sfv_finish_sport.setSlideToggleListener(object : SlideToggleView.SlideToggleListener {
+            override fun onBlockPositionChanged(view: SlideToggleView?, left: Int, total: Int, slide: Int) {
+
+            }
+
+            override fun onSlideOpen(view: SlideToggleView?) {
+                Logger.d("结束了")
+                mPresenter.stopSport(this@RealTimeTrajectoryActivity)
+            }
+
+        })
 
 
         //开始运动
@@ -141,6 +152,22 @@ class RealTimeTrajectoryActivity :
     override fun startAnimator(animator: AlphaAnimation) {
         tv_pause.visibility = View.VISIBLE
         tv_pause.startAnimation(animator)
+    }
+
+    override fun sportTooShort() {
+        MaterialDialog(this)
+            .message(R.string.s_real_time_sport_too_short)
+            .cancelable(false)
+            .show {
+                positiveButton(R.string.s_real_time_sport_ensure) {
+                    Logger.d("点击了确定")
+                    mPresenter.deleteTooShortSport()
+                }
+                negativeButton(R.string.s_real_time_sport_cancel) {
+                    Logger.d("点击了取消")
+
+                }
+            }
     }
 
     /**

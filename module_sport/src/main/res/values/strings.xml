@@ -5,6 +5,9 @@
     <string name="s_time">运动时间</string>
     <string name="s_start">开始</string>
     <string name="s_auto_pause">自动暂停</string>
+    <string name="s_real_time_sport_too_short">由于本次运动过短,将不会被记录,确定结束本次运动吗？</string>
+    <string name="s_real_time_sport_ensure">确认</string>
+    <string name="s_real_time_sport_cancel">取消</string>
 
     <string name="s_sport_mileage">%1$d月 里程(km)</string>
     <string name="s_sport_time">时间</string>

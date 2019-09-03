@@ -51,6 +51,11 @@ interface IRealTimeTrajectoryContract {
          * 更新activity中最新的点位
          */
         fun latestPoint(point: LatLng)
+
+        /**
+         * 运动距离过短
+         */
+        fun sportTooShort()
     }
 
     interface IRealTimeTrajectoryPresenter : IPresenter<IRealTimeTrajectoryView> {
@@ -63,7 +68,12 @@ interface IRealTimeTrajectoryContract {
          * 结束运动
          * @param context 上下文
          */
-        fun stopSport(context: Context )
+        fun stopSport(context: Context)
+
+        /**
+         * 删除不符合规定的轨迹数据
+         */
+        fun deleteTooShortSport()
     }
 
     interface IRealTimeTrajectoryModel : IModel

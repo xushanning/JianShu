@@ -72,7 +72,8 @@ class RealTimeTrajectoryPresenter @Inject constructor() :
     override fun stopSport(context: Context) {
         if (sportMileage < SHORTEST_MILEAGE) {
             //无效
-            service?.deleteTooShortTrajectory()
+            mView.sportTooShort()
+
         } else {
             service?.stopSport()
             if (isBindService) {
@@ -80,6 +81,10 @@ class RealTimeTrajectoryPresenter @Inject constructor() :
             }
             isBindService = false
         }
+    }
+
+    override fun deleteTooShortSport() {
+        service?.deleteTooShortTrajectory()
     }
 
     override fun onLocationChange(
