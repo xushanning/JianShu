@@ -63,7 +63,7 @@ class HistoryDetailActivity :
     }
 
     override fun loadSportData(mileage: String, speed: String, climb: String, time: String, heat: String) {
-        tv_mileage.text = mileage
+        tv_mileage_name.text = mileage
         tv_speed.text = speed
         tv_climb.text = climb
         tv_time.text = time

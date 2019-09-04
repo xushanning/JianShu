@@ -39,8 +39,9 @@ interface IRealTimeTrajectoryContract {
          * 刷新时间
          * @param speed 速度
          * @param sportTime 运动时间
+         * @param mileage 运动里程
          */
-        fun refreshDashBoard(sportTime: String, speed: String)
+        fun refreshDashBoard(sportTime: String, speed: String, mileage: String)
 
         /**
          * 开启暂停的闪烁动画

@@ -11,7 +11,6 @@ import com.amap.api.location.AMapLocationClientOption
 import com.amap.api.location.AMapLocationListener
 import com.amap.api.maps.AMapUtils
 import com.amap.api.maps.model.LatLng
-import com.google.gson.Gson
 import com.orhanobut.logger.Logger
 import com.xu.commonlib.db.dao.ISportDao
 import com.xu.commonlib.db.entity.PointBean
@@ -42,6 +41,10 @@ class SportService : DaggerService(), AMapLocationListener {
     private lateinit var trajectoryId: String
 
     private var onLocationChangeListener: OnLocationChangeListener? = null
+
+    private var onTrajectoryDeleteListener: OnTrajectoryDeleteListener? = null
+
+    private var onDbUpdateListener: OnDbUpdateListener? = null
 
     private var locationClient: AMapLocationClient? = null
 
@@ -130,6 +133,10 @@ class SportService : DaggerService(), AMapLocationListener {
         return SportBind()
     }
 
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        return START_NOT_STICKY
+    }
+
 
     inner class SportBind : Binder(), ISportBind {
         override fun startSport() {
@@ -171,7 +178,8 @@ class SportService : DaggerService(), AMapLocationListener {
         //设置模式为运动
         locationClientOption?.locationPurpose = AMapLocationClientOption.AMapLocationPurpose.Sport
         //高精度定位
-        locationClientOption?.locationMode = AMapLocationClientOption.AMapLocationMode.Hight_Accuracy
+        locationClientOption?.locationMode =
+            AMapLocationClientOption.AMapLocationMode.Hight_Accuracy
         locationClientOption?.interval = LOCATION_INTERVAL
         //不需要返回地址信息
         locationClientOption?.isMockEnable = false
@@ -296,7 +304,10 @@ class SportService : DaggerService(), AMapLocationListener {
      */
     private fun generateTrajectoryId(): String {
         val s = UUID.randomUUID().toString()
-        return s.substring(0, 8) + s.substring(9, 13) + s.substring(14, 18) + s.substring(19, 23) + s.substring(24)
+        return s.substring(0, 8) + s.substring(9, 13) + s.substring(14, 18) + s.substring(
+            19,
+            23
+        ) + s.substring(24)
     }
 
     /**
@@ -313,7 +324,9 @@ class SportService : DaggerService(), AMapLocationListener {
             val updateDis = sportDao.updateSportTrajectory(entity)
                 .compose(TransformUtil.defaultCompletableSchedulers())
                 .subscribe({
-                    stopSelf()
+                    if (complete) {
+                        onDbUpdateListener?.onDbUpdate()
+                    }
                 }, { Logger.d(it.message) })
             mCompositeDisposable.add(updateDis)
         }
@@ -325,12 +338,43 @@ class SportService : DaggerService(), AMapLocationListener {
     private fun deleteCurrentTrajectory() {
         val deleteDis = sportDao.deleteSportTrajectory(entity)
             .compose(TransformUtil.defaultSingleSchedulers())
-            .subscribe({ stopSelf() }, { Logger.d(it.message) })
+            .subscribe({
+                Logger.d("删除当前轨迹成功")
+                onTrajectoryDeleteListener?.onTrajectoryDelete()
+            }, { Logger.d(it.message) })
         mCompositeDisposable.add(deleteDis)
     }
 
     fun setOnLocationChangeListener(onLocationChangeListener: OnLocationChangeListener) {
         this.onLocationChangeListener = onLocationChangeListener
+    }
+
+    /**
+     * 轨迹删除监听
+     */
+    fun setOnTrajectoryDeleteListener(onTrajectoryDeleteListener: OnTrajectoryDeleteListener) {
+        this.onTrajectoryDeleteListener = onTrajectoryDeleteListener
+    }
+
+    /**
+     * 停止更新完数据库监听
+     */
+    fun setOnDbUpdateListener(onDbUpdateListener: OnDbUpdateListener) {
+        this.onDbUpdateListener = onDbUpdateListener
+    }
+
+    interface OnDbUpdateListener {
+        /**
+         * 数据库更新完
+         */
+        fun onDbUpdate()
+    }
+
+    interface OnTrajectoryDeleteListener {
+        /**
+         * 轨迹删除
+         */
+        fun onTrajectoryDelete()
     }
 
     interface OnLocationChangeListener {
@@ -367,5 +411,6 @@ class SportService : DaggerService(), AMapLocationListener {
         timerDis?.dispose()
         musicDis?.dispose()
         locationClient?.onDestroy()
+        Logger.d("service 被销毁了")
     }
 }

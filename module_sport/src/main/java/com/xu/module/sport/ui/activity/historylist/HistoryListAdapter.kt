@@ -25,7 +25,7 @@ class HistoryListAdapter(data: List<HistoryItemEntity>) :
         when (item.itemType) {
             TYPE_HEADER -> {
                 val headBean = item.headBean!!
-                helper.setText(R.id.tv_mileage, headBean.monthMileage)
+                helper.setText(R.id.tv_mileage_name, headBean.monthMileage)
                     .setText(R.id.tv_sport_duration, headBean.monthDuration)
                     .setText(R.id.tv_sport_count, headBean.monthCount)
                     .setText(R.id.tv_sport_heat, headBean.monthHeat)
@@ -43,7 +43,7 @@ class HistoryListAdapter(data: List<HistoryItemEntity>) :
                         //todo 默认骑车 将来待运动开始选择方式后，再做
                         "骑车"
                     )
-                ).setText(R.id.tv_mileage, dataBean.sportMileage.toString())
+                ).setText(R.id.tv_mileage_name, dataBean.sportMileage.toString())
                     .setText(R.id.tv_heat, dataBean.heat.toString())
                     //todo 下面这两个 写死吧先
                     .setText(R.id.tv_comment_count, "1")

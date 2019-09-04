@@ -23,7 +23,8 @@ import javax.inject.Inject
  */
 class RealTimeTrajectoryPresenter @Inject constructor() :
     BasePresenter<IRealTimeTrajectoryContract.IRealTimeTrajectoryView, IRealTimeTrajectoryContract.IRealTimeTrajectoryModel>(),
-    IRealTimeTrajectoryContract.IRealTimeTrajectoryPresenter, SportService.OnLocationChangeListener {
+    IRealTimeTrajectoryContract.IRealTimeTrajectoryPresenter, SportService.OnLocationChangeListener,
+    SportService.OnTrajectoryDeleteListener, SportService.OnDbUpdateListener {
     private var service: ISportBind? = null
 
     private lateinit var context: Context
@@ -50,13 +51,16 @@ class RealTimeTrajectoryPresenter @Inject constructor() :
 
     private val connection = object : ServiceConnection {
         override fun onServiceDisconnected(name: ComponentName?) {
-            mView.sportStopped()
         }
 
         override fun onServiceConnected(name: ComponentName?, binder: IBinder?) {
             service = binder as SportService.SportBind
             service?.startSport()
-            service?.getSportService()?.setOnLocationChangeListener(this@RealTimeTrajectoryPresenter)
+            service?.getSportService()
+                ?.setOnLocationChangeListener(this@RealTimeTrajectoryPresenter)
+            service?.getSportService()
+                ?.setOnTrajectoryDeleteListener(this@RealTimeTrajectoryPresenter)
+            service?.getSportService()?.setOnDbUpdateListener(this@RealTimeTrajectoryPresenter)
             mView.sportStarted()
         }
 
@@ -73,14 +77,25 @@ class RealTimeTrajectoryPresenter @Inject constructor() :
         if (sportMileage < SHORTEST_MILEAGE) {
             //无效
             mView.sportTooShort()
-
         } else {
             service?.stopSport()
-            if (isBindService) {
-                context.unbindService(connection)
-            }
-            isBindService = false
         }
+    }
+
+    override fun onTrajectoryDelete() {
+        serviceStopped()
+    }
+
+    override fun onDbUpdate() {
+        serviceStopped()
+    }
+
+    private fun serviceStopped() {
+        if (isBindService) {
+            context.unbindService(connection)
+        }
+        isBindService = false
+        mView.sportStopped()
     }
 
     override fun deleteTooShortSport() {
@@ -97,7 +112,11 @@ class RealTimeTrajectoryPresenter @Inject constructor() :
         sportMileage: Float
     ) {
         this.sportMileage = sportMileage
-        mView.refreshDashBoard(sportTime, speed.toString())
+        mView.refreshDashBoard(
+            sportTime,
+            speed.toString(),
+            String.format("%.2f", sportMileage / 1000)
+        )
         mView.latestPoint(latestPoint)
         if (pause) {
             startFlicker()

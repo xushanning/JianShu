@@ -9,6 +9,8 @@ import android.view.animation.AlphaAnimation
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
 import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.WhichButton
+import com.afollestad.materialdialogs.actions.getActionButton
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.amap.api.location.AMapLocation
@@ -120,7 +122,12 @@ class RealTimeTrajectoryActivity :
         })
 
         sfv_finish_sport.setSlideToggleListener(object : SlideToggleView.SlideToggleListener {
-            override fun onBlockPositionChanged(view: SlideToggleView?, left: Int, total: Int, slide: Int) {
+            override fun onBlockPositionChanged(
+                view: SlideToggleView?,
+                left: Int,
+                total: Int,
+                slide: Int
+            ) {
 
             }
 
@@ -156,16 +163,20 @@ class RealTimeTrajectoryActivity :
 
     override fun sportTooShort() {
         MaterialDialog(this)
-            .message(R.string.s_real_time_sport_too_short)
             .cancelable(false)
             .show {
+                getActionButton(WhichButton.NEGATIVE).updateTextColor(
+                    ContextCompat.getColor(
+                        this@RealTimeTrajectoryActivity,
+                        R.color.s_color_blue
+                    )
+                )
+                message(R.string.s_real_time_sport_too_short)
                 positiveButton(R.string.s_real_time_sport_ensure) {
-                    Logger.d("点击了确定")
                     mPresenter.deleteTooShortSport()
                 }
                 negativeButton(R.string.s_real_time_sport_cancel) {
-                    Logger.d("点击了取消")
-
+                    this@RealTimeTrajectoryActivity.sfv_finish_sport.closeToggle()
                 }
             }
     }
@@ -198,7 +209,10 @@ class RealTimeTrajectoryActivity :
 
         })
         oncePermission = RxPermissions(this)
-            .request(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS)
+            .request(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS
+            )
             .subscribe {
                 if (it) {
                     startOnceLocation()
@@ -217,7 +231,8 @@ class RealTimeTrajectoryActivity :
         //设置模式为定位一次
         locationClientOption?.locationPurpose = AMapLocationClientOption.AMapLocationPurpose.SignIn
         //高精度定位
-        locationClientOption?.locationMode = AMapLocationClientOption.AMapLocationMode.Hight_Accuracy
+        locationClientOption?.locationMode =
+            AMapLocationClientOption.AMapLocationMode.Hight_Accuracy
         //不需要返回地址信息
         locationClientOption?.isMockEnable = false
         locationClient?.setLocationOption(locationClientOption)
@@ -241,10 +256,13 @@ class RealTimeTrajectoryActivity :
     }
 
     override fun sportStopped() {
+        sfv_finish_sport.closeToggle()
         v_start.visibility = View.VISIBLE
         tv_start.visibility = View.VISIBLE
         sfv_finish_sport.visibility = View.GONE
-        Logger.d("解锁成功")
+        tv_time.text = getString(R.string.s_real_time_init_time)
+        tv_speed.text = getString(R.string.s_real_time_init_speed)
+        tv_mileage.text = getString(R.string.s_real_time_init_mileage)
     }
 
 
@@ -252,14 +270,20 @@ class RealTimeTrajectoryActivity :
         aMap.addMarker(
             startOption.icon(
                 BitmapDescriptorFactory.fromBitmap(
-                    VectorUtil.vectorToBitmap(applicationContext, R.drawable.s_vector_start_location)
+                    VectorUtil.vectorToBitmap(
+                        applicationContext,
+                        R.drawable.s_vector_start_location
+                    )
                 )
             )
         )
         currentMarker = aMap.addMarker(
             currentOption.icon(
                 BitmapDescriptorFactory.fromBitmap(
-                    VectorUtil.vectorToBitmap(applicationContext, R.drawable.s_vector_current_location)
+                    VectorUtil.vectorToBitmap(
+                        applicationContext,
+                        R.drawable.s_vector_current_location
+                    )
                 )
             )
         )
@@ -284,9 +308,10 @@ class RealTimeTrajectoryActivity :
         this.latestPoint = point
     }
 
-    override fun refreshDashBoard(sportTime: String, speed: String) {
+    override fun refreshDashBoard(sportTime: String, speed: String, mileage: String) {
         tv_time.text = sportTime
         tv_speed.text = speed
+        tv_mileage.text = mileage
     }
 
     override fun onDestroy() {

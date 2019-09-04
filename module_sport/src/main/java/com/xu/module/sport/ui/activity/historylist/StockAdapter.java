@@ -52,7 +52,7 @@ public class StockAdapter extends RecyclerViewAdapter<HistoryBean, StickyHeadEnt
         switch (type) {
             case TYPE_STICKY_HEAD:
                 HistoryHeadBean headBean = item.getHeadBean();
-                holder.setText(R.id.tv_mileage, headBean.getMonthMileage())
+                holder.setText(R.id.tv_mileage_name, headBean.getMonthMileage())
                         .setText(R.id.tv_sport_duration, headBean.getMonthDuration())
                         .setText(R.id.tv_sport_count, headBean.getMonthCount())
                         .setText(R.id.tv_sport_heat, headBean.getMonthHeat());
@@ -71,7 +71,7 @@ public class StockAdapter extends RecyclerViewAdapter<HistoryBean, StickyHeadEnt
                                 //todo 默认骑车 将来待运动开始选择方式后，再做
                                 "骑车"
                         )
-                ).setText(R.id.tv_mileage, String.valueOf(dataBean.getSportMileage()))
+                ).setText(R.id.tv_mileage_name, String.valueOf(dataBean.getSportMileage()))
                         .setText(R.id.tv_heat, String.valueOf(dataBean.getHeat()))
                         //todo 下面这两个 写死吧先
                         .setText(R.id.tv_comment_count, "1")

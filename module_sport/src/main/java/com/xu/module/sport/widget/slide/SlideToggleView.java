@@ -11,9 +11,11 @@ import android.view.View;
 import android.view.ViewParent;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.customview.widget.ViewDragHelper;
+
 import com.xu.module.sport.R;
 import com.xu.module.sport.widget.slide.ext.DisplayUtils;
 import com.xu.module.sport.widget.slide.shimmer.ShimmerTextView;

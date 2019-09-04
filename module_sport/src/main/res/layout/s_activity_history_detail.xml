@@ -89,7 +89,7 @@
                 android:text="@string/res_default_string"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/tv_mileage"
+                android:id="@+id/tv_mileage_name"
                 app:layout_constraintStart_toEndOf="@+id/s_textview12"
                 app:layout_constraintTop_toTopOf="@+id/s_textview12"
                 app:layout_constraintBottom_toBottomOf="@+id/s_textview12"
@@ -100,7 +100,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/s_textview15"
-                app:layout_constraintStart_toEndOf="@+id/tv_mileage"
+                app:layout_constraintStart_toEndOf="@+id/tv_mileage_name"
                 app:layout_constraintTop_toTopOf="@+id/s_textview12"
                 app:layout_constraintBottom_toBottomOf="@+id/s_textview12"
                 />
@@ -148,8 +148,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_speed"
                 app:layout_constraintStart_toEndOf="@+id/s_textview18"
-                app:layout_constraintTop_toTopOf="@+id/tv_mileage"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_mileage"
+                app:layout_constraintTop_toTopOf="@+id/tv_mileage_name"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_mileage_name"
                 />
 
         <TextView
@@ -158,8 +158,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/s_textview20"
                 app:layout_constraintStart_toEndOf="@+id/tv_speed"
-                app:layout_constraintTop_toTopOf="@+id/tv_mileage"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_mileage"
+                app:layout_constraintTop_toTopOf="@+id/tv_mileage_name"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_mileage_name"
                 />
 
         <TextView

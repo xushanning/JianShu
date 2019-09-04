@@ -8,6 +8,9 @@
     <string name="s_real_time_sport_too_short">由于本次运动过短,将不会被记录,确定结束本次运动吗？</string>
     <string name="s_real_time_sport_ensure">确认</string>
     <string name="s_real_time_sport_cancel">取消</string>
+    <string name="s_real_time_init_speed">0.0</string>
+    <string name="s_real_time_init_mileage">0.00</string>
+    <string name="s_real_time_init_time">00:00:00</string>
 
     <string name="s_sport_mileage">%1$d月 里程(km)</string>
     <string name="s_sport_time">时间</string>
