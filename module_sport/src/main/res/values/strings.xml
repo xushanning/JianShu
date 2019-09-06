@@ -34,4 +34,6 @@
     <string name="s_trajectory_detail_speed">均速</string>
     <string name="s_trajectory_detail_km_h">km/h</string>
     <string name="s_trajectory_detail_centigrade">℃</string>
+
+    <string name="s_home_club">俱乐部</string>
 </resources>

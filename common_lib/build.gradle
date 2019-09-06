@@ -52,6 +52,9 @@ dependencies {
     api rootProject.ext.dependencies["recyclerView"]
     api rootProject.ext.dependencies["viewpager2"]
     api rootProject.ext.dependencies["materialDialog"]
+    api rootProject.ext.dependencies["smartRefreshCore"]
+    api rootProject.ext.dependencies["smartRefreshHeader"]
+    api rootProject.ext.dependencies["smartRefreshFooter"]
 
 
     api rootProject.ext.dependencies["kotlin"]

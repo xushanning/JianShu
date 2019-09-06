@@ -23,7 +23,8 @@ import javax.inject.Inject
  * @author 言吾許
  */
 @Route(path = ARouterPath.sportHome)
-class HomeFragment : BaseMvpFragment<IHomeContract.IHomeView, IHomeContract.IHomePresenter>(), IHomeContract.IHomeView {
+class HomeFragment : BaseMvpFragment<IHomeContract.IHomeView, IHomeContract.IHomePresenter>(),
+    IHomeContract.IHomeView {
     @Inject
     lateinit var sportDao: ISportDao
 
@@ -43,6 +44,19 @@ class HomeFragment : BaseMvpFragment<IHomeContract.IHomeView, IHomeContract.IHom
                 .subscribe({
                     Logger.d("写入完毕")
                 }, { Logger.d(it.message) })
+        }
+
+        img_home_message.singleClick {
+            showToast("消息..正在开发")
+        }
+        img_home_friend.singleClick {
+            showToast("好友..正在开发")
+        }
+        img_home_notification.singleClick {
+            showToast("通知..正在开发")
+        }
+        img_home_setting.singleClick {
+            showToast("设置..正在开发")
         }
     }
 
@@ -75,6 +89,9 @@ class HomeFragment : BaseMvpFragment<IHomeContract.IHomeView, IHomeContract.IHom
 
     private fun generateTrajectoryId(): String {
         val s = UUID.randomUUID().toString()
-        return s.substring(0, 8) + s.substring(9, 13) + s.substring(14, 18) + s.substring(19, 23) + s.substring(24)
+        return s.substring(0, 8) + s.substring(9, 13) + s.substring(14, 18) + s.substring(
+            19,
+            23
+        ) + s.substring(24)
     }
 }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.trello.rxlifecycle3.components.support.RxFragment
 import com.xu.commonlib.mvp.IBaseView
 
@@ -12,7 +13,11 @@ import com.xu.commonlib.mvp.IBaseView
  */
 abstract class BaseFragment : RxFragment(), IBaseView {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view = inflater.inflate(setLayoutId(), container, false)
         initMvp()
         return view
@@ -42,6 +47,7 @@ abstract class BaseFragment : RxFragment(), IBaseView {
     }
 
     override fun showToast(content: String) {
+        Toast.makeText(context, content, Toast.LENGTH_SHORT).show()
     }
 
 
