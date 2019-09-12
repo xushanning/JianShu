@@ -55,6 +55,7 @@ dependencies {
     api rootProject.ext.dependencies["smartRefreshCore"]
     api rootProject.ext.dependencies["smartRefreshHeader"]
     api rootProject.ext.dependencies["smartRefreshFooter"]
+    api rootProject.ext.dependencies["popwindow"]
 
 
     api rootProject.ext.dependencies["kotlin"]

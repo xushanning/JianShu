@@ -6,4 +6,6 @@
     <color name="s_main_tab_un_select">#999999</color>
     <color name="s_ea">#EAEAEA</color>
     <color name="s_fa">#FAFAFA</color>
+    <color name="s_bind_phone_bg">#FFF2E5</color>
+    <color name="s_bind_phone">#FF8614</color>
 </resources>

@@ -2,7 +2,7 @@ ext {
 
     android = [
             compileSdkVersion: 28,
-            minSdkVersion    : 19,
+            minSdkVersion    : 21,
             targetSdkVersion : 28,
             versionCode      : 1,
             flavorDimensions : "1",
@@ -67,6 +67,7 @@ ext {
             ijkplayerJava        : "tv.danmaku.ijk.media:ijkplayer-java:0.8.8",
             ijkplayerArmv7a      : "tv.danmaku.ijk.media:ijkplayer-armv7a:0.8.8",
             videoPlayer          : "cn.jzvd:jiaozivideoplayer:6.2.10",
+            popwindow            : "com.github.pinguo-zhouwei:CustomPopwindow:2.1.1",
 
             gifView              : "com.github.Cutta:GifView:1.4",
             navigation           : "com.etebarian:meow-bottom-navigation:1.0.1",

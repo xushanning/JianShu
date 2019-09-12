@@ -24,6 +24,7 @@
                     android:adjustViewBounds="true"
                     android:src="@mipmap/s_home_top_bg"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -129,6 +130,107 @@
                     android:textColor="@android:color/white"
                     app:layout_constraintStart_toEndOf="@+id/s_imageview5"
                     app:layout_constraintTop_toTopOf="@+id/s_imageview5" />
+
+            <TextView
+                    android:id="@+id/s_textview9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="24dp"
+                    android:text="@string/s_home_heat_currency"
+                    android:textColor="@color/res_99"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/s_textview2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/s_textview2" />
+
+            <ImageView
+                    android:id="@+id/s_imageview7"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    app:layout_constraintBottom_toBottomOf="@+id/s_textview6"
+                    app:layout_constraintEnd_toEndOf="@+id/s_textview9"
+                    app:layout_constraintStart_toStartOf="@+id/s_textview9"
+                    app:layout_constraintTop_toTopOf="@+id/s_textview6"
+                    app:srcCompat="@mipmap/s_heat" />
+
+            <TextView
+                    android:id="@+id/s_textview14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/s_home_integral"
+                    android:textColor="@color/res_99"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/s_textview2"
+                    app:layout_constraintEnd_toStartOf="@+id/s_textview9"
+                    app:layout_constraintHorizontal_bias="0.6"
+                    app:layout_constraintStart_toEndOf="@+id/s_textview2"
+                    app:layout_constraintTop_toTopOf="@+id/s_textview2" />
+
+            <TextView
+                    android:id="@+id/s_textview17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1111"
+                    android:textColor="@android:color/white"
+                    app:layout_constraintBottom_toBottomOf="@+id/s_textview6"
+                    app:layout_constraintEnd_toEndOf="@+id/s_textview14"
+                    app:layout_constraintStart_toStartOf="@+id/s_textview14"
+                    app:layout_constraintTop_toTopOf="@+id/s_textview6" />
+
+            <View
+                    android:id="@+id/v_bind_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@color/s_bind_phone_bg"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/s_imageview6" />
+
+            <ImageView
+                    android:id="@+id/imgview1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/v_bind_phone"
+                    app:layout_constraintStart_toStartOf="@+id/v_bind_phone"
+                    app:layout_constraintTop_toTopOf="@+id/v_bind_phone"
+                    app:srcCompat="@drawable/s_vector_broadcast" />
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/s_home_bind_phone"
+                    android:textColor="@color/s_bind_phone"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/v_bind_phone"
+                    app:layout_constraintEnd_toEndOf="@+id/v_bind_phone"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/imgview1"
+                    app:layout_constraintTop_toTopOf="@+id/v_bind_phone" />
+
+            <TextView
+                    android:id="@+id/tv_month"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/res_default_string"
+                    android:textColor="@color/res_66"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/v_bind_phone"
+                    tools:text="6月" />
+
+            <TextView
+                    android:id="@+id/tv_sport_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_month"
+                    app:layout_constraintStart_toEndOf="@+id/tv_month"
+                    app:layout_constraintTop_toTopOf="@+id/tv_month" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>

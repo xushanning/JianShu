@@ -36,4 +36,11 @@
     <string name="s_trajectory_detail_centigrade">℃</string>
 
     <string name="s_home_club">俱乐部</string>
+    <string name="s_home_heat_currency">热力币</string>
+    <string name="s_home_integral">积分</string>
+    <string name="s_home_bind_phone">为了您的账号安全，请点此绑定手机号</string>
+    <string name="s_home_filter_month">%1$d月</string>
+    <string name="s_home_sport_type_bike">骑行</string>
+    <string name="s_home_sport_type_run">跑步</string>
+    <string name="s_home_sport_type_foot">徒步</string>
 </resources>

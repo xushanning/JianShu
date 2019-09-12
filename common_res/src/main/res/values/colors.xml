@@ -4,4 +4,6 @@
     <color name="res_99">#999999</color>
     <color name="res_ea">#EAEAEA</color>
     <color name="res_fa">#FAFAFA</color>
+    <color name="res_black">#000000</color>
+    <color name="res_white">#FFFFFF</color>
 </resources>

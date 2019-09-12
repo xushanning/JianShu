@@ -118,7 +118,7 @@
     <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/s_vcetor_thumbs_up"
+            app:srcCompat="@drawable/s_vector_thumbs_up"
             android:id="@+id/s_imageview4"
             app:layout_constraintStart_toEndOf="@+id/s_imageview2"
             android:layout_marginStart="8dp"

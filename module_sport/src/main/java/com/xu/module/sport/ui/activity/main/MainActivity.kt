@@ -67,7 +67,7 @@ class MainActivity : BaseMvpActivity<IMainContract.IMainView, IMainContract.IMai
             .apply {
                 add(R.drawable.s_selector_home)
                 add(R.drawable.s_selector_find)
-                add(R.drawable.s_vector_sport)
+                add(R.drawable.s_vector_sport_white)
                 add(R.drawable.s_selector_home)
                 add(R.drawable.s_selector_home)
             }
