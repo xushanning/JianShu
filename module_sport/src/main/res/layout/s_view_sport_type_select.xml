@@ -64,7 +64,7 @@
             app:layout_constraintStart_toEndOf="@+id/view2"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.2"
-            app:srcCompat="@drawable/s_vector_foot_on_dark" />
+            app:srcCompat="@drawable/s_vector_foot" />
 
     <TextView
             android:id="@+id/tv_bike"

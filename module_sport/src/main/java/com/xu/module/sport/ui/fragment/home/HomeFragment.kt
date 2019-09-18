@@ -1,10 +1,12 @@
 package com.xu.module.sport.ui.fragment.home
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.helper.widget.Layer
+import androidx.core.content.ContextCompat
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.example.zhouwei.library.CustomPopWindow
@@ -34,6 +36,20 @@ class HomeFragment : BaseMvpFragment<IHomeContract.IHomeView, IHomeContract.IHom
     lateinit var sportDao: ISportDao
 
     private var sportTypePop: CustomPopWindow? = null
+    /**
+     * 首页查询的运动类型
+     */
+    private var querySportType = QUERY_SPORT_TYPE_BIKE
+
+
+    companion object {
+        //查询运动类型：骑车
+        private const val QUERY_SPORT_TYPE_BIKE = 1
+        //查询运动类型：跑步
+        private const val QUERY_SPORT_TYPE_RUN = 2
+        //查询运动类型：徒步
+        private const val QUERY_SPORT_TYPE_FOOT = 3
+    }
 
     override fun setLayoutId(): Int {
         return R.layout.s_fragment_home
@@ -81,14 +97,16 @@ class HomeFragment : BaseMvpFragment<IHomeContract.IHomeView, IHomeContract.IHom
     private fun initSportType() {
         val sportTypeView =
             LayoutInflater.from(context).inflate(R.layout.s_view_sport_type_select, null)
-        setSportTypeColor(sportTypeView, R.color.res_black, R.color.res_66, R.color.res_66)
         sportTypeView.findViewById<Layer>(R.id.l_bike).singleClick {
+            querySportType = QUERY_SPORT_TYPE_BIKE
             refreshSportData()
         }
         sportTypeView.findViewById<Layer>(R.id.l_run).singleClick {
+            querySportType = QUERY_SPORT_TYPE_RUN
             refreshSportData()
         }
         sportTypeView.findViewById<Layer>(R.id.l_foot).singleClick {
+            querySportType = QUERY_SPORT_TYPE_FOOT
             refreshSportData()
         }
 
@@ -101,18 +119,76 @@ class HomeFragment : BaseMvpFragment<IHomeContract.IHomeView, IHomeContract.IHom
                 .setBgDarkAlpha(1f)
                 .create()
                 .showAsDropDown(tv_sport_type, 0, 20)
+            refreshUi(sportTypeView)
         }
     }
 
-    private fun setSportTypeColor(parentView: View, bikeColor: Int, runColor: Int, footColor: Int) {
-        parentView.findViewById<ImageView>(R.id.img_bike).drawable.setTint(bikeColor)
-        parentView.findViewById<ImageView>(R.id.img_run).drawable.setTint(runColor)
-        parentView.findViewById<ImageView>(R.id.img_foot).drawable.setTint(footColor)
+    /**
+     * 刷新弹窗UI
+     */
+    private fun refreshUi(sportTypeView: View) {
+        when (querySportType) {
+            QUERY_SPORT_TYPE_BIKE -> {
+                setSportTypeImg(
+                    sportTypeView,
+                    R.color.res_black,
+                    R.color.res_99,
+                    R.color.res_99
+                )
+            }
+            QUERY_SPORT_TYPE_RUN -> {
+                setSportTypeImg(
+                    sportTypeView,
+                    R.color.res_99,
+                    R.color.res_black,
+                    R.color.res_99
+                )
+            }
+            QUERY_SPORT_TYPE_FOOT -> {
+                setSportTypeImg(
+                    sportTypeView,
+                    R.color.res_99,
+                    R.color.res_99,
+                    R.color.res_black
+                )
+            }
+        }
+    }
 
-        parentView.findViewById<TextView>(R.id.tv_bike).setTextColor(bikeColor)
-        parentView.findViewById<TextView>(R.id.tv_run).setTextColor(runColor)
-        parentView.findViewById<TextView>(R.id.tv_foot).setTextColor(footColor)
+    /**
+     * 设置弹窗的img和字体颜色
+     */
+    private fun setSportTypeImg(
+        parentView: View,
+        bikeColor: Int,
+        runColor: Int,
+        footColor: Int
+    ) {
+        parentView.findViewById<ImageView>(R.id.img_bike).drawable.setTint(
+            ContextCompat.getColor(
+                context!!,
+                bikeColor
+            )
+        )
+        parentView.findViewById<ImageView>(R.id.img_run).drawable.setTint(
+            ContextCompat.getColor(
+                context!!,
+                runColor
+            )
+        )
+        parentView.findViewById<ImageView>(R.id.img_foot).drawable.setTint(
+            ContextCompat.getColor(
+                context!!,
+                footColor
+            )
+        )
 
+        parentView.findViewById<TextView>(R.id.tv_bike)
+            .setTextColor(ContextCompat.getColor(context!!, bikeColor))
+        parentView.findViewById<TextView>(R.id.tv_run)
+            .setTextColor(ContextCompat.getColor(context!!, runColor))
+        parentView.findViewById<TextView>(R.id.tv_foot)
+            .setTextColor(ContextCompat.getColor(context!!, footColor))
     }
 
 
