@@ -44,7 +44,7 @@ dependencies {
     kapt rootProject.ext.dependencies["daggerCompiler"]
     kapt rootProject.ext.dependencies["roomCompiler"]
 
-    api project(':vrouter_api')
+   // api project(':vrouter_api')
 
 
     api rootProject.ext.dependencies["appcompat"]
