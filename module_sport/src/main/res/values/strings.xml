@@ -43,4 +43,10 @@
     <string name="s_home_sport_type_bike">骑行</string>
     <string name="s_home_sport_type_run">跑步</string>
     <string name="s_home_sport_type_foot">徒步</string>
+    <string name="s_home_sport_rank">本地排名</string>
+    <string name="s_home_sport_time_default">00:00</string>
+    <string name="s_home_sport_heat">%1$d/100℃</string>
+    <string name="s_home_sport_history">运动记录</string>
+    <string name="s_home_sport_total_mileage">%1$fKm</string>
+    <string name="s_home_sport_medal">我的勋章</string>
 </resources>

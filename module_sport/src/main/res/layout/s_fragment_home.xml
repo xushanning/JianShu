@@ -1,236 +1,429 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.scwang.smart.refresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.scwang.smart.refresh.header.ClassicsHeader
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <com.scwang.smart.refresh.header.ClassicsHeader
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    <androidx.core.widget.NestedScrollView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+            <ImageView
+                android:id="@+id/s_imageview6"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            <ImageView
-                    android:id="@+id/s_imageview6"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:adjustViewBounds="true"
-                    android:src="@mipmap/s_home_top_bg"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@mipmap/s_home_top_bg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                    android:id="@+id/s_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="历史记录"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.469"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.849" />
-
-            <Button
-                    android:id="@+id/bt_inject"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="注入历史记录"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/s_button" />
+                android:id="@+id/bt_inject"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="200dp"
+                android:layout_marginEnd="8dp"
+                android:text="注入历史记录"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view11" />
 
             <ImageView
-                    android:id="@+id/img_home_message"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="32dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@mipmap/s_home_message" />
+                android:id="@+id/img_home_message"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@mipmap/s_home_message" />
 
             <ImageView
-                    android:id="@+id/img_home_setting"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginEnd="8dp"
-                    android:src="@mipmap/s_home_settings"
-                    app:layout_constraintBottom_toBottomOf="@+id/img_home_message"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/img_home_message" />
+                android:id="@+id/img_home_setting"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="8dp"
+                android:src="@mipmap/s_home_settings"
+                app:layout_constraintBottom_toBottomOf="@+id/img_home_message"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/img_home_message" />
 
             <ImageView
-                    android:id="@+id/img_home_notification"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginEnd="16dp"
-                    android:src="@mipmap/s_home_notification"
-                    app:layout_constraintBottom_toBottomOf="@+id/img_home_message"
-                    app:layout_constraintEnd_toStartOf="@+id/img_home_setting"
-                    app:layout_constraintTop_toTopOf="@+id/img_home_message" />
+                android:id="@+id/img_home_notification"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="16dp"
+                android:src="@mipmap/s_home_notification"
+                app:layout_constraintBottom_toBottomOf="@+id/img_home_message"
+                app:layout_constraintEnd_toStartOf="@+id/img_home_setting"
+                app:layout_constraintTop_toTopOf="@+id/img_home_message" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/img_home_friend"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginEnd="16dp"
-                    android:src="@mipmap/s_home_friend"
-                    app:layout_constraintBottom_toBottomOf="@+id/img_home_message"
-                    app:layout_constraintEnd_toStartOf="@+id/img_home_notification"
-                    app:layout_constraintTop_toTopOf="@+id/img_home_message" />
+                android:id="@+id/img_home_friend"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="16dp"
+                android:src="@mipmap/s_home_friend"
+                app:layout_constraintBottom_toBottomOf="@+id/img_home_message"
+                app:layout_constraintEnd_toStartOf="@+id/img_home_notification"
+                app:layout_constraintTop_toTopOf="@+id/img_home_message" />
 
             <ImageView
-                    android:id="@+id/s_imageview5"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginBottom="16dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/s_imageview6"
-                    app:layout_constraintStart_toStartOf="@+id/s_imageview6"
-                    app:srcCompat="@mipmap/s_club_cup" />
+                android:id="@+id/s_imageview5"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/s_imageview6"
+                app:layout_constraintStart_toStartOf="@+id/s_imageview6"
+                app:srcCompat="@mipmap/s_club_cup" />
 
             <TextView
-                    android:id="@+id/s_textview2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginBottom="18dp"
-                    android:text="@string/s_home_club"
-                    android:textColor="@color/res_99"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/s_imageview5"
-                    app:layout_constraintStart_toEndOf="@+id/s_imageview5" />
+                android:id="@+id/s_textview2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginBottom="18dp"
+                android:text="@string/s_home_club"
+                android:textColor="@color/res_99"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/s_imageview5"
+                app:layout_constraintStart_toEndOf="@+id/s_imageview5" />
 
             <TextView
-                    android:id="@+id/s_textview6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginTop="14dp"
-                    android:text="骑货单车俱乐部"
-                    android:textColor="@android:color/white"
-                    app:layout_constraintStart_toEndOf="@+id/s_imageview5"
-                    app:layout_constraintTop_toTopOf="@+id/s_imageview5" />
+                android:id="@+id/s_textview6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="14dp"
+                android:text="骑货单车俱乐部"
+                android:textColor="@android:color/white"
+                app:layout_constraintStart_toEndOf="@+id/s_imageview5"
+                app:layout_constraintTop_toTopOf="@+id/s_imageview5" />
 
             <TextView
-                    android:id="@+id/s_textview9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="24dp"
-                    android:text="@string/s_home_heat_currency"
-                    android:textColor="@color/res_99"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/s_textview2"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/s_textview2" />
+                android:id="@+id/s_textview9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:text="@string/s_home_heat_currency"
+                android:textColor="@color/res_99"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/s_textview2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/s_textview2" />
 
             <ImageView
-                    android:id="@+id/s_imageview7"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:adjustViewBounds="true"
-                    app:layout_constraintBottom_toBottomOf="@+id/s_textview6"
-                    app:layout_constraintEnd_toEndOf="@+id/s_textview9"
-                    app:layout_constraintStart_toStartOf="@+id/s_textview9"
-                    app:layout_constraintTop_toTopOf="@+id/s_textview6"
-                    app:srcCompat="@mipmap/s_heat" />
+                android:id="@+id/s_imageview7"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                app:layout_constraintBottom_toBottomOf="@+id/s_textview6"
+                app:layout_constraintEnd_toEndOf="@+id/s_textview9"
+                app:layout_constraintStart_toStartOf="@+id/s_textview9"
+                app:layout_constraintTop_toTopOf="@+id/s_textview6"
+                app:srcCompat="@mipmap/s_heat" />
 
             <TextView
-                    android:id="@+id/s_textview14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/s_home_integral"
-                    android:textColor="@color/res_99"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/s_textview2"
-                    app:layout_constraintEnd_toStartOf="@+id/s_textview9"
-                    app:layout_constraintHorizontal_bias="0.6"
-                    app:layout_constraintStart_toEndOf="@+id/s_textview2"
-                    app:layout_constraintTop_toTopOf="@+id/s_textview2" />
+                android:id="@+id/s_textview14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s_home_integral"
+                android:textColor="@color/res_99"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/s_textview2"
+                app:layout_constraintEnd_toStartOf="@+id/s_textview9"
+                app:layout_constraintHorizontal_bias="0.6"
+                app:layout_constraintStart_toEndOf="@+id/s_textview2"
+                app:layout_constraintTop_toTopOf="@+id/s_textview2" />
 
             <TextView
-                    android:id="@+id/s_textview17"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="1111"
-                    android:textColor="@android:color/white"
-                    app:layout_constraintBottom_toBottomOf="@+id/s_textview6"
-                    app:layout_constraintEnd_toEndOf="@+id/s_textview14"
-                    app:layout_constraintStart_toStartOf="@+id/s_textview14"
-                    app:layout_constraintTop_toTopOf="@+id/s_textview6" />
+                android:id="@+id/s_textview17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1111"
+                android:textColor="@android:color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/s_textview6"
+                app:layout_constraintEnd_toEndOf="@+id/s_textview14"
+                app:layout_constraintStart_toStartOf="@+id/s_textview14"
+                app:layout_constraintTop_toTopOf="@+id/s_textview6" />
 
             <View
-                    android:id="@+id/v_bind_phone"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:background="@color/s_bind_phone_bg"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/s_imageview6" />
+                android:id="@+id/v_bind_phone"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/s_bind_phone_bg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/s_imageview6" />
 
             <ImageView
-                    android:id="@+id/imgview1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/v_bind_phone"
-                    app:layout_constraintStart_toStartOf="@+id/v_bind_phone"
-                    app:layout_constraintTop_toTopOf="@+id/v_bind_phone"
-                    app:srcCompat="@drawable/s_vector_broadcast" />
+                android:id="@+id/imgview1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/v_bind_phone"
+                app:layout_constraintStart_toStartOf="@+id/v_bind_phone"
+                app:layout_constraintTop_toTopOf="@+id/v_bind_phone"
+                app:srcCompat="@drawable/s_vector_broadcast" />
 
             <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="@string/s_home_bind_phone"
-                    android:textColor="@color/s_bind_phone"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/v_bind_phone"
-                    app:layout_constraintEnd_toEndOf="@+id/v_bind_phone"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/imgview1"
-                    app:layout_constraintTop_toTopOf="@+id/v_bind_phone" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/s_home_bind_phone"
+                android:textColor="@color/s_bind_phone"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/v_bind_phone"
+                app:layout_constraintEnd_toEndOf="@+id/v_bind_phone"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/imgview1"
+                app:layout_constraintTop_toTopOf="@+id/v_bind_phone" />
 
             <TextView
-                    android:id="@+id/tv_month"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/res_default_string"
-                    android:textColor="@color/res_66"
-                    android:textSize="15sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/v_bind_phone"
-                    tools:text="6月" />
+                android:id="@+id/tv_month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/res_default_string"
+                android:textColor="@color/res_66"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/v_bind_phone"
+                tools:text="6月" />
+
+            <ImageView
+                android:id="@+id/img_sport_type"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_month"
+                app:layout_constraintStart_toEndOf="@+id/tv_month"
+                app:layout_constraintTop_toTopOf="@+id/tv_month"
+                app:srcCompat="@mipmap/s_sport_type_bike_focus" />
 
             <TextView
-                    android:id="@+id/tv_sport_type"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="TextView"
-                    app:layout_constraintBottom_toBottomOf="@+id/tv_month"
-                    app:layout_constraintStart_toEndOf="@+id/tv_month"
-                    app:layout_constraintTop_toTopOf="@+id/tv_month" />
+                android:id="@+id/tv_sport_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="@string/res_default_string"
+                app:layout_constraintBottom_toBottomOf="@+id/img_sport_type"
+                app:layout_constraintStart_toEndOf="@+id/img_sport_type"
+                app:layout_constraintTop_toTopOf="@+id/img_sport_type"
+                tools:text="骑行" />
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_sport_type"
+                app:layout_constraintStart_toEndOf="@+id/tv_sport_type"
+                app:layout_constraintTop_toTopOf="@+id/tv_sport_type"
+                app:srcCompat="@drawable/s_vector_triangle" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/s_guideline4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.7" />
+
+            <TextView
+                android:id="@+id/s_textview19"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/s_mileage"
+                app:layout_constraintEnd_toStartOf="@+id/s_textview21"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_month" />
+
+            <TextView
+                android:id="@+id/s_textview21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s_home_sport_rank"
+                app:layout_constraintBottom_toBottomOf="@+id/s_textview19"
+                app:layout_constraintEnd_toStartOf="@+id/s_textview23"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/s_textview19"
+                app:layout_constraintTop_toTopOf="@+id/s_textview19" />
+
+            <TextView
+                android:id="@+id/s_textview23"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:text="@string/s_time"
+                app:layout_constraintBottom_toBottomOf="@+id/s_textview21"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/s_guideline4"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/s_textview21"
+                app:layout_constraintTop_toTopOf="@+id/s_textview21" />
+
+            <TextView
+                android:id="@+id/tv_mileage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/res_default_0"
+                android:textColor="@color/res_black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/s_textview19"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/s_textview19"
+                app:layout_constraintTop_toBottomOf="@+id/s_textview19" />
+
+            <TextView
+                android:id="@+id/tv_rank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/res_default_string"
+                android:textColor="@color/res_black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_mileage"
+                app:layout_constraintEnd_toEndOf="@+id/s_textview21"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/s_textview21"
+                app:layout_constraintTop_toTopOf="@+id/tv_mileage" />
+
+            <TextView
+                android:id="@+id/tv_sport_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s_home_sport_time_default"
+                android:textColor="@color/res_black"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_mileage"
+                app:layout_constraintEnd_toEndOf="@+id/s_textview23"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/s_textview23"
+                app:layout_constraintTop_toTopOf="@+id/tv_mileage" />
+
+            <ImageView
+                android:id="@+id/img_question"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/s_vector_question"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_month"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_month" />
+
+            <TextView
+                android:id="@+id/tv_month_heat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="@string/s_home_sport_heat"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_month"
+                app:layout_constraintEnd_toStartOf="@+id/img_question"
+                app:layout_constraintTop_toTopOf="@+id/tv_month" />
+
+            <View
+                android:id="@+id/view11"
+                android:layout_width="0dp"
+                android:layout_height="5dp"
+                android:background="@color/res_ea"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_mileage" />
+
+            <ImageView
+                android:id="@+id/img_11"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:src="@mipmap/s_home_history"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view11" />
+
+            <TextView
+                android:id="@+id/tv_sport_history"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/s_home_sport_history"
+                android:textColor="@color/res_black"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/img_11"
+                app:layout_constraintEnd_toStartOf="@+id/tv_total_mileage"
+                app:layout_constraintStart_toEndOf="@+id/img_11"
+                app:layout_constraintTop_toTopOf="@+id/img_11" />
+
+            <ImageView
+                android:id="@+id/img_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/res_right_arrow"
+                app:layout_constraintBottom_toBottomOf="@id/img_11"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/img_11" />
+
+            <TextView
+                android:id="@+id/tv_total_mileage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/res_default_string"
+                app:layout_constraintBottom_toBottomOf="@+id/img_11"
+                app:layout_constraintEnd_toStartOf="@+id/img_12"
+                app:layout_constraintTop_toTopOf="@id/img_11"
+                tools:text="9.8Km" />
+
+            <ImageView
+                android:id="@+id/s_imageview8"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="32dp"
+                app:layout_constraintEnd_toEndOf="@+id/img_11"
+                app:layout_constraintStart_toStartOf="@+id/img_11"
+                app:layout_constraintTop_toBottomOf="@+id/img_11"
+                app:srcCompat="@mipmap/s_home_medal" />
+
+            <TextView
+                android:id="@+id/tv_my_medal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/s_home_sport_medal"
+                android:textColor="@color/res_black"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/s_imageview8"
+                app:layout_constraintEnd_toStartOf="@+id/s_imageview9"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@id/s_imageview8"
+                app:layout_constraintTop_toTopOf="@id/s_imageview8" />
+
+            <ImageView
+                android:id="@+id/s_imageview9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_my_medal"
+                app:layout_constraintEnd_toEndOf="@+id/img_12"
+                app:layout_constraintStart_toStartOf="@+id/img_12"
+                app:layout_constraintTop_toTopOf="@+id/tv_my_medal"
+                app:srcCompat="@drawable/res_right_arrow" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>

@@ -57,4 +57,10 @@ interface ISportDao {
      */
     @Delete
     fun deleteSportTrajectory(entity: TrajectoryEntity): Single<Int>
+
+    /**
+     * 查询某个月的某种运动类型的所有轨迹
+     */
+    @Query("select * from sport where month==:month and sportType==:sportType")
+    fun queryCurrentMonthHistoryByType(sportType: Int, month: Int): Flowable<List<TrajectoryEntity>>
 }

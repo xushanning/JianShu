@@ -63,4 +63,9 @@ class TrajectoryEntity {
      * 本次运动的热度(默认为0),在结束一次运动的时候计算
      */
     var heat = 0
+    /**
+     * 运动类型：目前支持骑车、跑步、徒步
+     * 默认为骑车
+     */
+    var sportType = 1
 }
