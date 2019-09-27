@@ -49,4 +49,5 @@
     <string name="s_home_sport_history">运动记录</string>
     <string name="s_home_sport_total_mileage">%1$fKm</string>
     <string name="s_home_sport_medal">我的勋章</string>
+    <string name="s_home_smart_device">智能设备</string>
 </resources>

@@ -424,6 +424,40 @@
                 app:layout_constraintStart_toStartOf="@+id/img_12"
                 app:layout_constraintTop_toTopOf="@+id/tv_my_medal"
                 app:srcCompat="@drawable/res_right_arrow" />
+
+            <ImageView
+                android:id="@+id/s_imageview10"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="32dp"
+                app:layout_constraintEnd_toEndOf="@+id/s_imageview8"
+                app:layout_constraintStart_toStartOf="@+id/s_imageview8"
+                app:layout_constraintTop_toBottomOf="@+id/s_imageview8"
+                app:srcCompat="@mipmap/s_home_smart_device" />
+
+            <TextView
+                android:id="@+id/tv_smart_device"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/s_home_smart_device"
+                android:textColor="@color/res_black"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/s_imageview10"
+                app:layout_constraintEnd_toStartOf="@+id/s_imageview11"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/s_imageview10"
+                app:layout_constraintTop_toTopOf="@+id/s_imageview10" />
+
+            <ImageView
+                android:id="@+id/s_imageview11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/s_imageview10"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/s_imageview10"
+                app:srcCompat="@drawable/res_right_arrow" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>

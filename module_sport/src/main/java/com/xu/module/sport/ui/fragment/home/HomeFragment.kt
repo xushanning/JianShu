@@ -88,6 +88,9 @@ class HomeFragment : BaseMvpFragment<IHomeContract.IHomeView, IHomeContract.IHom
         tv_my_medal.singleClick {
             showToast("我的勋章..正在开发")
         }
+        tv_smart_device.singleClick {
+            showToast("智能设备正在开发中")
+        }
 
         tv_total_mileage.text = getString(R.string.s_home_sport_total_mileage, 0.0f)
 
