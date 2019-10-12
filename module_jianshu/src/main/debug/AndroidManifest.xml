@@ -1,2 +1,25 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.xu.module.jianshu"/>
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.xu.module.jianshu">
+
+    <application
+        android:name=".debug.DebugApplication"
+        android:allowBackup="true"
+        android:label="@string/j_app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        tools:replace="android:theme,android:label">
+        <activity android:name=".ui.home.HomeActivity">
+
+        </activity>
+        <activity android:name=".ui.repeatclick.RepeatClickActivity" />
+        <activity android:name=".ui.retrofit.RetrofitTestActivity" />
+        <activity android:name=".ui.hook.HookActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

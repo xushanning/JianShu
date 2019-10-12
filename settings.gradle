@@ -4,10 +4,10 @@ include ':common_lib',
 //        ':vrouter_annotation',
         ':common_res',
         //简书demo
-        //':module_jianshu',
-        //运动模块
-        ':module_sport'
+        ':module_jianshu',
         //算法模块
         //':module_algorithm'
         //壳模块
         //':app'
+        //运动模块
+        ':module_sport'

@@ -10,9 +10,11 @@ import javax.inject.Inject
 /**
  * @author 言吾許
  */
-class HomePresenter @Inject constructor() : BasePresenter<IHomeContract.IHomeView, IHomeContract.IHomeModel>(),
+class HomePresenter @Inject constructor() :
+        BasePresenter<IHomeContract.IHomeView, IHomeContract.IHomeModel>(),
         IHomeContract.IHomePresenter {
     override fun getCurrentMonthSportStatistics(sportType: Int) {
+        Logger.d("查询")
         val statisticsDis = mModel.getCurrentMonthSportStatistics(sportType, Calendar.getInstance().get(Calendar.MONTH) + 1)
                 .compose(TransformUtil.defaultFlowableSchedulers())
                 .compose(mView.bindToLife())
@@ -24,7 +26,11 @@ class HomePresenter @Inject constructor() : BasePresenter<IHomeContract.IHomeVie
                         sportTime += item.sportTime
                     }
 
-                    mView.loadCurrentMonthSportStatistics(sportMileage.toString(), "1", TimeUtil.getTime(sportTime))
+                    mView.loadCurrentMonthSportStatistics(
+                            sportMileage.toString(),
+                            "1",
+                            TimeUtil.getTime(sportTime)
+                    )
                 }, { Logger.d(it.message) })
         mCompositeDisposable.add(statisticsDis)
     }

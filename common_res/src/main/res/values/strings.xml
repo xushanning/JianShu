@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">common_res</string>
+    <string name="j_app_name">common_res</string>
     <string name="res_default_string">--</string>
     <string name="res_default_0">0</string>
 </resources>

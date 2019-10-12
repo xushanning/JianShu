@@ -16,6 +16,10 @@ object ARouterPath {
      * 模拟retrofit
      */
     const val jianshuRetrofit = "/jianshu/retrofit"
+    /**
+     * 钩子
+     */
+    const val jianshuHook = "/jianshu/hook"
 
 
     /**

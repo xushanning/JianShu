@@ -32,7 +32,7 @@ import javax.inject.Inject
  */
 @Route(path = ARouterPath.sportHome)
 class HomeFragment : BaseMvpFragment<IHomeContract.IHomeView, IHomeContract.IHomePresenter>(),
-    IHomeContract.IHomeView {
+        IHomeContract.IHomeView {
     @Inject
     lateinit var sportDao: ISportDao
 
@@ -55,16 +55,16 @@ class HomeFragment : BaseMvpFragment<IHomeContract.IHomeView, IHomeContract.IHom
 
         tv_sport_history.singleClick {
             ARouter.getInstance()
-                .build(ARouterPath.sportHistoryList)
-                .navigation()
+                    .build(ARouterPath.sportHistoryList)
+                    .navigation()
         }
 
         bt_inject.singleClick {
             sportDao.saveSportTrajectory(generateData())
-                .compose(TransformUtil.defaultCompletableSchedulers())
-                .subscribe({
-                    Logger.d("写入完毕")
-                }, { Logger.d(it.message) })
+                    .compose(TransformUtil.defaultCompletableSchedulers())
+                    .subscribe({
+                        Logger.d("写入完毕")
+                    }, { Logger.d(it.message) })
         }
         img_home_message.singleClick {
             showToast("消息..正在开发")
@@ -99,7 +99,7 @@ class HomeFragment : BaseMvpFragment<IHomeContract.IHomeView, IHomeContract.IHom
 
         //月份
         tv_month.text =
-            getString(R.string.s_home_filter_month, Calendar.getInstance().get(Calendar.MONTH) + 1)
+                getString(R.string.s_home_filter_month, Calendar.getInstance().get(Calendar.MONTH) + 1)
         initSportType()
 
     }
@@ -109,7 +109,7 @@ class HomeFragment : BaseMvpFragment<IHomeContract.IHomeView, IHomeContract.IHom
      */
     private fun initSportType() {
         val sportTypeView =
-            LayoutInflater.from(context).inflate(R.layout.s_view_sport_type_select, null)
+                LayoutInflater.from(context).inflate(R.layout.s_view_sport_type_select, null)
         sportTypeView.findViewById<Layer>(R.id.l_bike).singleClick {
             querySportType = SportTypeConstant.SPORT_TYPE_BIKE
 
@@ -130,22 +130,24 @@ class HomeFragment : BaseMvpFragment<IHomeContract.IHomeView, IHomeContract.IHom
         tv_sport_type.text = getString(R.string.s_home_sport_type_bike)
         tv_sport_type.singleClick {
             sportTypePop = CustomPopWindow.PopupWindowBuilder(context)
-                .setView(sportTypeView)
-                .enableBackgroundDark(true)
-                .setBgDarkAlpha(1f)
-                .create()
-                .showAsDropDown(tv_sport_type, 0, 20)
+                    .setView(sportTypeView)
+                    .enableBackgroundDark(true)
+                    .setBgDarkAlpha(1f)
+                    .create()
+                    .showAsDropDown(tv_sport_type, 0, 20)
             refreshUi(sportTypeView)
         }
         refreshSportData(R.string.s_home_sport_type_bike, R.mipmap.s_sport_type_bike_focus)
     }
 
     override fun loadCurrentMonthSportStatistics(
-        sportMileage: String,
-        sportRank: String,
-        sportTime: String
+            sportMileage: String,
+            sportRank: String,
+            sportTime: String
     ) {
-
+        tv_mileage.text = sportMileage
+        tv_rank.text = sportRank
+        tv_sport_time.text = sportTime
     }
 
     /**
@@ -155,35 +157,35 @@ class HomeFragment : BaseMvpFragment<IHomeContract.IHomeView, IHomeContract.IHom
         when (querySportType) {
             SportTypeConstant.SPORT_TYPE_BIKE -> {
                 setSportTypeImg(
-                    sportTypeView,
-                    R.mipmap.s_sport_type_bike_focus,
-                    R.mipmap.s_sport_type_run_unfocus,
-                    R.mipmap.s_sport_type_foot_unfocus,
-                    R.color.res_black,
-                    R.color.res_99,
-                    R.color.res_99
+                        sportTypeView,
+                        R.mipmap.s_sport_type_bike_focus,
+                        R.mipmap.s_sport_type_run_unfocus,
+                        R.mipmap.s_sport_type_foot_unfocus,
+                        R.color.res_black,
+                        R.color.res_99,
+                        R.color.res_99
                 )
             }
             SportTypeConstant.SPORT_TYPE_RUN -> {
                 setSportTypeImg(
-                    sportTypeView,
-                    R.mipmap.s_sport_type_bike_unfocus,
-                    R.mipmap.s_sport_type_run_focus,
-                    R.mipmap.s_sport_type_foot_unfocus,
-                    R.color.res_99,
-                    R.color.res_black,
-                    R.color.res_99
+                        sportTypeView,
+                        R.mipmap.s_sport_type_bike_unfocus,
+                        R.mipmap.s_sport_type_run_focus,
+                        R.mipmap.s_sport_type_foot_unfocus,
+                        R.color.res_99,
+                        R.color.res_black,
+                        R.color.res_99
                 )
             }
             SportTypeConstant.SPORT_TYPE_FOOT -> {
                 setSportTypeImg(
-                    sportTypeView,
-                    R.mipmap.s_sport_type_bike_unfocus,
-                    R.mipmap.s_sport_type_run_unfocus,
-                    R.mipmap.s_sport_type_foot_focus,
-                    R.color.res_99,
-                    R.color.res_99,
-                    R.color.res_black
+                        sportTypeView,
+                        R.mipmap.s_sport_type_bike_unfocus,
+                        R.mipmap.s_sport_type_run_unfocus,
+                        R.mipmap.s_sport_type_foot_focus,
+                        R.color.res_99,
+                        R.color.res_99,
+                        R.color.res_black
                 )
             }
         }
@@ -193,24 +195,24 @@ class HomeFragment : BaseMvpFragment<IHomeContract.IHomeView, IHomeContract.IHom
      * 设置弹窗的img和字体颜色
      */
     private fun setSportTypeImg(
-        parentView: View,
-        bikeImg: Int,
-        runImg: Int,
-        footImg: Int,
-        bikeColor: Int,
-        runColor: Int,
-        footColor: Int
+            parentView: View,
+            bikeImg: Int,
+            runImg: Int,
+            footImg: Int,
+            bikeColor: Int,
+            runColor: Int,
+            footColor: Int
     ) {
         parentView.findViewById<ImageView>(R.id.img_bike).setImageResource(bikeImg)
         parentView.findViewById<ImageView>(R.id.img_run).setImageResource(runImg)
         parentView.findViewById<ImageView>(R.id.img_foot).setImageResource(footImg)
 
         parentView.findViewById<TextView>(R.id.tv_bike)
-            .setTextColor(ContextCompat.getColor(context!!, bikeColor))
+                .setTextColor(ContextCompat.getColor(context!!, bikeColor))
         parentView.findViewById<TextView>(R.id.tv_run)
-            .setTextColor(ContextCompat.getColor(context!!, runColor))
+                .setTextColor(ContextCompat.getColor(context!!, runColor))
         parentView.findViewById<TextView>(R.id.tv_foot)
-            .setTextColor(ContextCompat.getColor(context!!, footColor))
+                .setTextColor(ContextCompat.getColor(context!!, footColor))
     }
 
 
@@ -231,12 +233,12 @@ class HomeFragment : BaseMvpFragment<IHomeContract.IHomeView, IHomeContract.IHom
         entity.trajectoryId = generateTrajectoryId()
         entity.sportTime = random(1, 3600).toLong()
         entity.totalTime = random(100, 100000).toLong()
-        entity.sportMileage = random(1000, 100000).toFloat()
+        entity.sportMileage = random(1, 50).toFloat()
         entity.complete = true
         entity.startTime = 1566465010329
         entity.lastInsertTime = 1566466010329
         entity.year = random(2015, 2019)
-        entity.month = random(1, 12)
+        entity.month = 10
         entity.day = random(1, 30)
         entity.trajectoryPoints = generatePoint()
         entity.sportType = random(1, 3)
@@ -255,9 +257,6 @@ class HomeFragment : BaseMvpFragment<IHomeContract.IHomeView, IHomeContract.IHom
 
     private fun generateTrajectoryId(): String {
         val s = UUID.randomUUID().toString()
-        return s.substring(0, 8) + s.substring(9, 13) + s.substring(14, 18) + s.substring(
-            19,
-            23
-        ) + s.substring(24)
+        return s.substring(0, 8) + s.substring(9, 13) + s.substring(14, 18) + s.substring(19, 23) + s.substring(24)
     }
 }

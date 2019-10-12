@@ -31,10 +31,17 @@ class HomeActivity : BaseActivity() {
             showToast("没想到吧。。啥都没有")
             showToast("其实是懒。。没写")
         }
-
+        //仿retrofit
         bt_retrofit.singleClick {
             ARouter.getInstance()
                 .build(ARouterPath.jianshuRetrofit)
+                .navigation()
+        }
+
+        //hook
+        bt_hook.singleClick {
+            ARouter.getInstance()
+                .build(ARouterPath.jianshuHook)
                 .navigation()
         }
     }
