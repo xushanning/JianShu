@@ -14,8 +14,7 @@ class HomePresenter @Inject constructor() :
         BasePresenter<IHomeContract.IHomeView, IHomeContract.IHomeModel>(),
         IHomeContract.IHomePresenter {
     override fun getCurrentMonthSportStatistics(sportType: Int) {
-        Logger.d("查询")
-        val statisticsDis = mModel.getCurrentMonthSportStatistics(sportType, Calendar.getInstance().get(Calendar.MONTH) + 1)
+        val statisticsDis = mModel.getCurrentMonthSportStatistics(sportType, Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH) + 1)
                 .compose(TransformUtil.defaultFlowableSchedulers())
                 .compose(mView.bindToLife())
                 .subscribe({

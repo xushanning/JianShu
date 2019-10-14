@@ -30,7 +30,7 @@ interface ISportDao {
     /**
      * 查询某年某月的运动记录
      */
-    @Query("select * from  sport where year ==:year and month==:month")
+    @Query("select * from  sport where year ==:year and month==:month and complete=1")
     fun queryHistoryByMonth(year: Int, month: Int): Flowable<List<TrajectoryEntity>>
 
     /**
@@ -60,7 +60,9 @@ interface ISportDao {
 
     /**
      * 查询某个月的某种运动类型的所有轨迹
+     * 查询条件：年份、月份、运动类型、运动已经完成
+     * complete:1代表完成的巡河 0代表未完成的
      */
-    @Query("select * from sport where month==:month and sportType==:sportType")
-    fun queryCurrentMonthHistoryByType(sportType: Int, month: Int): Flowable<List<TrajectoryEntity>>
+    @Query("select * from sport where year==:year and month==:month and sportType==:sportType and complete =1")
+    fun queryCurrentMonthHistoryByType(sportType: Int, year: Int, month: Int): Flowable<List<TrajectoryEntity>>
 }

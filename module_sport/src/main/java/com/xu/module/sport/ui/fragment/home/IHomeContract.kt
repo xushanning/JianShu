@@ -32,6 +32,6 @@ interface IHomeContract {
         /**
          * 获取当月的运动的统计数据
          */
-        fun getCurrentMonthSportStatistics(sportType: Int, month: Int): Flowable<List<TrajectoryEntity>>
+        fun getCurrentMonthSportStatistics(sportType: Int, year: Int, month: Int): Flowable<List<TrajectoryEntity>>
     }
 }
