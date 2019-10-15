@@ -33,4 +33,19 @@ class HomePresenter @Inject constructor() :
                 }, { Logger.d(it.message) })
         mCompositeDisposable.add(statisticsDis)
     }
+
+    override fun getAllSportTotalMileage() {
+        val allMileageDis = mModel.getAllSportTotalMileage()
+                .compose(TransformUtil.defaultFlowableSchedulers())
+                .compose(mView.bindToLife())
+                .subscribe({
+                    var sportMileage = 0.0f
+                    it.forEach { item ->
+                        sportMileage += item.sportMileage
+                    }
+                    mView.loadAllSportTotalDistance(sportMileage.toString())
+                }, { Logger.d(it.message) })
+
+        mCompositeDisposable.add(allMileageDis)
+    }
 }

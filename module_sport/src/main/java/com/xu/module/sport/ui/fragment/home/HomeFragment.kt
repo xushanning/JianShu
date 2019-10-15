@@ -91,8 +91,11 @@ class HomeFragment : BaseMvpFragment<IHomeContract.IHomeView, IHomeContract.IHom
         tv_smart_device.singleClick {
             showToast("智能设备正在开发中")
         }
+        img_avatar.singleClick {
+            showToast("个人头像")
+        }
 
-        tv_total_mileage.text = getString(R.string.s_home_sport_total_mileage, 0.0f)
+        tv_total_mileage.text = getString(R.string.s_home_sport_total_mileage, "0.0")
 
         //本月运动热度
         tv_month_heat.text = getString(R.string.s_home_sport_heat, 0)
@@ -101,6 +104,7 @@ class HomeFragment : BaseMvpFragment<IHomeContract.IHomeView, IHomeContract.IHom
         tv_month.text =
                 getString(R.string.s_home_filter_month, Calendar.getInstance().get(Calendar.MONTH) + 1)
         initSportType()
+        mPresenter.getAllSportTotalMileage()
 
     }
 
@@ -148,6 +152,10 @@ class HomeFragment : BaseMvpFragment<IHomeContract.IHomeView, IHomeContract.IHom
         tv_mileage.text = sportMileage
         tv_rank.text = sportRank
         tv_sport_time.text = sportTime
+    }
+
+    override fun loadAllSportTotalDistance(mileage: String) {
+        tv_total_mileage.text = getString(R.string.s_home_sport_total_mileage, mileage)
     }
 
     /**
@@ -257,6 +265,9 @@ class HomeFragment : BaseMvpFragment<IHomeContract.IHomeView, IHomeContract.IHom
 
     private fun generateTrajectoryId(): String {
         val s = UUID.randomUUID().toString()
-        return s.substring(0, 8) + s.substring(9, 13) + s.substring(14, 18) + s.substring(19, 23) + s.substring(24)
+        return s.substring(0, 8) + s.substring(9, 13) + s.substring(14, 18) + s.substring(
+                19,
+                23
+        ) + s.substring(24)
     }
 }

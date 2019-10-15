@@ -19,6 +19,11 @@ interface IHomeContract {
          * @param sportTime 运动时间
          */
         fun loadCurrentMonthSportStatistics(sportMileage: String, sportRank: String, sportTime: String)
+
+        /**
+         * 加载所有运动距离
+         */
+        fun loadAllSportTotalDistance(mileage: String)
     }
 
     interface IHomePresenter : IPresenter<IHomeView> {
@@ -26,6 +31,11 @@ interface IHomeContract {
          * 获取当月的运动的统计数据
          */
         fun getCurrentMonthSportStatistics(sportType: Int)
+
+        /**
+         * 获取所有运动的总距离
+         */
+        fun getAllSportTotalMileage()
     }
 
     interface IHomeModel : IModel {
@@ -33,5 +43,10 @@ interface IHomeContract {
          * 获取当月的运动的统计数据
          */
         fun getCurrentMonthSportStatistics(sportType: Int, year: Int, month: Int): Flowable<List<TrajectoryEntity>>
+
+        /**
+         * 获取所有运动的总距离
+         */
+        fun getAllSportTotalMileage(): Flowable<List<TrajectoryEntity>>
     }
 }

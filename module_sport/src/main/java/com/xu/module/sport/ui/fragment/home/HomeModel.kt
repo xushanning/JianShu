@@ -12,4 +12,8 @@ class HomeModel @Inject constructor() : BaseModel(), IHomeContract.IHomeModel {
     override fun getCurrentMonthSportStatistics(sportType: Int, year: Int, month: Int): Flowable<List<TrajectoryEntity>> {
         return sportDao.queryCurrentMonthHistoryByType(sportType, year, month)
     }
+
+    override fun getAllSportTotalMileage(): Flowable<List<TrajectoryEntity>> {
+        return sportDao.queryAllHistory()
+    }
 }

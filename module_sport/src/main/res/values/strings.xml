@@ -47,7 +47,8 @@
     <string name="s_home_sport_time_default">00:00</string>
     <string name="s_home_sport_heat">%1$d/100℃</string>
     <string name="s_home_sport_history">运动记录</string>
-    <string name="s_home_sport_total_mileage">%1$fKm</string>
+    <string name="s_home_sport_total_mileage">%1$sKm</string>
     <string name="s_home_sport_medal">我的勋章</string>
     <string name="s_home_smart_device">智能设备</string>
+    <string name="s_home_sport_number">行者号</string>
 </resources>
