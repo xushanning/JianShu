@@ -51,4 +51,6 @@
     <string name="s_home_sport_medal">我的勋章</string>
     <string name="s_home_smart_device">智能设备</string>
     <string name="s_home_sport_number">行者号</string>
+
+    <string name="s_screen_open_app">双击打开行者App</string>
 </resources>

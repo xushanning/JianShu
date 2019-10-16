@@ -1,6 +1,7 @@
 package com.xu.module.sport.service
 
 import android.content.Intent
+import android.content.IntentFilter
 import android.media.MediaPlayer
 import android.os.Binder
 import android.os.IBinder
@@ -18,6 +19,7 @@ import com.xu.commonlib.db.entity.TrajectoryEntity
 import com.xu.commonlib.utlis.TimeUtil
 import com.xu.commonlib.utlis.TransformUtil
 import com.xu.module.sport.R
+import com.xu.module.sport.receiver.ScreenLockReceiver
 import dagger.android.DaggerService
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
@@ -112,6 +114,10 @@ class SportService : DaggerService(), AMapLocationListener {
      * 是否暂停
      */
     private var pause = false
+    /**
+     * 锁屏广播监听
+     */
+    private var lockReceiver: ScreenLockReceiver? = null
 
 
     companion object {
@@ -146,12 +152,14 @@ class SportService : DaggerService(), AMapLocationListener {
             generateNewTrajectory()
             startTimer()
             startMusic()
+            startReceiver()
         }
 
         override fun stopSport() {
             locationClient?.stopLocation()
             timerDis?.dispose()
             updateDb(true)
+            unregisterReceiver(lockReceiver)
         }
 
         override fun continueSport() {
@@ -257,6 +265,17 @@ class SportService : DaggerService(), AMapLocationListener {
             }.compose<Any>(TransformUtil.defaultSchedulers())
             .subscribe({}, { Logger.d(it.message) })
     }
+
+    /**
+     * 注册锁屏广播
+     */
+    private fun startReceiver() {
+        val filter = IntentFilter()
+        filter.addAction(Intent.ACTION_SCREEN_OFF)
+        lockReceiver = ScreenLockReceiver()
+        registerReceiver(lockReceiver, filter)
+    }
+
 
     override fun onLocationChanged(location: AMapLocation?) {
         if (location?.errorCode == 0) {
@@ -411,6 +430,7 @@ class SportService : DaggerService(), AMapLocationListener {
         timerDis?.dispose()
         musicDis?.dispose()
         locationClient?.onDestroy()
+        unregisterReceiver(lockReceiver)
         Logger.d("service 被销毁了")
     }
 }

@@ -101,7 +101,10 @@ ext {
 
             //高德地图
             map                  : "com.amap.api:3dmap:6.8.0",
-            location             : "com.amap.api:location:4.6.0"
+            location             : "com.amap.api:location:4.6.0",
+
+
+            eventBus             : "org.greenrobot:eventbus:3.1.1"
 
     ]
 }

@@ -6,4 +6,5 @@
     <color name="res_fa">#FAFAFA</color>
     <color name="res_black">#000000</color>
     <color name="res_white">#FFFFFF</color>
+    <color name="res_transparent">#00000000</color>
 </resources>

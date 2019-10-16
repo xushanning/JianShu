@@ -38,6 +38,10 @@ object ARouterPath {
      * 历史轨迹详情页
      */
     const val sportHistory = "/sport/history"
+    /**
+     * 锁屏activity
+     */
+    const val sportScreen = "/sport/screen"
 
     /**
      * 运动sport
