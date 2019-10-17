@@ -164,7 +164,7 @@ class RealTimeTrajectoryPresenter @Inject constructor() :
             animator?.repeatMode = ValueAnimator.REVERSE
         }
         mView.startAnimator(animator!!)
-        Logger.d("开始动画了")
+       // Logger.d("开始动画了")
     }
 
     /**

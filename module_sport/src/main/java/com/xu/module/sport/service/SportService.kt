@@ -19,11 +19,13 @@ import com.xu.commonlib.db.entity.TrajectoryEntity
 import com.xu.commonlib.utlis.TimeUtil
 import com.xu.commonlib.utlis.TransformUtil
 import com.xu.module.sport.R
+import com.xu.module.sport.beans.ScreenDataBean
 import com.xu.module.sport.receiver.ScreenLockReceiver
 import dagger.android.DaggerService
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
+import org.greenrobot.eventbus.EventBus
 import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -187,7 +189,7 @@ class SportService : DaggerService(), AMapLocationListener {
         locationClientOption?.locationPurpose = AMapLocationClientOption.AMapLocationPurpose.Sport
         //高精度定位
         locationClientOption?.locationMode =
-            AMapLocationClientOption.AMapLocationMode.Hight_Accuracy
+                AMapLocationClientOption.AMapLocationMode.Hight_Accuracy
         locationClientOption?.interval = LOCATION_INTERVAL
         //不需要返回地址信息
         locationClientOption?.isMockEnable = false
@@ -202,52 +204,54 @@ class SportService : DaggerService(), AMapLocationListener {
      */
     private fun startTimer() {
         timerDis = Observable
-            .interval(0, 1, TimeUnit.SECONDS)
-            .compose(TransformUtil.defaultSchedulers())
-            .subscribe({
-                totalTime++
-                if (lastPoint == null && latestPoint != null) {
-                    //第一个点
-                    onLocationChangeListener?.startPoint(latestPoint!!)
-                }
-                //进行重复次数统计
-                if (latestPoint != null && lastPoint != null) {
-                    if (latestPoint == lastPoint) {
-                        sameLocationCount++
+                .interval(0, 1, TimeUnit.SECONDS)
+                .compose(TransformUtil.defaultSchedulers())
+                .subscribe({
+                    totalTime++
+                    if (lastPoint == null && latestPoint != null) {
+                        //第一个点
+                        onLocationChangeListener?.startPoint(latestPoint!!)
+                    }
+                    //进行重复次数统计
+                    if (latestPoint != null && lastPoint != null) {
+                        if (latestPoint == lastPoint) {
+                            sameLocationCount++
+                        } else {
+                            //两个点不同，复位次数统计
+                            sameLocationCount = 0
+                            //计算距离
+                            sportMileage += AMapUtils.calculateLineDistance(lastPoint, latestPoint)
+                        }
+                    }
+                    //判断是否应该暂停
+                    if (sameLocationCount >= PAUSE_THRESHOLD) {
+                        //大于等于三次，判定为不动
+                        pause = true
                     } else {
-                        //两个点不同，复位次数统计
-                        sameLocationCount = 0
-                        //计算距离
-                        sportMileage += AMapUtils.calculateLineDistance(lastPoint, latestPoint)
+                        pause = false
+                        //运动时间增加
+                        if (latestPoint != null) {
+                            sportTime++
+                        }
                     }
-                }
-                //判断是否应该暂停
-                if (sameLocationCount >= PAUSE_THRESHOLD) {
-                    //大于等于三次，判定为不动
-                    pause = true
-                } else {
-                    pause = false
-                    //运动时间增加
+
                     if (latestPoint != null) {
-                        sportTime++
+                        onLocationChangeListener?.onLocationChange(
+                                latestPoint!!,
+                                lastPoint,
+                                pause,
+                                lastSpeed,
+                                lastAltitude,
+                                TimeUtil.getTime(sportTime),
+                                sportMileage
+                        )
+                        //抛出锁屏页的数据
+                        val screenData = ScreenDataBean(sportMileage, lastSpeed, TimeUtil.getTime(sportTime))
+                        EventBus.getDefault().post(screenData)
                     }
-                }
-
-                if (latestPoint != null) {
-                    onLocationChangeListener?.onLocationChange(
-                        latestPoint!!,
-                        lastPoint,
-                        pause,
-                        lastSpeed,
-                        lastAltitude,
-                        TimeUtil.getTime(sportTime),
-                        sportMileage
-                    )
-
-                }
-                lastPoint = latestPoint
-                updateDb(false)
-            }, { Logger.d(it.message) })
+                    lastPoint = latestPoint
+                    updateDb(false)
+                }, { Logger.d(it.message) })
     }
 
     /**
@@ -255,15 +259,15 @@ class SportService : DaggerService(), AMapLocationListener {
      */
     private fun startMusic() {
         musicDis = Observable
-            .create<Any> {
-                if (mediaPlayer == null) {
-                    mediaPlayer = MediaPlayer.create(applicationContext, R.raw.s_no_notice)
-                    mediaPlayer?.setWakeMode(this, PowerManager.PARTIAL_WAKE_LOCK)
-                    mediaPlayer?.isLooping = true
-                    mediaPlayer?.start()
-                }
-            }.compose<Any>(TransformUtil.defaultSchedulers())
-            .subscribe({}, { Logger.d(it.message) })
+                .create<Any> {
+                    if (mediaPlayer == null) {
+                        mediaPlayer = MediaPlayer.create(applicationContext, R.raw.s_no_notice)
+                        mediaPlayer?.setWakeMode(this, PowerManager.PARTIAL_WAKE_LOCK)
+                        mediaPlayer?.isLooping = true
+                        mediaPlayer?.start()
+                    }
+                }.compose<Any>(TransformUtil.defaultSchedulers())
+                .subscribe({}, { Logger.d(it.message) })
     }
 
     /**
@@ -282,12 +286,12 @@ class SportService : DaggerService(), AMapLocationListener {
             //定位成功
             latestPoint = LatLng(location.latitude, location.longitude)
             trajectoryPoints.add(
-                PointBean(
-                    location.latitude,
-                    location.longitude,
-                    location.altitude,
-                    System.currentTimeMillis()
-                )
+                    PointBean(
+                            location.latitude,
+                            location.longitude,
+                            location.altitude,
+                            System.currentTimeMillis()
+                    )
             )
             lastSpeed = location.speed
             lastAltitude = location.altitude
@@ -313,8 +317,8 @@ class SportService : DaggerService(), AMapLocationListener {
         entity.month = month
         entity.day = day
         val newDis = sportDao.saveSportTrajectory(entity)
-            .compose(TransformUtil.defaultCompletableSchedulers())
-            .subscribe({}, { Logger.d(it.message) })
+                .compose(TransformUtil.defaultCompletableSchedulers())
+                .subscribe({}, { Logger.d(it.message) })
         mCompositeDisposable.add(newDis)
     }
 
@@ -324,8 +328,8 @@ class SportService : DaggerService(), AMapLocationListener {
     private fun generateTrajectoryId(): String {
         val s = UUID.randomUUID().toString()
         return s.substring(0, 8) + s.substring(9, 13) + s.substring(14, 18) + s.substring(
-            19,
-            23
+                19,
+                23
         ) + s.substring(24)
     }
 
@@ -341,12 +345,12 @@ class SportService : DaggerService(), AMapLocationListener {
             entity.trajectoryPoints = trajectoryPoints
             entity.sportMileage = sportMileage
             val updateDis = sportDao.updateSportTrajectory(entity)
-                .compose(TransformUtil.defaultCompletableSchedulers())
-                .subscribe({
-                    if (complete) {
-                        onDbUpdateListener?.onDbUpdate()
-                    }
-                }, { Logger.d(it.message) })
+                    .compose(TransformUtil.defaultCompletableSchedulers())
+                    .subscribe({
+                        if (complete) {
+                            onDbUpdateListener?.onDbUpdate()
+                        }
+                    }, { Logger.d(it.message) })
             mCompositeDisposable.add(updateDis)
         }
     }
@@ -356,11 +360,11 @@ class SportService : DaggerService(), AMapLocationListener {
      */
     private fun deleteCurrentTrajectory() {
         val deleteDis = sportDao.deleteSportTrajectory(entity)
-            .compose(TransformUtil.defaultSingleSchedulers())
-            .subscribe({
-                Logger.d("删除当前轨迹成功")
-                onTrajectoryDeleteListener?.onTrajectoryDelete()
-            }, { Logger.d(it.message) })
+                .compose(TransformUtil.defaultSingleSchedulers())
+                .subscribe({
+                    Logger.d("删除当前轨迹成功")
+                    onTrajectoryDeleteListener?.onTrajectoryDelete()
+                }, { Logger.d(it.message) })
         mCompositeDisposable.add(deleteDis)
     }
 
@@ -407,13 +411,13 @@ class SportService : DaggerService(), AMapLocationListener {
          * @param sportMileage 运动距离
          */
         fun onLocationChange(
-            latestPoint: LatLng,
-            lastPoint: LatLng?,
-            pause: Boolean,
-            speed: Float,
-            altitude: Double,
-            sportTime: String,
-            sportMileage: Float
+                latestPoint: LatLng,
+                lastPoint: LatLng?,
+                pause: Boolean,
+                speed: Float,
+                altitude: Double,
+                sportTime: String,
+                sportMileage: Float
         )
 
         /**

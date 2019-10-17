@@ -44,8 +44,8 @@ import java.util.concurrent.TimeUnit
  */
 @Route(path = ARouterPath.sportRealTimeTrajectory)
 class RealTimeTrajectoryActivity :
-    BaseMvpActivity<IRealTimeTrajectoryContract.IRealTimeTrajectoryView, IRealTimeTrajectoryContract.IRealTimeTrajectoryPresenter>(),
-    IRealTimeTrajectoryContract.IRealTimeTrajectoryView, AMapLocationListener {
+        BaseMvpActivity<IRealTimeTrajectoryContract.IRealTimeTrajectoryView, IRealTimeTrajectoryContract.IRealTimeTrajectoryPresenter>(),
+        IRealTimeTrajectoryContract.IRealTimeTrajectoryView, AMapLocationListener {
     private var originalWidth = 0
     private var originalHeight = 0
     /**
@@ -123,10 +123,10 @@ class RealTimeTrajectoryActivity :
 
         sfv_finish_sport.setSlideToggleListener(object : SlideToggleView.SlideToggleListener {
             override fun onBlockPositionChanged(
-                view: SlideToggleView?,
-                left: Int,
-                total: Int,
-                slide: Int
+                    view: SlideToggleView?,
+                    left: Int,
+                    total: Int,
+                    slide: Int
             ) {
 
             }
@@ -141,17 +141,17 @@ class RealTimeTrajectoryActivity :
 
         //开始运动
         permissionDis = RxView.clicks(v_start)
-            .throttleFirst(2, TimeUnit.SECONDS)
-            .compose(RxPermissions(this).ensure(Manifest.permission.ACCESS_FINE_LOCATION))
-            .subscribe({
-                Logger.d(it)
-                if (it) {
-                    checkGpsOpen()
-                } else {
-                    //不允许，就不能用此功能
+                .throttleFirst(2, TimeUnit.SECONDS)
+                .compose(RxPermissions(this).ensure(Manifest.permission.ACCESS_FINE_LOCATION))
+                .subscribe({
+                    Logger.d(it)
+                    if (it) {
+                        checkGpsOpen()
+                    } else {
+                        //不允许，就不能用此功能
 
-                }
-            }, { Logger.d(it.message) })
+                    }
+                }, { Logger.d(it.message) })
 
 
     }
@@ -163,22 +163,22 @@ class RealTimeTrajectoryActivity :
 
     override fun sportTooShort() {
         MaterialDialog(this)
-            .cancelable(false)
-            .show {
-                getActionButton(WhichButton.NEGATIVE).updateTextColor(
-                    ContextCompat.getColor(
-                        this@RealTimeTrajectoryActivity,
-                        R.color.s_color_blue
+                .cancelable(false)
+                .show {
+                    getActionButton(WhichButton.NEGATIVE).updateTextColor(
+                            ContextCompat.getColor(
+                                    this@RealTimeTrajectoryActivity,
+                                    R.color.s_color_blue
+                            )
                     )
-                )
-                message(R.string.s_real_time_sport_too_short)
-                positiveButton(R.string.s_real_time_sport_ensure) {
-                    mPresenter.deleteTooShortSport()
+                    message(R.string.s_real_time_sport_too_short)
+                    positiveButton(R.string.s_real_time_sport_ensure) {
+                        mPresenter.deleteTooShortSport()
+                    }
+                    negativeButton(R.string.s_real_time_sport_cancel) {
+                        this@RealTimeTrajectoryActivity.sfv_finish_sport.closeToggle()
+                    }
                 }
-                negativeButton(R.string.s_real_time_sport_cancel) {
-                    this@RealTimeTrajectoryActivity.sfv_finish_sport.closeToggle()
-                }
-            }
     }
 
     /**
@@ -209,17 +209,17 @@ class RealTimeTrajectoryActivity :
 
         })
         oncePermission = RxPermissions(this)
-            .request(
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS
-            )
-            .subscribe {
-                if (it) {
-                    startOnceLocation()
-                } else {
+                .request(
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS
+                )
+                .subscribe {
+                    if (it) {
+                        startOnceLocation()
+                    } else {
 
+                    }
                 }
-            }
     }
 
     /**
@@ -232,7 +232,7 @@ class RealTimeTrajectoryActivity :
         locationClientOption?.locationPurpose = AMapLocationClientOption.AMapLocationPurpose.SignIn
         //高精度定位
         locationClientOption?.locationMode =
-            AMapLocationClientOption.AMapLocationMode.Hight_Accuracy
+                AMapLocationClientOption.AMapLocationMode.Hight_Accuracy
         //不需要返回地址信息
         locationClientOption?.isMockEnable = false
         locationClient?.setLocationOption(locationClientOption)
@@ -263,29 +263,30 @@ class RealTimeTrajectoryActivity :
         tv_time.text = getString(R.string.s_real_time_init_time)
         tv_speed.text = getString(R.string.s_real_time_init_speed)
         tv_mileage.text = getString(R.string.s_real_time_init_mileage)
+        tv_pause.visibility = View.GONE
     }
 
 
     override fun displayStartPoint(startOption: MarkerOptions, currentOption: MarkerOptions) {
         aMap.addMarker(
-            startOption.icon(
-                BitmapDescriptorFactory.fromBitmap(
-                    VectorUtil.vectorToBitmap(
-                        applicationContext,
-                        R.drawable.s_vector_start_location
-                    )
+                startOption.icon(
+                        BitmapDescriptorFactory.fromBitmap(
+                                VectorUtil.vectorToBitmap(
+                                        applicationContext,
+                                        R.drawable.s_vector_start_location
+                                )
+                        )
                 )
-            )
         )
         currentMarker = aMap.addMarker(
-            currentOption.icon(
-                BitmapDescriptorFactory.fromBitmap(
-                    VectorUtil.vectorToBitmap(
-                        applicationContext,
-                        R.drawable.s_vector_current_location
-                    )
+                currentOption.icon(
+                        BitmapDescriptorFactory.fromBitmap(
+                                VectorUtil.vectorToBitmap(
+                                        applicationContext,
+                                        R.drawable.s_vector_current_location
+                                )
+                        )
                 )
-            )
         )
     }
 
@@ -351,12 +352,12 @@ class RealTimeTrajectoryActivity :
     private fun jumpToMain() {
         //转场动画
         val compat = ActivityOptionsCompat.makeCustomAnimation(
-            this, R.anim.s_slide_un_move, R.anim.s_slide_top_bottom
+                this, R.anim.s_slide_un_move, R.anim.s_slide_top_bottom
         )
         ARouter.getInstance()
-            .build(ARouterPath.sportMain)
-            .withFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
-            .withOptionsCompat(compat)
-            .navigation(this@RealTimeTrajectoryActivity)
+                .build(ARouterPath.sportMain)
+                .withFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+                .withOptionsCompat(compat)
+                .navigation(this@RealTimeTrajectoryActivity)
     }
 }

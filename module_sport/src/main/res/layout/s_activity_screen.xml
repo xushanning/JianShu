@@ -29,37 +29,38 @@
         app:layout_constraintTop_toBottomOf="@+id/view1" />
 
     <TextView
-        android:id="@+id/s_textview26"
+        android:id="@+id/tv_mileage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toStartOf="@+id/s_textview27"
+        android:text="@string/res_default_string"
+        app:layout_constraintEnd_toStartOf="@+id/tv_time"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/s_view" />
 
     <TextView
-        android:id="@+id/s_textview27"
+        android:id="@+id/tv_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/s_textview26"
-        app:layout_constraintEnd_toStartOf="@+id/s_textview28"
+        android:text="@string/s_home_sport_time_default"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_mileage"
+        app:layout_constraintEnd_toStartOf="@+id/tv_speed"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/s_textview26"
-        app:layout_constraintTop_toTopOf="@+id/s_textview26" />
+        app:layout_constraintStart_toEndOf="@+id/tv_mileage"
+        app:layout_constraintTop_toTopOf="@+id/tv_mileage"
+        tools:text="00:00:00" />
 
     <TextView
-        android:id="@+id/s_textview28"
+        android:id="@+id/tv_speed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/s_textview27"
+        android:text="@string/res_default_string"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_time"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/s_textview27"
-        app:layout_constraintTop_toTopOf="@+id/s_textview27" />
+        app:layout_constraintStart_toEndOf="@+id/tv_time"
+        app:layout_constraintTop_toTopOf="@+id/tv_time" />
 
     <TextView
         android:id="@+id/s_textview29"
@@ -67,19 +68,19 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/s_trajectory_detail_mileage"
-        app:layout_constraintEnd_toEndOf="@+id/s_textview26"
-        app:layout_constraintStart_toStartOf="@+id/s_textview26"
-        app:layout_constraintTop_toBottomOf="@+id/s_textview26" />
+        app:layout_constraintEnd_toEndOf="@+id/tv_mileage"
+        app:layout_constraintStart_toStartOf="@+id/tv_mileage"
+        app:layout_constraintTop_toBottomOf="@+id/tv_mileage" />
 
     <TextView
         android:id="@+id/s_textview30"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="@string/s_trajectory_detail_time"
-        app:layout_constraintEnd_toEndOf="@+id/s_textview27"
-        app:layout_constraintStart_toStartOf="@+id/s_textview27"
-        app:layout_constraintTop_toBottomOf="@+id/s_textview27" />
+        android:text="@string/s_time"
+        app:layout_constraintEnd_toEndOf="@+id/tv_time"
+        app:layout_constraintStart_toStartOf="@+id/tv_time"
+        app:layout_constraintTop_toBottomOf="@+id/tv_time" />
 
     <TextView
         android:id="@+id/s_textview31"
@@ -87,9 +88,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/s_trajectory_detail_speed"
-        app:layout_constraintEnd_toEndOf="@+id/s_textview28"
-        app:layout_constraintStart_toStartOf="@+id/s_textview28"
-        app:layout_constraintTop_toBottomOf="@+id/s_textview28" />
+        app:layout_constraintEnd_toEndOf="@+id/tv_speed"
+        app:layout_constraintStart_toStartOf="@+id/tv_speed"
+        app:layout_constraintTop_toBottomOf="@+id/tv_speed" />
 
     <TextView
         android:id="@+id/s_textview32"

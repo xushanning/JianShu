@@ -4,6 +4,11 @@ android {
     resourcePrefix "s_"
 }
 
+kapt {
+    arguments {
+        arg('eventBusIndex', 'com.example.myapp.MyEventBusIndex')
+    }
+}
 
 dependencies {
     androidTestImplementation 'androidx.test:core:1.1.0'
@@ -13,6 +18,7 @@ dependencies {
     kapt rootProject.ext.dependencies["daggerProcessor"]
     kapt rootProject.ext.dependencies["daggerCompiler"]
     kapt rootProject.ext.dependencies["arouterProcessor"]
+    kapt rootProject.ext.dependencies["eventBusProcessor"]
 
     //目前只有sport module用到地图
     api rootProject.ext.dependencies["map"]

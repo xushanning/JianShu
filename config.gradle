@@ -103,8 +103,9 @@ ext {
             map                  : "com.amap.api:3dmap:6.8.0",
             location             : "com.amap.api:location:4.6.0",
 
-
-            eventBus             : "org.greenrobot:eventbus:3.1.1"
+            //事件总线
+            eventBus             : "org.greenrobot:eventbus:3.1.1",
+            eventBusProcessor    : "org.greenrobot:eventbus-annotation-processor:3.1.1"
 
     ]
 }
