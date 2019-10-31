@@ -51,4 +51,18 @@ object ARouterPath {
      * 运动home页面
      */
     const val sportHome = "/sport/home"
+
+    /**
+     * 视频主页面
+     */
+    const val videoMain = "/video/main"
+
+    /**
+     * 已完成界面
+     */
+    const val videoCompleted = "/video/completed"
+    /**
+     * 正在下载界面
+     */
+    const val videoDownloading = "/video/downloading"
 }

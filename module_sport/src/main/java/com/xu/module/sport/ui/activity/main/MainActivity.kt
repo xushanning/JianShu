@@ -116,6 +116,10 @@ class MainActivity : BaseMvpActivity<IMainContract.IMainView, IMainContract.IMai
 
     }
 
+    override fun initData() {
+
+    }
+
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
 
         if (keyCode == KeyEvent.KEYCODE_BACK) {

@@ -25,6 +25,7 @@ abstract class BaseActivity : RxAppCompatActivity(), IBaseView {
         }
         initMvp()
         initView(savedInstanceState)
+        initData()
     }
 
     abstract fun setLayoutId(): Int
@@ -40,6 +41,8 @@ abstract class BaseActivity : RxAppCompatActivity(), IBaseView {
     }
 
     abstract fun initView(savedInstanceState: Bundle?)
+
+    abstract fun initData()
 
     open fun onBackClick() {
         finish()

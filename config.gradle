@@ -49,7 +49,8 @@ ext {
 
             //net
             retrofitAdapter      : "com.squareup.retrofit2:adapter-rxjava2:2.3.0",
-            retrofitConverter    : "com.squareup.retrofit2:converter-gson:2.3.0",
+            gsonConverter    : "com.squareup.retrofit2:converter-gson:2.3.0",
+            scalarsConverter     : "com.squareup.retrofit2:converter-scalars:2.3.0",
             okhttpLog            : "com.squareup.okhttp3:logging-interceptor:3.8.1",
 
             //UI

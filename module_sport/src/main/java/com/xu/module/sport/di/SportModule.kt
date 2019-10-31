@@ -1,49 +1,24 @@
 package com.xu.module.sport.di
 
-import com.xu.commonlib.di.scope.ActivityScope
-import com.xu.commonlib.di.scope.FragmentScope
-import com.xu.module.sport.service.SportService
-import com.xu.module.sport.ui.activity.historydetail.HistoryDetailActivity
-import com.xu.module.sport.ui.activity.historylist.HistoryListActivity
-import com.xu.module.sport.ui.activity.main.MainActivity
-import com.xu.module.sport.ui.activity.realtime.RealTimeTrajectoryActivity
-import com.xu.module.sport.ui.fragment.home.HomeFragment
-import com.xu.module.sport.ui.fragment.sport.SportFragment
+import com.xu.commonlib.db.AppDatabase
+import com.xu.commonlib.db.dao.ISportDao
 import dagger.Module
-import dagger.android.ContributesAndroidInjector
+import dagger.Provides
+import javax.inject.Singleton
 
 /**
  * @author 言吾許
  */
 @Module
-abstract class SportModule {
-
-    @ActivityScope
-    @ContributesAndroidInjector(modules = [BindsModule::class])
-    abstract fun contributeMainActivity(): MainActivity
-
-    @ActivityScope
-    @ContributesAndroidInjector(modules = [BindsModule::class])
-    abstract fun contributeHistoryListActivity(): HistoryListActivity
-
-    @ActivityScope
-    @ContributesAndroidInjector(modules = [BindsModule::class])
-    abstract fun contributeHistoryActivity(): HistoryDetailActivity
-
-
-    @FragmentScope
-    @ContributesAndroidInjector(modules = [BindsModule::class])
-    abstract fun contributeSportFragment(): SportFragment
-
-    @ActivityScope
-    @ContributesAndroidInjector(modules = [BindsModule::class])
-    abstract fun contributeRealTimeTrajectoryActivity(): RealTimeTrajectoryActivity
-
-
-    @FragmentScope
-    @ContributesAndroidInjector(modules = [BindsModule::class])
-    abstract fun comtributeHomeFragment(): HomeFragment
-
-    @ContributesAndroidInjector
-    abstract fun comtributeSportService(): SportService
+class SportModule {
+    @Module
+    companion object {
+        //提供运动dao
+        @JvmStatic
+        @Provides
+        @Singleton
+        fun provideSportDao(database: AppDatabase): ISportDao {
+            return database.sportDao()
+        }
+    }
 }

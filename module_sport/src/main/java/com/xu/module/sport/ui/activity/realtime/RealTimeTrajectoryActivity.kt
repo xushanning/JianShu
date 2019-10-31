@@ -156,6 +156,10 @@ class RealTimeTrajectoryActivity :
 
     }
 
+    override fun initData() {
+
+    }
+
     override fun startAnimator(animator: AlphaAnimation) {
         tv_pause.visibility = View.VISIBLE
         tv_pause.startAnimation(animator)

@@ -38,6 +38,10 @@ class HistoryDetailActivity :
     override fun initView(savedInstanceState: Bundle?) {
 
         initMap(savedInstanceState)
+
+    }
+
+    override fun initData() {
         mPresenter.getDetailById(trajectoryId!!, applicationContext)
     }
 
@@ -59,10 +63,24 @@ class HistoryDetailActivity :
     }
 
     override fun setBound(latLngBounds: LatLngBounds) {
-        aMap.animateCamera(CameraUpdateFactory.newLatLngBoundsRect(latLngBounds, 200, 200, 200, 200))
+        aMap.animateCamera(
+            CameraUpdateFactory.newLatLngBoundsRect(
+                latLngBounds,
+                200,
+                200,
+                200,
+                200
+            )
+        )
     }
 
-    override fun loadSportData(mileage: String, speed: String, climb: String, time: String, heat: String) {
+    override fun loadSportData(
+        mileage: String,
+        speed: String,
+        climb: String,
+        time: String,
+        heat: String
+    ) {
         tv_mileage_name.text = mileage
         tv_speed.text = speed
         tv_climb.text = climb

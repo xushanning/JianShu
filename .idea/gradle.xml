@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$/common_res" />
             <option value="$PROJECT_DIR$/module_jianshu" />
             <option value="$PROJECT_DIR$/module_sport" />
+            <option value="$PROJECT_DIR$/module_video" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

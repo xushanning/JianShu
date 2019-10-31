@@ -67,7 +67,8 @@ dependencies {
     api rootProject.ext.dependencies["rxPermission"]
 
     api rootProject.ext.dependencies["retrofitAdapter"]
-    api rootProject.ext.dependencies["retrofitConverter"]
+    api rootProject.ext.dependencies["gsonConverter"]
+    api rootProject.ext.dependencies["scalarsConverter"]
     api rootProject.ext.dependencies["okhttpLog"]
 
     api rootProject.ext.dependencies["statusBar"]

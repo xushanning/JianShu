@@ -1,4 +1,4 @@
-include ':common_lib',
+include ':common_lib', ':module_video',
 //        ':vrouter_api',
 //        ':vrouter_complier',
 //        ':vrouter_annotation',

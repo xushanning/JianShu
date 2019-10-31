@@ -48,6 +48,10 @@ class HistoryListActivity :
         }
         initTabLayout()
         initRecyclerView()
+
+    }
+
+    override fun initData() {
         mPresenter.getSportYear()
     }
 

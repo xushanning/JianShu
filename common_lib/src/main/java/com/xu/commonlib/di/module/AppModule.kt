@@ -7,7 +7,7 @@ import com.google.gson.GsonBuilder
 import com.xu.commonlib.base.BaseApplication
 import com.xu.commonlib.constant.TableConstant
 import com.xu.commonlib.db.dao.ISportDao
-import com.xu.commonlib.db.db.AppDatabase
+import com.xu.commonlib.db.AppDatabase
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -39,13 +39,7 @@ abstract class AppModule {
 
         }
 
-        //提供运动dao
-        @JvmStatic
-        @Provides
-        @Singleton
-        fun privideSportDao(database: AppDatabase): ISportDao {
-            return database.sportDao()
-        }
+
     }
 
 

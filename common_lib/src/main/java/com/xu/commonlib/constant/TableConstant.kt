@@ -14,5 +14,9 @@ object TableConstant {
      * 运动类表
      */
     const val TABLE_SPORT = "sport"
+    /**
+     * 视频下载表
+     */
+    const val TABLE_VIDEO = "video"
 
 }

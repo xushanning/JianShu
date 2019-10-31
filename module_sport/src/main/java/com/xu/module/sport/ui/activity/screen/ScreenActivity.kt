@@ -24,14 +24,15 @@ class ScreenActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         window.addFlags(
-                //解锁
-                WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
-                        //锁屏状态下显示
-                        or WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
-                        //保持屏幕长亮
-                        or WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
-                        //打开屏幕
-                        or WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+            //解锁
+            WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
+                    //锁屏状态下显示
+                    or WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
+                    //保持屏幕长亮
+                    or WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
+                    //打开屏幕
+                    or WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
+        )
         super.onCreate(savedInstanceState)
         EventBus.getDefault().register(this)
     }
@@ -59,6 +60,10 @@ class ScreenActivity : BaseActivity() {
 //                    .navigation(this@ScreenActivity)
             finish()
         }
+
+    }
+
+    override fun initData() {
 
     }
 
