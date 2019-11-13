@@ -20,6 +20,10 @@ object ARouterPath {
      * 钩子
      */
     const val jianshuHook = "/jianshu/hook"
+    /**
+     * 事件分发
+     */
+    const val jianshuEvent = "/jianshu/eventDispatch"
 
 
     /**

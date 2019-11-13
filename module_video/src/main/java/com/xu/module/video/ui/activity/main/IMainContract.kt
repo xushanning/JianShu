@@ -10,14 +10,19 @@ import io.reactivex.Observable
  */
 interface IMainContract {
     interface IMainView : IView {
-
+        /**
+         * 展示现在的dialog
+         */
+        fun showDownloadDialog(coverUrl: String, videoUrl: String, title: String)
     }
 
     interface IMainPresenter : IPresenter<IMainView> {
+
+
         /**
-         * 获取分享的html代码
+         * 匹配分享的url
          */
-        fun getShareHtml(shareUrl: String)
+        fun checkShareUrl(shareUrl: CharSequence?)
     }
 
     interface IMainModel : IModel {

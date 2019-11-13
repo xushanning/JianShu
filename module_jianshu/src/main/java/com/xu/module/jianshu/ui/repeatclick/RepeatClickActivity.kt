@@ -54,7 +54,8 @@ class RepeatClickActivity : BaseActivity() {
         //item防重点击
         quickAdapter.singleItemClick {
             itemClickCount++
-            tv_recycler_click_count.text = getString(R.string.j_recycler_click_count, itemClickCount)
+            tv_recycler_click_count.text =
+                getString(R.string.j_recycler_click_count, itemClickCount)
         }
 
         //子view防重点击
@@ -64,6 +65,10 @@ class RepeatClickActivity : BaseActivity() {
             childClickCount++
             tv_child_repeat_click.text = getString(R.string.j_child_click_count, childClickCount)
         }
+
+    }
+
+    override fun initData() {
 
     }
 }

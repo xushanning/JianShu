@@ -1,3 +1,5 @@
 <resources>
     <string name="v_name">视频助手</string>
+    <string name="v_tab_name_downloading">正在下载</string>
+    <string name="v_tab_name_complete">已完成</string>
 </resources>

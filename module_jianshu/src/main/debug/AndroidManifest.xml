@@ -15,6 +15,9 @@
         <activity android:name=".ui.repeatclick.RepeatClickActivity" />
         <activity android:name=".ui.retrofit.RetrofitTestActivity" />
         <activity android:name=".ui.hook.HookActivity">
+
+        </activity>
+        <activity android:name=".ui.event.EventDispatchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

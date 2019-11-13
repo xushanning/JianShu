@@ -1,26 +1,31 @@
 package com.xu.module.video.ui.activity.main
 
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Bundle
 import android.view.KeyEvent
+import android.view.LayoutInflater
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
+import com.google.android.material.tabs.TabLayout
 import com.orhanobut.logger.Logger
 import com.xu.commonlib.base.BaseMvpActivity
 import com.xu.commonlib.constant.ARouterPath
-import com.xu.commonlib.utlis.TransformUtil
 import com.xu.module.video.R
-import com.xu.module.video.http.VideoApi
 import kotlinx.android.synthetic.main.v_activity_main.*
-import javax.inject.Inject
 
 /**
  * @author 言吾許
  */
 @Route(path = ARouterPath.videoMain)
 class MainActivity : BaseMvpActivity<IMainContract.IMainView, IMainContract.IMainPresenter>(),
-    IMainContract.IMainView {
+        IMainContract.IMainView, ClipboardManager.OnPrimaryClipChangedListener {
 
+    private var clipboardManager: ClipboardManager? = null
 
     override fun setLayoutId(): Int {
         return R.layout.v_activity_main
@@ -31,29 +36,85 @@ class MainActivity : BaseMvpActivity<IMainContract.IMainView, IMainContract.IMai
     }
 
     override fun initData() {
-        mPresenter.getShareHtml("http://v.douyin.com/xU4jXA/ ")
+        mPresenter.checkShareUrl("#在抖音，记录美好生活# http://v.douyin.com/QaLa4w/ 复制此链接，打开【抖音短视频】，直接观看视频！")
     }
 
     private fun initTabLayout() {
         val fragmentList = ArrayList<Fragment>()
-            .apply {
-                //已完成
-                val completedFragment =
-                    ARouter.getInstance().build(ARouterPath.videoCompleted).navigation() as Fragment
-                //正在下载
-                val downloadingFragment =
-                    ARouter.getInstance().build(ARouterPath.videoDownloading).navigation() as Fragment
-                add(completedFragment)
-                add(downloadingFragment)
+                .apply {
+                    //已完成
+                    val completedFragment =
+                            ARouter.getInstance().build(ARouterPath.videoCompleted).navigation() as Fragment
+                    //正在下载
+                    val downloadingFragment =
+                            ARouter.getInstance().build(ARouterPath.videoDownloading).navigation() as Fragment
+                    add(completedFragment)
+                    add(downloadingFragment)
 
-            }
+                }
 
         val pagerAdapter = MainPagerAdapter(supportFragmentManager, fragmentList)
         tl_main.setupWithViewPager(vp_main)
+
         vp_main.adapter = pagerAdapter
 
+        val tabNameList = ArrayList<String>().apply {
+            add(getString(R.string.v_tab_name_complete))
+            add(getString(R.string.v_tab_name_downloading))
+        }
+        tl_main.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabReselected(p0: TabLayout.Tab) {
+
+            }
+
+            override fun onTabUnselected(p0: TabLayout.Tab) {
+                updateTab(p0, false)
+            }
+
+            override fun onTabSelected(p0: TabLayout.Tab) {
+                updateTab(p0, true)
+            }
+
+        })
+
+        ArrayList<Int>()
+                .apply {
+                    add(R.drawable.v_selector_complete)
+                    add(R.drawable.v_selector_downloading)
+                }.forEachIndexed { index, i ->
+                    val tab = tl_main.getTabAt(index)
+                    val view = LayoutInflater.from(this).inflate(R.layout.v_view_main_tab, null)
+                    val tvName = view.findViewById<TextView>(R.id.tv_name)
+                    val imgTab = view.findViewById<ImageView>(R.id.img_tab)
+                    tvName.text = tabNameList[index]
+                    if (index == 0) {
+                        tvName.setTextColor(ContextCompat.getColor(this, R.color.v_main_tab_select))
+                    }
+                    imgTab.setImageResource(i)
+                    tab?.customView = view
+                }
+
+        clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        clipboardManager?.addPrimaryClipChangedListener(this)
     }
 
+    private fun updateTab(tab: TabLayout.Tab, isSelect: Boolean) {
+        val tvName = tab.customView?.findViewById<TextView>(R.id.tv_name)
+        if (isSelect) {
+            tvName?.setTextColor(ContextCompat.getColor(this, R.color.v_main_tab_select))
+        } else {
+            tvName?.setTextColor(ContextCompat.getColor(this, R.color.v_main_tab_un_select))
+        }
+    }
+
+    override fun onPrimaryClipChanged() {
+        val shareUrl = clipboardManager?.primaryClip?.getItemAt(0)?.text
+        mPresenter.checkShareUrl(shareUrl)
+    }
+
+    override fun showDownloadDialog(coverUrl: String, videoUrl: String, title: String) {
+
+    }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
 
@@ -62,5 +123,10 @@ class MainActivity : BaseMvpActivity<IMainContract.IMainView, IMainContract.IMai
             return true
         }
         return super.onKeyDown(keyCode, event)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        clipboardManager?.removePrimaryClipChangedListener(this)
     }
 }

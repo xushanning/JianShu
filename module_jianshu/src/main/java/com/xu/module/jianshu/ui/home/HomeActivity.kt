@@ -15,6 +15,8 @@ import kotlinx.android.synthetic.main.j_activity_home.*
  */
 @Route(path = ARouterPath.jianShuHome)
 class HomeActivity : BaseActivity() {
+
+
     override fun setLayoutId(): Int {
         return R.layout.j_activity_home
     }
@@ -23,8 +25,8 @@ class HomeActivity : BaseActivity() {
         //防重点
         bt_repeat_click.singleClick {
             ARouter.getInstance()
-                .build(ARouterPath.jianshuRepeatClick)
-                .navigation()
+                    .build(ARouterPath.jianshuRepeatClick)
+                    .navigation()
         }
         //scrollview嵌套RecyclerView嵌套数据ANR
         bt_anr.singleClick {
@@ -34,15 +36,30 @@ class HomeActivity : BaseActivity() {
         //仿retrofit
         bt_retrofit.singleClick {
             ARouter.getInstance()
-                .build(ARouterPath.jianshuRetrofit)
-                .navigation()
+                    .build(ARouterPath.jianshuRetrofit)
+                    .navigation()
         }
 
         //hook
         bt_hook.singleClick {
             ARouter.getInstance()
-                .build(ARouterPath.jianshuHook)
-                .navigation()
+                    .build(ARouterPath.jianshuHook)
+                    .navigation()
         }
+
+        //event dispatch
+        bt_event_dispatch.singleClick {
+            ARouter.getInstance()
+                    .build(ARouterPath.jianshuEvent)
+                    .navigation()
+        }
+        //lambda表达式演变
+        bt_lambda.singleClick {
+
+        }
+    }
+
+    override fun initData() {
+
     }
 }

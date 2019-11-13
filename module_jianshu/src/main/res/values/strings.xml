@@ -4,6 +4,7 @@
     <string name="j_retrofit_title">模拟retrofit</string>
     <string name="j_repeat_click_title">防重点测试</string>
     <string name="j_hook_title">钩子</string>
+    <string name="j_event_dispatch_title">事件分发</string>
     <string name="j_view_click_count">view点击次数:%1$d次</string>
     <string name="j_recycler_click_count">item点击次数:%1$d次</string>
     <string name="j_child_click_count">child点击次数:%1$d次</string>

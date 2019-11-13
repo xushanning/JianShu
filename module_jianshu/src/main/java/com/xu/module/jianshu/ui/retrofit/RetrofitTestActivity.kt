@@ -49,5 +49,9 @@ class RetrofitTestActivity : BaseActivity() {
                 })
         }
     }
+
+    override fun initData() {
+
+    }
 }
 

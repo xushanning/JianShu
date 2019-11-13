@@ -25,4 +25,8 @@ class HookActivity : BaseActivity() {
         }
         ViewClickHookHelper.hook(this, bt_hook)
     }
+
+    override fun initData() {
+
+    }
 }

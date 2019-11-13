@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.xu.module.jianshu">
+    package="com.xu.module.jianshu">
 
     <application>
         <activity android:name=".ui.home.HomeActivity">
 
         </activity>
-        <activity android:name=".ui.repeatclick.RepeatClickActivity"/>
-        <activity android:name=".ui.retrofit.RetrofitTestActivity"/>
+        <activity android:name=".ui.repeatclick.RepeatClickActivity" />
+        <activity android:name=".ui.retrofit.RetrofitTestActivity" />
+        <activity android:name=".ui.event.EventDispatchActivity" />
     </application>
 
 </manifest>
