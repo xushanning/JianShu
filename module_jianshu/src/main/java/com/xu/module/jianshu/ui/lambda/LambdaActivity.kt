@@ -27,6 +27,10 @@ class LambdaActivity : BaseActivity() {
         //两个是一样的
         //val sum  = { i: Int, j: Int -> i + j }
         val sum: (Int, Int) -> Int = { i, j -> i + j }
+        /**
+         * 因此lambda定义就是
+         * 方法名:(参数类型1,参数类型2,。。。)->返回值类型={参数1,参数2,。。。->具体实现方法}
+         */
         Logger.d(sum(1, 2))
         //这样也是可以的
         Logger.d({ i: Int, j: Int -> i + j }(1, 2))
@@ -96,7 +100,7 @@ class LambdaActivity : BaseActivity() {
     }
 
     override fun initData() {
-
+        test3()
     }
 
     private fun testMap() {
@@ -120,7 +124,7 @@ class LambdaActivity : BaseActivity() {
         Observable.create(ObservableOnSubscribe<Int> {
             it.onNext(1)
         }).map({ index ->
-
+            index.toString() + "12"
         }).subscribe()
         /**
          * kotlin语法约定，如果lambda表达式是函数是最后一个实参的话，它可以放在
@@ -129,7 +133,7 @@ class LambdaActivity : BaseActivity() {
         Observable.create(ObservableOnSubscribe<Int> {
             it.onNext(1)
         }).map() { index ->
-
+            index.toString() + "12"
         }.subscribe()
 
         /**
@@ -139,7 +143,7 @@ class LambdaActivity : BaseActivity() {
         Observable.create(ObservableOnSubscribe<Int> {
             it.onNext(1)
         }).map { index ->
-
+            index.toString() + "12"
         }.subscribe()
 
         /**
@@ -195,5 +199,59 @@ class LambdaActivity : BaseActivity() {
         this.kotlinListener = kotlinListener
     }
 
+    private fun test3() {
+        /**
+         * 第三个参数为一个lambda表达式
+         * 类似这个 val sum: (Int, Int) -> Int = { i, j -> i + j }
+         */
+
+        ifStringNotNull(null, "hello", { value1, value2 ->
+            Logger.d(value1 + value2)
+        })
+        /**
+         * 又因为lambda为第三个参数，因此可以提出去
+         */
+        ifStringNotNull(null, "hello") { value1, value2 ->
+            Logger.d(value1 + value2)
+        }
+        /**
+         * 任意类型的
+         */
+        ifNotNull(1, "hello") { value1, value2 ->
+            Logger.d(value1.toString() + value2)
+        }
+
+        val result = ifNotNullString("aa", "bb") { value1, value2 ->
+            value1 + value2
+        }
+        Logger.d(result)
+    }
+
+    /**
+     *判断两个都不能为空，这里限制了为string
+     * lambda具体实现，看调用者
+     * @param bothNotNull 方法名
+     */
+    private fun ifStringNotNull(value1: String?, value2: String?, bothNotNull: (String, String) -> (Unit)) {
+        if (value1 != null && value2 != null) {
+            bothNotNull(value1, value2)
+        }
+    }
+
+    //如果不限制类型，可以这样
+    private fun <T1, T2> ifNotNull(value1: T1?, value2: T2?, bothNotNull: (T1, T2) -> (Unit)) {
+        if (value1 != null && value2 != null) {
+            bothNotNull(value1, value2)
+        }
+    }
+
+    //带返回值的lambda
+    private fun <T1, T2> ifNotNullString(value1: T1?, value2: T2?, bothNotNull: (T1, T2) -> (String)): String {
+        return if (value1 != null && value2 != null) {
+            bothNotNull(value1, value2)
+        } else {
+            "有一个是空"
+        }
+    }
 
 }

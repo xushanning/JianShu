@@ -3,6 +3,7 @@ package com.xu.module.sport.ui.activity.historylist
 import com.orhanobut.logger.Logger
 import com.xu.commonlib.mvp.BasePresenter
 import com.xu.commonlib.utlis.TransformUtil
+import com.xu.commonlib.utlis.extention.flowableTransform
 import com.xu.module.sport.util.ApiException
 import javax.inject.Inject
 
@@ -28,8 +29,7 @@ class HistoryListPresenter @Inject constructor() :
                     resultList
                 }
             }
-            .compose(TransformUtil.defaultFlowableSchedulers())
-            .compose(mView.bindToLife())
+            .flowableTransform(mView)
             .subscribe({ mView.loadSportYear(it) }, { Logger.d(it.message) })
 
 
@@ -47,8 +47,7 @@ class HistoryListPresenter @Inject constructor() :
                 }
                 monthList.distinct().sorted()
             }
-            .compose(TransformUtil.defaultFlowableSchedulers())
-            .compose(mView.bindToLife())
+            .flowableTransform(mView)
             .subscribe({
                 Logger.d("点击的年份的时候加载")
                 mView.loadSportMonth(it)
@@ -67,8 +66,7 @@ class HistoryListPresenter @Inject constructor() :
                 }
                 data
             }
-            .compose(TransformUtil.defaultFlowableSchedulers())
-            .compose(mView.bindToLife())
+            .flowableTransform(mView)
             .subscribe({ mView.loadSportHistoryList(it) }, { Logger.d(it.message) })
         mCompositeDisposable.add(monthDis)
     }

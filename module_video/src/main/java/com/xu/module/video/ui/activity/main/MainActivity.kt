@@ -12,9 +12,9 @@ import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.google.android.material.tabs.TabLayout
-import com.orhanobut.logger.Logger
 import com.xu.commonlib.base.BaseMvpActivity
 import com.xu.commonlib.constant.ARouterPath
+import com.xu.commonlib.utlis.extention.tabSelected
 import com.xu.module.video.R
 import kotlinx.android.synthetic.main.v_activity_main.*
 
@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.v_activity_main.*
  */
 @Route(path = ARouterPath.videoMain)
 class MainActivity : BaseMvpActivity<IMainContract.IMainView, IMainContract.IMainPresenter>(),
-        IMainContract.IMainView, ClipboardManager.OnPrimaryClipChangedListener {
+    IMainContract.IMainView, ClipboardManager.OnPrimaryClipChangedListener {
 
     private var clipboardManager: ClipboardManager? = null
 
@@ -41,17 +41,17 @@ class MainActivity : BaseMvpActivity<IMainContract.IMainView, IMainContract.IMai
 
     private fun initTabLayout() {
         val fragmentList = ArrayList<Fragment>()
-                .apply {
-                    //已完成
-                    val completedFragment =
-                            ARouter.getInstance().build(ARouterPath.videoCompleted).navigation() as Fragment
-                    //正在下载
-                    val downloadingFragment =
-                            ARouter.getInstance().build(ARouterPath.videoDownloading).navigation() as Fragment
-                    add(completedFragment)
-                    add(downloadingFragment)
+            .apply {
+                //已完成
+                val completedFragment =
+                    ARouter.getInstance().build(ARouterPath.videoCompleted).navigation() as Fragment
+                //正在下载
+                val downloadingFragment =
+                    ARouter.getInstance().build(ARouterPath.videoDownloading).navigation() as Fragment
+                add(completedFragment)
+                add(downloadingFragment)
 
-                }
+            }
 
         val pagerAdapter = MainPagerAdapter(supportFragmentManager, fragmentList)
         tl_main.setupWithViewPager(vp_main)
@@ -62,37 +62,26 @@ class MainActivity : BaseMvpActivity<IMainContract.IMainView, IMainContract.IMai
             add(getString(R.string.v_tab_name_complete))
             add(getString(R.string.v_tab_name_downloading))
         }
-        tl_main.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabReselected(p0: TabLayout.Tab) {
-
-            }
-
-            override fun onTabUnselected(p0: TabLayout.Tab) {
-                updateTab(p0, false)
-            }
-
-            override fun onTabSelected(p0: TabLayout.Tab) {
-                updateTab(p0, true)
-            }
-
-        })
+        tl_main.tabSelected {
+            updateTab(tl_main.getTabAt(it)!!, false)
+        }
 
         ArrayList<Int>()
-                .apply {
-                    add(R.drawable.v_selector_complete)
-                    add(R.drawable.v_selector_downloading)
-                }.forEachIndexed { index, i ->
-                    val tab = tl_main.getTabAt(index)
-                    val view = LayoutInflater.from(this).inflate(R.layout.v_view_main_tab, null)
-                    val tvName = view.findViewById<TextView>(R.id.tv_name)
-                    val imgTab = view.findViewById<ImageView>(R.id.img_tab)
-                    tvName.text = tabNameList[index]
-                    if (index == 0) {
-                        tvName.setTextColor(ContextCompat.getColor(this, R.color.v_main_tab_select))
-                    }
-                    imgTab.setImageResource(i)
-                    tab?.customView = view
+            .apply {
+                add(R.drawable.v_selector_complete)
+                add(R.drawable.v_selector_downloading)
+            }.forEachIndexed { index, i ->
+                val tab = tl_main.getTabAt(index)
+                val view = LayoutInflater.from(this).inflate(R.layout.v_view_main_tab, null)
+                val tvName = view.findViewById<TextView>(R.id.tv_name)
+                val imgTab = view.findViewById<ImageView>(R.id.img_tab)
+                tvName.text = tabNameList[index]
+                if (index == 0) {
+                    tvName.setTextColor(ContextCompat.getColor(this, R.color.v_main_tab_select))
                 }
+                imgTab.setImageResource(i)
+                tab?.customView = view
+            }
 
         clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         clipboardManager?.addPrimaryClipChangedListener(this)
