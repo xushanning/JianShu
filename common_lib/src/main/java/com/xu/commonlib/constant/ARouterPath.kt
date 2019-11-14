@@ -24,6 +24,10 @@ object ARouterPath {
      * 事件分发
      */
     const val jianshuEvent = "/jianshu/eventDispatch"
+    /**
+     * lambda表达式演化
+     */
+    const val jianshuLambda = "/jianshu/lambda"
 
 
     /**

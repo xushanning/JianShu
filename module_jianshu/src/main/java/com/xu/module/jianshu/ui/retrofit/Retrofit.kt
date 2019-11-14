@@ -15,6 +15,7 @@ class Retrofit(var callFactory: Call.Factory, var baseUrl: String) {
 
 
     fun <T> create(service: Class<T>): T {
+        //kotlin语法约定，如果lambda表达式是函数是最后一个实参的话，它可以放在括号外面
         return Proxy.newProxyInstance(
             service.classLoader, arrayOf(service)
         ) { _, method, _ ->
