@@ -2,4 +2,5 @@
 <resources>
     <color name="v_main_tab_select">#333333</color>
     <color name="v_main_tab_un_select">#999999</color>
+    <color name="v_download_head">#298FFF</color>
 </resources>

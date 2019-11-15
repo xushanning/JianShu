@@ -9,6 +9,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.customview.customView
+import com.afollestad.materialdialogs.customview.getCustomView
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.google.android.material.tabs.TabLayout
@@ -102,7 +105,11 @@ class MainActivity : BaseMvpActivity<IMainContract.IMainView, IMainContract.IMai
     }
 
     override fun showDownloadDialog(coverUrl: String, videoUrl: String, title: String) {
-
+        val downloadView = MaterialDialog(this)
+            .show { customView(R.layout.v_dialog_download) }
+            .getCustomView()
+        val tvVideoName = downloadView.findViewById<TextView>(R.id.tv_video_name)
+        tvVideoName.text = title
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
