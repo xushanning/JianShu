@@ -5,20 +5,26 @@ import android.content.Context
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.ModalDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.google.android.material.tabs.TabLayout
+import com.orhanobut.logger.Logger
 import com.xu.commonlib.base.BaseMvpActivity
 import com.xu.commonlib.constant.ARouterPath
+import com.xu.commonlib.utlis.extention.load
+import com.xu.commonlib.utlis.extention.singleClick
 import com.xu.commonlib.utlis.extention.tabSelected
 import com.xu.module.video.R
+import com.xu.module.video.bean.VideoInfoBean
 import kotlinx.android.synthetic.main.v_activity_main.*
 
 /**
@@ -104,12 +110,32 @@ class MainActivity : BaseMvpActivity<IMainContract.IMainView, IMainContract.IMai
         mPresenter.checkShareUrl(shareUrl)
     }
 
-    override fun showDownloadDialog(coverUrl: String, videoUrl: String, title: String) {
-        val downloadView = MaterialDialog(this)
-            .show { customView(R.layout.v_dialog_download) }
-            .getCustomView()
+    override fun showDownloadDialog(videoInfoBean: VideoInfoBean) {
+        val downloadDialog = MaterialDialog(this)
+            .show {
+                customView(
+                    R.layout.v_dialog_download,
+                    horizontalPadding = false,
+                    noVerticalPadding = true
+                )
+                cancelOnTouchOutside(false)
+            }
+
+        val downloadView = downloadDialog.getCustomView()
         val tvVideoName = downloadView.findViewById<TextView>(R.id.tv_video_name)
-        tvVideoName.text = title
+        val imgClose = downloadView.findViewById<ImageView>(R.id.img_close)
+        val tvDownload = downloadView.findViewById<TextView>(R.id.tv_download)
+        val imgCover = downloadView.findViewById<ImageView>(R.id.img_cover)
+        val tvVideoSource = downloadView.findViewById<TextView>(R.id.tv_video_source)
+        imgCover.load(videoInfoBean.videoCoverUrl)
+        imgClose.singleClick {
+            downloadDialog.dismiss()
+        }
+        tvDownload.singleClick {
+            Logger.d("开始下载")
+        }
+        tvVideoName.text = videoInfoBean.title
+        tvVideoSource.text = getString(R.string.v_video_source, videoInfoBean.videoSource)
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {

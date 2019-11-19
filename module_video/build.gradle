@@ -13,4 +13,5 @@ dependencies {
     kapt rootProject.ext.dependencies["daggerProcessor"]
     kapt rootProject.ext.dependencies["daggerCompiler"]
     kapt rootProject.ext.dependencies["arouterProcessor"]
+    kapt rootProject.ext.dependencies["glideProcessor"]
 }

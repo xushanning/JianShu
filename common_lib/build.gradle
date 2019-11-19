@@ -43,7 +43,7 @@ dependencies {
     kapt rootProject.ext.dependencies["daggerProcessor"]
     kapt rootProject.ext.dependencies["daggerCompiler"]
     kapt rootProject.ext.dependencies["roomCompiler"]
-
+    kapt rootProject.ext.dependencies["glideProcessor"]
     // api project(':vrouter_api')
 
 
@@ -56,6 +56,7 @@ dependencies {
     api rootProject.ext.dependencies["smartRefreshHeader"]
     api rootProject.ext.dependencies["smartRefreshFooter"]
     api rootProject.ext.dependencies["popwindow"]
+    api rootProject.ext.dependencies["glide"]
 
 
     api rootProject.ext.dependencies["kotlin"]

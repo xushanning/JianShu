@@ -9,5 +9,9 @@ data class VideoInfoBean(
     /**
      * 视频地址
      */
-    val videoUrl: String
+    val videoUrl: String,
+    /**
+     * 视频来源
+     */
+    val videoSource: String
 )

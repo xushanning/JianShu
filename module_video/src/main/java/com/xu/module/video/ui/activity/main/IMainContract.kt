@@ -3,6 +3,7 @@ package com.xu.module.video.ui.activity.main
 import com.xu.commonlib.mvp.IModel
 import com.xu.commonlib.mvp.IPresenter
 import com.xu.commonlib.mvp.IView
+import com.xu.module.video.bean.VideoInfoBean
 import io.reactivex.Observable
 
 /**
@@ -13,7 +14,7 @@ interface IMainContract {
         /**
          * 展示现在的dialog
          */
-        fun showDownloadDialog(coverUrl: String, videoUrl: String, title: String)
+        fun showDownloadDialog(videoInfoBean: VideoInfoBean)
     }
 
     interface IMainPresenter : IPresenter<IMainView> {
