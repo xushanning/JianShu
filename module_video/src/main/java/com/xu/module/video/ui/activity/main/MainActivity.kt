@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -41,7 +42,14 @@ class MainActivity : BaseMvpActivity<IMainContract.IMainView, IMainContract.IMai
     }
 
     override fun initView(savedInstanceState: Bundle?) {
+        setSupportActionBar(tb_main)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
         initTabLayout()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.v_home_item, menu)
+        return true
     }
 
     override fun initData() {
@@ -67,30 +75,35 @@ class MainActivity : BaseMvpActivity<IMainContract.IMainView, IMainContract.IMai
 
         vp_main.adapter = pagerAdapter
 
-        val tabNameList = ArrayList<String>().apply {
-            add(getString(R.string.v_tab_name_complete))
-            add(getString(R.string.v_tab_name_downloading))
-        }
+        ArrayList<String>()
+            .apply {
+                add(getString(R.string.v_tab_name_complete))
+                add(getString(R.string.v_tab_name_downloading))
+            }.forEachIndexed { index, s ->
+                val tab = tl_main.getTabAt(index)
+                tab?.text = s
+            }
+
         tl_main.tabSelected {
             updateTab(tl_main.getTabAt(it)!!, false)
         }
 
-        ArrayList<Int>()
-            .apply {
-                add(R.drawable.v_selector_complete)
-                add(R.drawable.v_selector_downloading)
-            }.forEachIndexed { index, i ->
-                val tab = tl_main.getTabAt(index)
-                val view = LayoutInflater.from(this).inflate(R.layout.v_view_main_tab, null)
-                val tvName = view.findViewById<TextView>(R.id.tv_name)
-                val imgTab = view.findViewById<ImageView>(R.id.img_tab)
-                tvName.text = tabNameList[index]
-                if (index == 0) {
-                    tvName.setTextColor(ContextCompat.getColor(this, R.color.v_main_tab_select))
-                }
-                imgTab.setImageResource(i)
-                tab?.customView = view
-            }
+//        ArrayList<Int>()
+//            .apply {
+//                add(R.drawable.v_selector_complete)
+//                add(R.drawable.v_selector_downloading)
+//            }.forEachIndexed { index, i ->
+//                val tab = tl_main.getTabAt(index)
+//                val view = LayoutInflater.from(this).inflate(R.layout.v_view_main_tab, null)
+//                val tvName = view.findViewById<TextView>(R.id.tv_name)
+//                val imgTab = view.findViewById<ImageView>(R.id.img_tab)
+//                tvName.text = tabNameList[index]
+//                if (index == 0) {
+//                    tvName.setTextColor(ContextCompat.getColor(this, R.color.v_main_tab_select))
+//                }
+//                imgTab.setImageResource(i)
+//                tab?.customView = view
+//            }
 
         clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         clipboardManager?.addPrimaryClipChangedListener(this)

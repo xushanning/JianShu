@@ -31,7 +31,8 @@ import javax.inject.Inject
  */
 
 @Suppress("UNCHECKED_CAST")
-abstract class BaseMvpActivity<in V : IView, P : IPresenter<V>> : BaseActivity(), IView, HasSupportFragmentInjector {
+abstract class BaseMvpActivity<in V : IView, P : IPresenter<V>> : BaseActivity(), IView,
+    HasSupportFragmentInjector {
 
     @Inject
     lateinit var mPresenter: P
@@ -53,8 +54,16 @@ abstract class BaseMvpActivity<in V : IView, P : IPresenter<V>> : BaseActivity()
         mPresenter.attachView(this as V)
     }
 
+    override fun showLoading() {
 
+    }
 
+    override fun showLoadFailed() {
+    }
+
+    override fun showEmpty() {
+
+    }
 
     override fun <T> bindToLife(): LifecycleTransformer<T> {
         return this.bindToLifecycle()

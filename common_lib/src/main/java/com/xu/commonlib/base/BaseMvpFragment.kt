@@ -28,4 +28,14 @@ abstract class BaseMvpFragment<in V : IView, P : IPresenter<V>> : BaseFragment()
     override fun <T> bindToLife(): LifecycleTransformer<T> {
         return this.bindToLifecycle()
     }
+
+    override fun showLoading() {
+
+    }
+
+    override fun showLoadFailed() {
+    }
+
+    override fun showEmpty() {
+    }
 }

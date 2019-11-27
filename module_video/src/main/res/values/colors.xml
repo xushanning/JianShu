@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="v_main_tab_select">#333333</color>
-    <color name="v_main_tab_un_select">#999999</color>
+    <color name="v_main_tab_select">#FFFFFF</color>
+    <color name="v_main_tab_un_select">#B0CFFF</color>
     <color name="v_download_head">#298FFF</color>
+    <color name="v_main_indicate">#48FCFF</color>
+    <color name="v_main_head_start">#3473FF</color>
+    <color name="v_main_head_end">#0151FE</color>
 </resources>

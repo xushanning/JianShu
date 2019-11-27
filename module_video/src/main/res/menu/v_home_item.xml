@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_new_task"
+        android:icon="@drawable/v_vector_new_task"
+        android:title=""
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_main_more"
+        android:icon="@drawable/v_vector_main_more"
+        android:title=""
+        app:showAsAction="ifRoom" />
+
+</menu>

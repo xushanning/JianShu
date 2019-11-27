@@ -72,6 +72,7 @@ ext {
             popwindow            : "com.github.pinguo-zhouwei:CustomPopwindow:2.1.1",
             glide                : "com.github.bumptech.glide:glide:${dependVersion.glideVersion}",
             glideProcessor       : "com.github.bumptech.glide:compiler:${dependVersion.glideVersion}",
+            gloading             : "com.billy.android:gloading:1.0.0",
 
             gifView              : "com.github.Cutta:GifView:1.4",
             navigation           : "com.etebarian:meow-bottom-navigation:1.0.1",
