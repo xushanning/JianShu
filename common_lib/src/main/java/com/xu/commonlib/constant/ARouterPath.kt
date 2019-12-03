@@ -28,6 +28,10 @@ object ARouterPath {
      * lambda表达式演化
      */
     const val jianshuLambda = "/jianshu/lambda"
+    /**
+     * 协调布局
+     */
+    const val jianshuCoordinator = "/jianshu/coordinator"
 
 
     /**

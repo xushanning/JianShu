@@ -4,26 +4,20 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.os.Bundle
 import android.view.KeyEvent
-import android.view.LayoutInflater
 import android.view.Menu
-import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.ModalDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
-import com.google.android.material.tabs.TabLayout
 import com.orhanobut.logger.Logger
 import com.xu.commonlib.base.BaseMvpActivity
 import com.xu.commonlib.constant.ARouterPath
 import com.xu.commonlib.utlis.extention.load
 import com.xu.commonlib.utlis.extention.singleClick
-import com.xu.commonlib.utlis.extention.tabSelected
 import com.xu.module.video.R
 import com.xu.module.video.bean.VideoInfoBean
 import kotlinx.android.synthetic.main.v_activity_main.*
@@ -84,39 +78,10 @@ class MainActivity : BaseMvpActivity<IMainContract.IMainView, IMainContract.IMai
                 tab?.text = s
             }
 
-        tl_main.tabSelected {
-            updateTab(tl_main.getTabAt(it)!!, false)
-        }
-
-//        ArrayList<Int>()
-//            .apply {
-//                add(R.drawable.v_selector_complete)
-//                add(R.drawable.v_selector_downloading)
-//            }.forEachIndexed { index, i ->
-//                val tab = tl_main.getTabAt(index)
-//                val view = LayoutInflater.from(this).inflate(R.layout.v_view_main_tab, null)
-//                val tvName = view.findViewById<TextView>(R.id.tv_name)
-//                val imgTab = view.findViewById<ImageView>(R.id.img_tab)
-//                tvName.text = tabNameList[index]
-//                if (index == 0) {
-//                    tvName.setTextColor(ContextCompat.getColor(this, R.color.v_main_tab_select))
-//                }
-//                imgTab.setImageResource(i)
-//                tab?.customView = view
-//            }
-
         clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         clipboardManager?.addPrimaryClipChangedListener(this)
     }
 
-    private fun updateTab(tab: TabLayout.Tab, isSelect: Boolean) {
-        val tvName = tab.customView?.findViewById<TextView>(R.id.tv_name)
-        if (isSelect) {
-            tvName?.setTextColor(ContextCompat.getColor(this, R.color.v_main_tab_select))
-        } else {
-            tvName?.setTextColor(ContextCompat.getColor(this, R.color.v_main_tab_un_select))
-        }
-    }
 
     override fun onPrimaryClipChanged() {
         val shareUrl = clipboardManager?.primaryClip?.getItemAt(0)?.text

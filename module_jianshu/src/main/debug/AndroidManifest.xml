@@ -18,14 +18,17 @@
 
         </activity>
         <activity android:name=".ui.lambda.LambdaActivity">
+
+        </activity>
+        <activity android:name=".ui.event.EventDispatchActivity">
+
+        </activity>
+        <activity android:name=".ui.coordinatorlayout.CoordinatorLayoutActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".ui.event.EventDispatchActivity">
-
         </activity>
     </application>
 </manifest>
