@@ -11,13 +11,15 @@ import com.xu.module.video.R
  * 正在下载fragment
  */
 @Route(path = ARouterPath.videoDownloading)
-class DownloadingFragment :
-    BaseMvpFragment<IDownloadingContract.IDownloadingView, IDownloadingContract.IDownloadingPresenter>(),
-    IDownloadingContract.IDownloadingView {
+class DownloadingFragment : BaseMvpFragment<IDownloadingContract.IDownloadingView, IDownloadingContract.IDownloadingPresenter>(), IDownloadingContract.IDownloadingView {
     override fun setLayoutId(): Int {
         return R.layout.v_fragment_downloading
     }
 
     override fun initView(view: View) {
+    }
+
+    override fun initData() {
+
     }
 }

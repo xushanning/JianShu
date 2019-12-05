@@ -10,6 +10,7 @@
         <activity android:name=".ui.retrofit.RetrofitTestActivity" />
         <activity android:name=".ui.event.EventDispatchActivity" />
         <activity android:name=".ui.coordinatorlayout.CoordinatorLayoutActivity" />
+        <activity android:name=".ui.coordinatorlayout.CollapsingToolbarActivity" />
     </application>
 
 </manifest>

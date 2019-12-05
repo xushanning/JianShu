@@ -13,11 +13,7 @@ import com.xu.commonlib.mvp.IBaseView
  */
 abstract class BaseFragment : RxFragment(), IBaseView {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(setLayoutId(), container, false)
         initMvp()
         return view
@@ -26,11 +22,23 @@ abstract class BaseFragment : RxFragment(), IBaseView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView(view)
+        initData()
     }
 
-
+    /**
+     * 设置布局
+     */
     abstract fun setLayoutId(): Int
+
+    /**
+     * 初始化view相关
+     */
     abstract fun initView(view: View)
+
+    /**
+     * 初始化数据
+     */
+    abstract fun initData()
 
     open fun initMvp() {
 

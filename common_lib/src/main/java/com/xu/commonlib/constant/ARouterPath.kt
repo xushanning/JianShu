@@ -32,6 +32,10 @@ object ARouterPath {
      * 协调布局
      */
     const val jianshuCoordinator = "/jianshu/coordinator"
+    /**
+     *协调布局2
+     */
+    const val jianshuCollapsing = "/jianshu/collapsing"
 
 
     /**

@@ -24,6 +24,9 @@
 
         </activity>
         <activity android:name=".ui.coordinatorlayout.CoordinatorLayoutActivity">
+
+        </activity>
+        <activity android:name=".ui.coordinatorlayout.CollapsingToolbarActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
