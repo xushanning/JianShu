@@ -11,7 +11,7 @@ object AssetUtil {
      * 获取asset下的json数据
      */
     fun getAssetJson(fileName: String): String {
-        val input = BaseApplication.context!!.assets.open(fileName)
+        val input = BaseApplication.appContext.assets.open(fileName)
         var json = ""
         val scanner = Scanner(input, "UTF-8").useDelimiter("\\A")
         if (scanner.hasNext()) {

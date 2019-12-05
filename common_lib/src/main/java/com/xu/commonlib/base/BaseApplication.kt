@@ -1,5 +1,6 @@
 package com.xu.commonlib.base
 
+import android.app.Application
 import com.alibaba.android.arouter.launcher.ARouter
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.FormatStrategy
@@ -15,11 +16,12 @@ import dagger.android.DaggerApplication
 abstract class BaseApplication : DaggerApplication() {
 
     companion object {
-        var context: BaseApplication? = null
+        lateinit var appContext: Application
     }
+
     override fun onCreate() {
         super.onCreate()
-        context = this
+        appContext = this
         initLogger()
         initARouter()
 

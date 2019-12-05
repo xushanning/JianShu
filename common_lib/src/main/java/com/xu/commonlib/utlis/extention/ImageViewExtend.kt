@@ -8,7 +8,7 @@ import com.xu.commonlib.base.BaseApplication
  * 图片加载扩展
  */
 fun ImageView.load(url: String) {
-    Glide.with(BaseApplication.context!!.applicationContext)
+    Glide.with(BaseApplication.appContext.applicationContext)
             .load(url)
             .into(this)
 }
