@@ -27,6 +27,9 @@
 
         </activity>
         <activity android:name=".ui.coordinatorlayout.CollapsingToolbarActivity">
+
+        </activity>
+        <activity android:name=".ui.coordinatorlayout.sample1.TextRecyclerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -60,9 +60,9 @@
         android:id="@+id/tl_head"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:barTitle="@string/j_collapsing_title"
         app:layout_anchor="@+id/img_head"
-        app:layout_behavior=".ui.coordinatorlayout.TranslucentBehavior" />
+        app:layout_behavior=".ui.coordinatorlayout.TranslucentBehavior"
+        app:title="hello" />
 
     <!--    必须加入layout_anchor属性-->
     <ImageView
