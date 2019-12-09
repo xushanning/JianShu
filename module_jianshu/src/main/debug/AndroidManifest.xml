@@ -30,6 +30,15 @@
 
         </activity>
         <activity android:name=".ui.coordinatorlayout.sample1.TextRecyclerActivity">
+
+        </activity>
+        <activity android:name=".ui.coordinatorlayout.CoordinatorHomeActivity">
+
+        </activity>
+        <activity android:name=".ui.coordinatorlayout.sample2.Sample2Activity">
+
+        </activity>
+        <activity android:name=".ui.coordinatorlayout.sample3.Sample3Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

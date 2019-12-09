@@ -29,6 +29,23 @@ object ARouterPath {
      */
     const val jianshuLambda = "/jianshu/lambda"
     /**
+     * 协调布局home页面
+     */
+    const val jianshuCoordinatorHome = "/jianshu/coordinatorHome"
+    /**
+     * sample2
+     */
+    const val jianshuCoordinatorSample2 = "/jianshu/coordinatorSample2"
+    /**
+     * sample3
+     */
+    const val jianshuCoordinatorSample3 = "/jianshu/coordinatorSample3"
+    /**
+     * sample3 fragment
+     */
+    const val jianshuCoordinatorSample3Fragment = "/jianshu/coordinatorSample3Fragment"
+
+    /**
      * 协调布局
      */
     const val jianshuCoordinator = "/jianshu/coordinator"

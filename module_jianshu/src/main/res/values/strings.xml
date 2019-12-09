@@ -10,4 +10,5 @@
     <string name="j_recycler_click_count">item点击次数:%1$d次</string>
     <string name="j_child_click_count">child点击次数:%1$d次</string>
     <string name="j_collapsing_title">收缩布局</string>
+    <string name="j_coordinator_home_title">协调布局</string>
 </resources>
