@@ -2,6 +2,7 @@ package com.xu.commonlib.base
 
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.Toast
 import com.alibaba.android.arouter.launcher.ARouter
 import com.jaeger.library.StatusBarUtil
 import com.trello.rxlifecycle3.components.support.RxAppCompatActivity
@@ -55,7 +56,7 @@ abstract class BaseActivity : RxAppCompatActivity(), IBaseView {
     }
 
     override fun showToast(content: String) {
-
+        Toast.makeText(this, content, Toast.LENGTH_SHORT).show()
     }
 
     override fun dismissDialog() {

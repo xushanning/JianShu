@@ -7,8 +7,8 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.appbar.AppBarLayout
 import com.jaeger.library.StatusBarUtil
-import com.orhanobut.logger.Logger
 import com.xu.commonlib.base.BaseActivity
+import com.xu.commonlib.utlis.extention.singleClick
 import com.xu.module.jianshu.R
 import com.xu.module.jianshu.ui.coordinatorlayout.CoordinatorAdapter
 import kotlinx.android.synthetic.main.j_activity_zhi_fu_bao.*
@@ -27,6 +27,54 @@ class ZhiFuBaoActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
         rv_content.layoutManager = LinearLayoutManager(this)
         rv_content.adapter = quickAdapter
         abl_zfb.addOnOffsetChangedListener(this)
+        //扫一扫
+        img_open_scan.singleClick {
+            showToast("扫一扫")
+        }
+        //付钱
+        img_open_pay.singleClick {
+            showToast("付钱")
+        }
+        //收钱
+        img_open_toll.singleClick {
+            showToast("收钱")
+        }
+        //卡包
+        img_open_card.singleClick {
+            showToast("卡包")
+        }
+        //个人中心
+        img_person_center.singleClick {
+            showToast("个人中心")
+        }
+        //增加
+        img_add.singleClick {
+            showToast("增加")
+        }
+        //语音
+        img_microphone.singleClick {
+            showToast("语音")
+        }
+        //搜索
+        v_search.singleClick {
+            showToast("搜索")
+        }
+        //扫一扫
+        img_close_scan.singleClick {
+            showToast("扫一扫")
+        }
+        //付钱
+        img_close_pay.singleClick {
+            showToast("付钱")
+        }
+        //收钱
+        img_close_toll.singleClick {
+            showToast("收钱")
+        }
+        //搜索
+        img_close_card.singleClick {
+            showToast("搜索")
+        }
     }
 
     override fun setStatusBar() {

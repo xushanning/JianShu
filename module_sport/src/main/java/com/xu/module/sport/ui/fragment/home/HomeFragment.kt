@@ -108,6 +108,10 @@ class HomeFragment : BaseMvpFragment<IHomeContract.IHomeView, IHomeContract.IHom
 
     }
 
+    override fun initData() {
+
+    }
+
     /**
      * 初始化运动类型
      */
