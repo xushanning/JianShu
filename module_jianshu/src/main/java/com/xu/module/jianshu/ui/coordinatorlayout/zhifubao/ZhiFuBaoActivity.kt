@@ -83,7 +83,7 @@ class ZhiFuBaoActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
 
     override fun initData() {
         val data = ArrayList<String>()
-        for (i in 1..100) {
+        for (i in 1..3) {
             data.add(i.toString())
         }
         quickAdapter.setNewData(data)
