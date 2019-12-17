@@ -1,0 +1,30 @@
+[
+  {
+    "itemName": "余额宝",
+    "iconName": "j_zfb_yeb"
+  },
+  {
+    "itemName": "转账",
+    "iconName": "j_zfb_transfer"
+  },
+  {
+    "itemName": "充值中心",
+    "iconName": "j_zfb_recharge"
+  },
+  {
+    "itemName": "生活缴费",
+    "iconName": "j_zfb_expenses"
+  },
+  {
+    "itemName": "花呗",
+    "iconName": "j_zfb_hua_bei"
+  },
+  {
+    "itemName": "医疗健康",
+    "iconName": "j_zfb_health"
+  },
+  {
+    "itemName": "更多",
+    "iconName": "j_zfb_more"
+  }
+]

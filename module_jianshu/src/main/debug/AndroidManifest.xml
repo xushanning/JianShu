@@ -44,7 +44,7 @@
         <activity android:name=".ui.nestedscroll.NestedScrollActivity">
 
         </activity>
-        <activity android:name=".ui.coordinatorlayout.zhifubao.ZhiFuBaoActivity">
+        <activity android:name=".ui.coordinatorlayout.alipay.ZhiFuBaoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

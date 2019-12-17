@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/img_close_scan"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/j_zfb_scan_small"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/img_close_pay"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="24dp"
+        android:src="@drawable/j_zfb_pay_small"
+        app:layout_constraintBottom_toBottomOf="@+id/img_close_scan"
+        app:layout_constraintStart_toEndOf="@+id/img_close_scan"
+        app:layout_constraintTop_toTopOf="@+id/img_close_scan" />
+
+    <ImageView
+        android:id="@+id/img_close_toll"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="24dp"
+        android:src="@drawable/j_zfb_toll_small"
+        app:layout_constraintBottom_toBottomOf="@+id/img_close_pay"
+        app:layout_constraintStart_toEndOf="@+id/img_close_pay"
+        app:layout_constraintTop_toTopOf="@+id/img_close_pay" />
+
+    <ImageView
+        android:id="@+id/img_close_card"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="24dp"
+        android:src="@drawable/j_zfb_close_search"
+        app:layout_constraintBottom_toBottomOf="@+id/img_close_toll"
+        app:layout_constraintStart_toEndOf="@+id/img_close_toll"
+        app:layout_constraintTop_toTopOf="@+id/img_close_toll" />
+
+    <ImageView
+        android:id="@+id/img_close_add"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/j_zfb_add"
+        app:layout_constraintBottom_toBottomOf="@+id/img_close_card"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/img_close_card" />
+
+    <View
+        android:id="@+id/v_bg2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
