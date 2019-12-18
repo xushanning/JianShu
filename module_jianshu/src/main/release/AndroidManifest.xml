@@ -8,7 +8,7 @@
         </activity>
         <activity android:name=".ui.repeatclick.RepeatClickActivity" />
         <activity android:name=".ui.retrofit.RetrofitTestActivity" />
-        <activity android:name=".ui.event.EventDispatchActivity" />
+        <activity android:name=".ui.eventdispatch.EventDispatchActivity" />
         <activity android:name=".ui.coordinatorlayout.CoordinatorLayoutActivity" />
         <activity android:name=".ui.coordinatorlayout.CollapsingToolbarActivity" />
     </application>
