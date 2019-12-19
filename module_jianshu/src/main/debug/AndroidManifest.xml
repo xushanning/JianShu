@@ -21,11 +21,7 @@
 
         </activity>
         <activity android:name=".ui.eventdispatch.EventDispatchActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".ui.coordinatorlayout.CoordinatorLayoutActivity">
 
@@ -50,6 +46,13 @@
         </activity>
         <activity android:name=".ui.coordinatorlayout.alipay.ZhiFuBaoActivity">
 
+        </activity>
+        <activity android:name=".ui.viewdraw.ViewDrawActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 </manifest>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.xu.module.jianshu.ui.viewdraw.ParentView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/v_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.xu.module.jianshu.ui.viewdraw.ChildView
+        android:id="@+id/v_child"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/res_99" />
+
+</com.xu.module.jianshu.ui.viewdraw.ParentView>

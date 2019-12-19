@@ -18,11 +18,18 @@ class FatherView : FrameLayout {
 
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes)
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
-        if (ev?.action == MotionEvent.ACTION_DOWN) {
-            Logger.d("父容器viewGroup dispatchTouchEvent")
+        when (ev?.action) {
+            MotionEvent.ACTION_DOWN -> {
+                Logger.d("父容器 分发事件 down")
+            }
+            MotionEvent.ACTION_UP -> {
+                Logger.d("父容器 分发事件 up")
+            }
+            MotionEvent.ACTION_MOVE -> {
+                Logger.d("父容器 分发事件 move")
+            }
         }
         return super.dispatchTouchEvent(ev)
     }
