@@ -18,7 +18,23 @@ class ChildView : View {
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        Logger.d(widthMeasureSpec)
+        Logger.d(MeasureSpec.getSize(heightMeasureSpec))
+
+        when (MeasureSpec.getMode(heightMeasureSpec)) {
+            MeasureSpec.AT_MOST -> {
+                Logger.d("AT_MOST")
+            }
+            MeasureSpec.EXACTLY -> {
+                Logger.d("EXACTLY")
+            }
+            MeasureSpec.UNSPECIFIED -> {
+                Logger.d("UNSPECIFIED")
+            }
+            else -> {
+
+            }
+
+        }
     }
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
