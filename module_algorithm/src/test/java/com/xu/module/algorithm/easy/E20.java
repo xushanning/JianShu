@@ -4,8 +4,7 @@ import com.xu.module.algorithm.PrintUtil;
 
 import org.junit.Test;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Stack;
 
 public class E20 {
     /**
@@ -39,41 +38,44 @@ public class E20 {
      */
     @Test
     public void test() {
-        PrintUtil.print(isValid("()[]{}"));
+       // PrintUtil.print(isValid("()[]{}"));
+       PrintUtil.print(isValid("{[]}"));
+//        PrintUtil.print(isValid("()"));
     }
 
+    /**
+     * 这种算法太流批了~
+     * @param data
+     * @return
+     */
     private boolean isValid(String data) {
         char[] cData = data.toCharArray();
+        Stack<Character> stack = new Stack<>();
         if (data.length() % 2 == 1) {
             return false;
         }
-
-        int half = data.length() / 2;
-        for (int i = 0; i < half; i++) {
-            char a = cData[i];
-            char b = cData[data.length() - i - 1];
-            switch (a) {
-                case '(':
-                    if (b != ')') {
-                        return false;
-                    }
-                    break;
-                case '[':
-                    if (b != ']') {
-                        return false;
-                    }
-                    break;
-                case '{':
-                    if (b != '}') {
-                        return false;
-                    }
-                    break;
-                default:
-                    break;
+        for (char ch : cData) {
+            if (ch == '(' || ch == '[' || ch == '{') {
+                //压栈
+                stack.add(ch);
+            } else {
+                if (stack.isEmpty()) {
+                    return false;
+                }
+                //pop():移除堆栈顶部的对象，并作为此函数的值返回该对象
+                if (ch == ')' && stack.pop() != '(') {
+                    return false;
+                }
+                if (ch == '}' && stack.pop() != '{') {
+                    return false;
+                }
+                if (ch == ']' && stack.pop() != '[') {
+                    return false;
+                }
             }
-
         }
-        return true;
+
+        return stack.isEmpty();
     }
 
 }
