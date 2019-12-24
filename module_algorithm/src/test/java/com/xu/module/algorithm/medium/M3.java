@@ -1,4 +1,4 @@
-package com.xu.module.algorithm.hard;
+package com.xu.module.algorithm.medium;
 
 import com.xu.module.algorithm.PrintUtil;
 
@@ -25,7 +25,7 @@ import org.junit.Test;
  * 解释: 因为无重复字符的最长子串是 "wke"，所以其长度为 3。
  *      请注意，你的答案必须是 子串 的长度，"pwke" 是一个子序列，不是子串。
  */
-public class H3 {
+public class M3 {
     @Test
     public void test() {
         PrintUtil.print(handle("pwwkew"));

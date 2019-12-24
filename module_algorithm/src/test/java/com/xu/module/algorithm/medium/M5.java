@@ -1,4 +1,4 @@
-package com.xu.module.algorithm.hard;
+package com.xu.module.algorithm.medium;
 
 import com.xu.module.algorithm.PrintUtil;
 
@@ -20,7 +20,7 @@ import org.junit.Test;
  * 输入: "cbbd"
  * 输出: "bb"
  */
-public class H5 {
+public class M5 {
     @Test
     public void test() {
         PrintUtil.print(handle("cbbd"));

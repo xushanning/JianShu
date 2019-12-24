@@ -1,4 +1,4 @@
-package com.xu.module.algorithm.hard;
+package com.xu.module.algorithm.medium;
 
 import com.xu.module.algorithm.PrintUtil;
 
@@ -18,7 +18,7 @@ import org.junit.Test;
  * 输出：7 -> 0 -> 8
  * 原因：342 + 465 = 807
  */
-public class H2 {
+public class M2 {
     @Test
     public void test() {
         Node node1 = new Node(2);
