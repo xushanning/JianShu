@@ -2,6 +2,7 @@ package com.xu.commonlib.base
 
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.trello.rxlifecycle3.LifecycleTransformer
 import com.xu.commonlib.mvp.IPresenter
@@ -42,6 +43,7 @@ abstract class BaseMvpActivity<in V : IView, P : IPresenter<V>> : BaseActivity()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
+        initMvp()
         super.onCreate(savedInstanceState)
     }
 
@@ -49,7 +51,7 @@ abstract class BaseMvpActivity<in V : IView, P : IPresenter<V>> : BaseActivity()
         return supportFragmentInjector
     }
 
-    override fun initMvp() {
+    private fun initMvp() {
 
         mPresenter.attachView(this as V)
     }
@@ -63,6 +65,32 @@ abstract class BaseMvpActivity<in V : IView, P : IPresenter<V>> : BaseActivity()
 
     override fun showEmpty() {
 
+    }
+
+    /**
+     *显示dialog
+     */
+    override fun showDialog(content: String) {
+
+    }
+
+    /**
+     * 默认显示正在加载...
+     */
+    override fun showDialog() {
+    }
+
+    /**
+     * 关闭dialog
+     */
+    override fun dismissDialog() {
+    }
+
+    /**
+     * 展示吐司
+     */
+    override fun showToast(content: String) {
+        Toast.makeText(this, content, Toast.LENGTH_SHORT).show()
     }
 
     override fun <T> bindToLife(): LifecycleTransformer<T> {

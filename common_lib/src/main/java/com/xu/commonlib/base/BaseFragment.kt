@@ -11,12 +11,14 @@ import com.xu.commonlib.mvp.IBaseView
 /**
  * @author 言吾許
  */
-abstract class BaseFragment : RxFragment(), IBaseView {
+abstract class BaseFragment : RxFragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(setLayoutId(), container, false)
-        initMvp()
-        return view
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(setLayoutId(), container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,24 +41,6 @@ abstract class BaseFragment : RxFragment(), IBaseView {
      * 初始化数据
      */
     abstract fun initData()
-
-    open fun initMvp() {
-
-    }
-
-    override fun showDialog(content: String) {
-
-    }
-
-    override fun showDialog() {
-    }
-
-    override fun dismissDialog() {
-    }
-
-    override fun showToast(content: String) {
-        Toast.makeText(context, content, Toast.LENGTH_SHORT).show()
-    }
 
 
 }
