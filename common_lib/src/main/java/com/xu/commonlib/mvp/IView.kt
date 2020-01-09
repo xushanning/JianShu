@@ -5,7 +5,7 @@ import com.trello.rxlifecycle3.LifecycleTransformer
 /**
  * @author 言吾許
  */
-interface IView {
+interface IView :IBaseView{
     /**
      * 绑定声明周期
      */
@@ -41,8 +41,4 @@ interface IView {
      */
     fun dismissDialog()
 
-    /**
-     * 展示吐司
-     */
-    fun showToast(content: String)
 }

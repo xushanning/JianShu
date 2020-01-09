@@ -6,5 +6,9 @@ package com.xu.commonlib.mvp
 interface IBaseView {
 
 
+    /**
+     * 展示吐司
+     */
+    fun showToast(content: String)
 
 }

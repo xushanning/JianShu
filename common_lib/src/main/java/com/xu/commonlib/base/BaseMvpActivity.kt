@@ -86,12 +86,7 @@ abstract class BaseMvpActivity<in V : IView, P : IPresenter<V>> : BaseActivity()
     override fun dismissDialog() {
     }
 
-    /**
-     * 展示吐司
-     */
-    override fun showToast(content: String) {
-        Toast.makeText(this, content, Toast.LENGTH_SHORT).show()
-    }
+
 
     override fun <T> bindToLife(): LifecycleTransformer<T> {
         return this.bindToLifecycle()

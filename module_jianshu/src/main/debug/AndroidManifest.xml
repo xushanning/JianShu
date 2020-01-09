@@ -48,6 +48,9 @@
 
         </activity>
         <activity android:name=".ui.viewdraw.ViewDrawActivity">
+
+        </activity>
+        <activity android:name=".ui.easyload.LoadingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
