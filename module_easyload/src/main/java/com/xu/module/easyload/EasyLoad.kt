@@ -84,5 +84,23 @@ class EasyLoad private constructor() {
         return LoadService(target, globalStates, localStates, globalDefaultState, localDefaultState, reloadListener)
     }
 
+    /**
+     * http://lison.cc/842.html?i=1
+     * builder模式
+     */
+    class Builder {
+        /**
+         * 全局的status
+         */
+        private var globalStates: MutableList<BaseState>? = null
 
+
+        fun addGlobalState(state: BaseState) = apply {
+
+        }
+
+        fun addLocalState() = apply {
+
+        }
+    }
 }
