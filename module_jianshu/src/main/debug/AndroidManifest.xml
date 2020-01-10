@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.xu.module.jianshu">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:name=".debug.DebugApplication"
         android:allowBackup="true"
@@ -50,7 +51,13 @@
         <activity android:name=".ui.viewdraw.ViewDrawActivity">
 
         </activity>
-        <activity android:name=".ui.easyload.LoadingActivity">
+        <activity android:name=".ui.easyload.target.PlaceHolderActivity">
+
+        </activity>
+        <activity android:name=".ui.easyload.target.NormalActivity">
+
+        </activity>
+        <activity android:name=".ui.easyload.target.ViewActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

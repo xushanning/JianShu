@@ -4,12 +4,13 @@ import android.app.Activity
 import android.content.Context
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
+import com.xu.module.easyload.EasyLoad
 import com.xu.module.easyload.listener.OnStateChangeListener
-import com.xu.module.easyload.listener.OnReloadListener
 import com.xu.module.easyload.state.BaseState
 import com.xu.module.easyload.state.SuccessState
 
-class LoadService(target: Any, globalState: MutableList<BaseState>?, localState: MutableList<BaseState>?, globalDefaultState: Class<out BaseState>?, localDefaultState: Class<out BaseState>?, reloadListener: OnReloadListener? = null) : ILoadService {
+class LoadService(target: Any, builder: EasyLoad.Builder) : ILoadService {
     private lateinit var container: ViewGroup
     private lateinit var originalView: View
     private lateinit var originalLayoutParams: ViewGroup.LayoutParams
@@ -28,7 +29,7 @@ class LoadService(target: Any, globalState: MutableList<BaseState>?, localState:
 
     init {
         initTarget(target)
-        initStates(globalState, localState, globalDefaultState, localDefaultState, reloadListener)
+        initStates(builder)
     }
 
     private fun initTarget(target: Any) {
@@ -39,36 +40,44 @@ class LoadService(target: Any, globalState: MutableList<BaseState>?, localState:
                 //activity初始化状态就一个view
                 originalView = container.getChildAt(0)
                 mContext = target
+                originalLayoutParams = originalView.layoutParams
             }
-            is ViewGroup -> {
-                //fragment传入container
-                container = target
-                originalView = container.getChildAt(0)
-                mContext = originalView.context
-            }
+            //fragment和view都传入view
             is View -> {
-                container = target.parent as ViewGroup
+                val parentViewGroup = target.parent as ViewGroup
+                container = FrameLayout(target.context)
                 originalView = target
                 mContext = originalView.context
+                originalLayoutParams = originalView.layoutParams
+                container.layoutParams = originalLayoutParams
+                parentViewGroup.removeView(target)
+                parentViewGroup.addView(container)
             }
             else -> {
-                throw IllegalArgumentException("target必须是activity、fragment、view的一种")
+                throw IllegalArgumentException("target必须是activity、view的一种")
             }
         }
-        originalLayoutParams = originalView.layoutParams
+
     }
 
-    private fun initStates(globalState: MutableList<BaseState>?, localState: MutableList<BaseState>?, globalDefaultState: Class<out BaseState>?, localDefaultState: Class<out BaseState>?, reloadListener: OnReloadListener? = null) {
-        if (localState == null && globalState == null) {
+    private fun initStates(builder: EasyLoad.Builder) {
+
+        val globalStates = builder.globalStates
+        val localStates = builder.localStates
+        val reloadListener = builder.onReloadListener
+        val localDefaultState = builder.localDefaultState
+        val globalDefaultState = builder.globalDefaultState
+        this.onStateChangedListener = builder.onStateChangeListener
+        if (globalStates.isEmpty() && localStates.isEmpty()) {
             throw IllegalArgumentException("globalState和localState必须设置其一~！")
         }
         //全局state初始化
-        globalState?.forEach {
+        globalStates.forEach {
             it.initView(mContext, reloadListener)
             mStates[it.javaClass] = it
         }
         //local会把全局覆盖
-        localState?.forEach {
+        localStates.forEach {
             it.initView(mContext, reloadListener)
             mStates[it.javaClass] = it
         }
@@ -83,7 +92,6 @@ class LoadService(target: Any, globalState: MutableList<BaseState>?, localState:
         if (globalDefaultState != null && localDefaultState == null) {
             showDefault(globalDefaultState)
         }
-
     }
 
     /**
@@ -137,21 +145,4 @@ class LoadService(target: Any, globalState: MutableList<BaseState>?, localState:
     }
 
 
-    /**
-     * 加载状态改变回调
-     */
-    override fun setOnStateChangeListener(stateChangedListener: OnStateChangeListener): LoadService {
-        this.onStateChangedListener = stateChangedListener
-        return this
-    }
-
-    /**
-     * 重试回调
-     */
-    override fun setOnReloadListener(reloadListener: OnReloadListener): LoadService {
-        mStates.forEach {
-            it.value.setOnReloadListener(reloadListener)
-        }
-        return this
-    }
 }

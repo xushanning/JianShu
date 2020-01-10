@@ -6,11 +6,12 @@ import android.view.View
 import androidx.annotation.LayoutRes
 import com.xu.module.easyload.service.ILoadService
 import com.xu.module.easyload.listener.OnReloadListener
+import java.io.Serializable
 
 /**
  * base
  */
-abstract class BaseState {
+abstract class BaseState : Serializable {
     private var view: View? = null
     private var context: Context? = null
     private var onReloadListener: OnReloadListener? = null
