@@ -12,9 +12,7 @@ import com.xu.module.easyload.state.SuccessState
 
 class LoadService(target: Any, builder: EasyLoad.Builder) : ILoadService {
     private lateinit var container: ViewGroup
-    private lateinit var originalView: View
-    private lateinit var originalLayoutParams: ViewGroup.LayoutParams
-    private lateinit var mContext: Context
+
 
     /**
      * 存放state
@@ -28,39 +26,44 @@ class LoadService(target: Any, builder: EasyLoad.Builder) : ILoadService {
 
 
     init {
-        initTarget(target)
-        initStates(builder)
+        initTarget(target, builder)
     }
 
-    private fun initTarget(target: Any) {
-
+    private fun initTarget(target: Any, builder: EasyLoad.Builder) {
+        val originalView: View?
+        val mContext: Context?
         when (target) {
             is Activity -> {
                 container = target.findViewById(android.R.id.content)
                 //activity初始化状态就一个view
                 originalView = container.getChildAt(0)
                 mContext = target
-                originalLayoutParams = originalView.layoutParams
+                //originalLayoutParams = originalView.layoutParams
             }
             //fragment和view都传入view
             is View -> {
                 val parentViewGroup = target.parent as ViewGroup
+                val index = parentViewGroup.indexOfChild(target)
                 container = FrameLayout(target.context)
                 originalView = target
-                mContext = originalView.context
-                originalLayoutParams = originalView.layoutParams
-                container.layoutParams = originalLayoutParams
+                mContext = target.context
+                container.layoutParams = target.layoutParams
                 parentViewGroup.removeView(target)
-                parentViewGroup.addView(container)
+                parentViewGroup.addView(container, index)
+                val childParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+                container.addView(target, childParams)
             }
             else -> {
                 throw IllegalArgumentException("target必须是activity、view的一种")
             }
         }
-
+        if (originalView == null || mContext == null) {
+            throw IllegalArgumentException("初始化失败!")
+        }
+        initStates(builder, originalView, mContext)
     }
 
-    private fun initStates(builder: EasyLoad.Builder) {
+    private fun initStates(builder: EasyLoad.Builder, originalView: View, mContext: Context) {
 
         val globalStates = builder.globalStates
         val localStates = builder.localStates
@@ -125,19 +128,18 @@ class LoadService(target: Any, builder: EasyLoad.Builder) : ILoadService {
         val view = state!!.getView(this, state)
         onStateChangedListener?.onStateChange(view, state)
         if (state is SuccessState) {
-            //成功的话，就把原始界面跳转到最前面
-            view.visibility = View.VISIBLE
-            currentOtherStateView?.visibility = View.GONE
+            //成功->移除状态view
+            container.removeView(currentOtherStateView)
         } else {
             //相同，不变
             if (currentOtherStateView == view) {
                 return
             }
-            //先把当前的view
+            //不同，移除状态view
             container.removeView(currentOtherStateView)
-            val stateValue = mStates[SuccessState::class.java]
-            stateValue?.getView(this, stateValue)?.visibility = View.GONE
-            view.layoutParams = originalLayoutParams
+            view.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+            //增加新的状态view
+            //todo 性能没有直接显示高
             container.addView(view)
             currentOtherStateView = view
         }

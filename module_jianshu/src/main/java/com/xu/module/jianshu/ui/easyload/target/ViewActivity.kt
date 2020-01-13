@@ -49,7 +49,6 @@ class ViewActivity : Activity() {
                     }
 
                     override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
-                        Logger.d("chenggonglea a a ")
                         service.showSuccess()
                         return false
                     }
@@ -67,6 +66,7 @@ class ViewActivity : Activity() {
                     }
 
                     override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                        img2.visibility = View.VISIBLE
                         return false
                     }
 
