@@ -5,6 +5,7 @@ import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.RelativeLayout
 import com.xu.module.easyload.EasyLoad
 import com.xu.module.easyload.listener.OnStateChangeListener
 import com.xu.module.easyload.state.BaseState
@@ -12,6 +13,10 @@ import com.xu.module.easyload.state.SuccessState
 
 class LoadService(target: Any, builder: EasyLoad.Builder) : ILoadService {
     private lateinit var container: ViewGroup
+    /**
+     * 目标view的params
+     */
+    private var targetParams: ViewGroup.LayoutParams? = null
 
 
     /**
@@ -23,6 +28,10 @@ class LoadService(target: Any, builder: EasyLoad.Builder) : ILoadService {
      */
     private var currentOtherStateView: View? = null
     private var onStateChangedListener: OnStateChangeListener? = null
+    /**
+     * 是否需要特殊处理
+     */
+    private var needSpecialHandle = false
 
 
     init {
@@ -43,15 +52,22 @@ class LoadService(target: Any, builder: EasyLoad.Builder) : ILoadService {
             //fragment和view都传入view
             is View -> {
                 val parentViewGroup = target.parent as ViewGroup
-                val index = parentViewGroup.indexOfChild(target)
-                container = FrameLayout(target.context)
                 originalView = target
                 mContext = target.context
-                container.layoutParams = target.layoutParams
-                parentViewGroup.removeView(target)
-                parentViewGroup.addView(container, index)
-                val childParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-                container.addView(target, childParams)
+                if (parentViewGroup.javaClass == Class.forName("androidx.constraintlayout.widget.ConstraintLayout") || parentViewGroup.javaClass == RelativeLayout::class.java) {
+                    //constraintLayout和RelativeLayout特殊处理
+                    needSpecialHandle = true
+                    targetParams = originalView.layoutParams
+                    container = parentViewGroup
+                } else {
+                    val index = parentViewGroup.indexOfChild(target)
+                    container = FrameLayout(target.context)
+                    container.layoutParams = target.layoutParams
+                    parentViewGroup.removeView(target)
+                    parentViewGroup.addView(container, index)
+                    val childParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+                    container.addView(target, childParams)
+                }
             }
             else -> {
                 throw IllegalArgumentException("target必须是activity、view的一种")
@@ -137,7 +153,11 @@ class LoadService(target: Any, builder: EasyLoad.Builder) : ILoadService {
             }
             //不同，移除状态view
             container.removeView(currentOtherStateView)
-            view.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+            view.layoutParams = if (needSpecialHandle) {
+                targetParams
+            } else {
+                ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+            }
             //增加新的状态view
             //todo 性能没有直接显示高
             container.addView(view)
@@ -145,6 +165,4 @@ class LoadService(target: Any, builder: EasyLoad.Builder) : ILoadService {
         }
 
     }
-
-
 }
