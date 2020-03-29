@@ -1,5 +1,9 @@
 package com.xu.module.algorithm.easy;
 
+import com.xu.module.algorithm.PrintUtil;
+
+import org.junit.Test;
+
 /**
  * @author 许 on 2019/12/24.
  * 最后一个单词的长度
@@ -16,4 +20,26 @@ package com.xu.module.algorithm.easy;
  */
 public class E58 {
 
+    @Test
+    public void test() {
+        PrintUtil.print(getWordLength("Hello World"));
+
+    }
+
+    private int getWordLength(String s) {
+        if (s == null || s.length() == 0) {
+            return 0;
+        }
+        int result = 0;
+        //从后往前遍历。。。。。
+        for (int i = s.length() - 1; i >= 0; i--) {
+            if (s.charAt(i) != ' ') {
+                result++;
+            } else if (s.charAt(i) == ' ' && result != 0) {
+                return result;
+            }
+        }
+        return result;
+
+    }
 }
