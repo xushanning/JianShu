@@ -67,5 +67,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.easyload.target.ToolBarActivity"
+            android:theme="@style/Theme.Design.Light">
+
+        </activity>
     </application>
 </manifest>

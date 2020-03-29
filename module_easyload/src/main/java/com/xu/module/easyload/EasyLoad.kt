@@ -1,5 +1,6 @@
 package com.xu.module.easyload
 
+import android.util.Log
 import com.xu.module.easyload.listener.OnReloadListener
 import com.xu.module.easyload.listener.OnStateChangeListener
 import com.xu.module.easyload.service.ILoadService
@@ -41,7 +42,9 @@ class EasyLoad private constructor() {
         builder.onReloadListener = null
         builder.onStateChangeListener = null
         builder.localStates.clear()
-        return LoadService(target, cloneBuilder)
+        val service=LoadService(target, cloneBuilder)
+        Log.d("tag",service.toString())
+        return service
     }
 
     /**

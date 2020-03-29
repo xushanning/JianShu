@@ -2,6 +2,7 @@ package com.xu.module.easyload.service
 
 import android.app.Activity
 import android.content.Context
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -10,6 +11,7 @@ import com.xu.module.easyload.EasyLoad
 import com.xu.module.easyload.listener.OnStateChangeListener
 import com.xu.module.easyload.state.BaseState
 import com.xu.module.easyload.state.SuccessState
+import kotlinx.android.synthetic.*
 
 class LoadService(target: Any, builder: EasyLoad.Builder) : ILoadService {
     private lateinit var container: ViewGroup
@@ -146,6 +148,7 @@ class LoadService(target: Any, builder: EasyLoad.Builder) : ILoadService {
         if (state is SuccessState) {
             //成功->移除状态view
             container.removeView(currentOtherStateView)
+            Log.d("tag",container.childCount.toString())
         } else {
             //相同，不变
             if (currentOtherStateView == view) {
