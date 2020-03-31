@@ -28,12 +28,17 @@ import org.junit.Test;
  * 1.  1 阶 + 1 阶 + 1 阶
  * 2.  1 阶 + 2 阶
  * 3.  2 阶 + 1 阶
+ * <p>
+ * <p>
+ * 漫画讲得好
+ * https://mp.weixin.qq.com/s/3h9iqU4rdH3EIy5m6AzXsg
  */
 public class E70 {
     @Test
     public void test() {
         PrintUtil.print(getCount(8));
         PrintUtil.print(getCount1(8));
+        PrintUtil.print(getCount2(8));
     }
 
     private int getCount(int floor) {
@@ -44,7 +49,7 @@ public class E70 {
     }
 
     /**
-     * 动态规划解法
+     * 备忘录解法
      * dynamic programming
      * DP
      *
@@ -68,5 +73,32 @@ public class E70 {
             }
         }
         return array[floor];
+    }
+
+    /**
+     * 动态规划
+     * 某一个数量只和前两个状态有关，不用像备忘录一样，保留所有的状态
+     * 进一步降低时间复杂度
+     * 这才是这正的动态规划
+     *
+     * @param floor 楼梯层数
+     * @return
+     */
+    private int getCount2(int floor) {
+        if (floor == 0) {
+            return 0;
+        }
+        if (floor == 1 || floor == 2) {
+            return 1;
+        }
+        int a = 1;
+        int b = 2;
+        int temp = 0;
+        for (int i = 3; i < floor; i++) {
+            temp = a + b;
+            a = b;
+            b = temp;
+        }
+        return temp;
     }
 }

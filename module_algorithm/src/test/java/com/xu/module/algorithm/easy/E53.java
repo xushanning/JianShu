@@ -19,7 +19,9 @@ public class E53 {
     @Test
     public void test() {
         int[] data = new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4};
-        PrintUtil.print(getMax(data));
+//        PrintUtil.print(getMax(data));
+        PrintUtil.print(getMax2(data));
+//         PrintUtil.print(getMax3(data));
     }
 
     private int getMax(int[] data) {
@@ -39,5 +41,39 @@ public class E53 {
             }
         }
         return max;
+    }
+
+    /**
+     * 动态规划解法
+     *
+     * @param nums
+     * @return
+     */
+    private int getMax2(int[] nums) {
+        int sum = nums[0];
+        int n = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            if (n > 0) {
+                n += nums[i];
+            } else {
+                n = nums[i];
+            }
+            if (sum < n) {
+                sum = n;
+            }
+        }
+        return sum;
+
+    }
+
+    private int getMax3(int[] nums) {
+        int res = Integer.MIN_VALUE;
+        int currSum = 0;
+        for (int num : nums) {
+            currSum = Math.max(currSum + num, num);
+            res = Math.max(currSum, res);
+        }
+
+        return res;
     }
 }
