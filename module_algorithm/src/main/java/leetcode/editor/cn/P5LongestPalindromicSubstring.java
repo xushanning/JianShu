@@ -27,7 +27,28 @@ public class P5LongestPalindromicSubstring {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public String longestPalindrome(String s) {
-            return "";
+            int len = s.length();
+            //异常判断
+            if (len <= 1) {
+                return s;
+            }
+            int left = 0;
+            int right = 0;
+            int maxLen = 0;
+            boolean[][] dp = new boolean[len][len];
+            for (int i = 1; i < len; i++) {
+                for (int j = 0; j < i; j++) {
+                    if (s.charAt(i) == s.charAt(j) && (i - j <= 2 || dp[j + 1][i - 1])) {
+                        dp[j][i] = true;
+                        if (i - j + 1 > maxLen) {
+                            maxLen = i - j + 1;
+                            left = j;
+                            right = i;
+                        }
+                    }
+                }
+            }
+            return s.substring(left, right + 1);
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
