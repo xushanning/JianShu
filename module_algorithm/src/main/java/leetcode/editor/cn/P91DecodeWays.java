@@ -31,31 +31,38 @@ public class P91DecodeWays {
     public static void main(String[] args) {
         Solution solution = new P91DecodeWays().new Solution();
         // TO TEST
-        solution.numDecodings("12");
+        solution.numDecodings("10");
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int numDecodings(String s) {
+            char[] arr = s.toCharArray();
             int len = s.length();
-            if (len <= 1) {
-                return len;
-            }
             int[] dp = new int[len + 1];
             //状态转移方程  dp[i]=dp[i-1]+{s.subString(i-2,i-1)是否小于等于26}
 
             //边界
-            dp[0] = 0;
-            dp[1] = 1;
+            dp[0] = 1;
+            dp[1] = arr[0] == '0' ? 0 : 1;
 
             for (int i = 2; i <= len; i++) {
-                String ab = s.substring(i - 2, i);
-                int abc = Integer.valueOf(ab);
-                int index = 0;
-                if (abc <= 26) {
-                    index = 1;
+                int n = (arr[i - 2] - '0') * 10 + (arr[i - 1] - '0');
+                //考虑的情况有点多，当时漏了两种。。。。
+                if (arr[i - 1] == '0' && arr[i - 2] == '0') {
+                    return 0;
+                } else if (arr[i - 2] == '0') {
+                    dp[i] = dp[i - 1];
+                } else if (arr[i - 1] == '0') {
+                    if (n > 26) {
+                        return 0;
+                    }
+                    dp[i] = dp[i - 2];
+                } else if (n > 26) {
+                    dp[i] = dp[i - 1];
+                } else {
+                    dp[i] = dp[i - 1] + dp[i - 2];
                 }
-                dp[i] = dp[i - 1] + index;
             }
             return dp[len];
         }
