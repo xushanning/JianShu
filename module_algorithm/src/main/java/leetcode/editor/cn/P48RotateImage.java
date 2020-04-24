@@ -46,11 +46,20 @@
 
 package leetcode.editor.cn;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 //Java：旋转图像
 public class P48RotateImage {
     public static void main(String[] args) {
         Solution solution = new P48RotateImage().new Solution();
         // TO TEST
+        int[][] test1 = new int[][]{
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}
+        };
+        solution.rotate(test1);
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -60,13 +69,30 @@ public class P48RotateImage {
                 return;
             }
             int n = matrix.length;
-            //推导公式：转换前->转换后：(i,j)->(j,n-i-1)
-            for (int i = 0; i < n; i++) {
-                for (int j = 0; j < n; j++) {
+            //推导公式：顺时针转换前->转换后：(i,j)->(j,n-i-1)
+            //逆时针转换 [x][y] --> [n - 1 - y][x]
+            //可以一组进行旋转
+            //[0][0] --> [0][3]
+            //[0][3] --> [3][3]
+            //[3][3] --> [3][0]
+            //[3][0] --> [0][0]
 
+
+            //实现不是按照上面来的。。。只能死记硬背了
+            for (int i = 0; i < n; i++) {
+                for (int j = i; j < n; j++) {
+                    int tmp = matrix[j][i];
+                    matrix[j][i] = matrix[i][j];
+                    matrix[i][j] = tmp;
                 }
             }
-
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n / 2; j++) {
+                    int tmp = matrix[i][j];
+                    matrix[i][j] = matrix[i][n - j - 1];
+                    matrix[i][n - j - 1] = tmp;
+                }
+            }
 
         }
     }
