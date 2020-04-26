@@ -37,6 +37,7 @@ public class P74SearchA2dMatrix {
     public static void main(String[] args) {
         Solution solution = new P74SearchA2dMatrix().new Solution();
         // TO TEST
+        solution.searchMatrix(new int[][]{{1, 3, 5, 7}, {10, 11, 16, 20}, {23, 30, 34, 50}}, 3);
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -50,8 +51,19 @@ public class P74SearchA2dMatrix {
             int n = matrix[0].length;
             int left = 0;
             int right = m * n - 1;
-            while (left < right) {
-
+            while (left <= right) {
+                int mid = left + (right - left) / 2;
+                //第几行
+                int row = mid / n;
+                //第几列
+                int column = mid % n;
+                if (matrix[row][column] == target) {
+                    return true;
+                } else if (matrix[row][column] < target) {
+                    left = mid + 1;
+                } else {
+                    right = mid - 1;
+                }
             }
             return false;
         }
