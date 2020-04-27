@@ -33,22 +33,25 @@ public class P32LongestValidParentheses {
             if (len < 2) {
                 return 0;
             }
+            //其中第 i  个元素表示以下标为 i  的字符结尾的最长有效子字符串的长度
             int[] dp = new int[len];
-            dp[0] = 0;
-
-            // int maxLen = 0;
+            //状态转移方程想不到
+            int maxLen = 0;
             for (int i = 1; i < len; i++) {
-                if (s.charAt(i - 1) == '(' && s.charAt(i) == ')') {
-                    dp[i] = dp[i - 1] + 1;
-                } else {
-                    dp[i] = dp[i - 1];
+                //只考虑当前")"的情况，因为如果是"("，那么dp[i]=0
+                if (s.charAt(i) == ')') {
+                    if (s.charAt(i - 1) == '(') {
+                        //()这种的
+                        dp[i] = (i >= 2 ? dp[i - 2] : 0) + 2;
+                    } else if (i - dp[i - 1] > 0 && s.charAt(i - dp[i - 1] - 1) == '(') {
+                        //(())这种的
+                        dp[i] = dp[i - 1] + ((i - dp[i - 1]) >= 2 ? dp[i - dp[i - 1] - 2] : 0) + 2;
+                    }
+                    maxLen = Math.max(maxLen, dp[i]);
                 }
 
-//                if (dp[i] > maxLen) {
-//                    maxLen = dp[i];
-//                }
             }
-            return dp[len - 1] * 2;
+            return maxLen;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
