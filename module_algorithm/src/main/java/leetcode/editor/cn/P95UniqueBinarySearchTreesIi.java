@@ -28,26 +28,27 @@ package leetcode.editor.cn;
 import java.util.List;
 
 //Java：不同的二叉搜索树 II
-public class P95UniqueBinarySearchTreesIi{
+public class P95UniqueBinarySearchTreesIi {
     public static void main(String[] args) {
         Solution solution = new P95UniqueBinarySearchTreesIi().new Solution();
         // TO TEST
     }
     //leetcode submit region begin(Prohibit modification and deletion)
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
- * }
- */
-class Solution {
-    public List<TreeNode> generateTrees(int n) {
 
+    /**
+     * Definition for a binary tree node.
+     * public class TreeNode {
+     * int val;
+     * TreeNode left;
+     * TreeNode right;
+     * TreeNode(int x) { val = x; }
+     * }
+     */
+    class Solution {
+        public List<TreeNode> generateTrees(int n) {
+            return null;
+        }
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

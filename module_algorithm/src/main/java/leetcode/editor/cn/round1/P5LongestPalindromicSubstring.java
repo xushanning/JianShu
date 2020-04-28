@@ -15,31 +15,27 @@
 // Related Topics 字符串 动态规划
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 //Java：最长回文子串
 public class P5LongestPalindromicSubstring {
     public static void main(String[] args) {
         Solution solution = new P5LongestPalindromicSubstring().new Solution();
         // TO TEST
-        solution.longestPalindrome("babad");
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public String longestPalindrome(String s) {
-            //babad
             int len = s.length();
-            if (len == 0) {
-                return "";
+            //异常判断
+            if (len <= 1) {
+                return s;
             }
-            //状态转移方程dp[i][j]从i到j是否是回文串
-            //dp[i][j]=dp[i-1][j+1] && s[i]==s[j]
-            boolean[][] dp = new boolean[len][len];
-            //  dp[0][0] = true;
-            int maxLen = 0;
             int left = 0;
             int right = 0;
+            int maxLen = 0;
+            boolean[][] dp = new boolean[len][len];
             for (int i = 1; i < len; i++) {
                 for (int j = 0; j < i; j++) {
                     if (s.charAt(i) == s.charAt(j) && (i - j <= 2 || dp[j + 1][i - 1])) {

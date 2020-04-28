@@ -24,39 +24,38 @@
 // Related Topics 哈希表 双指针 字符串 Sliding Window
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 //Java：无重复字符的最长子串
 public class P3LongestSubstringWithoutRepeatingCharacters {
     public static void main(String[] args) {
         Solution solution = new P3LongestSubstringWithoutRepeatingCharacters().new Solution();
         // TO TEST
+        solution.lengthOfLongestSubstring("pwwkew");
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int lengthOfLongestSubstring(String s) {
-            int len = s.length();
-            if (len == 0) {
+            if (s == null) {
                 return 0;
             }
-            int maxLen = 0;
-
-            for (int i = 0; i < len; i++) {
-                List<Character> list = new ArrayList<>();
-                for (int j = i; j < len; j++) {
-                    char a = s.charAt(j);
-                    if (list.contains(a)) {
+            int max = 0;
+            for (int i = 0; i < s.length(); i++) {
+                Set<Character> set = new HashSet<>();
+                for (int j = i; j < s.length(); j++) {
+                    if (set.contains(s.charAt(j))) {
                         break;
                     }
-                    list.add(a);
-                    maxLen = Math.max(maxLen, list.size());
+                    max = Math.max(max, j - i + 1);
+                    set.add(s.charAt(j));
                 }
             }
-            return maxLen;
+
+            return max;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

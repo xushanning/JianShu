@@ -13,18 +13,20 @@
 
 
 package leetcode.editor.cn;
+
 //Java：螺旋矩阵 II
-public class P59SpiralMatrixIi{
+public class P59SpiralMatrixIi {
     public static void main(String[] args) {
         Solution solution = new P59SpiralMatrixIi().new Solution();
         // TO TEST
     }
-    //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int[][] generateMatrix(int n) {
 
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public int[][] generateMatrix(int n) {
+            return null;
+        }
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

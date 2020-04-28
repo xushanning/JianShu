@@ -13,13 +13,14 @@
 // Related Topics 链表 数学
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 //Java：两数相加
 public class P2AddTwoNumbers {
     public static void main(String[] args) {
         Solution solution = new P2AddTwoNumbers().new Solution();
         // TO TEST
+
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 
@@ -33,31 +34,38 @@ public class P2AddTwoNumbers {
      */
     class Solution {
         public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-            ListNode res = new ListNode(0);
-            int flag = 0;
-            ListNode cur = res;
-            //(2 -> 4 -> 3) + (5 -> 6 -> 4)  708
-            while (l1 != null || l2 != null) {
-                int x = l1 == null ? 0 : l1.val;
-                int y = l2 == null ? 0 : l2.val;
-                int sum = x + y + flag;
-                flag = sum / 10;
-                cur.next = new ListNode(sum % 10);
-                cur = cur.next;
-                if (l1 != null) {
-                    l1 = l1.next;
+            ListNode result = new ListNode(0);
+            ListNode current = result;
+            ListNode p = l1, q = l2;
+            int carry = 0;
+            while (p != null || q != null) {
+                int x = p != null ? p.val : 0;
+                int y = q != null ? q.val : 0;
+                int sum = x + y + carry;
+                carry = sum / 10;
+                current.next = new ListNode(sum % 10);
+                current = current.next;
+                if (p != null) {
+                    p = p.next;
                 }
-                if (l2 != null) {
-                    l2 = l2.next;
+                if (q != null) {
+                    q = q.next;
                 }
             }
-
-            if (flag > 0) {
-                cur.next = new ListNode(flag);
+            if (carry > 0) {
+                current.next = new ListNode(carry);
             }
-            return res.next;
+            return result.next;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
 
+    public class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode(int x) {
+            this.val = x;
+        }
+    }
 }

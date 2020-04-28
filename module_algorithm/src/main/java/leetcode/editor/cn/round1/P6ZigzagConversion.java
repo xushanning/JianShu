@@ -21,7 +21,7 @@
 //
 // 示例 2: 
 //
-// 输入: s = "LEETCODEISHIRING", numRows = 4
+// 输入: s = "", numRows = 4
 //输出: "LDREOEIIECIHNTSG"
 //解释:
 //
@@ -32,46 +32,45 @@
 // Related Topics 字符串
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import kotlin.random.FallbackThreadLocalRandom;
 
 //Java：Z 字形变换
 public class P6ZigzagConversion {
     public static void main(String[] args) {
         Solution solution = new P6ZigzagConversion().new Solution();
         // TO TEST
+        solution.convert("LEETCODEISHIRING", 4);
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public String convert(String s, int numRows) {
-            int len = s.length();
-            if (len == 0 || numRows <= 1) {
+            //异常判断
+            int length = s.length();
+            if (length == 0 || numRows <= 1) {
                 return s;
             }
-            List<StringBuilder> sbList = new ArrayList<>();
+            List<StringBuilder> sbs = new ArrayList<>();
             for (int i = 0; i < numRows; i++) {
-                sbList.add(new StringBuilder());
+                sbs.add(new StringBuilder());
             }
-
             int index = 0;
             int dir = 1;
-            for (int i = 0; i < len; i++) {
-                sbList.get(index).append(s.charAt(i));
-                index = index + dir;
+            for (char c : s.toCharArray()) {
+                sbs.get(index).append(c);
+                index += dir;
                 if (index == 0 || index == numRows - 1) {
                     dir = -dir;
                 }
             }
-            StringBuilder res = new StringBuilder();
-            for (StringBuilder sb : sbList) {
-                res.append(sb);
+            StringBuilder result = new StringBuilder();
+            for (StringBuilder stringBuilder : sbs) {
+                result.append(stringBuilder);
             }
-            return res.toString();
+            return result.toString();
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
