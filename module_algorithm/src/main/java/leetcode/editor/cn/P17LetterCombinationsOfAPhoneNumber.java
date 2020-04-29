@@ -18,9 +18,7 @@
 package leetcode.editor.cn;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 //Java：电话号码的字母组合
 public class P17LetterCombinationsOfAPhoneNumber {
@@ -32,44 +30,62 @@ public class P17LetterCombinationsOfAPhoneNumber {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         private List<String> res = new ArrayList<>();
-        private Map<String, String> data;
+        private int len;
+        private String digits;
 
-        //todo 这种方法，我自己想不出来
         public List<String> letterCombinations(String digits) {
-            data = new HashMap<>();
-            data.put("2", "abc");
-            data.put("3", "def");
-            data.put("4", "ghi");
-            data.put("5", "jkl");
-            data.put("6", "mno");
-            data.put("7", "pqrs");
-            data.put("8", "tuv");
-            data.put("9", "wxyz");
-            //异常判断
-            if (digits.length() != 0) {
-                dfs("", digits);
+            this.len = digits.length();
+            if (len == 0) {
+                return res;
             }
+            dfs(new StringBuilder(), digits);
+            this.digits = digits;
             return res;
         }
 
-        //23
-        private void dfs(String combination, String next) {
+        //"23"
+        //和第一次相比，用的新的stringbuilder
+        private void dfs(StringBuilder sb, String next) {
             if (next.length() == 0) {
-                res.add(combination);
+                res.add(sb.toString());
                 return;
             }
-            //next中的第一个数字
             String digit = next.substring(0, 1);
-            // 把数字换算成字母
-            String letters = data.get(digit);
-
+            String letters = getValue(digit);
 
             for (int i = 0; i < letters.length(); i++) {
-                //做判断:a
-                String letter = letters.substring(i, i + 1);
-                //递归 a 23中除去当前2的剩下的，也就是3
-                dfs(combination + letter, next.substring(1));
+                //做选择
+                sb.append(letters.substring(i, i + 1));
+                //下钻
+                dfs(sb, next.substring(1));
+                //回溯
+                sb.deleteCharAt(sb.length() - 1);
             }
+
+        }
+
+        private String getValue(String digit) {
+            switch (digit) {
+                case "2":
+                    return "abc";
+                case "3":
+                    return "def";
+                case "4":
+                    return "ghi";
+                case "5":
+                    return "jkl";
+                case "6":
+                    return "mno";
+                case "7":
+                    return "pqrs";
+                case "8":
+                    return "tuv";
+                case "9":
+                    return "wxyz";
+                default:
+                    return "";
+            }
+
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

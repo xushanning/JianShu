@@ -8,7 +8,7 @@
 // Related Topics 数组 双指针
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 import java.util.Arrays;
 
@@ -22,30 +22,29 @@ public class P16ThreeSumClosest {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int threeSumClosest(int[] nums, int target) {
+            // [-1，2，1，-4]  1
             int len = nums.length;
             if (len < 3) {
                 return 0;
             }
             Arrays.sort(nums);
-            //[-4,-1，1，2], 和 target = 1
             int res = nums[0] + nums[1] + nums[2];
-
             for (int i = 0; i < len; i++) {
                 int left = i + 1;
                 int right = len - 1;
                 while (left < right) {
                     int sum = nums[i] + nums[left] + nums[right];
-
-                    if (sum == target) {
-                        return target;
-                    } else if (sum > target) {
-                        //偏大
+                    if (sum > target) {
+                        //偏大，右边的指针左移
                         right--;
-                    } else {
+                    } else if (sum < target) {
+                        //偏小，左边的指针右移
                         left++;
+                    } else {
+                        //正好等于，那么直接返回
+                        return sum;
                     }
-
-                    if (Math.abs(sum - target) < Math.abs(res - target)) {
+                    if (Math.abs(target - sum) < Math.abs(target - res)) {
                         res = sum;
                     }
                 }

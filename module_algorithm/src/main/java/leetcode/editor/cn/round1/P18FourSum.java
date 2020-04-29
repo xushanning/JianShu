@@ -19,7 +19,7 @@
 // Related Topics 数组 哈希表 双指针
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,45 +34,49 @@ public class P18FourSum {
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
+        //结合第15、16题，一样的思路，还是很简单的
         public List<List<Integer>> fourSum(int[] nums, int target) {
-            int len = nums.length;
             List<List<Integer>> res = new ArrayList<>();
+            int len = nums.length;
+            //异常判断
             if (len < 4) {
                 return res;
             }
             Arrays.sort(nums);
-            //[-2,-1,0,0,1,2]
+            //[-2, -1, 0, 0, 1, 2]
             for (int i = 0; i < len - 3; i++) {
                 //去重
                 if (i > 0 && nums[i] == nums[i - 1]) {
                     continue;
                 }
-                //去重
                 for (int j = i + 1; j < len - 2; j++) {
+                    //去重
                     if (j > i + 1 && nums[j] == nums[j - 1]) {
                         continue;
                     }
                     int left = j + 1;
                     int right = len - 1;
                     while (left < right) {
-                        int sum = nums[left] + nums[right] + nums[i] + nums[j];
+                        int sum = nums[i] + nums[j] + nums[left] + nums[right];
                         if (sum == target) {
-                            res.add(Arrays.asList(nums[left], nums[right], nums[i], nums[j]));
+                            res.add(Arrays.asList(nums[i], nums[j], nums[left], nums[right]));
+                            //去重
                             while (left < right && nums[left] == nums[left + 1]) {
                                 left++;
                             }
+                            //去重
                             while (left < right && nums[right] == nums[right - 1]) {
                                 right--;
                             }
                             left++;
                             right--;
                         } else if (sum > target) {
-                            //过大
+                            //太大了，右指针左移
                             right--;
                         } else {
+                            //太小了，左指针右移
                             left++;
                         }
-
                     }
                 }
             }

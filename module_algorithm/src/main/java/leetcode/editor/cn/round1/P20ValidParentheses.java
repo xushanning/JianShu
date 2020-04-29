@@ -40,7 +40,7 @@
 // Related Topics 栈 字符串
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 import java.util.Stack;
 
@@ -55,16 +55,16 @@ public class P20ValidParentheses {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public boolean isValid(String s) {
-            int len = s.length();
 
-
+            if (s.length() % 2 == 1) {
+                return false;
+            }
             Stack<Character> stack = new Stack<>();
-            for (int i = 0; i < len; i++) {
+            for (int i = 0; i < s.length(); i++) {
                 char c = s.charAt(i);
                 if (c == '(' || c == '{' || c == '[') {
                     stack.push(c);
                 } else {
-                    //防止这种 ))因为前面的if不走，所以stack为空，那么下面的肯定报异常
                     if (stack.empty()) {
                         return false;
                     }

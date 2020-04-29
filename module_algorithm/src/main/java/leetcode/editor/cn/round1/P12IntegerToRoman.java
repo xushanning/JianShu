@@ -53,30 +53,87 @@
 // Related Topics 数学 字符串
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 //Java：整数转罗马数字
 public class P12IntegerToRoman {
     public static void main(String[] args) {
         Solution solution = new P12IntegerToRoman().new Solution();
         // TO TEST
-        solution.intToRoman(1994);
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public String intToRoman(int num) {
-            int[] nums = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
-            String[] romans = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
-            StringBuilder sb = new StringBuilder();
-            int index = 0;
-            while (index < 13) {
-                while (num >= nums[index]) {
-                    sb.append(romans[index]);
-                    num = num - nums[index];
-                }
-                index++;
+            if (num < 1 || num > 3999) {
+                return null;
             }
+
+            StringBuilder sb = new StringBuilder();
+
+            //千位
+            int index = num / 1000;
+            for (int i = 0; i < index; i++) {
+                //1000, "M"
+                sb.append("M");
+            }
+
+            // C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。
+            //百分位
+            num = num % 1000;
+            if (num >= 900) {
+                sb.append("CM");
+                num -= 900;
+            } else if (num >= 500) {
+                //500, "D"
+                sb.append("D");
+                num -= 500;
+            } else if (num >= 400) {
+                sb.append("CD");
+                num -= 400;
+            }
+
+            int bai = num / 100;
+            for (int i = 0; i < bai; i++) {
+                sb.append("C");
+            }
+
+            //十分位
+            num = num % 100;
+            // X 可以放在 L (50) 和 C (100) 的左边，来表示 40 和 90。
+            if (num >= 90) {
+                sb.append("XC");
+                num -= 90;
+            } else if (num >= 50) {
+                sb.append("L");
+                num -= 50;
+            } else if (num >= 40) {
+                sb.append("XL");
+                num -= 40;
+            }
+            int shi = num / 10;
+            for (int i = 0; i < shi; i++) {
+                sb.append("X");
+            }
+
+
+            // I 可以放在 V (5) 和 X (10) 的左边，来表示 4 和 9。
+            //个位
+            num = num % 10;
+            if (num >= 9) {
+                sb.append("IX");
+                num -= 9;
+            } else if (num >= 5) {
+                sb.append("V");
+                num -= 5;
+            } else if (num >= 4) {
+                sb.append("IV");
+                num -= 4;
+            }
+            for (int i = 0; i < num; i++) {
+                sb.append("I");
+            }
+
             return sb.toString();
         }
     }

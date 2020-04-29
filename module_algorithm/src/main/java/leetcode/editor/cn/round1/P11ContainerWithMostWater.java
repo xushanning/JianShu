@@ -18,39 +18,33 @@
 // Related Topics 数组 双指针
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 //Java：盛最多水的容器
 public class P11ContainerWithMostWater {
     public static void main(String[] args) {
         Solution solution = new P11ContainerWithMostWater().new Solution();
         // TO TEST
+        solution.maxArea(new int[]{1, 8, 6, 2, 5, 4, 8, 3, 7});
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int maxArea(int[] height) {
-            int len = height.length;
-            if (len == 0) {
+            int n = height.length;
+            //判异常
+            if (n == 0) {
                 return 0;
             }
             int max = 0;
-            int left = 0;
-            int right = len - 1;
-            while (left < right) {
-                int cur;
-                if (height[left] > height[right]) {
-                    cur = height[right] * (right - left);
-                    right--;
-                } else {
-                    cur = height[left] * (right - left);
-                    left++;
-                }
-                if (cur > max) {
-                    max = cur;
-                }
+            //双指针
+            int l = 0;
+            int r = n - 1;
+            while (l < r) {
+                max = height[r] > height[l] ? Math.max(max, (r - l) * Math.min(height[r], height[l++])) : Math.max(max, (r - l) * Math.min(height[r--], height[l]));
             }
             return max;
+
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

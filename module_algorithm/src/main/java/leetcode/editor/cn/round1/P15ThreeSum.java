@@ -18,7 +18,7 @@
 // Related Topics 数组 双指针
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,48 +33,48 @@ public class P15ThreeSum {
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
+        //todo 还需要进一步熟练
         public List<List<Integer>> threeSum(int[] nums) {
-            int len = nums.length;
             List<List<Integer>> res = new ArrayList<>();
-            if (len == 0) {
+            int len = nums.length;
+            if (len < 3) {
                 return res;
             }
             Arrays.sort(nums);
-            //[-4,-1, -1, 0, 1, 2, ]
-
             for (int i = 0; i < len; i++) {
                 if (nums[i] > 0) {
+                    //第i个大于0，那么必然不可能出现等于0的情况，直接跳出循环
                     break;
                 }
+                //[-4,-1, -1, 0, 1, 2]
                 if (i > 0 && nums[i] == nums[i - 1]) {
+                    //去重
                     continue;
                 }
-                int left = i + 1;
-                int right = len - 1;
+                int L = i + 1;
+                int R = len - 1;
 
-                while (left < right) {
-                    int sum = nums[i] + nums[left] + nums[right];
+                while (L < R) {
+                    int sum = nums[i] + nums[L] + nums[R];
                     if (sum == 0) {
-                        List<Integer> cur = new ArrayList<>();
-                        cur.add(nums[i]);
-                        cur.add(nums[left]);
-                        cur.add(nums[right]);
-                        res.add(cur);
-                        while (left < right && nums[left] == nums[left + 1]) {
-                            left++;
+                        res.add(Arrays.asList(nums[i], nums[L], nums[R]));
+                        //重点：去重
+                        while (L < R && nums[L] == nums[L + 1]) {
+                            L++;
                         }
-                        while (left < right && nums[right - 1] == nums[right]) {
-                            right--;
+                        while (L < R && nums[R] == nums[R - 1]) {
+                            R--;
                         }
-                        left++;
-                        right--;
-                    } else if (sum > 0) {
-                        right--;
+                        L++;
+                        R--;
+                    } else if (sum < 0) {
+                        //小于0，那么需要加个大一点的，左边往右移动一下
+                        L++;
                     } else {
-                        left++;
+                        //同理，大于0，需要加个小一点的，右边的左移一下
+                        R--;
                     }
                 }
-
             }
             return res;
         }

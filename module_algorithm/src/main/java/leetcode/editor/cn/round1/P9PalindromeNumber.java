@@ -26,28 +26,33 @@
 // Related Topics 数学
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
+
+import leetcode.editor.cn.PrintUtil;
 
 //Java：回文数
 public class P9PalindromeNumber {
     public static void main(String[] args) {
         Solution solution = new P9PalindromeNumber().new Solution();
         // TO TEST
+        PrintUtil.print(solution.isPalindrome(123211));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public boolean isPalindrome(int x) {
-            if (x < 0) {
-                return false;
+            String s = String.valueOf(x);
+            int length = s.length();
+            if (length == 1) {
+                return true;
             }
-            int original = x;
-            int res = 0;
-            while (original != 0) {
-                res = res * 10 + original % 10;
-                original = original / 10;
+
+            for (int i = 0; i < length / 2; i++) {
+                if (s.charAt(i) != s.charAt(length - 1-i)) {
+                    return false;
+                }
             }
-            return res == x;
+            return true;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

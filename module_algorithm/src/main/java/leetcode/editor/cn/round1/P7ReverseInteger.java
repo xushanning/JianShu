@@ -24,33 +24,36 @@
 // Related Topics 数学
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
+
+import leetcode.editor.cn.PrintUtil;
 
 //Java：整数反转
 public class P7ReverseInteger {
     public static void main(String[] args) {
         Solution solution = new P7ReverseInteger().new Solution();
         // TO TEST
-        PrintUtil.print(solution.reverse(123));
+        PrintUtil.print(solution.reverse(120));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int reverse(int x) {
-            //-123
-            int res = 0;
+            int result = 0;
             while (x != 0) {
-                int a = x % 10;
-                if (res > Integer.MAX_VALUE / 10 || (res == Integer.MAX_VALUE / 10 && x > 7)) {
-                    return 0;
-                }
-                if (res < Integer.MIN_VALUE / 10 || (res == Integer.MIN_VALUE / 10 && x < -8)) {
-                    return 0;
-                }
-                res = res * 10 + a;
+                int c = x % 10;
                 x = x / 10;
+                if (result > Integer.MAX_VALUE / 10 || (result == Integer.MAX_VALUE / 10 && x > 7)) {
+                    return 0;
+                }
+                if (result < Integer.MIN_VALUE / 10 || (result == Integer.MIN_VALUE / 10 && x < -8)) {
+                    return 0;
+                }
+
+                result = result * 10 + c;
+
             }
-            return res;
+            return result;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

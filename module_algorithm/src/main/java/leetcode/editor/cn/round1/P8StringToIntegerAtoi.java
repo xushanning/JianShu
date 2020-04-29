@@ -60,7 +60,7 @@
 // Related Topics 数学 字符串
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 //Java：字符串转换整数 (atoi)
 public class P8StringToIntegerAtoi {
@@ -73,22 +73,15 @@ public class P8StringToIntegerAtoi {
     class Solution {
         public int myAtoi(String str) {
             int len = str.length();
-            if (len == 0) {
-                return 0;
-            }
-            char[] arr = str.toCharArray();
-            //第一个非空字符的位置
             int index = 0;
+            char[] arr = str.toCharArray();
             while (index < len && arr[index] == ' ') {
                 index++;
             }
-            //全是空串，那么返回0
-            if (index == len) {
+            if (len == index) {
                 return 0;
             }
-            /**
-             * 第一个字符是否是负
-             */
+            //是否第一个是负号
             boolean flag = false;
             if (arr[index] == '-') {
                 flag = true;
@@ -96,17 +89,17 @@ public class P8StringToIntegerAtoi {
             } else if (arr[index] == '+') {
                 index++;
             } else if (!Character.isDigit(arr[index])) {
-                //第一个非空字符不是数字
+                //不是数字直接返回
                 return 0;
             }
             int res = 0;
+            //不到最后，并且是数字
             while (index < len && Character.isDigit(arr[index])) {
                 int digit = arr[index] - '0';
-                //溢出判断
                 if (res > (Integer.MAX_VALUE - digit) / 10) {
                     return flag ? Integer.MIN_VALUE : Integer.MAX_VALUE;
                 }
-                res = 10 * res + digit;
+                res = res * 10 + digit;
                 index++;
             }
             return flag ? -res : res;

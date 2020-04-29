@@ -21,29 +21,32 @@
 // Related Topics 字符串
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 //Java：最长公共前缀
 public class P14LongestCommonPrefix {
     public static void main(String[] args) {
         Solution solution = new P14LongestCommonPrefix().new Solution();
         // TO TEST
+        solution.longestCommonPrefix(new String[]{"dog","racecar","car"});
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public String longestCommonPrefix(String[] strs) {
-            int len = strs.length;
-            if (len == 0) {
+            //判断异常
+            if (strs.length == 0) {
                 return "";
             }
-            String res = strs[0];
+            //["flower","flow","flight"]
+            String result = strs[0];
             for (String s : strs) {
-                while (s.indexOf(res) != 0) {
-                    res = res.substring(0, res.length() - 1);
+                //indexOf方法：返回指定字符在字符串中第一次出现处的索引，如果此字符串中没有这样的字符，则返回 -1
+                while (s.indexOf(result) != 0) {
+                    result = result.substring(0, result.length() - 1);
                 }
             }
-            return res;
+            return result;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

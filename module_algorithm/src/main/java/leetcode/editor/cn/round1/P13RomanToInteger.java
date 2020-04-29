@@ -53,52 +53,43 @@
 // Related Topics 数学 字符串
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
-//Java：罗马数字转整数
+import leetcode.editor.cn.PrintUtil;
+
+/**
+ * @author Administrator
+ */ //Java：罗马数字转整数
 public class P13RomanToInteger {
     public static void main(String[] args) {
         Solution solution = new P13RomanToInteger().new Solution();
         // TO TEST
-        solution.romanToInt("MCMXCIV");
+        PrintUtil.print(solution.romanToInt("MCMXCIV"));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int romanToInt(String s) {
-            int len = s.length();
-            if (len == 0) {
+            if (s.length() == 0) {
                 return 0;
             }
-            int res = 0;
-            //MCMXCIV
-            //小的在大的左边就做减法
-            int pre = getValue(s.charAt(0));
-            for (int i = 1; i < len; i++) {
-                int cur = getValue(s.charAt(i));
-                if (cur > pre) {
-                    res = res - pre;
+            int result = 0;
+            int preNum = getValue(s.charAt(0));
+            for (int i = 1; i < s.length(); i++) {
+                int last = getValue(s.charAt(i));
+                if (last > preNum) {
+                    result -= preNum;
                 } else {
-                    res = res + pre;
+                    result += preNum;
                 }
-                pre = cur;
+                preNum = last;
             }
-            return pre + res;
+            //把这个忘了
+            return result+preNum;
         }
-        //I             1
-        //V             5
-        //X             10
-        //L             50
-        //C             100
-        //D             500
-        //M             1000
 
-        // I 可以放在 V (5) 和 X (10) 的左边，来表示 4 和 9。
-        // X 可以放在 L (50) 和 C (100) 的左边，来表示 40 和 90。
-        // C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。
-
-        private int getValue(char s) {
-            switch (s) {
+        private int getValue(char c) {
+            switch (c) {
                 case 'I':
                     return 1;
                 case 'V':
@@ -117,7 +108,6 @@ public class P13RomanToInteger {
                     return 0;
             }
         }
-
     }
 //leetcode submit region end(Prohibit modification and deletion)
 

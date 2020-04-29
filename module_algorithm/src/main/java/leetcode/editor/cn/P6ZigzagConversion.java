@@ -37,7 +37,7 @@ package leetcode.editor.cn;
 import java.util.ArrayList;
 import java.util.List;
 
-import kotlin.random.FallbackThreadLocalRandom;
+
 
 //Java：Z 字形变换
 public class P6ZigzagConversion {

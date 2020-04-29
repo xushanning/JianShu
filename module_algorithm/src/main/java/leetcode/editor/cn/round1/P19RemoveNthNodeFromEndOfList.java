@@ -17,13 +17,23 @@
 // Related Topics 链表 双指针
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 //Java：删除链表的倒数第N个节点
 public class P19RemoveNthNodeFromEndOfList {
     public static void main(String[] args) {
         Solution solution = new P19RemoveNthNodeFromEndOfList().new Solution();
         // TO TEST
+        ListNode listNode5 = new P19RemoveNthNodeFromEndOfList().new ListNode(5);
+        ListNode listNode4 = new P19RemoveNthNodeFromEndOfList().new ListNode(4);
+        listNode4.next = listNode5;
+        ListNode listNode3 = new P19RemoveNthNodeFromEndOfList().new ListNode(3);
+        listNode3.next = listNode4;
+        ListNode listNode2 = new P19RemoveNthNodeFromEndOfList().new ListNode(2);
+        listNode2.next = listNode3;
+        ListNode listNode1 = new P19RemoveNthNodeFromEndOfList().new ListNode(1);
+        listNode1.next = listNode2;
+        solution.removeNthFromEnd(listNode1, 2);
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 
@@ -37,24 +47,34 @@ public class P19RemoveNthNodeFromEndOfList {
      */
     class Solution {
         public ListNode removeNthFromEnd(ListNode head, int n) {
+            //基本思路，双指针，一个指针指到0，另一个指到n，然后往后移动，直到第二个指针
+            //到了最后，那么把前一个指针的节点删掉
+
             ListNode right = head;
             for (int i = 0; i < n; i++) {
                 right = right.next;
             }
-            //这个很重要
+
             if (right == null) {
                 return head.next;
             }
-
             ListNode left = head;
             while (right.next != null) {
-                left = left.next;
                 right = right.next;
+                left = left.next;
             }
             left.next = left.next.next;
             return head;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
+    //leetcode submit region end(Prohibit modification and deletion)
+    class ListNode {
+        int val;
+        ListNode next;
+
+        public ListNode(int val) {
+            this.val = val;
+        }
+    }
 }
