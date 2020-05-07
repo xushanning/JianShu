@@ -23,35 +23,26 @@
 // Related Topics 双指针 字符串
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 //Java：实现 strStr()
 public class P28ImplementStrstr {
     public static void main(String[] args) {
         Solution solution = new P28ImplementStrstr().new Solution();
         // TO TEST
-        int s = solution.strStr("hello", "ll");
-        PrintUtil.print(s);
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int strStr(String haystack, String needle) {
-            if ("".equals(needle)) {
-                return 0;
-            }
-            int len = haystack.length();
-
-
-            if (len == 0) {
+            if (haystack == null || needle == null) {
                 return -1;
             }
-
-
-            //"hello", "ll"  返回2
-            for (int i = 0; i < len - needle.length() + 1; i++) {
-                String s = haystack.substring(i, i + needle.length());
-                if (s.equals(needle)) {
+            int m = haystack.length();
+            int n = needle.length();
+            //加1非常关键，否则"" ""这种情况处理不了
+            for (int i = 0; i < m - n + 1; i++) {
+                if (haystack.substring(i, i + n).equals(needle)) {
                     return i;
                 }
             }

@@ -32,7 +32,7 @@
 // Related Topics 数组 回溯算法
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,43 +47,42 @@ public class P40CombinationSumIi {
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
+        private List<List<Integer>> res = new ArrayList<>();
         private int len;
         private int[] candidates;
-        private List<List<Integer>> res = new ArrayList<>();
 
         public List<List<Integer>> combinationSum2(int[] candidates, int target) {
-            len = candidates.length;
-            if (len == 0) {
-                return res;
-            }
             this.candidates = candidates;
+            len = candidates.length;
             Arrays.sort(candidates);
-            dfs(0, new ArrayList<>(), target);
+            dfs(target, new ArrayList<>(), 0);
             return res;
         }
 
-        private void dfs(int begin, List<Integer> cur, int lave) {
-            if (lave == 0) {
+        //candidates =[1,1,2,5,6,7,10]  target = 8
+        private void dfs(int target, List<Integer> cur, int begin) {
+            if (target == 0) {
                 res.add(new ArrayList<>(cur));
                 return;
             }
-
             for (int i = begin; i < len; i++) {
-                int item = candidates[i];
-                //核心剪枝
-                if (i > begin && candidates[i - 1] == candidates[i]) {
-                    continue;
-                }
-                if (lave - item < 0) {
+                //大剪枝，直接跳出循环
+                if (target - candidates[i] < 0) {
                     break;
                 }
-                //选择
-                cur.add(item);
-                //下钻
-                dfs(i + 1, cur, lave - item);
+                //todo 这里需要重点理解，卡在了这里，官方下的回复解释的好
+                //小剪枝 跳出本次循环，进入下一次循环
+                if (i > begin && candidates[i] == candidates[i - 1]) {
+                    continue;
+                }
+                //做判断
+                cur.add(candidates[i]);
+                //递归
+                dfs(target - candidates[i], cur, i + 1);
                 //回溯
                 cur.remove(cur.size() - 1);
             }
+
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

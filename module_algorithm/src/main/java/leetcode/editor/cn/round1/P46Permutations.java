@@ -15,7 +15,7 @@
 // Related Topics 回溯算法
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,36 +25,48 @@ public class P46Permutations {
     public static void main(String[] args) {
         Solution solution = new P46Permutations().new Solution();
         // TO TEST
+        solution.permute(new int[]{1, 2, 3});
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         private List<List<Integer>> res = new ArrayList<>();
         private int[] nums;
-        private int len;
 
         public List<List<Integer>> permute(int[] nums) {
-            len = nums.length;
-            if (len == 0) {
-                return res;
-            }
             this.nums = nums;
-            dfs(0, new ArrayList<>());
+            if (nums.length != 0) {
+                List<Integer> also = new ArrayList<>();
+                for (int i = 0; i < nums.length; i++) {
+                    also.add(nums[i]);
+                }
+                dfs(new ArrayList<>(), also);
+            }
             return res;
         }
 
-        private void dfs(int begin, List<Integer> cur) {
-            if (cur.size() == len) {
+        /**
+         * @param cur  路径存储
+         * @param also 记录剩下可选的list
+         */
+        private void dfs(List<Integer> cur, List<Integer> also) {
+            //递归终止条件
+            if (cur.size() == nums.length) {
                 res.add(new ArrayList<>(cur));
                 return;
             }
 
-            for (int i = begin; i < len; i++) {
-                cur.add(nums[i]);
-                dfs(i + 1, cur);
+            for (int i = 0; i < also.size(); i++) {
+                //判断
+                cur.add(also.get(i));
+                //拷贝一份
+                List<Integer> next = new ArrayList<>(also);
+                next.remove(i);
+                //递归
+                dfs(cur, next);
+                //回溯
                 cur.remove(cur.size() - 1);
             }
-
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

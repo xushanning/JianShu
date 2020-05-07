@@ -11,7 +11,7 @@
 // Related Topics 链表
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 //Java：两两交换链表中的节点
 public class P24SwapNodesInPairs {
@@ -30,26 +30,36 @@ public class P24SwapNodesInPairs {
      * }
      */
     class Solution {
+        //https://www.bilibili.com/video/BV1VC4y1s75E?from=search&seid=14993378031525039042
         public ListNode swapPairs(ListNode head) {
+            //1->2->3->4, 你应该返回 2->1->4->3
+            //异常判断
             if (head == null || head.next == null) {
                 return head;
             }
             ListNode dummy = new ListNode(0);
             ListNode pre = dummy;
             pre.next = head;
-            //1->2->3->4   返回 2->1->4->3
             while (pre.next != null && pre.next.next != null) {
-                //每次三个三个一起处理
-                ListNode cur = pre.next;
+                ListNode current = pre.next;
                 ListNode future = pre.next.next;
                 pre.next = future;
-                cur.next = future.next;
-                future.next = cur;
+                current.next = future.next;
+                future.next = current;
                 pre = pre.next.next;
             }
             return dummy.next;
+
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
+    //leetcode submit region end(Prohibit modification and deletion)
+    class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode(int val) {
+            this.val = val;
+        }
+    }
 }

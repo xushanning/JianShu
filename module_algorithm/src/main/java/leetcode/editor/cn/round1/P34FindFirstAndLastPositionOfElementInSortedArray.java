@@ -16,7 +16,7 @@
 // Related Topics 数组 二分查找
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 //Java：在排序数组中查找元素的第一个和最后一个位置
 public class P34FindFirstAndLastPositionOfElementInSortedArray {
@@ -27,31 +27,63 @@ public class P34FindFirstAndLastPositionOfElementInSortedArray {
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
+        //边界条件太操蛋了
         public int[] searchRange(int[] nums, int target) {
+            int[] res = new int[]{-1, -1};
             if (nums.length == 0) {
-                return new int[]{-1, -1};
+                return res;
             }
-            int left = searchLeft(nums, target);
-            int right = searchRight(nums, target);
-            return new int[]{left, right};
+            res[0] = searchLeft(nums, target);
+            res[1] = searchRight(nums, target);
+            return res;
         }
 
-        //寻找左边界
+        /**
+         * 找左边界
+         *
+         * @param nums
+         * @param target
+         * @return
+         */
         private int searchLeft(int[] nums, int target) {
-            for (int i = 0; i < nums.length; i++) {
-                if (nums[i] == target) {
-                    return i;
+            int left = -1;
+            int right = nums.length - 1;
+            while (left + 1 < right) {
+                //中间值
+                int mid = (left + right) / 2;
+                if (nums[mid] < target) {
+                    left = mid;
+                } else {
+                    right = mid;
                 }
+            }
+            if (nums[right] == target) {
+                return right;
             }
             return -1;
         }
 
-        //寻找右边界
+        /**
+         * 找右边界
+         *
+         * @param nums
+         * @param target
+         * @return
+         */
         private int searchRight(int[] nums, int target) {
-            for (int i = nums.length - 1; i >= 0; i--) {
-                if (nums[i] == target) {
-                    return i;
+            int left = 0;
+            int right = nums.length;
+            while (left + 1 < right) {
+                //中间值
+                int mid = (left + right) / 2;
+                if (nums[mid] <= target) {
+                    left = mid;
+                } else {
+                    right = mid;
                 }
+            }
+            if (nums[left] == target) {
+                return left;
             }
             return -1;
         }

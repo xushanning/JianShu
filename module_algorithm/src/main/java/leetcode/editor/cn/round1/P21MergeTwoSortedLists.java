@@ -8,7 +8,7 @@
 // Related Topics 链表
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 //Java：合并两个有序链表
 public class P21MergeTwoSortedLists {
@@ -29,7 +29,6 @@ public class P21MergeTwoSortedLists {
     class Solution {
         public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
             ListNode listNode = new ListNode(0);
-            //指针
             ListNode head = listNode;
             while (l1 != null && l2 != null) {
                 if (l1.val < l2.val) {
@@ -51,5 +50,14 @@ public class P21MergeTwoSortedLists {
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
+
+    private class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode(int val) {
+            this.val = val;
+        }
+    }
 
 }

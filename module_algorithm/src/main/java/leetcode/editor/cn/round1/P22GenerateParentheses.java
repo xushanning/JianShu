@@ -16,7 +16,7 @@
 // Related Topics 字符串 回溯算法
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,32 +35,38 @@ public class P22GenerateParentheses {
 
         public List<String> generateParenthesis(int n) {
             this.n = n;
-            dfs(new StringBuilder(), 0, 0);
+            backtrack(new StringBuilder(), 0, 0);
             return res;
         }
 
-        private void dfs(StringBuilder cur, int open, int close) {
-            //结束循环
-            if (cur.length() == n * 2) {
-                res.add(cur.toString());
+        //todo 这个递归调用是真的晕，需要再次加强，在纸上画画，会比较清楚
+        private void backtrack(StringBuilder sb, int open, int close) {
+            //结束循环:括号的数量等于2n
+            if (sb.length() == n * 2) {
+                res.add(sb.toString());
                 return;
             }
-            //做判断
+            //核心思想：
+            //如果左括号数量不大于 n，我们可以放一个左括号。
+            //如果右括号数量小于左括号的数量，我们可以放一个右括号。
             if (open < n) {
-                cur.append('(');
-                //下钻
-                dfs(cur, open + 1, close);
+                //做判断
+                sb.append('(');
+                //递归
+                backtrack(sb, open + 1, close);
                 //回溯
-                cur.deleteCharAt(cur.length() - 1);
+                sb.deleteCharAt(sb.length() - 1);
             }
 
             if (close < open) {
-                cur.append(')');
-                //下钻
-                dfs(cur, open, close + 1);
+                //做判断
+                sb.append(')');
+                //递归
+                backtrack(sb, open, close + 1);
                 //回溯
-                cur.deleteCharAt(cur.length() - 1);
+                sb.deleteCharAt(sb.length() - 1);
             }
+
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

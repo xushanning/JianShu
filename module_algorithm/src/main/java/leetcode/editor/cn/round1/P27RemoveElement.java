@@ -48,35 +48,33 @@
 // Related Topics 数组 双指针
 
 
-package leetcode.editor.cn;
-
-import java.lang.reflect.Array;
-import java.util.Arrays;
+package leetcode.editor.cn.round1;
 
 //Java：移除元素
 public class P27RemoveElement {
     public static void main(String[] args) {
         Solution solution = new P27RemoveElement().new Solution();
         // TO TEST
+        solution.removeElement(new int[]{3, 2, 2, 3}, 3);
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int removeElement(int[] nums, int val) {
-            // [0,1,2,2,3,0,4,2], val = 2  res=5
-            int len = nums.length;
-            if (len == 0) {
+
+            //异常判断
+            if (nums.length == 0) {
                 return 0;
             }
-
-            int left = 0;
-            for (int right = 0; right < len; right++) {
-                if (nums[right] != val) {
-                    nums[left] = nums[right];
-                    left++;
+            //nums = [3,2,2,3], val = 2
+            int i = 0;
+            for (int j =0; j < nums.length; j++) {
+                if (nums[j] != val) {
+                    nums[i] = nums[j];
+                    i++;
                 }
             }
-            return left;
+            return i;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

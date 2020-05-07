@@ -32,45 +32,42 @@
 // Related Topics 字符串
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 //Java：外观数列
 public class P38CountAndSay {
     public static void main(String[] args) {
         Solution solution = new P38CountAndSay().new Solution();
         // TO TEST
-        String s = solution.countAndSay(5);
-        PrintUtil.print(s);
+        solution.countAndSay(2);
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
-        //第二遍没有采用第一遍的递归
         public String countAndSay(int n) {
-            if (n < 1) {
-                return "";
+            if (n == 1) {
+                return "1";
             }
-            String res = "1";
-
-            for (int i = 1; i < n; i++) {
-                int p = 0;
-                int cur;
-                StringBuilder sb = new StringBuilder();
-                for (cur = 1; cur < res.length(); cur++) {
-                    if (res.charAt(p) != res.charAt(cur)) {
-                        int count = cur - p;
-                        sb.append(count).append(res.charAt(p));
-                        p = cur;
-                    }
-                }
-                //为了处理这种情况:1、11
-                if (p != cur) {
+            //4.     1211
+            //5.     111221
+            String str = countAndSay(n - 1);
+            StringBuilder sb = new StringBuilder();
+            int p = 0;
+            int cur;
+            for (cur = 1; cur < str.length(); cur++) {
+                if (str.charAt(p) != str.charAt(cur)) {
+                    //相同的数量
                     int count = cur - p;
-                    sb.append(count).append(res.charAt(p));
+                    sb.append(count).append(str.charAt(p));
+                    p = cur;
                 }
-                res = sb.toString();
             }
-            return res;
+            //这一段没懂
+            if (p != cur) {
+                int count = cur - p;
+                sb.append(count).append(str.charAt(p));
+            }
+            return sb.toString();
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

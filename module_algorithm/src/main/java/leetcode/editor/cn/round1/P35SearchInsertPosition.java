@@ -28,35 +28,40 @@
 // Related Topics 数组 二分查找
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 //Java：搜索插入位置
 public class P35SearchInsertPosition {
     public static void main(String[] args) {
         Solution solution = new P35SearchInsertPosition().new Solution();
         // TO TEST
+        solution.searchInsert(new int[]{1, 3, 5, 6}, 2);
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int searchInsert(int[] nums, int target) {
-            int len = nums.length;
-            if (len == 0) {
-                return 0;
+            int length = nums.length;
+            if (length == 0) {
+                return -1;
             }
             int left = 0;
-            int right = len - 1;
+            int right = length - 1;
             while (left <= right) {
-                int mid = (right + left) / 2;
-                if (nums[mid] == target) {
-                    return mid;
-                } else if (nums[mid] > target) {
-                    right = mid - 1;
-                } else {
-                    left = mid + 1;
+                int middle = (right + left) / 2;
+                int middleNum = nums[middle];
+                if (middleNum == target) {
+                    return middle;
                 }
+                if (middleNum < target) {
+                    left = middle + 1;
+                } else {
+                    right = middle - 1;
+                }
+
             }
             return left;
+            //[1,3,5,6], 2
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

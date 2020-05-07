@@ -58,7 +58,7 @@
 // Related Topics 哈希表
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -72,28 +72,35 @@ public class P36ValidSudoku {
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
+        //挺好理解的，记住思路就ok
         public boolean isValidSudoku(char[][] board) {
             Map<Integer, Integer>[] rows = new HashMap[9];
             Map<Integer, Integer>[] columns = new HashMap[9];
             Map<Integer, Integer>[] boxes = new HashMap[9];
-
+            //一共27个哈希表，共存储9行、9列、9小3x3情况
             for (int i = 0; i < 9; i++) {
-                rows[i] = new HashMap<>(9);
-                columns[i] = new HashMap<>(9);
-                boxes[i] = new HashMap<>(9);
+                rows[i] = new HashMap<>();
+                columns[i] = new HashMap<>();
+                boxes[i] = new HashMap<>();
             }
             for (int i = 0; i < 9; i++) {
                 for (int j = 0; j < 9; j++) {
-                    if (board[i][j] != '.') {
-                        int s = board[i][j] - '0';
-                        rows[i].put(s, rows[i].getOrDefault(s, 0) + 1);
-                        columns[j].put(s, columns[j].getOrDefault(s, 0) + 1);
+                    char s = board[i][j];
+                    if (s != '.') {
+                        //核心(反正我自己没推导出来)
                         int boxIndex = (i / 3) * 3 + j / 3;
-                        boxes[boxIndex].put(s, boxes[boxIndex].getOrDefault(s, 0) + 1);
-                        if (boxes[boxIndex].get(s) > 1 || rows[i].get(s) > 1 || columns[j].get(s) > 1) {
+                        int n = (int) s;
+                        //把n的位置上加1
+                        rows[i].put(n, rows[i].getOrDefault(n, 0) + 1);
+                        columns[j].put(n, columns[j].getOrDefault(n, 0) + 1);
+                        boxes[boxIndex].put(n, boxes[boxIndex].getOrDefault(n, 0) + 1);
+
+                        //检查 前面加了后，至少为1
+                        if (rows[i].get(n) > 1 || columns[j].get(n) > 1 || boxes[boxIndex].get(n) > 1) {
                             return false;
                         }
                     }
+
                 }
             }
             return true;
