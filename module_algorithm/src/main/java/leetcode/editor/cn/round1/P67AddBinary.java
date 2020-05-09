@@ -26,7 +26,7 @@
 // Related Topics 数学 字符串
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 //Java：二进制求和
 public class P67AddBinary {
@@ -40,25 +40,23 @@ public class P67AddBinary {
         public String addBinary(String a, String b) {
             int m = a.length() - 1;
             int n = b.length() - 1;
-            //保证m为大的
             if (m < n) {
                 return addBinary(b, a);
             }
             StringBuilder sb = new StringBuilder();
             int carry = 0;
-
             while (n >= 0) {
                 int sum = a.charAt(m) - '0' + b.charAt(n) - '0' + carry;
                 carry = sum / 2;
-                sum = sum % 2;
+                sum %= 2;
                 sb.append(sum);
-                n--;
                 m--;
+                n--;
             }
             while (m >= 0) {
                 int sum = a.charAt(m) - '0' + carry;
                 carry = sum / 2;
-                sum = sum % 2;
+                sum %= 2;
                 sb.append(sum);
                 m--;
             }

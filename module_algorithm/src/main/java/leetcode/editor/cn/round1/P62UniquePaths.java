@@ -37,7 +37,7 @@
 // Related Topics 数组 动态规划
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 //Java：不同路径
 public class P62UniquePaths {
@@ -49,10 +49,9 @@ public class P62UniquePaths {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int uniquePaths(int m, int n) {
-            //定义状态转移方程dp[i][j]为到达第i，j位置的路径数量
-            //那么 dp[i][j]=dp[i-1][j]+dp[i][j-1]
+            //状态转移方程：dp[i][j]=dp[i-1][j]+dp[i][j-1]
             int[][] dp = new int[m][n];
-            //处理边界
+            //上下边界，过来，都是1，因为只能直着走，或者竖着走
             for (int i = 0; i < m; i++) {
                 dp[i][0] = 1;
             }

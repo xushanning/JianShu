@@ -20,37 +20,41 @@
 // Related Topics 数学 二分查找
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 //Java：x 的平方根
 public class P69Sqrtx {
     public static void main(String[] args) {
         Solution solution = new P69Sqrtx().new Solution();
         // TO TEST
+        solution.mySqrt(8);
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int mySqrt(int x) {
-            if (x < 0) {
-                return 0;
+            //异常判断
+            if (x < 2) {
+                return x;
             }
-            long left = 0;
-            long right = x;
-            while (left < right) {
-                long mid = left + (right - left + 1) / 2;
-                long square = mid * mid;
-                if (square == x) {
-                    return (int) mid;
-                } else if (square > x) {
-                    //过大
-                    right = mid - 1;
+
+            long start = 0;
+            long end = x;
+
+            while (start < end) {
+                //重要，最重要的是别越界
+                long middle = start + (end - start + 1) / 2;
+                long square = middle * middle;
+                if (square > x) {
+                    //重要
+                    end = middle - 1;
+                } else if (square < x) {
+                    start = middle;
                 } else {
-                    //过小，注意开闭
-                    left = mid;
+                    return (int) middle;
                 }
             }
-            return (int) left;
+            return (int) start;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

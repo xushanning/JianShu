@@ -19,7 +19,7 @@
 // Related Topics 哈希表 字符串
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,19 +39,20 @@ public class P49GroupAnagrams {
         public List<List<String>> groupAnagrams(String[] strs) {
             int len = strs.length;
             if (len == 0) {
-                return new ArrayList<>();
+                return null;
             }
-            Map<String, ArrayList<String>> map = new HashMap<>(len);
-            for (int i = 0; i < len; i++) {
-                char[] c = strs[i].toCharArray();
-                Arrays.sort(c);
-                String key = String.valueOf(c);
-                if (!map.containsKey(key)) {
-                    map.put(key, new ArrayList<>());
+            Map<String, ArrayList<String>> data = new HashMap<>();
+            for (String s : strs) {
+                char[] ca = s.toCharArray();
+                Arrays.sort(ca);
+                String key = String.valueOf(ca);
+                if (!data.containsKey(key)) {
+                    data.put(key, new ArrayList());
                 }
-                map.get(key).add(strs[i]);
+                data.get(key).add(s);
             }
-            return new ArrayList<>(map.values());
+
+            return new ArrayList<>(data.values());
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

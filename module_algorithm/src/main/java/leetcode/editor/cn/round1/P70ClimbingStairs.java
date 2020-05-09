@@ -24,13 +24,14 @@
 // Related Topics 动态规划
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 //Java：爬楼梯
 public class P70ClimbingStairs {
     public static void main(String[] args) {
         Solution solution = new P70ClimbingStairs().new Solution();
         // TO TEST
+        solution.climbStairs(9);
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -39,15 +40,15 @@ public class P70ClimbingStairs {
             if (n <= 3) {
                 return n;
             }
-            int[] dp = new int[n + 1];
-            dp[0] = 0;
-            dp[1] = 1;
-            dp[2] = 2;
+            int p = 2;
+            int q = 3;
 
-            for (int i = 3; i <= n; i++) {
-                dp[i] = dp[i - 1] + dp[i - 2];
+            for (int i = 3; i < n; i++) {
+               int  result = q + p;
+                p = q;
+                q = result;
             }
-            return dp[n];
+            return q;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

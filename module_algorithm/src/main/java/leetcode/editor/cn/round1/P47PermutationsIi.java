@@ -12,31 +12,38 @@
 // Related Topics 回溯算法
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import leetcode.editor.cn.PrintUtil;
 
 //Java：全排列 II
 public class P47PermutationsIi {
     public static void main(String[] args) {
         Solution solution = new P47PermutationsIi().new Solution();
         // TO TEST
+        List<List<Integer>> res = solution.permuteUnique(new int[]{1, 1, 2});
+        for (List<Integer> item : res) {
+            StringBuilder sb = new StringBuilder();
+            for (Integer i : item) {
+                sb.append(i);
+            }
+            PrintUtil.print(sb.toString());
+        }
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         private List<List<Integer>> res = new ArrayList<>();
-        private int[] nums;
         private int len;
+        private int[] nums;
         private boolean[] used;
 
         public List<List<Integer>> permuteUnique(int[] nums) {
             len = nums.length;
-            if (len == 0) {
-                return res;
-            }
             this.nums = nums;
             used = new boolean[len];
             Arrays.sort(nums);
@@ -50,10 +57,11 @@ public class P47PermutationsIi {
                 return;
             }
             for (int i = 0; i < len; i++) {
+                //如果第i个用了，那么跳过
                 if (used[i]) {
                     continue;
                 }
-                //如果当前和上一个相等，并且上一个没有被用过，所以上面必须得排序
+                //剪枝，最难理解的地方，关键
                 if (i > 0 && nums[i] == nums[i - 1] && !used[i - 1]) {
                     continue;
                 }
@@ -63,6 +71,7 @@ public class P47PermutationsIi {
                 //回溯
                 used[i] = false;
                 cur.remove(cur.size() - 1);
+
             }
         }
     }

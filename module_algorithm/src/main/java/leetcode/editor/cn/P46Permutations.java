@@ -33,26 +33,30 @@ public class P46Permutations {
         private int[] nums;
         private int len;
 
+        //比第一次好
         public List<List<Integer>> permute(int[] nums) {
             len = nums.length;
             if (len == 0) {
                 return res;
             }
             this.nums = nums;
-            dfs(0, new ArrayList<>());
+            dfs(new ArrayList<>());
             return res;
         }
 
-        private void dfs(int begin, List<Integer> cur) {
+        private void dfs(List<Integer> cur) {
             if (cur.size() == len) {
                 res.add(new ArrayList<>(cur));
                 return;
             }
 
-            for (int i = begin; i < len; i++) {
-                cur.add(nums[i]);
-                dfs(i + 1, cur);
-                cur.remove(cur.size() - 1);
+            for (int i = 0; i < len; i++) {
+                //核心
+                if (!cur.contains(nums[i])) {
+                    cur.add(nums[i]);
+                    dfs(cur);
+                    cur.remove(cur.size() - 1);
+                }
             }
 
         }

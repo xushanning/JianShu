@@ -20,28 +20,28 @@
 // Related Topics 贪心算法 数组
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 //Java：跳跃游戏
 public class P55JumpGame {
     public static void main(String[] args) {
         Solution solution = new P55JumpGame().new Solution();
         // TO TEST
+        solution.canJump(new int[]{0, 2, 3});
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public boolean canJump(int[] nums) {
             int len = nums.length;
-            if (len == 0) {
-                return false;
-            }
+
             int furthest = 0;
             for (int i = 0; i < len; i++) {
+                //到了第i个，最远的furthest都到不了，还玩个毛
                 if (i > furthest) {
                     return false;
                 }
-                furthest = Math.max(furthest, nums[i] + i);
+                furthest = Math.max(nums[i] + i, furthest);
                 if (furthest >= len - 1) {
                     return true;
                 }

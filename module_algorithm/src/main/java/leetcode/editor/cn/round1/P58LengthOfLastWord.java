@@ -14,36 +14,34 @@
 // Related Topics 字符串
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
+
+import leetcode.editor.cn.PrintUtil;
 
 //Java：最后一个单词的长度
 public class P58LengthOfLastWord {
     public static void main(String[] args) {
         Solution solution = new P58LengthOfLastWord().new Solution();
         // TO TEST
+        PrintUtil.print(solution.lengthOfLastWord("a"));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int lengthOfLastWord(String s) {
-            int len = s.length();
-            if (len == 0) {
+            int end = s.length() - 1;
+            while (end >= 0 && s.charAt(end) == ' ') {
+                end--;
+            }
+            if (end < 0) {
                 return 0;
             }
-            int right = len - 1;
-            //while用得好啊
-            while (right >= 0 && s.charAt(right) == ' ') {
-                right--;
+            int start = end;
+            while (start >= 0 && s.charAt(start) != ' ') {
+                start--;
             }
-            if (right < 0) {
-                return 0;
-            }
-            int left = right;
-            while (left >= 0 && s.charAt(left) != ' ') {
-                left--;
-            }
+            return end - start;
 
-            return right - left;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

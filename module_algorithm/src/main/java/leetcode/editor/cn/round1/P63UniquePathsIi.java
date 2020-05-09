@@ -28,7 +28,7 @@
 // Related Topics 数组 动态规划
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 //Java：不同路径 II
 public class P63UniquePathsIi {
@@ -39,41 +39,31 @@ public class P63UniquePathsIi {
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
-        //一次就正确，哦也
         public int uniquePathsWithObstacles(int[][] obstacleGrid) {
-            int m = obstacleGrid.length;
-            if (m == 0 || obstacleGrid[0].length == 0) {
+            //判断异常
+            if (obstacleGrid.length == 0 || obstacleGrid[0].length == 0) {
                 return 0;
             }
-            //第一个点就是障碍，那么直接返回
+            //如果左上角的点，就有障碍，那么所有的路径都是0
             if (obstacleGrid[0][0] == 1) {
                 return 0;
             }
+            int m = obstacleGrid.length;
             int n = obstacleGrid[0].length;
-            //定义状态转移方程dp[i][j]=dp[i-1][j]+dp[i][j-1]
             int[][] dp = new int[m][n];
+            //临界点
             dp[0][0] = 1;
             for (int i = 1; i < m; i++) {
-                if (obstacleGrid[i][0] == 1 || dp[i - 1][0] == 0) {
-                    dp[i][0] = 0;
-                } else {
-                    dp[i][0] = 1;
-                }
+                //如果这个节点有障碍，那么整个路径就废了，如果没有，就是上个点的
+                dp[i][0] = obstacleGrid[i][0] == 1 ? 0 : dp[i - 1][0];
             }
             for (int j = 1; j < n; j++) {
-                if (obstacleGrid[0][j] == 1 || dp[0][j - 1] == 0) {
-                    dp[0][j] = 0;
-                } else {
-                    dp[0][j] = 1;
-                }
+                dp[0][j] = obstacleGrid[0][j] == 1 ? 0 : dp[0][j - 1];
             }
+
             for (int i = 1; i < m; i++) {
                 for (int j = 1; j < n; j++) {
-                    if (obstacleGrid[i][j] == 1) {
-                        dp[i][j] = 0;
-                    } else {
-                        dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
-                    }
+                    dp[i][j] = obstacleGrid[i][j] == 1 ? 0 : dp[i - 1][j] + dp[i][j - 1];
                 }
             }
             return dp[m - 1][n - 1];

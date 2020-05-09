@@ -48,23 +48,43 @@
 // Related Topics 栈 字符串
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
+
+import java.util.Stack;
 
 //Java：简化路径
 public class P71SimplifyPath {
     public static void main(String[] args) {
         Solution solution = new P71SimplifyPath().new Solution();
         // TO TEST
+        solution.simplifyPath("/a/../../b/../c//.//");
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public String simplifyPath(String path) {
-            int len = path.length();
-            if (len == 0) {
-                return "";
+            Stack<String> stack = new Stack<>();
+            String[] str = path.split("/");
+            for (String s : str) {
+                if (s.equals("..")) {
+                    //..代表移除返回上一级，如果栈不是空战，那么要移除栈，否则不做操作，因为从根目录返回上一级是不可行的
+                    if (!stack.empty()) {
+                        stack.pop();
+                    }
+                } else if (!s.equals("") && !s.equals(".")) {
+                    //只要不是空字符串和.(因为.代表本级，无意义)，其他的都入栈
+                    stack.push(s);
+                }
             }
-            return "";
+            if (stack.empty()) {
+                return "/";
+            }
+            //不安全
+            StringBuilder sb = new StringBuilder();
+            for (String s : stack) {
+                sb.append("/").append(s);
+            }
+            return sb.toString();
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

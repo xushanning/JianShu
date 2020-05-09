@@ -13,34 +13,36 @@
 // Related Topics 数组 分治算法 动态规划
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 //Java：最大子序和
 public class P53MaximumSubarray {
     public static void main(String[] args) {
         Solution solution = new P53MaximumSubarray().new Solution();
         // TO TEST
+        solution.maxSubArray(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4});
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int maxSubArray(int[] nums) {
-            int len = nums.length;
-            if (len == 0) {
+            //判异常
+            if (nums.length == 0) {
                 return 0;
             }
-            //状态转移方程
-            //定义dp[i]为以i结尾的最大子序和
-            //dp[i]=max{nums[i],dp[i-1]+nums[i]}
-            //注意，一定不是dp[i]=max{dp[i-1],dp[i-1]+nums[i]}因为dp为以i结尾的，这个公式，不是以i结尾的了
-            int[] dp = new int[len];
+
+            //动态转移方程推导：以i结尾的所有子数组最大和的和为max{第i项，以i结尾的所有子数组最大和+i项}
+            //dp[i]:以i结尾的所有子数组的最大值
+            //所以动态转移方程为：dp[i]=max{nums[i],dp[i-1]+nums[i]}
+            int n = nums.length;
+            int[] dp = new int[n];
+            //初始化边界值
             dp[0] = nums[0];
             int max = nums[0];
-            for (int i = 1; i < len; i++) {
+            //其实这里可以不够用dp数组，因为前面的dp[i]只使用了一次，可以类似爬楼梯，用一个变量就可以
+            for (int i = 1; i < n; i++) {
                 dp[i] = Math.max(nums[i], dp[i - 1] + nums[i]);
-                if (dp[i] > max) {
-                    max = dp[i];
-                }
+                max = Math.max(max, dp[i]);
             }
             return max;
         }

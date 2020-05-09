@@ -15,11 +15,10 @@
 // Related Topics 排序 数组
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 
 //Java：合并区间
@@ -32,34 +31,30 @@ public class P56MergeIntervals {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int[][] merge(int[][] intervals) {
-            int m = intervals.length;
-            if (m == 0 || intervals[0].length == 0) {
-                return new int[][]{};
+            if (intervals.length == 0 || intervals[0].length == 0) {
+                return intervals;
             }
-            int n = intervals[0].length;
-            //排序
-            Arrays.sort(intervals, new Comparator<int[]>() {
-                @Override
-                public int compare(int[] o1, int[] o2) {
-                    return o1[0] - o2[0];
-                }
-            });
+            //按照第一个元素进行排序
+            Arrays.sort(intervals, (o1, o2) -> o1[0] - o2[0]);
             //排序前：[[2,6],[1,3],[15,18],[8,10]]
             //排序后：[[1,3],[2,6],[8,10],[15,18]]
-            int[] cur = intervals[0];
 
             List<int[]> data = new ArrayList<>();
+            //异常判断
+            int m = intervals.length;
+            int[] cur = intervals[0];
             for (int i = 1; i < m; i++) {
+                //当前的第一个大于上一个的第二个，说明不连续
                 if (intervals[i][0] > cur[1]) {
-                    //不连续，那么加上
                     data.add(cur);
                     cur = intervals[i];
                 } else {
-                    cur[1] = Math.max(cur[1], intervals[i][1]);
+                    //当前和上一个产生了连续重叠
+                    //max是为了防止这种情况：[1,4],[2,3]
+                    cur[1] = Math.max(intervals[i][1], cur[1]);
                 }
             }
             data.add(cur);
-
             int[][] res = new int[data.size()][2];
             for (int i = 0; i < data.size(); i++) {
                 res[i] = data.get(i);
