@@ -10,7 +10,7 @@
 // Related Topics 链表 双指针
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 //Java：分隔链表
 public class P86PartitionList {
@@ -30,28 +30,42 @@ public class P86PartitionList {
      */
     class Solution {
         public ListNode partition(ListNode head, int x) {
+            //异常判断
+            if (head == null) {
+                return null;
+            }
+            if (head.next == null) {
+                return head;
+            }
 
-            ListNode big = new ListNode(0);
-            ListNode curBig = big;
             ListNode small = new ListNode(0);
-            ListNode curSmall = small;
+            ListNode s1 = small;
+            ListNode big = new ListNode(0);
+            ListNode b1 = big;
             while (head != null) {
-                int curVal = head.val;
-                if (curVal < x) {
-                    curSmall.next = head;
-                    curSmall = curSmall.next;
+                if (head.val < x) {
+                    s1.next = head;
+                    s1 = s1.next;
                 } else {
-                    curBig.next = head;
-                    curBig = curBig.next;
+                    b1.next = head;
+                    b1 = b1.next;
                 }
                 head = head.next;
             }
-            curSmall.next = big.next;
-            //这行有点蒙
-            curBig.next = null;
+            s1.next = big.next;
+            //最后一个节点指向null
+            b1.next = null;
             return small.next;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
+    //leetcode submit region end(Prohibit modification and deletion)
+    class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode(int val) {
+            this.val = val;
+        }
+    }
 }

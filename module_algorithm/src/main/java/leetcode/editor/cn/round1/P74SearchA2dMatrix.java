@@ -30,40 +30,39 @@
 // Related Topics 数组 二分查找
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 //Java：搜索二维矩阵
 public class P74SearchA2dMatrix {
     public static void main(String[] args) {
         Solution solution = new P74SearchA2dMatrix().new Solution();
         // TO TEST
-        int[][] matrix = new int[][]{{1, 3, 5, 7}, {10, 11, 16, 20}, {23, 30, 34, 50}};
-        solution.searchMatrix(matrix, 3);
+        solution.searchMatrix(new int[][]{{1, 3, 5, 7}, {10, 11, 16, 20}, {23, 30, 34, 50}}, 3);
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public boolean searchMatrix(int[][] matrix, int target) {
-            int m = matrix.length;
-            if (m == 0 || matrix[0].length == 0) {
+            //异常判断
+            if (matrix.length == 0 || matrix[0].length == 0) {
                 return false;
             }
+            int m = matrix.length;
             int n = matrix[0].length;
             int left = 0;
             int right = m * n - 1;
             while (left <= right) {
                 int mid = left + (right - left) / 2;
+                //第几行
                 int row = mid / n;
+                //第几列
                 int column = mid % n;
-                int value = matrix[row][column];
-                if (value == target) {
+                if (matrix[row][column] == target) {
                     return true;
-                } else if (value > target) {
-                    //过小了 缩有边界
-                    right = mid - 1;
-                } else {
-                    //过大 增大左边界
+                } else if (matrix[row][column] < target) {
                     left = mid + 1;
+                } else {
+                    right = mid - 1;
                 }
             }
             return false;

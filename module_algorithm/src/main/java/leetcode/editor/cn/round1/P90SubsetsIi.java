@@ -17,7 +17,7 @@
 // Related Topics 数组 回溯算法
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,39 +28,47 @@ public class P90SubsetsIi {
     public static void main(String[] args) {
         Solution solution = new P90SubsetsIi().new Solution();
         // TO TEST
+        List<List<Integer>> res = solution.subsetsWithDup(new int[]{2, 2, 1});
+        for (int i = 0; i < res.size(); i++) {
+
+        }
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         private List<List<Integer>> res = new ArrayList<>();
-        private int len;
+        private int len, k;
         private int[] nums;
-        private int i;
 
         public List<List<Integer>> subsetsWithDup(int[] nums) {
-            this.len = nums.length;
+            len = nums.length;
             this.nums = nums;
             Arrays.sort(nums);
-            for (i = 0; i <= len; i++) {
+            for (k = 0; k <= len; k++) {
 
-                dfs(new ArrayList<>(), 0);
+                backtrack(0, new ArrayList<>());
             }
             return res;
         }
 
-        private void dfs(List<Integer> cur, int start) {
-            if (cur.size() == i) {
+        private void backtrack(int start, List<Integer> cur) {
+
+            if (cur.size() == k) {
+                //如果不包含，那么增加，如果有重复的直接返回
                 if (!res.contains(cur)) {
                     res.add(new ArrayList<>(cur));
                 }
                 return;
             }
-
             for (int i = start; i < len; i++) {
+                //做判断
                 cur.add(nums[i]);
-                dfs(cur, i + 1);
+                //下钻
+                backtrack(i + 1, cur);
+                //回溯
                 cur.remove(cur.size() - 1);
             }
+
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

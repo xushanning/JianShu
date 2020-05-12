@@ -13,7 +13,7 @@
 // Related Topics 链表
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 //Java：删除排序链表中的重复元素
 public class P83RemoveDuplicatesFromSortedList {
@@ -33,22 +33,28 @@ public class P83RemoveDuplicatesFromSortedList {
      */
     class Solution {
         public ListNode deleteDuplicates(ListNode head) {
-            //1->1->2->3->3
-            //1->2->3
-            if (head == null || head.next == null) {
-                return head;
-            }
-            ListNode cur = head;
-            while (cur != null && cur.next != null) {
-                if (cur.val == cur.next.val) {
-                    cur.next = cur.next.next;
+            //将指针指向头部
+            ListNode current = head;
+            while (current != null && current.next != null) {
+                //1->1->2->3->3
+                if (current.val == current.next.val) {
+                    current.next = current.next.next;
                 } else {
-                    cur = cur.next;
+                    //1->2->3->3
+                    current = current.next;
                 }
             }
             return head;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
+    //leetcode submit region end(Prohibit modification and deletion)
+    private class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode(int val) {
+            this.val = val;
+        }
+    }
 }

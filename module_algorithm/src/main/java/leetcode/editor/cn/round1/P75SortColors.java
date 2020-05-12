@@ -20,7 +20,7 @@
 // Related Topics 排序 数组 双指针
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 //Java：颜色分类
 public class P75SortColors {
@@ -31,24 +31,24 @@ public class P75SortColors {
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
+        //todo 三个指针，还是得看
         public void sortColors(int[] nums) {
             int len = nums.length;
+
             if (len == 0) {
                 return;
             }
-            //[2,0,2,1,1,0]
-            //[0,0,1,1,2,2]
+            int cur = 0;
             int left = 0;
             int right = len - 1;
-            int cur = 0;
-            //三指针
+            //[2,0,2,1,1,0]
             while (cur <= right) {
                 if (nums[cur] == 0) {
-                    int temp = nums[cur];
-                    nums[cur] = nums[left];
-                    nums[left] = temp;
-                    cur++;
+                    int tem = nums[left];
+                    nums[left] = nums[cur];
+                    nums[cur] = tem;
                     left++;
+                    cur++;
                 } else if (nums[cur] == 2) {
                     //和最后一个交换
                     int temp = nums[cur];

@@ -30,7 +30,7 @@
 // Related Topics 数组 回溯算法
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 //Java：单词搜索
 public class P79WordSearch {
@@ -41,17 +41,27 @@ public class P79WordSearch {
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
+        /**
+         * 用来存储是否这个点已经标记过了
+         */
+        private boolean[][] marked;
+        private int m;
+        private int n;
         private String word;
         private char[][] board;
         //四个方向
         private int[][] direction = {{-1, 0}, {0, -1}, {0, 1}, {1, 0}};
-        private boolean[][] marked;
-        int m;
-        int n;
 
+        /**
+         * 有点晕
+         *
+         * @param board
+         * @param word
+         * @return
+         */
         public boolean exist(char[][] board, String word) {
             m = board.length;
-            if (m == 0 || board[0].length == 0 || word.length() == 0) {
+            if (m == 0) {
                 return false;
             }
             n = board[0].length;
@@ -69,15 +79,18 @@ public class P79WordSearch {
         }
 
         private boolean dfs(int i, int j, int start) {
-            boolean flag = word.charAt(start) == board[i][j];
-            //结束循环条件
+            //条件:最后一个字母了，如果最后一个字母，能和i j对上，return true
             if (start == word.length() - 1) {
-                return flag;
+                return board[i][j] == word.charAt(start);
             }
-            if (flag) {
+
+            if (board[i][j] == word.charAt(start)) {
                 marked[i][j] = true;
-                //四个方向
+                //做判断
+                //下钻
+                //考虑四个方向上
                 for (int k = 0; k < 4; k++) {
+                    //{{-1, 0}, {0, -1}, {0, 1}, {1, 0}};
                     int newX = i + direction[k][0];
                     int newY = j + direction[k][1];
                     if (isInArea(newX, newY) && !marked[newX][newY]) {
@@ -86,13 +99,18 @@ public class P79WordSearch {
                         }
                     }
                 }
+                //回溯 把这个位置置成未标记过，表示，后续的可以从别的方向再来这个里
                 marked[i][j] = false;
             }
+            //两种情况
+            // ①如果字母直接不合work相同，那么直接返回false，不匹配
+            //②匹配，但是下钻不匹配，那么也返回false
             return false;
+
         }
 
         private boolean isInArea(int x, int y) {
-            return x >= 0 && y >= 0 && x < m && y < n;
+            return x >= 0 && x < m && y >= 0 && y < n;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

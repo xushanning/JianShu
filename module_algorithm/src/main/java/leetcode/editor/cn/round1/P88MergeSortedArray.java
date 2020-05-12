@@ -21,7 +21,7 @@
 // Related Topics 数组 双指针
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 //Java：合并两个有序数组
 public class P88MergeSortedArray {
@@ -32,28 +32,29 @@ public class P88MergeSortedArray {
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
+        //https://www.bilibili.com/video/BV1eE411y7WC?from=search&seid=14198379694628421192
+        //双指针
         public void merge(int[] nums1, int m, int[] nums2, int n) {
-            int i = m - 1;
-            int j = n - 1;
-            int k = m + n - 1;
-            //[1,2,3,0,0,0]
-            //[2,5,6]
-            while (i >= 0 && j >= 0) {
-                if (nums1[i] > nums2[j]) {
-                    nums1[k] = nums1[i];
+            int i1 = m - 1;
+            int i2 = n - 1;
+            int i = m + n - 1;
+            while (i1 >= 0 && i2 >= 0) {
+                if (nums1[i1] > nums2[i2]) {
+                    nums1[i] = nums1[i1];
+                    i1--;
                     i--;
                 } else {
-                    nums1[k] = nums2[j];
-                    j--;
+                    nums1[i] = nums2[i2];
+                    i2--;
+                    i--;
                 }
-                k--;
             }
-            //为了防止这种情况出现  [4,5,6,0,0,0]  [1,2,3]
-            while (j >= 0) {
-                nums1[k] = nums2[j];
-                j--;
-                k--;
+            while (i2 >= 0) {
+                nums1[i] = nums2[i2];
+                i2--;
+                i--;
             }
+
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
