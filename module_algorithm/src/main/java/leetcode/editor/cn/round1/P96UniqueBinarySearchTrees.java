@@ -15,7 +15,7 @@
 // Related Topics 树 动态规划
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 //Java：不同的二叉搜索树
 //若它的左子树不空，则左子树上所有结点的值均小于它的根结点的值；

@@ -29,48 +29,28 @@ public class P92ReverseLinkedListIi {
      * }
      */
     class Solution {
-        //https://www.bilibili.com/video/BV1mJ411x7RM?from=search&seid=663209764609762460
         public ListNode reverseBetween(ListNode head, int m, int n) {
-            //异常判断
             if (head == null) {
-                return null;
-            }
-            if (head.next == null) {
                 return head;
             }
-            ListNode dummy = new ListNode(0);
-            dummy.next = head;
-            //第一段的最后一个节点
-            ListNode first = dummy;
-            for (int i = 1; i < m; i++) {
-                first = first.next;
+            ListNode left = head;
+            ListNode right = head;
+            ListNode cur = head;
+            int index = 1;
+            //1->2->3->4->5->NULL, m = 2, n = 4
+            while (cur != null) {
+                if (index == m - 1) {
+                    left = cur;
+                }
+                if (index == n - 1) {
+                    right = cur;
+                }
+                cur = cur.next;
+                index++;
             }
-            //反转前的第二段的第一个节点，反转后的第二段的最后一个节点
-            ListNode second = first.next;
-            //双指针
-            ListNode l = second;
-            ListNode r = second.next;
-
-            for (int i = m; i < n; i++) {
-                ListNode next = r.next;
-                r.next = l;
-                //右移
-                l = r;
-                r = next;
-            }
-            first.next = l;
-            second.next = r;
-            return dummy.next;
+            return null;
         }
     }
+//leetcode submit region end(Prohibit modification and deletion)
 
-    //leetcode submit region end(Prohibit modification and deletion)
-    private class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int val) {
-            this.val = val;
-        }
-    }
 }

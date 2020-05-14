@@ -30,7 +30,9 @@
 // Related Topics 树 深度优先搜索 广度优先搜索
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
+
+import leetcode.editor.cn.TreeNode;
 
 //Java：对称二叉树
 public class P101SymmetricTree {
@@ -54,16 +56,19 @@ public class P101SymmetricTree {
             return isMirror(root, root);
         }
 
-        private boolean isMirror(TreeNode left, TreeNode right) {
-            if (left == null && right == null) {
+        private boolean isMirror(TreeNode node1, TreeNode node2) {
+            if (node1 == null && node2 == null) {
                 return true;
             }
-            if (left == null || right == null) {
+            if (node1 == null || node2 == null) {
                 return false;
             }
-            return (left.val == right.val) && isMirror(left.left, right.right) && isMirror(left.right, right.left);
+            return (node1.val == node2.val)
+                    && isMirror(node1.left, node2.right)
+                    && isMirror(node1.right, node2.left);
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
+
+    //leetcode submit region end(Prohibit modification and deletion)
 
 }

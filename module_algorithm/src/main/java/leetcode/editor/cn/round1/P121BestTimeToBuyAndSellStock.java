@@ -23,34 +23,51 @@
 // Related Topics 数组 动态规划
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 //Java：买卖股票的最佳时机
 public class P121BestTimeToBuyAndSellStock {
     public static void main(String[] args) {
         Solution solution = new P121BestTimeToBuyAndSellStock().new Solution();
         // TO TEST
+        solution.maxProfit(new int[]{7, 1, 5, 3, 6, 4});
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
+    //自己想出来的，哦也
     class Solution {
         public int maxProfit(int[] prices) {
             int len = prices.length;
-            if (len == 0) {
+            if (len <= 1) {
                 return 0;
             }
-            //定义状态转移方程：dp[i]为前i天最大利润
-            //两种情况：如果第i天卖了，那么买入时机为前面最小的值
-            //如果没有卖，那么就是dp[i-1]
-            //所以dp[i]=max{dp[i-1],prices[i]-min{前面的}}
-            int[] dp = new int[len + 1];
+            int[] dp = new int[len + 2];
+
+
+            //前i天的最大利润可以看成分成两种情况：
+            //第i天，卖了，那么最大利润就是第i天减去前面最小的一个
+            //第i天，不卖，那么就是前i-1天中买了，又卖了
+            //状态转移方程：dp[i]=max{dp[i-1],prices[i]-min[i-1]}
+            //min[i-1]为前i-1项最小的值
+
+
+            //边界
             dp[1] = 0;
+            //前i-1个最小的值
             int min = prices[0];
+            int result = 0;
+            //[7, 1, 5, 3, 6, 4]
             for (int i = 1; i < len; i++) {
                 dp[i + 1] = Math.max(dp[i], prices[i] - min);
+                if (dp[i + 1] > result) {
+                    result = dp[i + 1];
+                }
                 min = Math.min(prices[i], min);
             }
-            return Math.max(dp[len], 0);
+            if (result <= 0) {
+                return 0;
+            }
+            return dp[len];
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

@@ -36,7 +36,7 @@
 // Related Topics 树 深度优先搜索
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 //Java：相同的树
 public class P100SameTree {
@@ -56,19 +56,30 @@ public class P100SameTree {
      * }
      */
     class Solution {
-        public boolean isSameTree(TreeNode p, TreeNode q) {
-            if (p == null && q == null) {
+        //贼他妈的简单
+        public boolean isSameTree(TreeNode m, TreeNode n) {
+            if (m == null && n == null) {
                 return true;
             }
-            if (p != null && q != null) {
-                if (p.val != q.val) {
+
+            if (m != null && n != null) {
+                if (m.val != n.val) {
                     return false;
                 }
-                return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+                return isSameTree(m.left, n.left) && isSameTree(m.right, n.right);
             }
             return false;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
+    //leetcode submit region end(Prohibit modification and deletion)
+    private class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+    }
 }

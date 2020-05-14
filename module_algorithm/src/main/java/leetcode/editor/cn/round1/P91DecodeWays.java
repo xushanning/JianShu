@@ -24,34 +24,28 @@
 // Related Topics 字符串 动态规划
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 //Java：解码方法
 public class P91DecodeWays {
     public static void main(String[] args) {
         Solution solution = new P91DecodeWays().new Solution();
-        solution.numDecodings("226");
         // TO TEST
+        solution.numDecodings("10");
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int numDecodings(String s) {
-            //https://www.cnblogs.com/shayue/p/10294475.html
-            //22 8
-            //定义状态转移方程dp[i]为s前i个字符解码的总数量,那么
-            //dp[i]=最后两位小于等于26?dp[i-1]+dp[i-1]:dp[i-1]
-            int len = s.length();
-            if (len == 0) {
-                return 0;
-            }
             char[] arr = s.toCharArray();
-            if (arr[0] == '0') {
-                return 0;
-            }
+            int len = s.length();
             int[] dp = new int[len + 1];
+            //状态转移方程  dp[i]=dp[i-1]+{s.subString(i-2,i-1)是否小于等于26}
+
+            //边界
             dp[0] = 1;
-            dp[1] = 1;
+            dp[1] = arr[0] == '0' ? 0 : 1;
+
             for (int i = 2; i <= len; i++) {
                 int n = (arr[i - 2] - '0') * 10 + (arr[i - 1] - '0');
                 //考虑的情况有点多，当时漏了两种。。。。
@@ -70,7 +64,6 @@ public class P91DecodeWays {
                     dp[i] = dp[i - 1] + dp[i - 2];
                 }
             }
-
             return dp[len];
         }
     }

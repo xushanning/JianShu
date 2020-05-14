@@ -3,9 +3,9 @@
 // 例如，给定三角形： 
 //
 // [
-//  [2],
-//  [3,4],
-//  [6,5,7],
+//     [2],
+//    [3,4],
+//   [6,5,7],
 //  [4,1,8,3]
 //]
 // 
@@ -18,7 +18,7 @@
 // Related Topics 数组 动态规划
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 import java.util.List;
 
@@ -32,21 +32,27 @@ public class P120Triangle {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int minimumTotal(List<List<Integer>> triangle) {
-            //自下而上解决此问题
-            //定义状态转移方程dp[i][j]为到达第i，j最小路径
-            //那么dp[i][j]=max{dp[i+1][j],dp[i+1][j+1]}
-            int m = triangle.size();
-            int n = triangle.get(m - 1).size();
-            int dp[][] = new int[m][m];
-            //边界条件，最底下的一行
-            for (int i = 0; i < n; i++) {
-                dp[m - 1][i] = triangle.get(m - 1).get(i);
+            //判断异常
+            if (triangle.size() == 0) {
+                return 0;
             }
+            int m = triangle.size();
+            //本题要自下而上!!!!!!!!!重要
+            //讲得好：https://www.bilibili.com/video/BV1V7411A7LK?from=search&seid=15891718507482217659
+            int[][] dp = new int[m][m];
+            //状态转移方程：dp[i][j]=min{dp[i+1][j],dp[i+1][j+1]}+triangle[i][j]
+            //初始化，是最后一行
+            List<Integer> last = triangle.get(m - 1);
+            for (int i = 0; i < last.size(); i++) {
+                dp[m - 1][i] = last.get(i);
+            }
+            //最后一行已经初始化了，从倒数第二行开始循环
             for (int i = m - 2; i >= 0; i--) {
                 for (int j = 0; j < triangle.get(i).size(); j++) {
                     dp[i][j] = Math.min(dp[i + 1][j], dp[i + 1][j + 1]) + triangle.get(i).get(j);
                 }
             }
+
             return dp[0][0];
         }
     }
