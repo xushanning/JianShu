@@ -29,7 +29,7 @@
 // Related Topics 设计
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round1;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,88 +37,96 @@ import java.util.Map;
 //Java：LRU缓存机制
 public class P146LruCache {
     public static void main(String[] args) {
-        //Solution solution = new P146LruCache().new Solution();
+//        Solution solution = new P146LruCache().new Solution();
         // TO TEST
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class LRUCache {
-        private Map<Integer, Node> data = new HashMap<>();
-        private int size = 0;
-        private Node head, tail;
         private int capacity;
+        private int size = 0;
+        //头结点，尾节点,注意：并不具体存储具体的值！！！！
+        private DLinkedNode head, tail;
+        private Map<Integer, DLinkedNode> cache = new HashMap<>();
 
         public LRUCache(int capacity) {
             this.capacity = capacity;
-            head = new Node();
-            tail = new Node();
+            head = new DLinkedNode();
+            tail = new DLinkedNode();
             head.next = tail;
             tail.pre = head;
         }
 
         public int get(int key) {
-            Node node = data.get(key);
+            DLinkedNode node = cache.get(key);
             if (node == null) {
                 return -1;
-            } else {
-                moveToHead(node);
-                return node.value;
             }
-
+            moveToHead(node);
+            return node.value;
         }
 
         public void put(int key, int value) {
-            Node node = data.get(key);
+            DLinkedNode node = cache.get(key);
+
             if (node == null) {
-                //没有，增加新的
-                Node newNode = new Node();
+                //不存在
+                DLinkedNode newNode = new DLinkedNode();
                 newNode.key = key;
                 newNode.value = value;
-                size++;
-                data.put(key, newNode);
+                cache.put(key, newNode);
                 addNode(newNode);
+                size++;
                 if (size > capacity) {
-                    Node tailNode = popTail();
-                    data.remove(tailNode.key);
+                    //超出容量，把尾巴干掉
+                    DLinkedNode tail = popTail();
+                    cache.remove(tail.key);
                     size--;
                 }
             } else {
+                //存在，更新value,移到前面去
                 node.value = value;
                 moveToHead(node);
             }
         }
 
-        private void addNode(Node node) {
+        /**
+         * 添加节点
+         *
+         * @param node
+         */
+        private void addNode(DLinkedNode node) {
             node.pre = head;
             node.next = head.next;
             head.next.pre = node;
             head.next = node;
         }
 
-        private void moveToHead(Node node) {
+        private void moveToHead(DLinkedNode node) {
+            //把节点删除
             removeNode(node);
+            //增加一个
             addNode(node);
         }
 
-        private void removeNode(Node node) {
-            Node pre = node.pre;
-            Node next = node.next;
-            pre.next = next;
-            next.pre = pre;
-        }
-
-
-        private Node popTail() {
-            Node res = tail.pre;
+        private DLinkedNode popTail() {
+            DLinkedNode res = tail.pre;
             removeNode(res);
             return res;
         }
 
-        private class Node {
-            private int key;
-            private int value;
-            private Node pre;
-            private Node next;
+        private void removeNode(DLinkedNode node) {
+            DLinkedNode pre = node.pre;
+            DLinkedNode next = node.next;
+            pre.next = next;
+            next.pre = pre;
+        }
+
+        private class DLinkedNode {
+            int key;
+            int value;
+            DLinkedNode pre;
+            DLinkedNode next;
         }
     }
 
