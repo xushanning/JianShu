@@ -78,7 +78,7 @@ dependencies {
     api rootProject.ext.dependencies["quickAdapter"]
 
     api rootProject.ext.dependencies["logger"]
-
+    debugApi rootProject.ext.dependencies["leakCanary"]
 
     api rootProject.ext.dependencies["dagger"]
     api rootProject.ext.dependencies["arouterApi"]
@@ -87,7 +87,7 @@ dependencies {
 
     api rootProject.ext.dependencies["room"]
     api rootProject.ext.dependencies["roomRx"]
-    debugImplementation rootProject.ext.dependencies["dbDebug"]
+    debugApi rootProject.ext.dependencies["dbDebug"]
 
     api rootProject.ext.dependencies["coroutines"]
 

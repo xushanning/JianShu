@@ -1,6 +1,5 @@
 package com.xu.module.jianshu.ui.viewstub
 
-import android.content.pm.PackageManager
 import android.os.Bundle
 import com.xu.commonlib.base.BaseActivity
 import com.xu.commonlib.utlis.extention.singleClick

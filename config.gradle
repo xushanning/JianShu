@@ -97,6 +97,7 @@ ext {
 
             //debug
             logger               : "com.orhanobut:logger:2.2.0",
+            leakCanary           : "com.squareup.leakcanary:leakcanary-android:2.3",
 
             //db
             room                 : "androidx.room:room-runtime:${dependVersion.room}",
