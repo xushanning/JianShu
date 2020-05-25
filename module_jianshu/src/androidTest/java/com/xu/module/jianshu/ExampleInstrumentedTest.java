@@ -1,6 +1,10 @@
 package com.xu.module.jianshu;
 
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+
+import com.xu.module.jianshu.ui.rx.RxPlugins;
+
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**

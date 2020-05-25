@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.xu.commonlib.base.BaseActivity
 import com.xu.commonlib.utlis.extention.singleClick
 import com.xu.module.jianshu.R
+import com.xu.module.jianshu.ui.rx.RxPlugins
 import kotlinx.android.synthetic.main.j_activity_view_stub.*
 
 class ViewStubActivity : BaseActivity() {
@@ -20,6 +21,6 @@ class ViewStubActivity : BaseActivity() {
     }
 
     override fun initData() {
-
+        RxPlugins().insert()
     }
 }
