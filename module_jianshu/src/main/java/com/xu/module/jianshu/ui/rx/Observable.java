@@ -16,7 +16,7 @@ public abstract class Observable<T> implements ObservableSource<T> {
 
     protected abstract void subscribeActual(Observer<? super T> observer);
 
-//    public <R> Observable<R> map(Function<? super T, ? extends R> mapper) {
-//        return
-//    }
+    public <R> Observable<R> map(Function<? super T, ? extends R> mapper) {
+        return new ObservableMap<>(this, mapper);
+    }
 }

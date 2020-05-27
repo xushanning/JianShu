@@ -4,28 +4,36 @@ import androidx.annotation.NonNull;
 
 public class RxTest {
     void test() {
-        Observable.create(new ObservableOnSubscribe<String>() {
-            @Override
-            public void subscribe(@NonNull ObservableEmitter<String> emitter) {
-                emitter.onNext("xu");
-                emitter.onComplete();
-            }
-        }).subscribe(new Observer<String>() {
-            @Override
-            public void onSubscribe() {
+        Observable
+                .create(new ObservableOnSubscribe<String>() {
+                    @Override
+                    public void subscribe(@NonNull ObservableEmitter<String> emitter) {
+                        emitter.onNext("xu");
+                        emitter.onComplete();
+                    }
+                })
+                .map(new Function<String, Integer>() {
+                    @Override
+                    public Integer apply(String s) {
+                        return 1234;
+                    }
+                })
+                .subscribe(new Observer<Integer>() {
+                    @Override
+                    public void onSubscribe() {
 
-            }
+                    }
 
-            @Override
-            public void onNext(String s) {
+                    @Override
+                    public void onNext(Integer s) {
 
-            }
+                    }
 
-            @Override
-            public void onComplete() {
+                    @Override
+                    public void onComplete() {
 
-            }
-        });
+                    }
+                });
 
     }
 }
