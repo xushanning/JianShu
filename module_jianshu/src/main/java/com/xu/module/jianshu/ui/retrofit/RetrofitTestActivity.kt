@@ -2,6 +2,7 @@ package com.xu.module.jianshu.ui.retrofit
 
 import android.os.Bundle
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.bumptech.glide.Glide
 import com.orhanobut.logger.Logger
 import com.xu.commonlib.base.BaseActivity
 import com.xu.commonlib.constant.ARouterPath

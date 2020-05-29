@@ -2,6 +2,8 @@ package com.xu.module.jianshu.ui.rx;
 
 import androidx.annotation.NonNull;
 
+import org.greenrobot.eventbus.EventBus;
+
 public class RxTest {
     void test() {
         Observable
@@ -34,6 +36,8 @@ public class RxTest {
 
                     }
                 });
+        EventBus.getDefault().register(this);
+      //  EventBus.getDefault().post();
 
     }
 }
