@@ -34,9 +34,6 @@ class ViewStubActivity : BaseActivity() {
 
     override fun initView(savedInstanceState: Bundle?) {
         bt_home.singleClick {
-//            Thread {
-//                sayHello()
-//            }.start()
             thread {
                 Logger.d(Thread.currentThread().name)
                 val msg = Message()

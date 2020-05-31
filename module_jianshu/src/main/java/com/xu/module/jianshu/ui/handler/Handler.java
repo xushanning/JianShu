@@ -10,33 +10,36 @@ public class Handler {
     private MessageQueue mMessageQueue;
 
 
-    public Handler(){
+    public Handler() {
         mLooper = Looper.myLooper();
         mMessageQueue = mLooper.mQueue;
     }
 
     /**
      * 发送消息
+     *
      * @param msg
      */
-    public void sendMessage(Message msg){
-        msg.target = this;   //消息发送出去后，本Handler处理
+    public void sendMessage(Message msg) {
+        msg.target = this;
         mMessageQueue.enqueueMessage(msg);
     }
 
     /**
      * 转发消息
+     *
      * @param msg
      */
-    public void dispatchMessage(Message msg){
+    public void dispatchMessage(Message msg) {
         handleMessage(msg);
     }
 
     /**
      * 处理消息，需要调用方重写
+     *
      * @param msg
      */
-    public void handleMessage(Message msg){
+    public void handleMessage(Message msg) {
 
     }
 

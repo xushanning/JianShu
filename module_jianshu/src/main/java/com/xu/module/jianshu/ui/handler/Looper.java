@@ -1,6 +1,7 @@
 package com.xu.module.jianshu.ui.handler;
 
 
+import com.orhanobut.logger.Logger;
 
 /**
  * 自定义Looper
@@ -12,16 +13,17 @@ public class Looper {
     protected static MessageQueue mQueue;
 
 
-    public Looper(){
+    public Looper() {
         mQueue = new MessageQueue();
     }
 
 
     /**
      * 返回当前线程绑定的Looper对象
+     *
      * @return
      */
-    public static Looper myLooper(){
+    public static Looper myLooper() {
         return sThreadLocal.get();
     }
 
@@ -29,8 +31,8 @@ public class Looper {
     /**
      * 准备，创建Looper对象
      */
-    public static void prepare(){
-        if(sThreadLocal.get() != null){   //主线程只有一个looper对象
+    public static void prepare() {
+        if (sThreadLocal.get() != null) {   //主线程只有一个looper对象
             throw new RuntimeException("Only one Looper may be created per thread");
         }
         //当前线程绑定一个Looper对象
@@ -42,16 +44,17 @@ public class Looper {
      * 轮询器，调用消息
      * 调用loop前一定要执行prepare
      */
-    public static void loop(){
+    public static void loop() {
         Looper looper = myLooper();
-        if(looper == null){
+        if (looper == null) {
             throw new RuntimeException("No Looper; Looper.prepare() wasn't called on this thread.");
         }
         //当前线程的消息队列
         MessageQueue messageQueue = looper.mQueue;
-        for(;;){
+        for (; ; ) {
+            Logger.d("loop开始循环");
             Message msg = messageQueue.next();
-            if(msg == null){
+            if (msg == null) {
                 continue;
             }
             //转发
