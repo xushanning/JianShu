@@ -64,16 +64,19 @@
 
         </activity>
         <activity android:name=".ui.viewstub.ViewStubActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".ui.easyload.target.ToolBarActivity"
             android:theme="@style/Theme.Design.Light">
 
+        </activity>
+        <activity android:name=".ui.coroutine.CoroutineActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 </manifest>

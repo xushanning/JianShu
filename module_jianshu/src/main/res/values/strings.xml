@@ -15,4 +15,5 @@
     <string name="j_zfb_pay">付钱</string>
     <string name="j_zfb_toll">收钱</string>
     <string name="j_zfb_card">卡包</string>
+    <string name="j_coroutine_title">协程</string>
 </resources>
