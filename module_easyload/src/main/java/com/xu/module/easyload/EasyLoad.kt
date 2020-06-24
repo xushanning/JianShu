@@ -102,6 +102,7 @@ class EasyLoad private constructor() {
          * 后设置会把前面设置的覆盖掉
          */
         fun setGlobalDefaultState(defaultStatus: Class<out BaseState>) = apply {
+            //todo 是不是可以通过判断如果不是null的话，就抛异常？做到只初始化一次？
             this.globalDefaultState = defaultStatus
         }
 
