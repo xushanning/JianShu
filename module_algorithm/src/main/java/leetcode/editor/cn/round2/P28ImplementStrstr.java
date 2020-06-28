@@ -23,7 +23,9 @@
 // Related Topics 双指针 字符串
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round2;
+
+import leetcode.editor.cn.PrintUtil;
 
 //Java：实现 strStr()
 public class P28ImplementStrstr {

@@ -15,7 +15,7 @@
 // Related Topics 字符串 回溯算法
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,35 +30,38 @@ public class P17LetterCombinationsOfAPhoneNumber {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         private List<String> res = new ArrayList<>();
+        private int len;
+        private String digits;
 
-        //"23"
         public List<String> letterCombinations(String digits) {
-            int len = digits.length();
+            this.len = digits.length();
             if (len == 0) {
                 return res;
             }
-
             dfs(new StringBuilder(), digits);
-
+            this.digits = digits;
             return res;
         }
 
+        //"23"
+        //和第一次相比，用的新的stringbuilder
         private void dfs(StringBuilder sb, String next) {
             if (next.length() == 0) {
                 res.add(sb.toString());
                 return;
             }
             String digit = next.substring(0, 1);
-            //abc
             String letters = getValue(digit);
+
             for (int i = 0; i < letters.length(); i++) {
                 //做选择
                 sb.append(letters.substring(i, i + 1));
-                //下钻从第一个开始到最后截取
+                //下钻
                 dfs(sb, next.substring(1));
                 //回溯
                 sb.deleteCharAt(sb.length() - 1);
             }
+
         }
 
         private String getValue(String digit) {
@@ -82,6 +85,7 @@ public class P17LetterCombinationsOfAPhoneNumber {
                 default:
                     return "";
             }
+
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

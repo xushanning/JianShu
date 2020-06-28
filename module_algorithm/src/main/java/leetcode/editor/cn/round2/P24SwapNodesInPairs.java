@@ -11,7 +11,9 @@
 // Related Topics 链表
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round2;
+
+import leetcode.editor.cn.ListNode;
 
 //Java：两两交换链表中的节点
 public class P24SwapNodesInPairs {

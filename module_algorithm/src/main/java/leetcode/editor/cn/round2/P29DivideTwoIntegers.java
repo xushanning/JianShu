@@ -30,7 +30,7 @@
 // Related Topics 数学 二分查找
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round2;
 
 //Java：两数相除
 public class P29DivideTwoIntegers {

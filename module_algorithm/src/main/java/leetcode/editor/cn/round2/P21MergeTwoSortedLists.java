@@ -8,7 +8,9 @@
 // Related Topics 链表
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round2;
+
+import leetcode.editor.cn.ListNode;
 
 //Java：合并两个有序链表
 public class P21MergeTwoSortedLists {

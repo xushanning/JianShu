@@ -17,7 +17,9 @@
 // Related Topics 链表 双指针
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round2;
+
+import leetcode.editor.cn.ListNode;
 
 //Java：删除链表的倒数第N个节点
 public class P19RemoveNthNodeFromEndOfList {
@@ -41,14 +43,15 @@ public class P19RemoveNthNodeFromEndOfList {
             for (int i = 0; i < n; i++) {
                 right = right.next;
             }
-            //这种情况？ 1->2  2 然后移除倒数第二个，就是把头去掉，因此返回head.next
+            //这个很重要
             if (right == null) {
                 return head.next;
             }
+
             ListNode left = head;
             while (right.next != null) {
-                right = right.next;
                 left = left.next;
+                right = right.next;
             }
             left.next = left.next.next;
             return head;

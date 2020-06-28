@@ -1,28 +1,14 @@
 //给定一个包括 n 个整数的数组 nums 和 一个目标值 target。找出 nums 中的三个整数，使得它们的和与 target 最接近。返回这三个数的和
 //。假定每组输入只存在唯一答案。 
 //
-// 
+// 例如，给定数组 nums = [-1，2，1，-4], 和 target = 1.
 //
-// 示例： 
-//
-// 输入：nums = [-1,2,1,-4], target = 1
-//输出：2
-//解释：与 target 最接近的和是 2 (-1 + 2 + 1 = 2) 。
-// 
-//
-// 
-//
-// 提示： 
-//
-// 
-// 3 <= nums.length <= 10^3 
-// -10^3 <= nums[i] <= 10^3 
-// -10^4 <= target <= 10^4 
+//与 target 最接近的三个数的和为 2. (-1 + 2 + 1 = 2).
 // 
 // Related Topics 数组 双指针
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round2;
 
 import java.util.Arrays;
 
@@ -41,7 +27,9 @@ public class P16ThreeSumClosest {
                 return 0;
             }
             Arrays.sort(nums);
+            //[-4,-1，1，2], 和 target = 1
             int res = nums[0] + nums[1] + nums[2];
+
             for (int i = 0; i < len; i++) {
                 int left = i + 1;
                 int right = len - 1;
@@ -51,12 +39,13 @@ public class P16ThreeSumClosest {
                     if (sum == target) {
                         return target;
                     } else if (sum > target) {
-                        //如果比target大，那么说明right得--
+                        //偏大
                         right--;
                     } else {
                         left++;
                     }
-                    if (Math.abs(target - res) > Math.abs(target - sum)) {
+
+                    if (Math.abs(sum - target) < Math.abs(res - target)) {
                         res = sum;
                     }
                 }

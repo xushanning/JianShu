@@ -43,7 +43,7 @@
 // Related Topics 数组 双指针
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round2;
 
 //Java：删除排序数组中的重复项
 public class P26RemoveDuplicatesFromSortedArray {

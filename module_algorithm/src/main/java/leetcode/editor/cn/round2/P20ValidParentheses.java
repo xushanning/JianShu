@@ -40,7 +40,7 @@
 // Related Topics 栈 字符串
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round2;
 
 import java.util.Stack;
 
@@ -49,38 +49,37 @@ public class P20ValidParentheses {
     public static void main(String[] args) {
         Solution solution = new P20ValidParentheses().new Solution();
         // TO TEST
+        solution.isValid("");
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public boolean isValid(String s) {
             int len = s.length();
-            if (len == 0) {
-                return true;
-            }
+
+
             Stack<Character> stack = new Stack<>();
             for (int i = 0; i < len; i++) {
                 char c = s.charAt(i);
-                if (c == '[' || c == '{' || c == '(') {
+                if (c == '(' || c == '{' || c == '[') {
                     stack.push(c);
                 } else {
-                    if (stack.isEmpty()) {
+                    //防止这种 ))因为前面的if不走，所以stack为空，那么下面的肯定报异常
+                    if (stack.empty()) {
                         return false;
                     }
-                    char top = stack.pop();
-
-                    if (c == ')' && top != '(') {
+                    if (c == ')' && stack.pop() != '(') {
                         return false;
                     }
-                    if (c == '}' && top != '{') {
+                    if (c == '}' && stack.pop() != '{') {
                         return false;
                     }
-                    if (c == ']' && top != '[') {
+                    if (c == ']' && stack.pop() != '[') {
                         return false;
                     }
                 }
             }
-            return stack.isEmpty();
+            return stack.empty();
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

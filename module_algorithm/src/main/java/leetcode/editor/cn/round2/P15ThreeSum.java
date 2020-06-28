@@ -18,7 +18,7 @@
 // Related Topics 数组 双指针
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round2;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,54 +34,48 @@ public class P15ThreeSum {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public List<List<Integer>> threeSum(int[] nums) {
-            //[-1, 0, 1, 2, -1, -4]
             int len = nums.length;
             List<List<Integer>> res = new ArrayList<>();
-            if (len < 3) {
+            if (len == 0) {
                 return res;
             }
             Arrays.sort(nums);
+            //[-4,-1, -1, 0, 1, 2, ]
 
             for (int i = 0; i < len; i++) {
-                //第i个如果大于0，说明不可能出现为0的组合
                 if (nums[i] > 0) {
                     break;
                 }
-                //当前和上一个相同，那么已经处理过，不处理
                 if (i > 0 && nums[i] == nums[i - 1]) {
                     continue;
                 }
-
                 int left = i + 1;
                 int right = len - 1;
+
                 while (left < right) {
-                    int sum = nums[left] + nums[right] + nums[i];
+                    int sum = nums[i] + nums[left] + nums[right];
                     if (sum == 0) {
-                        //说明正好
-                        List<Integer> item = new ArrayList<>();
-                        item.add(nums[left]);
-                        item.add(nums[right]);
-                        item.add(nums[i]);
-                        res.add(item);
+                        List<Integer> cur = new ArrayList<>();
+                        cur.add(nums[i]);
+                        cur.add(nums[left]);
+                        cur.add(nums[right]);
+                        res.add(cur);
                         while (left < right && nums[left] == nums[left + 1]) {
                             left++;
                         }
-                        while (left < right && nums[right] == nums[right - 1]) {
+                        while (left < right && nums[right - 1] == nums[right]) {
                             right--;
                         }
-                        //如果正好三个数为0，那么排除了相同的，动一个的话，肯定不可能为0，所以两边同时缩圈
                         left++;
                         right--;
                     } else if (sum > 0) {
-                        //说明right太大了，需要--
                         right--;
                     } else {
-                        //说明left太小了，需要++
                         left++;
                     }
                 }
-            }
 
+            }
             return res;
         }
     }

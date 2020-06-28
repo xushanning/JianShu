@@ -48,10 +48,7 @@
 // Related Topics 数组 双指针
 
 
-package leetcode.editor.cn;
-
-import java.lang.reflect.Array;
-import java.util.Arrays;
+package leetcode.editor.cn.round2;
 
 //Java：移除元素
 public class P27RemoveElement {
