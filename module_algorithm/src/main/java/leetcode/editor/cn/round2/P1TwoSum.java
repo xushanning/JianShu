@@ -14,7 +14,7 @@
 // Related Topics 数组 哈希表
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round2;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,19 +30,20 @@ public class P1TwoSum {
     class Solution {
         public int[] twoSum(int[] nums, int target) {
             int len = nums.length;
-            if (len < 2) {
+            if (len == 0) {
                 return null;
             }
             Map<Integer, Integer> map = new HashMap<>();
+            //[2, 7, 11, 15], target = 9
             for (int i = 0; i < len; i++) {
+                //所需要的值
                 int a = target - nums[i];
                 if (map.containsKey(a)) {
                     return new int[]{map.get(a), i};
-                } else {
-                    map.put(nums[i], i);
                 }
+                map.put(nums[i], i);
             }
-            throw new IllegalArgumentException("没有这两个");
+            return new int[]{};
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
