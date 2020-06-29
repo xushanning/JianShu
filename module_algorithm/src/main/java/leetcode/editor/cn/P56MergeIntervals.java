@@ -32,39 +32,32 @@ public class P56MergeIntervals {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int[][] merge(int[][] intervals) {
-            int m = intervals.length;
-            if (m == 0 || intervals[0].length == 0) {
-                return new int[][]{};
+            int len = intervals.length;
+            if (len == 0) {
+                return intervals;
             }
-            int n = intervals[0].length;
-            //排序
-            Arrays.sort(intervals, new Comparator<int[]>() {
-                @Override
-                public int compare(int[] o1, int[] o2) {
-                    return o1[0] - o2[0];
-                }
-            });
-            //排序前：[[2,6],[1,3],[15,18],[8,10]]
-            //排序后：[[1,3],[2,6],[8,10],[15,18]]
-            int[] cur = intervals[0];
 
+            //按照第一个排序
+            Arrays.sort(intervals, (o1, o2) -> o1[0] - o2[0]);
+            int[] cur = intervals[0];
+            //[[1,3],[2,6],[8,10],[15,18]]
             List<int[]> data = new ArrayList<>();
-            for (int i = 1; i < m; i++) {
+            for (int i = 1; i < len; i++) {
                 if (intervals[i][0] > cur[1]) {
-                    //不连续，那么加上
+                    //不连续
                     data.add(cur);
                     cur = intervals[i];
                 } else {
+                    //连续
                     cur[1] = Math.max(cur[1], intervals[i][1]);
                 }
             }
-            data.add(cur);
-
             int[][] res = new int[data.size()][2];
             for (int i = 0; i < data.size(); i++) {
                 res[i] = data.get(i);
             }
             return res;
+
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

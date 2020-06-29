@@ -36,12 +36,15 @@ public class P55JumpGame {
             if (len == 0) {
                 return false;
             }
+            //[4,3,1,1,4]
+            //上一步!!!!!能跳的最远距离
             int furthest = 0;
             for (int i = 0; i < len; i++) {
                 if (i > furthest) {
                     return false;
                 }
-                furthest = Math.max(furthest, nums[i] + i);
+                //为下一次循环计算当前位置能跳的最远距离
+                furthest = Math.max(furthest, i + nums[i]);
                 if (furthest >= len - 1) {
                     return true;
                 }

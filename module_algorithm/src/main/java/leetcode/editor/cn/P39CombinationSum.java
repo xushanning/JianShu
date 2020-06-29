@@ -46,39 +46,36 @@ public class P39CombinationSum {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         private List<List<Integer>> res = new ArrayList<>();
-        private int[] candidates;
         private int len;
+        private int[] candidates;
 
         public List<List<Integer>> combinationSum(int[] candidates, int target) {
-            this.candidates = candidates;
+            //[2,3,6,7], target = 7
             len = candidates.length;
             if (len == 0) {
                 return res;
             }
-            dfs(0, new ArrayList<>(), target);
+
+            this.candidates = candidates;
+            dfs(new ArrayList<>(), target, 0);
             return res;
         }
 
-        private void dfs(int begin, List<Integer> cur, int lave) {
-            if (lave == 0) {
+        private void dfs(List<Integer> cur, int less, int start) {
+            if (less == 0) {
                 res.add(new ArrayList<>(cur));
                 return;
             }
-            for (int i = begin; i < len; i++) {
+            for (int i = start; i < len; i++) {
                 int item = candidates[i];
-                if (lave - item < 0) {
+                if (less - item < 0) {
                     continue;
                 }
-
-
                 //做选择
                 cur.add(item);
-                //下钻
-                dfs(i, cur, lave - item);
-                //回溯
+                dfs(cur, less - item, i);
                 cur.remove(cur.size() - 1);
             }
-
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

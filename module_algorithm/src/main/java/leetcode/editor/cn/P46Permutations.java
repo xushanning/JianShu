@@ -33,7 +33,6 @@ public class P46Permutations {
         private int[] nums;
         private int len;
 
-        //比第一次好
         public List<List<Integer>> permute(int[] nums) {
             len = nums.length;
             if (len == 0) {
@@ -49,16 +48,15 @@ public class P46Permutations {
                 res.add(new ArrayList<>(cur));
                 return;
             }
-
             for (int i = 0; i < len; i++) {
-                //核心
                 if (!cur.contains(nums[i])) {
                     cur.add(nums[i]);
+                    //下钻
                     dfs(cur);
+                    //回溯
                     cur.remove(cur.size() - 1);
                 }
             }
-
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

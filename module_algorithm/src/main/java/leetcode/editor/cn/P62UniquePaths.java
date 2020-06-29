@@ -49,15 +49,14 @@ public class P62UniquePaths {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int uniquePaths(int m, int n) {
-            //定义状态转移方程dp[i][j]为到达第i，j位置的路径数量
-            //那么 dp[i][j]=dp[i-1][j]+dp[i][j-1]
+            //动态规划,定义dp为到第m，n个网格，有dp[m][n]种路径
             int[][] dp = new int[m][n];
-            //处理边界
+            //处理上下边界
             for (int i = 0; i < m; i++) {
                 dp[i][0] = 1;
             }
-            for (int j = 0; j < n; j++) {
-                dp[0][j] = 1;
+            for (int i = 0; i < n; i++) {
+                dp[0][i] = 1;
             }
             for (int i = 1; i < m; i++) {
                 for (int j = 1; j < n; j++) {

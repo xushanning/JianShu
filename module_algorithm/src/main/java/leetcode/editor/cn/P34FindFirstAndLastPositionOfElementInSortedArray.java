@@ -28,12 +28,15 @@ public class P34FindFirstAndLastPositionOfElementInSortedArray {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int[] searchRange(int[] nums, int target) {
-            if (nums.length == 0) {
+            int len = nums.length;
+            if (len == 0) {
                 return new int[]{-1, -1};
             }
             int left = searchLeft(nums, target);
             int right = searchRight(nums, target);
             return new int[]{left, right};
+            //nums = [5,7,7,8,8,10], target = 8 out [3,4]
+
         }
 
         //寻找左边界

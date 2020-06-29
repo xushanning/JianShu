@@ -38,10 +38,11 @@ public class P49GroupAnagrams {
     class Solution {
         public List<List<String>> groupAnagrams(String[] strs) {
             int len = strs.length;
+            List<List<String>> res = new ArrayList<>();
             if (len == 0) {
-                return new ArrayList<>();
+                return res;
             }
-            Map<String, ArrayList<String>> map = new HashMap<>(len);
+            Map<String, List<String>> map = new HashMap();
             for (int i = 0; i < len; i++) {
                 char[] c = strs[i].toCharArray();
                 Arrays.sort(c);

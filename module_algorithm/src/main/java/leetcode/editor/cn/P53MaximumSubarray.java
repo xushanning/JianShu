@@ -25,19 +25,18 @@ public class P53MaximumSubarray {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int maxSubArray(int[] nums) {
+            //[-2,1,-3,4,-1,2,1,-5,4]   [4,-1,2,1] 的和最大，为 6
+            //第一眼就是动态规划
             int len = nums.length;
             if (len == 0) {
                 return 0;
             }
             //状态转移方程
-            //定义dp[i]为以i结尾的最大子序和
-            //dp[i]=max{nums[i],dp[i-1]+nums[i]}
-            //注意，一定不是dp[i]=max{dp[i-1],dp[i-1]+nums[i]}因为dp为以i结尾的，这个公式，不是以i结尾的了
             int[] dp = new int[len];
             dp[0] = nums[0];
             int max = nums[0];
             for (int i = 1; i < len; i++) {
-                dp[i] = Math.max(nums[i], dp[i - 1] + nums[i]);
+                dp[i] = Math.max(nums[i], nums[i] + dp[i - 1]);
                 if (dp[i] > max) {
                     max = dp[i];
                 }

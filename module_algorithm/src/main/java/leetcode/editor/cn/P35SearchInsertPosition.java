@@ -40,6 +40,7 @@ public class P35SearchInsertPosition {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int searchInsert(int[] nums, int target) {
+            //[1,3,5,6], 5  2
             int len = nums.length;
             if (len == 0) {
                 return 0;
@@ -47,13 +48,14 @@ public class P35SearchInsertPosition {
             int left = 0;
             int right = len - 1;
             while (left <= right) {
-                int mid = (right + left) / 2;
-                if (nums[mid] == target) {
-                    return mid;
-                } else if (nums[mid] > target) {
-                    right = mid - 1;
+                int middle = (right - left) / 2;
+                if (nums[middle] == target) {
+                    return middle;
+                } else if (nums[middle] > target) {
+                    //过大
+                    right = middle - 1;
                 } else {
-                    left = mid + 1;
+                    left = middle + 1;
                 }
             }
             return left;

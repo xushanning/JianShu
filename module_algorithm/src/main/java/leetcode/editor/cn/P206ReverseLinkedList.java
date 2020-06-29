@@ -30,18 +30,14 @@ public class P206ReverseLinkedList {
      */
     class Solution {
         public ListNode reverseList(ListNode head) {
-            //异常判断
-            if (head == null) {
-                return null;
-            }
-            if (head.next == null) {
+            if (head == null || head.next == null) {
                 return head;
             }
+            //三个指针
             ListNode pre = null;
             ListNode cur = head;
             while (cur != null) {
                 ListNode next = cur.next;
-                //当前的指向前一个
                 cur.next = pre;
                 pre = cur;
                 cur = next;
@@ -49,14 +45,6 @@ public class P206ReverseLinkedList {
             return pre;
         }
     }
+//leetcode submit region end(Prohibit modification and deletion)
 
-    //leetcode submit region end(Prohibit modification and deletion)
-    private class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int val) {
-            this.val = val;
-        }
-    }
 }

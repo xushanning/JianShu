@@ -25,30 +25,28 @@ public class P221MaximalSquare {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int maximalSquare(char[][] matrix) {
-            //判断异常情况
-            if (matrix.length == 0 || matrix[0].length == 0) {
+            int m = matrix.length;
+            if (m == 0 || matrix[0].length == 0) {
                 return 0;
             }
-            int m = matrix.length;
             int n = matrix[0].length;
+            //表示以i j为右下角所组成的最大的方程的边长
             int[][] dp = new int[m][n];
-            dp[0][0] = matrix[0][0] == '1' ? 1 : 0;
-            int maxLength = 0;
-            //本题的状态转移方程可以通过绘制一个二维图去推导， dp[i][j]=min{dp[i-1][j],min[i][j-1],min[i-1][j-1]}+1
+            int max = 0;
             for (int i = 0; i < m; i++) {
                 for (int j = 0; j < n; j++) {
                     if (matrix[i][j] == '1') {
                         if (i == 0 || j == 0) {
-                            dp[i][j] = matrix[i][j] == '1' ? 1 : 0;
+                            dp[i][j] = 1;
                         } else {
+                            //这个状态方程不好弄
                             dp[i][j] = Math.min(Math.min(dp[i - 1][j], dp[i][j - 1]), dp[i - 1][j - 1]) + 1;
                         }
-                        //更新maxLength
-                        maxLength = Math.max(maxLength, dp[i][j]);
+                        max = Math.max(max, dp[i][j]);
                     }
                 }
             }
-            return maxLength * maxLength;
+            return max * max;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

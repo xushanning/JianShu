@@ -39,17 +39,16 @@ public class P121BestTimeToBuyAndSellStock {
             if (len == 0) {
                 return 0;
             }
-            //定义状态转移方程：dp[i]为前i天最大利润
-            //两种情况：如果第i天卖了，那么买入时机为前面最小的值
-            //如果没有卖，那么就是dp[i-1]
-            //所以dp[i]=max{dp[i-1],prices[i]-min{前面的}}
+            //dp为前i天最大的利润
             int[] dp = new int[len + 1];
             dp[1] = 0;
+            //[7,1,5,3,6,4]
             int min = prices[0];
             for (int i = 1; i < len; i++) {
                 dp[i + 1] = Math.max(dp[i], prices[i] - min);
                 min = Math.min(prices[i], min);
             }
+
             return Math.max(dp[len], 0);
         }
     }
