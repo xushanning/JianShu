@@ -60,6 +60,9 @@
 
 package leetcode.editor.cn;
 
+import java.util.ArrayList;
+import java.util.List;
+
 //Java：有效的数独
 public class P36ValidSudoku {
     public static void main(String[] args) {
@@ -70,7 +73,47 @@ public class P36ValidSudoku {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public boolean isValidSudoku(char[][] board) {
-            return false;
+            int len = board.length;
+            List<Character>[] rowList = new ArrayList[len];
+            List<Character>[] columnList = new ArrayList[len];
+            List<Character>[] boxList = new ArrayList[len];
+
+            for (int i = 0; i < len; i++) {
+                rowList[i] = new ArrayList<>();
+                columnList[i] = new ArrayList<>();
+                boxList[i] = new ArrayList<>();
+            }
+
+            for (int i = 0; i < len; i++) {
+                for (int j = 0; j < len; j++) {
+                    char c = board[i][j];
+                    if (c != '.') {
+                        List<Character> row = rowList[i];
+                        if (row.contains(c)) {
+                            return false;
+                        } else {
+                            row.add(c);
+                        }
+                        List<Character> column = columnList[j];
+                        if (column.contains(c)) {
+                            return false;
+                        } else {
+                            column.add(c);
+                        }
+                        int boxIndex = (i / 3) * 3 + j / 3;
+                        List<Character> box = boxList[boxIndex];
+                        if (box.contains(c)) {
+                            return false;
+                        } else {
+                            box.add(c);
+                        }
+                    }
+
+
+                }
+            }
+
+            return true;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
