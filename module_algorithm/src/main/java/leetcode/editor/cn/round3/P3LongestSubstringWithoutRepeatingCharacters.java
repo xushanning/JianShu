@@ -24,7 +24,7 @@
 // Related Topics 哈希表 双指针 字符串 Sliding Window
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round3;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,20 +43,20 @@ public class P3LongestSubstringWithoutRepeatingCharacters {
             if (len == 0) {
                 return 0;
             }
-            int max = 0;
-            //"pwwkew"
+            int maxLen = 0;
+
             for (int i = 0; i < len; i++) {
                 List<Character> list = new ArrayList<>();
                 for (int j = i; j < len; j++) {
-                    if (list.contains(s.charAt(j))) {
+                    char a = s.charAt(j);
+                    if (list.contains(a)) {
                         break;
                     }
-                    max = Math.max(max, j - i + 1);
-                    list.add(s.charAt(j));
+                    list.add(a);
+                    maxLen = Math.max(maxLen, list.size());
                 }
             }
-
-            return max;
+            return maxLen;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

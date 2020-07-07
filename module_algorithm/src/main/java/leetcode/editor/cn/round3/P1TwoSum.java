@@ -14,7 +14,10 @@
 // Related Topics 数组 哈希表
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round3;
+
+import java.util.HashMap;
+import java.util.Map;
 
 //Java：两数之和
 public class P1TwoSum {
@@ -27,19 +30,19 @@ public class P1TwoSum {
     class Solution {
         public int[] twoSum(int[] nums, int target) {
             int len = nums.length;
-
-            if (len == 0) {
-                return nums;
+            if (len < 2) {
+                return null;
             }
-            //nums = [2, 7, 11, 15], target = 9  [0, 1]
-            for (int i = 1; i < len; i++) {
-                for (int j = 0; j < i; j++) {
-                    if (nums[i] + nums[j] == target) {
-                        return new int[]{i, j};
-                    }
+            Map<Integer, Integer> map = new HashMap<>();
+            for (int i = 0; i < len; i++) {
+                int a = target - nums[i];
+                if (map.containsKey(a)) {
+                    return new int[]{map.get(a), i};
+                } else {
+                    map.put(nums[i], i);
                 }
             }
-            throw new IllegalArgumentException("No two sum solution");
+            throw new IllegalArgumentException("没有这两个");
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
