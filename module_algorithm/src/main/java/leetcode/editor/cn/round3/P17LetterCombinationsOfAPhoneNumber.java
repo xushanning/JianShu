@@ -53,7 +53,7 @@ public class P17LetterCombinationsOfAPhoneNumber {
             String letters = getValue(digit);
             for (int i = 0; i < letters.length(); i++) {
                 //做选择
-                sb.append(letters.substring(i, i + 1));
+                sb.append(letters.charAt(i));
                 //下钻从第一个开始到最后截取
                 dfs(sb, next.substring(1));
                 //回溯
