@@ -49,27 +49,35 @@ class EventDispatchActivity : BaseActivity() {
             }
             false
         }
-
         v_father.setOnClickListener {
-            Logger.d("父view的OnClickListener")
+            Logger.d("viewgroup点击")
         }
+
+        v_child.setOnClickListener {
+            Logger.d("子view点击")
+        }
+
+//        v_father.setOnClickListener {
+//            Logger.d("父view的OnClickListener")
+//        }
+
     }
 
     override fun initData() {
 
     }
 
-    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
-        if (ev?.action == MotionEvent.ACTION_DOWN) {
-            Logger.d("activity dispatchTouchEvent")
-        }
-        return super.dispatchTouchEvent(ev)
-    }
-
-    override fun onTouchEvent(event: MotionEvent?): Boolean {
-        if (event?.action == MotionEvent.ACTION_DOWN) {
-            Logger.d("activity onTouchEvent")
-        }
-        return super.onTouchEvent(event)
-    }
+//    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+//        if (ev?.action == MotionEvent.ACTION_DOWN) {
+//            Logger.d("activity dispatchTouchEvent")
+//        }
+//        return super.dispatchTouchEvent(ev)
+//    }
+//
+//    override fun onTouchEvent(event: MotionEvent?): Boolean {
+//        if (event?.action == MotionEvent.ACTION_DOWN) {
+//            Logger.d("activity onTouchEvent")
+//        }
+//        return super.onTouchEvent(event)
+//    }
 }

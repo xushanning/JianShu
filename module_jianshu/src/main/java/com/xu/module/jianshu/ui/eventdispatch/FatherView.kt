@@ -19,20 +19,20 @@ class FatherView : FrameLayout {
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
 
-    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
-        when (ev?.action) {
-            MotionEvent.ACTION_DOWN -> {
-                Logger.d("父容器 分发事件 down")
-            }
-            MotionEvent.ACTION_UP -> {
-                Logger.d("父容器 分发事件 up")
-            }
-            MotionEvent.ACTION_MOVE -> {
-                Logger.d("父容器 分发事件 move")
-            }
-        }
-        return super.dispatchTouchEvent(ev)
-    }
+//    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+//        when (ev?.action) {
+//            MotionEvent.ACTION_DOWN -> {
+//                Logger.d("父容器 分发事件 down")
+//            }
+//            MotionEvent.ACTION_UP -> {
+//                Logger.d("父容器 分发事件 up")
+//            }
+//            MotionEvent.ACTION_MOVE -> {
+//                Logger.d("父容器 分发事件 move")
+//            }
+//        }
+//        return super.dispatchTouchEvent(ev)
+//    }
 
     /**
      * 可以这么认为：onInterceptTouchEvent返回值关系着是否调用onTouchListener
@@ -46,12 +46,12 @@ class FatherView : FrameLayout {
         //容器拦截如果返回true，那么子view就收不到事件了，就会走自己的onTouchEvent方法
         return true
     }
-
-    override fun onTouchEvent(event: MotionEvent?): Boolean {
-        if (event?.action == MotionEvent.ACTION_DOWN) {
-            Logger.d("父容器viewGroup onTouchEvent")
-        }
-        //如果返回true，表示消费事件，不再往activity传递
-        return super.onTouchEvent(event)
-    }
+//
+//    override fun onTouchEvent(event: MotionEvent?): Boolean {
+//        if (event?.action == MotionEvent.ACTION_DOWN) {
+//            Logger.d("父容器viewGroup onTouchEvent")
+//        }
+//        //如果返回true，表示消费事件，不再往activity传递
+//        return super.onTouchEvent(event)
+//    }
 }
