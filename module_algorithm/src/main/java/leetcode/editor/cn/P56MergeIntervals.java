@@ -18,8 +18,9 @@
 
 package leetcode.editor.cn;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
+import java.util.List;
 
 //Java：合并区间
 public class P56MergeIntervals {
@@ -35,13 +36,25 @@ public class P56MergeIntervals {
             if (len == 0) {
                 return intervals;
             }
-            Arrays.sort(intervals, new Comparator<int[]>() {
-                @Override
-                public int compare(int[] o1, int[] o2) {
-                    return 0;
+            Arrays.sort(intervals, (o1, o2) -> o1[0] - o2[0]);
+            //[[1,3],[2,6],[8,10],[15,18]]
+            int[] cur = intervals[0];
+            List<int[]> data = new ArrayList<>();
+            for (int i = 1; i < len; i++) {
+                if (intervals[i][0] > cur[1]) {
+                    data.add(cur);
+                    cur = intervals[i];
+                } else {
+                    cur[1] = Math.max(cur[1], intervals[i][1]);
                 }
-            });
-            return null;
+            }
+            //别忘了这个
+            data.add(cur);
+            int[][] res = new int[data.size()][2];
+            for (int i = 0; i < data.size(); i++) {
+                res[i] = data.get(i);
+            }
+            return res;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
