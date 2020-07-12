@@ -87,7 +87,6 @@ dependencies {
 
     api rootProject.ext.dependencies["room"]
     api rootProject.ext.dependencies["roomRx"]
-    debugApi rootProject.ext.dependencies["dbDebug"]
 
     api rootProject.ext.dependencies["coroutines"]
 

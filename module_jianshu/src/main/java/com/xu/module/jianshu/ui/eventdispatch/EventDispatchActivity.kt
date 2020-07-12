@@ -67,12 +67,12 @@ class EventDispatchActivity : BaseActivity() {
 
     }
 
-//    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
-//        if (ev?.action == MotionEvent.ACTION_DOWN) {
-//            Logger.d("activity dispatchTouchEvent")
-//        }
-//        return super.dispatchTouchEvent(ev)
-//    }
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        if (ev?.action == MotionEvent.ACTION_DOWN) {
+            Logger.d("activity dispatchTouchEvent")
+        }
+        return super.dispatchTouchEvent(ev)
+    }
 //
 //    override fun onTouchEvent(event: MotionEvent?): Boolean {
 //        if (event?.action == MotionEvent.ACTION_DOWN) {

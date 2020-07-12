@@ -103,7 +103,6 @@ ext {
             room                 : "androidx.room:room-runtime:${dependVersion.room}",
             roomRx               : "androidx.room:room-rxjava2:${dependVersion.room}",
             roomCompiler         : "androidx.room:room-compiler:${dependVersion.room}",
-            dbDebug              : "com.amitshekhar.android:debug-db-encrypt:1.0.6",
 
             //高德地图
             map                  : "com.amap.api:3dmap:6.8.0",
