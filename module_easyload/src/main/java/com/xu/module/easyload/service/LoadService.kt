@@ -148,7 +148,7 @@ class LoadService(target: Any, builder: EasyLoad.Builder) : ILoadService {
         if (state is SuccessState) {
             //成功->移除状态view
             container.removeView(currentOtherStateView)
-            Log.d("tag",container.childCount.toString())
+            Log.d("tag1",container.childCount.toString())
         } else {
             //相同，不变
             if (currentOtherStateView == view) {

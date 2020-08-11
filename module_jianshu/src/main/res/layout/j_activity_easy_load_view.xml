@@ -27,7 +27,8 @@
             android:id="@+id/img_relative"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:scaleType="fitXY" />
+            android:scaleType="fitXY"
+            android:src="@drawable/j_collapsing_bg" />
     </RelativeLayout>
 
     <LinearLayout
@@ -42,7 +43,8 @@
             android:id="@+id/img_linear"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:scaleType="fitXY" />
+            android:scaleType="fitXY"
+            android:src="@drawable/j_collapsing_bg" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
