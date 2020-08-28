@@ -14,15 +14,17 @@ ext {
             okdownload   : "1.0.5",
             rxCache      : "2.3.5",
             rxlifecycle  : "3.0.0",
-            kotlinVersion: "1.3.72",
+            kotlinVersion: "1.4.0",
             room         : "2.2.0-alpha02",
             dagger       : "2.23.2",
-            glideVersion : "4.10.0"
+            glideVersion : "4.10.0",
+            moshi        : "1.9.3",
+            retrofit     : "2.9.0"
     ]
     dependencies = [
             //kotlin
             kotlin               : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${dependVersion.kotlinVersion}",
-            coroutines           : "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.0-M2",
+            coroutines           : "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9",
 
             //android-support
             appcompat            : "androidx.appcompat:appcompat:${dependVersion.support}",
@@ -49,10 +51,14 @@ ext {
             rxPermission         : "com.github.tbruyelle:rxpermissions:0.10.2",
 
             //net
-            retrofitAdapter      : "com.squareup.retrofit2:adapter-rxjava2:2.3.0",
-            gsonConverter        : "com.squareup.retrofit2:converter-gson:2.3.0",
-            scalarsConverter     : "com.squareup.retrofit2:converter-scalars:2.3.0",
+            retrofit             : "com.squareup.retrofit2:retrofit:${dependVersion.retrofit}",
+            moshiCoverter        : "com.squareup.retrofit2:converter-moshi:${dependVersion.retrofit}",
+//            retrofitAdapter      : "com.squareup.retrofit2:adapter-rxjava2:2.3.0",
+//            gsonConverter        : "com.squareup.retrofit2:converter-gson:2.3.0",
+//            scalarsConverter     : "com.squareup.retrofit2:converter-scalars:2.3.0",
             okhttpLog            : "com.squareup.okhttp3:logging-interceptor:3.8.1",
+            moshi                : "com.squareup.moshi:moshi:${dependVersion.moshi}",
+            moshiKapt            : "com.squareup.moshi:moshi-kotlin-codegen:${dependVersion.moshi}",
 
             //UI
             materialDialog       : "com.afollestad.material-dialogs:core:3.1.0",
@@ -73,6 +79,7 @@ ext {
             glide                : "com.github.bumptech.glide:glide:${dependVersion.glideVersion}",
             glideProcessor       : "com.github.bumptech.glide:compiler:${dependVersion.glideVersion}",
             gloading             : "com.billy.android:gloading:1.0.0",
+            easyload             : "com.xu.easyload:easyload:0.0.1",
 
             gifView              : "com.github.Cutta:GifView:1.4",
             navigation           : "com.etebarian:meow-bottom-navigation:1.0.1",
@@ -82,8 +89,7 @@ ext {
 
 
             //jetPack
-            lifecycle            : "android.arch.lifecycle:runtime:1.1.1",
-            lifecycleJava8       : "android.arch.lifecycle:common-java8:1.1.1",
+            lifecycle            : "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0",
 
             //aRouter
             arouterApi           : "com.alibaba:arouter-api:1.4.1",
@@ -110,7 +116,10 @@ ext {
 
             //事件总线
             eventBus             : "org.greenrobot:eventbus:3.1.1",
-            eventBusProcessor    : "org.greenrobot:eventbus-annotation-processor:3.1.1"
+            eventBusProcessor    : "org.greenrobot:eventbus-annotation-processor:3.1.1",
+
+            //util
+            alpha                : "com.alibaba.android:alpha:1.0.0.1@aar"
 
     ]
 }

@@ -44,7 +44,7 @@ dependencies {
     kapt rootProject.ext.dependencies["daggerCompiler"]
     kapt rootProject.ext.dependencies["roomCompiler"]
     kapt rootProject.ext.dependencies["glideProcessor"]
-    // api project(':vrouter_api')
+    kapt rootProject.ext.dependencies["moshiKapt"]
 
 
     api rootProject.ext.dependencies["appcompat"]
@@ -58,6 +58,7 @@ dependencies {
     api rootProject.ext.dependencies["popwindow"]
     api rootProject.ext.dependencies["glide"]
     api rootProject.ext.dependencies["gloading"]
+    api rootProject.ext.dependencies["easyload"]
 
 
     api rootProject.ext.dependencies["kotlin"]
@@ -68,9 +69,9 @@ dependencies {
     api rootProject.ext.dependencies["rxlifecycleComponents"]
     api rootProject.ext.dependencies["rxPermission"]
 
-    api rootProject.ext.dependencies["retrofitAdapter"]
-    api rootProject.ext.dependencies["gsonConverter"]
-    api rootProject.ext.dependencies["scalarsConverter"]
+    api rootProject.ext.dependencies["retrofit"]
+    api rootProject.ext.dependencies["moshiCoverter"]
+    api rootProject.ext.dependencies["moshi"]
     api rootProject.ext.dependencies["okhttpLog"]
 
     api rootProject.ext.dependencies["statusBar"]
@@ -89,5 +90,8 @@ dependencies {
     api rootProject.ext.dependencies["roomRx"]
 
     api rootProject.ext.dependencies["coroutines"]
+    api rootProject.ext.dependencies["lifecycle"]
+
+    api rootProject.ext.dependencies["alpha"]
 
 }

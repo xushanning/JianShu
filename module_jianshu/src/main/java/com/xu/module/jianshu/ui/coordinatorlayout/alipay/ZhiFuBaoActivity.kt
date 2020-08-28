@@ -7,9 +7,9 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.appbar.AppBarLayout
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.jaeger.library.StatusBarUtil
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.Types
 import com.xu.commonlib.base.BaseActivity
 import com.xu.commonlib.utlis.AssetUtil
 import com.xu.commonlib.utlis.extention.singleClick
@@ -95,7 +95,8 @@ class ZhiFuBaoActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
             showToast(it.itemName + "被点击")
         }
 
-        val behavior = (abl_zfb.layoutParams as CoordinatorLayout.LayoutParams).behavior as AlipayRefreshBehavior
+        val behavior =
+            (abl_zfb.layoutParams as CoordinatorLayout.LayoutParams).behavior as AlipayRefreshBehavior
         behavior.setOnRefrehViewActionListener {
             sv_refresh.setDuration(2000)
             sv_refresh.performAnim()
@@ -113,10 +114,10 @@ class ZhiFuBaoActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
     }
 
     override fun initData() {
-        val itemData = Gson().fromJson<List<ItemBean>>(
-                AssetUtil.getAssetJson("zfbConfig.json"),
-                object : TypeToken<List<ItemBean>>() {}.type
-        )
+        val moshi = Moshi.Builder().build()
+        val type = Types.newParameterizedType(List::class.java, ItemBean::class.java)
+        val adapter = moshi.adapter<List<ItemBean>>(type)
+        val itemData = adapter.fromJson(AssetUtil.getAssetJson("zfbConfig.json"))
         quickAdapter.setNewData(itemData)
     }
 

@@ -7,11 +7,11 @@ import com.xu.commonlib.mvp.IView
 interface ICoroutineContract {
 
     interface ICoroutineView : IView {
-
+        fun loadData(name: String)
     }
 
     interface ICoroutinePresenter : IPresenter<ICoroutineView> {
-
+        fun getData()
     }
 
     interface ICoroutineModel : IModel {

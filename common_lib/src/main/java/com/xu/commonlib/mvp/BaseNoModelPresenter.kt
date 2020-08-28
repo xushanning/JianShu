@@ -14,9 +14,9 @@ abstract class BaseNoModelPresenter<V : IView> : IPresenter<V> {
 
     private var mCompositeDisposable: CompositeDisposable? = null
 
-    override fun attachView(mView: V) {
-        this.mView = mView
-    }
+//    override fun attachView(mView: V) {
+//        this.mView = mView
+//    }
 
     override fun detachView() {
 

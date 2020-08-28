@@ -2,8 +2,8 @@ package com.xu.commonlib.base
 
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.trello.rxlifecycle3.LifecycleTransformer
 import com.xu.commonlib.mvp.IPresenter
 import com.xu.commonlib.mvp.IView
@@ -52,8 +52,7 @@ abstract class BaseMvpActivity<in V : IView, P : IPresenter<V>> : BaseActivity()
     }
 
     private fun initMvp() {
-
-        mPresenter.attachView(this as V)
+        mPresenter.attachView(this as V, lifecycleScope)
     }
 
     override fun showLoading() {
@@ -85,7 +84,6 @@ abstract class BaseMvpActivity<in V : IView, P : IPresenter<V>> : BaseActivity()
      */
     override fun dismissDialog() {
     }
-
 
 
     override fun <T> bindToLife(): LifecycleTransformer<T> {

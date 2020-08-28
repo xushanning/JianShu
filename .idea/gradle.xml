@@ -16,6 +16,7 @@
             <option value="$PROJECT_DIR$/module_algorithm" />
             <option value="$PROJECT_DIR$/module_easyload" />
             <option value="$PROJECT_DIR$/module_jianshu" />
+            <option value="$PROJECT_DIR$/module_wan" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

@@ -1,15 +1,13 @@
 package com.xu.commonlib.di.module
 
-import com.google.gson.Gson
+
 import com.orhanobut.logger.Logger
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.scalars.ScalarsConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -77,12 +75,10 @@ abstract class ClientModule {
         @JvmStatic
         @Provides
         @Singleton
-        fun provideBuilder(client: OkHttpClient, gson: Gson): Retrofit.Builder {
+        fun provideBuilder(client: OkHttpClient): Retrofit.Builder {
             return Retrofit.Builder()
                 .client(client)
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addConverterFactory(MoshiConverterFactory.create())
         }
 
         @JvmStatic

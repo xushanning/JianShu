@@ -1,3 +1,4 @@
+include ':module_wan'
 include ':common_lib', ':module_easyload',
         ':common_res',
         //':module_video',

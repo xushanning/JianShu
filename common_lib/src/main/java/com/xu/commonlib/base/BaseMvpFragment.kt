@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import com.trello.rxlifecycle3.LifecycleTransformer
 import com.xu.commonlib.mvp.IPresenter
 import com.xu.commonlib.mvp.IView
@@ -29,7 +30,7 @@ abstract class BaseMvpFragment<in V : IView, P : IPresenter<V>> : BaseFragment()
     }
 
     private fun initMvp() {
-        mPresenter.attachView(this as V)
+        mPresenter.attachView(this as V, lifecycleScope)
     }
 
 
