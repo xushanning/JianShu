@@ -90,7 +90,10 @@ dependencies {
     api rootProject.ext.dependencies["roomRx"]
 
     api rootProject.ext.dependencies["coroutines"]
-    api rootProject.ext.dependencies["lifecycle"]
+
+    //JetPack
+    api rootProject.ext.dependencies["liveData"]
+    api rootProject.ext.dependencies["viewModel"]
 
     api rootProject.ext.dependencies["alpha"]
 

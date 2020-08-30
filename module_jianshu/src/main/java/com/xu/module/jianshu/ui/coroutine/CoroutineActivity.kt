@@ -1,7 +1,6 @@
 package com.xu.module.jianshu.ui.coroutine
 
 import android.os.Bundle
-import androidx.lifecycle.lifecycleScope
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.orhanobut.logger.Logger
 import com.xu.commonlib.base.BaseMvpActivity
@@ -56,7 +55,7 @@ class CoroutineActivity :
 
     suspend fun start2() {
         //返回一个job类型的对象，这种方式不会阻断主线程
-        val job: Job = lifecycleScope.launch(Dispatchers.IO) {
+        val job: Job =  MainScope().launch(Dispatchers.IO) {
             delay(1000)
         }
         job.isActive
@@ -69,7 +68,7 @@ class CoroutineActivity :
 
     private fun start3() {
         //必须外面套一层
-        lifecycleScope.launch {
+        MainScope().launch {
             val result0 = getResult()
             //async可以支持并发，此时一般都跟await一起使用,这样会阻塞外面的协程
             val result1 = async {

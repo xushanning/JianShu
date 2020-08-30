@@ -3,7 +3,6 @@ package com.xu.commonlib.base
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import com.trello.rxlifecycle3.LifecycleTransformer
 import com.xu.commonlib.mvp.IPresenter
 import com.xu.commonlib.mvp.IView
@@ -52,7 +51,7 @@ abstract class BaseMvpActivity<in V : IView, P : IPresenter<V>> : BaseActivity()
     }
 
     private fun initMvp() {
-        mPresenter.attachView(this as V, lifecycleScope)
+        mPresenter.attachView(this as V)
     }
 
     override fun showLoading() {

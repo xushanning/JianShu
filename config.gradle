@@ -19,7 +19,8 @@ ext {
             dagger       : "2.23.2",
             glideVersion : "4.10.0",
             moshi        : "1.9.3",
-            retrofit     : "2.9.0"
+            retrofit     : "2.9.0",
+            lifecycle    : "2.2.0"
     ]
     dependencies = [
             //kotlin
@@ -53,9 +54,6 @@ ext {
             //net
             retrofit             : "com.squareup.retrofit2:retrofit:${dependVersion.retrofit}",
             moshiCoverter        : "com.squareup.retrofit2:converter-moshi:${dependVersion.retrofit}",
-//            retrofitAdapter      : "com.squareup.retrofit2:adapter-rxjava2:2.3.0",
-//            gsonConverter        : "com.squareup.retrofit2:converter-gson:2.3.0",
-//            scalarsConverter     : "com.squareup.retrofit2:converter-scalars:2.3.0",
             okhttpLog            : "com.squareup.okhttp3:logging-interceptor:3.8.1",
             moshi                : "com.squareup.moshi:moshi:${dependVersion.moshi}",
             moshiKapt            : "com.squareup.moshi:moshi-kotlin-codegen:${dependVersion.moshi}",
@@ -89,7 +87,8 @@ ext {
 
 
             //jetPack
-            lifecycle            : "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0",
+            liveData             : "androidx.lifecycle:lifecycle-livedata-ktx:${dependVersion.lifecycle}",
+            viewModel            : "androidx.lifecycle:lifecycle-viewmodel-ktx:${dependVersion.lifecycle}",
 
             //aRouter
             arouterApi           : "com.alibaba:arouter-api:1.4.1",

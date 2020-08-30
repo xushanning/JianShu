@@ -3,6 +3,7 @@ package com.xu.module.jianshu.ui.coroutine
 import com.xu.commonlib.mvp.BasePresenter
 import com.xu.module.jianshu.api.WanService
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -16,7 +17,7 @@ class CoroutinePresenter @Inject constructor() :
     lateinit var api: WanService
 
     override fun getData() {
-        lifecycleScope.launch(Dispatchers.IO) {
+        MainScope().launch(Dispatchers.IO) {
             val result = api.getArticleList()
             var name = ""
             result.data.forEach {
