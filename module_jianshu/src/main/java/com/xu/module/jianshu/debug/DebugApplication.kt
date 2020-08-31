@@ -13,7 +13,7 @@ import dagger.android.DaggerApplication
  */
 class DebugApplication : BaseApplication() {
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
-        val injector = DaggerAppComponent.builder().create(this)
+        val injector = DaggerAppComponent.factory().create(this)
         injector.inject(this)
         return injector
     }

@@ -1,7 +1,8 @@
-package com.xu.module.jianshu.api
+package com.xu.module.wan.api
 
-import com.xu.module.jianshu.bean.ArticleBean
-import com.xu.module.jianshu.bean.BaseResBean
+
+import com.xu.module.wan.bean.ArticleBean
+import com.xu.module.wan.bean.BaseResBean
 import retrofit2.http.GET
 
 /**

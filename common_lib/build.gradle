@@ -31,7 +31,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
+    dataBinding {
+        enabled true
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -94,6 +99,7 @@ dependencies {
     //JetPack
     api rootProject.ext.dependencies["liveData"]
     api rootProject.ext.dependencies["viewModel"]
+    api rootProject.ext.dependencies["fragmentKtx"]
 
     api rootProject.ext.dependencies["alpha"]
 

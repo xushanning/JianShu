@@ -1,10 +1,10 @@
-package com.xu.module.jianshu.debug
+package com.xu.module.wan.debug
 
 import com.xu.commonlib.base.BaseApplication
 import com.xu.commonlib.di.module.AppModule
 import com.xu.commonlib.di.module.ClientModule
-import com.xu.module.jianshu.di.module.JianShuModule
-import com.xu.module.jianshu.di.module.UiModule
+import com.xu.module.wan.di.module.UiModule
+import com.xu.module.wan.di.module.WanModule
 import dagger.Component
 import dagger.android.AndroidInjectionModule
 import dagger.android.AndroidInjector
@@ -20,8 +20,8 @@ import javax.inject.Singleton
         AndroidSupportInjectionModule::class,
         AppModule::class,//全局module
         ClientModule::class,//第三方库的module
-        UiModule::class,
-        JianShuModule::class
+        WanModule::class,
+        UiModule::class
     ]
 )
 interface AppComponent : AndroidInjector<BaseApplication> {

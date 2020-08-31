@@ -1,4 +1,4 @@
-package com.xu.module.jianshu.bean
+package com.xu.module.wan.bean
 
 import com.squareup.moshi.JsonClass
 
