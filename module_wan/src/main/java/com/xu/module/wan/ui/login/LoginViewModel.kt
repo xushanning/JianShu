@@ -9,12 +9,13 @@ import com.xu.module.wan.api.WanService
 class LoginViewModel @ViewModelInject constructor(
     private val api: WanService
 ) : BaseViewModel() {
+
     var name = ObservableField("原始的name")
 
 
     fun getListData() {
         request({
-            api.getArticleList()
+            api.getPublicAccountList()
         }, {
             var result = ""
             it.forEach { item ->

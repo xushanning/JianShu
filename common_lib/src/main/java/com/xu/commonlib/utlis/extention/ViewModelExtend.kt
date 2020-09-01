@@ -1,10 +1,10 @@
 package com.xu.commonlib.utlis.extention
 
 import androidx.lifecycle.viewModelScope
-import com.orhanobut.logger.Logger
 import com.xu.commonlib.base.mvvm.BaseViewModel
 import com.xu.commonlib.http.ApiException
 import com.xu.commonlib.http.BaseResponse
+import com.xu.commonlib.http.ErrorHandler
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
@@ -21,13 +21,17 @@ fun <T> BaseViewModel.request(
 ): Job {
     return viewModelScope.launch {
         runCatching {
+            if (showLoading) {
+
+            }
             block()
         }.onSuccess {
             if (it.isSuccess()) {
                 success(it.getResData())
-            } else throw ApiException(it.getResCode(), it.getResMsg())
+            }
+            //else throw ApiException(it.getResCode(), it.getResMsg())
         }.onFailure {
-
+            error(ErrorHandler.handleError(it))
         }
     }
 }

@@ -4,7 +4,7 @@ import com.squareup.moshi.JsonClass
 
 
 @JsonClass(generateAdapter = true)
-data class ArticleBean(
+data class PublicAccountBean(
     val children: List<Any>,
     val courseId: Int,
     val id: Int,
