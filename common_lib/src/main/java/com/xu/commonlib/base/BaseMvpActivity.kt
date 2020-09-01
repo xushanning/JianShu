@@ -5,8 +5,7 @@ import android.os.Bundle
 import com.trello.rxlifecycle3.LifecycleTransformer
 import com.xu.commonlib.mvp.IPresenter
 import com.xu.commonlib.mvp.IView
-import dagger.android.AndroidInjection
-import javax.inject.Inject
+ import javax.inject.Inject
 
 /**
  *           .----.
@@ -33,7 +32,7 @@ abstract class BaseMvpActivity<in V : IView, P : IPresenter<V>> : BaseActivity()
     lateinit var mPresenter: P
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
+     //   AndroidInjection.inject(this)
         initMvp()
         super.onCreate(savedInstanceState)
     }

@@ -1,39 +1,39 @@
 package com.xu.commonlib.base.mvvm
 
 import android.os.Bundle
-import androidx.activity.viewModels
+import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.SavedStateViewModelFactory
 import androidx.lifecycle.ViewModelProvider
 import com.alibaba.android.arouter.launcher.ARouter
 import com.xu.commonlib.utlis.extention.getVmClazz
-import dagger.android.AndroidInjection
 
 abstract class BaseVmActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppCompatActivity() {
-    lateinit var mDataBinding: DB
-    lateinit var mViewModel: VM
-
+    protected lateinit var mDataBinding: DB
+    protected val mViewModel: VM by lazy { ViewModelProvider(this).get(getVmClazz(this)) }
     override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         ARouter.getInstance().inject(this)
         initDataBind()
-        initViewModel()
         initView()
+        initData()
     }
 
     private fun initDataBind() {
         mDataBinding = DataBindingUtil.setContentView(this, layoutId())
         mDataBinding.lifecycleOwner = this
+        mDataBinding.setVariable(getVariableId(), mViewModel)
     }
 
-    private fun initViewModel() {
-        mViewModel = ViewModelProvider(this).get(getVmClazz(this))
-    }
 
+    @LayoutRes
     abstract fun layoutId(): Int
 
+    abstract fun getVariableId(): Int
+
     abstract fun initView()
+
+    abstract fun initData()
+
 }

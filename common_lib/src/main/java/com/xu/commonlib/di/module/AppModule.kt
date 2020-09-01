@@ -5,43 +5,36 @@ import androidx.room.Room
 import com.xu.commonlib.base.BaseApplication
 import com.xu.commonlib.constant.TableConstant
 import com.xu.commonlib.db.AppDatabase
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 import javax.inject.Singleton
 
 /**
  * @author 言吾許
  */
 @Module
-abstract class AppModule {
+@InstallIn(ApplicationComponent::class)
+class AppModule {
 
-    @Module
-    companion object {
-//        @JvmStatic
-//        @Provides
-//        @Singleton
-//        fun provideGson(): Gson {
-//            return GsonBuilder().create()
-//        }
 
-        //提供room数据库
-        @JvmStatic
-        @Provides
-        @Singleton
-        fun provideRoom(context: Context): AppDatabase {
-            return Room
-                .databaseBuilder(context, AppDatabase::class.java, TableConstant.DB_NAME)
-                .build()
-
-        }
-
+    //提供room数据库
+    @Provides
+    @Singleton
+    fun provideRoom(context: Context): AppDatabase {
+        return Room
+            .databaseBuilder(context, AppDatabase::class.java, TableConstant.DB_NAME)
+            .build()
 
     }
 
 
-    @Binds
-    abstract fun provideApplicationContext(application: BaseApplication): Context
+    @Provides
+    @Singleton
+    fun provideApplicationContext(): Context {
+        return BaseApplication.appContext.applicationContext
+    }
 
 
 }

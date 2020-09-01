@@ -1,9 +1,10 @@
 package com.xu.commonlib.utlis.extention
 
 import androidx.lifecycle.viewModelScope
+import com.orhanobut.logger.Logger
 import com.xu.commonlib.base.mvvm.BaseViewModel
 import com.xu.commonlib.http.ApiException
-import com.xu.commonlib.http.BaseRes
+import com.xu.commonlib.http.BaseResponse
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
@@ -13,7 +14,7 @@ import kotlinx.coroutines.launch
 
 
 fun <T> BaseViewModel.request(
-    block: suspend () -> BaseRes<T>,
+    block: suspend () -> BaseResponse<T>,
     success: (T) -> Unit,
     error: (ApiException) -> Unit,
     showLoading: Boolean = true

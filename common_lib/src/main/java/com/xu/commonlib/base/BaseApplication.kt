@@ -8,12 +8,12 @@ import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
 import com.xu.commonlib.BuildConfig
 import com.xu.commonlib.utlis.LoggerStrategy
-import dagger.android.DaggerApplication
+
 
 /**
  * @author 言吾許
  */
-abstract class BaseApplication : DaggerApplication() {
+abstract class BaseApplication :  Application() {
 
     companion object {
         lateinit var appContext: Application

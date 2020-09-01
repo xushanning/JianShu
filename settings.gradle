@@ -1,14 +1,16 @@
-include ':module_wan'
-include ':common_lib', ':module_easyload',
+
+include ':common_lib',
+        //':module_easyload',
         ':common_res',
+        ':module_wan'
         //':module_video',
         //':vrouter_api',
         //':vrouter_complier',
         //':vrouter_annotation',
         //简书demo
-        ':module_jianshu',
+        //':module_jianshu'
         //算法模块
-         ':module_algorithm'
+        // ':module_algorithm'
         //壳模块
         //':app'
         //运动模块

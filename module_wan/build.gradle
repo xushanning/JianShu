@@ -16,9 +16,13 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation project(path: ':common_res')
+    //很奇怪，已经在lib中依赖过了，这里还是得依赖一次
+    implementation rootProject.ext.dependencies["hilt"]
 
-    kapt rootProject.ext.dependencies["daggerProcessor"]
-    kapt rootProject.ext.dependencies["daggerCompiler"]
     kapt rootProject.ext.dependencies["arouterProcessor"]
     kapt rootProject.ext.dependencies["moshiKapt"]
+    kapt rootProject.ext.dependencies["hiltKapt"]
+    kapt rootProject.ext.dependencies["hiltViewModelCompiler"]
+
+
 }

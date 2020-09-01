@@ -2,9 +2,10 @@ package com.xu.module.jianshu.ui.easyload
 
 import android.os.Handler
 import android.os.Looper
-import com.xu.module.easyload.service.ILoadService
-import com.xu.module.easyload.state.BaseState
-import com.xu.module.easyload.state.SuccessState
+import com.xu.easyload.service.ILoadService
+import com.xu.easyload.state.BaseState
+import com.xu.easyload.state.SuccessState
+
 
 object DelayUtil {
     fun successDelay(loadService: ILoadService, delay: Long = 2000) {

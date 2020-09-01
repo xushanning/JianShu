@@ -1,16 +1,28 @@
 package com.xu.module.wan.ui.login
 
 import androidx.databinding.ObservableField
-import com.orhanobut.logger.Logger
+import androidx.hilt.lifecycle.ViewModelInject
 import com.xu.commonlib.base.mvvm.BaseViewModel
+import com.xu.commonlib.utlis.extention.request
 import com.xu.module.wan.api.WanService
-import javax.inject.Inject
 
-class LoginViewModel : BaseViewModel() {
+class LoginViewModel @ViewModelInject constructor(
+    private val api: WanService
+) : BaseViewModel() {
     var name = ObservableField("原始的name")
 
 
-    fun test() {
+    fun getListData() {
+        request({
+            api.getArticleList()
+        }, {
+            var result = ""
+            it.forEach { item ->
+                result += item.name
+            }
+            name.set(result)
+        }, {
 
+        })
     }
 }
