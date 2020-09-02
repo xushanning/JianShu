@@ -10,13 +10,13 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.xu.commonlib.utlis.extention.getVmClazz
 
 abstract class BaseVmActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppCompatActivity() {
-    protected lateinit var mDataBinding: DB
+    private lateinit var mDataBinding: DB
     protected val mViewModel: VM by lazy { ViewModelProvider(this).get(getVmClazz(this)) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ARouter.getInstance().inject(this)
         initDataBind()
-        initView()
+        initView(mDataBinding)
         initData()
     }
 
@@ -32,7 +32,7 @@ abstract class BaseVmActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppCom
 
     abstract fun getVariableId(): Int
 
-    abstract fun initView()
+    abstract fun initView(mDataBinding: DB)
 
     abstract fun initData()
 

@@ -1,6 +1,7 @@
 package com.xu.commonlib.utlis.extention
 
 import androidx.lifecycle.viewModelScope
+import com.orhanobut.logger.Logger
 import com.xu.commonlib.base.mvvm.BaseViewModel
 import com.xu.commonlib.http.ApiException
 import com.xu.commonlib.http.BaseResponse
@@ -26,12 +27,30 @@ fun <T> BaseViewModel.request(
             }
             block()
         }.onSuccess {
-            if (it.isSuccess()) {
-                success(it.getResData())
+            //dismiss dialog
+            runCatching {
+                //todo 这里建立在如果成功（code==1），那么data一定非null，如果code==1，并且出现了data==null，就会crash
+                if (it.isSuccess() && it.getResData() != null) {
+                    success(it.getResData()!!)
+                } else {
+                    throw ApiException(it.getResCode(), it.getResMsg(), null)
+                }
+            }.onFailure {
+                error(ErrorHandler.handleError(it))
             }
-            //else throw ApiException(it.getResCode(), it.getResMsg())
         }.onFailure {
+            Logger.d(it.message)
             error(ErrorHandler.handleError(it))
+        }
+    }
+
+
+    fun <T> BaseViewModel.request(
+        block: suspend () -> BaseResponse<T>
+
+        ): Job {
+        return viewModelScope.launch {
+
         }
     }
 }

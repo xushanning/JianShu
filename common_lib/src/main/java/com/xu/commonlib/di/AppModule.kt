@@ -1,15 +1,22 @@
-package com.xu.commonlib.di.module
+package com.xu.commonlib.di
 
 
+import android.content.Context
+import androidx.room.Room
+import com.google.gson.GsonBuilder
 import com.orhanobut.logger.Logger
+import com.xu.commonlib.base.BaseApplication
+import com.xu.commonlib.constant.TableConstant
+import com.xu.commonlib.db.AppDatabase
+import com.xu.easyload.EasyLoad
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.components.ApplicationComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
@@ -20,7 +27,7 @@ import javax.inject.Singleton
  */
 @Module
 @InstallIn(ApplicationComponent::class)
-class ClientModule {
+class AppModule {
     /**
      * 超时时间
      */
@@ -37,17 +44,18 @@ class ClientModule {
             Logger.d("请求地址:" + request.url())
             chain.proceed(request)
         }
+        val resInterceptor = HttpLoggingInterceptor { s ->
 
-        builder.addInterceptor(HttpLoggingInterceptor { s ->
-            if (s.isNotEmpty()) {
-                val begin = s.substring(0, 1)
+            if (s.length > 1) {
+                val begin: String = s.substring(0, 1)
                 if ("{" == begin) {
-                    //只打印json
-                    Logger.json(s)
+                    Logger.d(s)
                 }
             }
+        }
+        resInterceptor.level = HttpLoggingInterceptor.Level.BODY
+        builder.addInterceptor(resInterceptor)
 
-        })
         builder.addInterceptor { chain ->
             val builder1 = chain.request().newBuilder()
             chain.proceed(builder1.build())
@@ -84,5 +92,30 @@ class ClientModule {
     fun provideOkHttpClient(): OkHttpClient.Builder {
         return OkHttpClient.Builder()
     }
+
+
+    //提供room数据库
+    @Provides
+    @Singleton
+    fun provideRoom(context: Context): AppDatabase {
+        return Room
+            .databaseBuilder(context, AppDatabase::class.java, TableConstant.DB_NAME)
+            .build()
+
+    }
+
+
+    @Provides
+    @Singleton
+    fun provideApplicationContext(): Context {
+        return BaseApplication.appContext.applicationContext
+    }
+
+    @Provides
+    @Singleton
+    fun provideEasyLoadBuilder(): EasyLoad.LocalBuilder {
+        return EasyLoad.initLocal()
+    }
+
 
 }

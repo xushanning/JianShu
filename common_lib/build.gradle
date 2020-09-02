@@ -46,8 +46,7 @@ dependencies {
     androidTestImplementation 'androidx.test:core:1.1.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
 
-    kapt rootProject.ext.dependencies["daggerProcessor"]
-    kapt rootProject.ext.dependencies["daggerCompiler"]
+
     kapt rootProject.ext.dependencies["roomCompiler"]
     kapt rootProject.ext.dependencies["glideProcessor"]
     kapt rootProject.ext.dependencies["moshiKapt"]
@@ -106,5 +105,8 @@ dependencies {
     api rootProject.ext.dependencies["fragmentKtx"]
 
     api rootProject.ext.dependencies["alpha"]
+
+    api "com.squareup.retrofit2:converter-gson:2.9.0"
+
 
 }

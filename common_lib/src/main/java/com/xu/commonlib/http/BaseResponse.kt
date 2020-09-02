@@ -6,7 +6,7 @@ package com.xu.commonlib.http
 abstract class BaseResponse<T> {
     abstract fun isSuccess(): Boolean
 
-    abstract fun getResData(): T
+    abstract fun getResData(): T?
 
     abstract fun getResCode(): Int
 

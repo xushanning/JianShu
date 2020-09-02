@@ -1,29 +1,37 @@
 package com.xu.module.wan.ui.login
 
-import androidx.databinding.ObservableField
+import android.content.Context
 import androidx.hilt.lifecycle.ViewModelInject
+import com.orhanobut.logger.Logger
 import com.xu.commonlib.base.mvvm.BaseViewModel
+import com.xu.commonlib.livedata.StringLiveData
 import com.xu.commonlib.utlis.extention.request
+import com.xu.commonlib.utlis.extention.showToast
 import com.xu.module.wan.api.WanService
 
 class LoginViewModel @ViewModelInject constructor(
-    private val api: WanService
+    private val api: WanService, private val context: Context
 ) : BaseViewModel() {
 
-    var name = ObservableField("原始的name")
 
+    /**
+     * 用户名
+     */
+    val userName = StringLiveData()
 
-    fun getListData() {
-        request({
-            api.getPublicAccountList()
+    /**
+     * 密码
+     */
+    val password = StringLiveData()
+
+    /**
+     *执行登陆
+     */
+    fun doLogin() {
+        request({ api.login(userName.value, password.value) }, {
+            Logger.d(it.username)
         }, {
-            var result = ""
-            it.forEach { item ->
-                result += item.name
-            }
-            name.set(result)
-        }, {
-
+            context.showToast(it.errorMsg)
         })
     }
 }

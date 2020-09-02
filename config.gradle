@@ -18,7 +18,7 @@ ext {
             room         : "2.2.0-alpha02",
             dagger       : "2.28.3",
             glideVersion : "4.10.0",
-            moshi        : "1.9.3",
+            moshi        : "1.10.0",
             retrofit     : "2.9.0",
             lifecycle    : "2.2.0",
             hilt         : "2.28-alpha",
@@ -79,7 +79,7 @@ ext {
             glide                : "com.github.bumptech.glide:glide:${dependVersion.glideVersion}",
             glideProcessor       : "com.github.bumptech.glide:compiler:${dependVersion.glideVersion}",
             gloading             : "com.billy.android:gloading:1.0.0",
-            easyload             : "com.xu.easyload:easyload:0.0.1",
+            easyload             : "com.xu.easyload:easyload:0.0.2",
 
             gifView              : "com.github.Cutta:GifView:1.4",
             navigation           : "com.etebarian:meow-bottom-navigation:1.0.1",
@@ -98,10 +98,6 @@ ext {
             arouterProcessor     : "com.alibaba:arouter-compiler:1.2.2",
 
             //AOP
-//            singleClick          : "org.aspectj:aspectjrt:1.8.13",
-            dagger               : "com.google.dagger:dagger-android-support:${dependVersion.dagger}",
-            daggerProcessor      : "com.google.dagger:dagger-android-processor:${dependVersion.dagger}",
-            daggerCompiler       : "com.google.dagger:dagger-compiler:${dependVersion.dagger}",
             hilt                 : "com.google.dagger:hilt-android:${dependVersion.hilt}",
             hiltKapt             : "com.google.dagger:hilt-android-compiler:${dependVersion.hilt}",
             hiltViewModel        : "androidx.hilt:hilt-lifecycle-viewmodel:${dependVersion.hiltViewModel}",
