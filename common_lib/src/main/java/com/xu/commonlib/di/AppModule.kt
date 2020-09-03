@@ -3,7 +3,6 @@ package com.xu.commonlib.di
 
 import android.content.Context
 import androidx.room.Room
-import com.google.gson.GsonBuilder
 import com.orhanobut.logger.Logger
 import com.xu.commonlib.base.BaseApplication
 import com.xu.commonlib.constant.TableConstant
@@ -16,7 +15,6 @@ import dagger.hilt.android.components.ApplicationComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton

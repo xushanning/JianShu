@@ -1,8 +1,9 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
+apply plugin: 'com.github.ben-manes.versions'
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -105,8 +106,6 @@ dependencies {
     api rootProject.ext.dependencies["fragmentKtx"]
 
     api rootProject.ext.dependencies["alpha"]
-
-    api "com.squareup.retrofit2:converter-gson:2.9.0"
 
 
 }

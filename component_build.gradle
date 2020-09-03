@@ -3,10 +3,11 @@ if (isDebug.toBoolean()) {
 } else {
     apply plugin: 'com.android.library'
 }
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
+apply plugin: 'com.github.ben-manes.versions'
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion

@@ -2,7 +2,6 @@ package com.xu.module.wan.ui.login
 
 import com.xu.commonlib.base.mvvm.BaseVmActivity
 import com.xu.commonlib.utlis.extention.showToast
-import com.xu.easyload.ext.inject
 import com.xu.module.wan.BR
 import com.xu.module.wan.R
 import com.xu.module.wan.databinding.WActivityLoginBinding
@@ -20,9 +19,7 @@ class LoginActivity : BaseVmActivity<LoginViewModel, WActivityLoginBinding>() {
     override fun initView(mDataBinding: WActivityLoginBinding) {
         mDataBinding.click = OnClick()
 
-        val load = inject(this) {
-            showDefault()
-        }
+
     }
 
     override fun initData() {
