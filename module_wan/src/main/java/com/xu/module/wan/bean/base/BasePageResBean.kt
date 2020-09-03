@@ -1,8 +1,11 @@
-package com.xu.module.wan.bean
+package com.xu.module.wan.bean.base
+
+import com.squareup.moshi.JsonClass
 
 /**
  * 带有分页的bean
  */
+@JsonClass(generateAdapter = true)
 data class BasePageResBean<T>(
     val curPage: Int,
     val datas: T,

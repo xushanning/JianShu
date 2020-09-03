@@ -6,11 +6,11 @@
 
         <variable
             name="viewModel"
-            type="com.xu.module.wan.ui.login.LoginViewModel" />
+            type="com.xu.module.wan.ui.activity.login.LoginViewModel" />
 
         <variable
             name="click"
-            type="com.xu.module.wan.ui.login.LoginActivity.OnClick" />
+            type="com.xu.module.wan.ui.activity.login.LoginActivity.OnClick" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -12,6 +12,8 @@ import com.xu.commonlib.utlis.extention.getVmClazz
 abstract class BaseVmActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppCompatActivity() {
     private lateinit var mDataBinding: DB
     protected val mViewModel: VM by lazy { ViewModelProvider(this).get(getVmClazz(this)) }
+    abstract val layoutId: Int
+    abstract val variableId: Int
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ARouter.getInstance().inject(this)
@@ -21,16 +23,10 @@ abstract class BaseVmActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppCom
     }
 
     private fun initDataBind() {
-        mDataBinding = DataBindingUtil.setContentView(this, layoutId())
+        mDataBinding = DataBindingUtil.setContentView(this, layoutId)
         mDataBinding.lifecycleOwner = this
-        mDataBinding.setVariable(getVariableId(), mViewModel)
+        mDataBinding.setVariable(variableId, mViewModel)
     }
-
-
-    @LayoutRes
-    abstract fun layoutId(): Int
-
-    abstract fun getVariableId(): Int
 
     abstract fun initView(mDataBinding: DB)
 

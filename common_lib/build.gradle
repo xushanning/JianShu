@@ -65,8 +65,8 @@ dependencies {
     api rootProject.ext.dependencies["smartRefreshFooter"]
     api rootProject.ext.dependencies["popwindow"]
     api rootProject.ext.dependencies["glide"]
-    api rootProject.ext.dependencies["gloading"]
     api rootProject.ext.dependencies["easyload"]
+    api rootProject.ext.dependencies["navigation"]
 
 
     api rootProject.ext.dependencies["kotlin"]

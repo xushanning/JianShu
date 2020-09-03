@@ -1,4 +1,4 @@
-package com.xu.module.wan.ui.login
+package com.xu.module.wan.ui.activity.login
 
 import android.content.Context
 import androidx.hilt.lifecycle.ViewModelInject

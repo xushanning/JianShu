@@ -2,7 +2,9 @@ package com.xu.module.wan.bean
 
 import com.squareup.moshi.JsonClass
 
-
+/**
+ * 公众账号bean
+ */
 @JsonClass(generateAdapter = true)
 data class PublicAccountBean(
     val children: List<Any>,

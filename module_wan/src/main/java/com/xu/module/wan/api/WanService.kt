@@ -2,6 +2,8 @@ package com.xu.module.wan.api
 
 
 import com.xu.module.wan.bean.*
+import com.xu.module.wan.bean.base.BasePageResBean
+import com.xu.module.wan.bean.base.BaseResBean
 import retrofit2.http.*
 
 /**
@@ -24,6 +26,18 @@ interface WanService {
      */
     @POST("user/register")
     suspend fun register(): BaseResBean<Any>
+
+    /**
+     * 获取首页置顶的文章列表
+     */
+    @GET("article/top/json")
+    suspend fun getHomeTopArticleList(): BaseResBean<MutableList<ArticleItemBean>>
+
+    /**
+     * 获取首页的文章列表数据
+     */
+    @GET("article/list/{page}/json")
+    suspend fun getHomeArticleList(@Path("page") page: Int): BaseResBean<BasePageResBean<MutableList<ArticleItemBean>>>
 
     /**
      * 登出
@@ -53,7 +67,7 @@ interface WanService {
     suspend fun getPublicAccountHistoryById(
         @Path("page") page: Int,
         @Path("accountId") accountId: String
-    ): BaseResBean<BasePageResBean<MutableList<PublicAccountHistoryBean>>>
+    ): BaseResBean<BasePageResBean<MutableList<ArticleItemBean>>>
 
 
 }

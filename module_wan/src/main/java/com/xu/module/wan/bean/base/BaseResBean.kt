@@ -1,4 +1,4 @@
-package com.xu.module.wan.bean
+package com.xu.module.wan.bean.base
 
 import com.squareup.moshi.JsonClass
 import com.xu.commonlib.http.BaseResponse

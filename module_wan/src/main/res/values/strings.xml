@@ -5,4 +5,9 @@
     <string name="w_password">密码</string>
     <string name="w_empty_username">请输入账号</string>
     <string name="w_empty_password">请输入密码</string>
+
+    <string name="w_navigate_home">首页</string>
+    <string name="w_navigate_project">项目</string>
+    <string name="w_navigate_square">广场</string>
+
 </resources>

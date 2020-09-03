@@ -3,11 +3,10 @@ package com.xu.module.wan.bean
 import com.squareup.moshi.JsonClass
 
 /**
- * 公众号历史文章bean
- *
+ *文章item bean
  */
 @JsonClass(generateAdapter = true)
-data class PublicAccountHistoryBean(
+data class ArticleItemBean(
     val apkLink: String,
     val audit: Int,
     val author: String,
@@ -42,6 +41,7 @@ data class PublicAccountHistoryBean(
     val zan: Int
 )
 
+@JsonClass(generateAdapter = true)
 data class TagBean(
     val name: String,
     val url: String
