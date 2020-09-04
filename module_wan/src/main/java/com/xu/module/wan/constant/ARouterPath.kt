@@ -12,6 +12,11 @@ object ARouterPath {
     const val main = "/wan/main"
 
     /**
+     * WebView
+     */
+    const val web = "/wan/web"
+
+    /**
      * home页面
      */
     const val home = "/wan/home"

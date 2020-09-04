@@ -2,16 +2,17 @@ package com.xu.module.wan.ui.fragment.home
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
 import com.orhanobut.logger.Logger
 import com.xu.commonlib.base.mvvm.BaseVmFragment
 import com.xu.commonlib.utlis.extention.observe
-import com.xu.commonlib.utlis.extention.singleDataItemClick
-import com.xu.commonlib.utlis.extention.singleItemClick
+import com.xu.commonlib.utlis.extention.singleDbChildDataItemClick
+import com.xu.commonlib.utlis.extention.singleDbDataItemClick
+import com.xu.module.wan.BR
 import com.xu.module.wan.R
 import com.xu.module.wan.constant.ARouterPath
 import com.xu.module.wan.databinding.WFragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
-import com.xu.module.wan.BR
 import kotlinx.android.synthetic.main.w_fragment_home.*
 
 @Route(path = ARouterPath.home)
@@ -27,14 +28,31 @@ class HomeFragment(
         rv_home.layoutManager = LinearLayoutManager(context)
         rv_home.adapter = quickAdapter
 
+        quickAdapter.run {
+
+            singleDbDataItemClick {
+                ARouter.getInstance()
+                    .build(ARouterPath.web)
+                    .withString("url", it.link)
+                    .navigation()
+
+            }
+
+            singleDbChildDataItemClick { item, viewId ->
+                if (viewId == R.id.img_collect) {
+                    Logger.d("收藏" + item.author)
+                }
+            }
+        }
+
+
     }
 
     override fun initData() {
         mViewModel.getHomeData()
 
         observe(mViewModel.homeArticleData) {
-            Logger.d(it.size)
-            quickAdapter.data = it
+            quickAdapter.setNewInstance(it)
         }
     }
 

@@ -7,6 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import com.alibaba.android.arouter.launcher.ARouter
+import com.jaeger.library.StatusBarUtil
 import com.xu.commonlib.utlis.extention.getVmClazz
 
 abstract class BaseVmActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppCompatActivity() {
@@ -17,6 +18,7 @@ abstract class BaseVmActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppCom
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ARouter.getInstance().inject(this)
+        StatusBarUtil.setTranslucentForImageViewInFragment(this, 0, null)
         initDataBind()
         initView(mDataBinding)
         initData()

@@ -1,6 +1,8 @@
 package com.xu.commonlib.utlis.extention
 
+import androidx.databinding.ViewDataBinding
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 
 /**
@@ -71,6 +73,64 @@ fun <T> BaseQuickAdapter<T, BaseViewHolder>.singleChildDataItemClick(
         }
     }
 }
+
+fun <T, D : ViewDataBinding> BaseQuickAdapter<T, BaseDataBindingHolder<D>>.singleDbItemClick(
+    time: Long = 1000,
+    block: (position: Int) -> Unit
+) {
+    QuickAdapterClick.delayTime = time
+    setOnItemClickListener { _, _, position ->
+        if (clickEnable()) {
+            block(position)
+        }
+    }
+}
+
+/**
+ * BaseQuickAdapter DataBinding带数据的 item防重点
+ */
+fun <T, D : ViewDataBinding> BaseQuickAdapter<T, BaseDataBindingHolder<D>>.singleDbDataItemClick(
+    time: Long = 1000,
+    block: (item: T) -> Unit
+) {
+    QuickAdapterClick.delayTime = time
+    setOnItemClickListener { _, _, position ->
+        if (clickEnable()) {
+            block(data[position])
+        }
+    }
+}
+
+/**
+ * BaseQuickAdapter DataBinding item子view防重点
+ */
+fun <T, D : ViewDataBinding> BaseQuickAdapter<T, BaseDataBindingHolder<D>>.singleDbChildItemClick(
+    time: Long = 1000,
+    block: (position: Int, viewId: Int) -> Unit
+) {
+    QuickAdapterClick.delayTime = time
+    setOnItemChildClickListener { _, view, position ->
+        if (clickEnable()) {
+            block(position, view.id)
+        }
+    }
+}
+
+/**
+ * BaseQuickAdapter 带数据的item子view防重点
+ */
+fun <T, D : ViewDataBinding> BaseQuickAdapter<T, BaseDataBindingHolder<D>>.singleDbChildDataItemClick(
+    time: Long = 1000,
+    block: (item: T, viewId: Int) -> Unit
+) {
+    QuickAdapterClick.delayTime = time
+    setOnItemChildClickListener { _, view, position ->
+        if (clickEnable()) {
+            block(data[position], view.id)
+        }
+    }
+}
+
 
 private fun clickEnable(): Boolean {
     var flag = false

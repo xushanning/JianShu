@@ -67,6 +67,7 @@ dependencies {
     api rootProject.ext.dependencies["glide"]
     api rootProject.ext.dependencies["easyload"]
     api rootProject.ext.dependencies["navigation"]
+    api rootProject.ext.dependencies["agentWeb"]
 
 
     api rootProject.ext.dependencies["kotlin"]

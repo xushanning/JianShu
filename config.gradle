@@ -81,6 +81,7 @@ ext {
             glide                : "com.github.bumptech.glide:glide:${dependVersion.glideVersion}",
             glideProcessor       : "com.github.bumptech.glide:compiler:${dependVersion.glideVersion}",
             easyload             : "com.xu.easyload:easyload:0.0.2",
+            agentWeb             : "com.just.agentweb:agentweb-androidx:4.1.4",
 
             gifView              : "com.github.Cutta:GifView:1.4",
             navigation           : "it.sephiroth.android.library.bottomnavigation:bottom-navigation:3.0.0",
