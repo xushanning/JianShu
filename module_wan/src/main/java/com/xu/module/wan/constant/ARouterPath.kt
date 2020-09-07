@@ -27,6 +27,11 @@ object ARouterPath {
     const val project = "/wan/project"
 
     /**
+     * 项目列表
+     */
+    const val projectList = "/wan/projectList"
+
+    /**
      * 广场
      */
     const val square = "/wan/square"

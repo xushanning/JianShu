@@ -1,6 +1,7 @@
 package com.xu.module.wan.di
 
 import com.xu.module.wan.api.WanService
+import com.xu.module.wan.constant.AppConstant
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,7 +19,7 @@ class ApplicationModule {
     @Singleton
     fun provideApi(builder: Retrofit.Builder): WanService {
         return builder
-            .baseUrl("https://wanandroid.com/")
+            .baseUrl(AppConstant.BASE_URL)
             .build()
             .create(WanService::class.java)
     }

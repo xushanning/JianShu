@@ -12,4 +12,8 @@
 
     <string name="w_article_top">置顶</string>
     <string name="w_article_new">新</string>
+
+    <string name="w_web_collect">收藏</string>
+    <string name="w_web_share">分享</string>
+    <string name="w_web_browser">用浏览器打开</string>
 </resources>

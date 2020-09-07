@@ -3,6 +3,7 @@ package com.xu.commonlib.di
 
 import android.content.Context
 import androidx.room.Room
+import com.alibaba.android.arouter.launcher.ARouter
 import com.orhanobut.logger.Logger
 import com.xu.commonlib.base.BaseApplication
 import com.xu.commonlib.constant.TableConstant
@@ -114,6 +115,7 @@ class AppModule {
     fun provideEasyLoadBuilder(): EasyLoad.LocalBuilder {
         return EasyLoad.initLocal()
     }
+
 
 
 }

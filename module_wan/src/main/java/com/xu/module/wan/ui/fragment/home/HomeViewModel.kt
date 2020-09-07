@@ -8,6 +8,7 @@ import com.xu.commonlib.base.mvvm.BaseViewModel
 import com.xu.commonlib.utlis.extention.request
 import com.xu.module.wan.api.WanService
 import com.xu.module.wan.bean.ArticleItemBean
+import com.xu.module.wan.bean.BannerBean
 import com.xu.module.wan.bean.base.BasePageResBean
 import com.xu.module.wan.bean.base.BaseResBean
 import kotlinx.coroutines.Dispatchers
@@ -15,9 +16,17 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
 
 class HomeViewModel @ViewModelInject constructor(
-    private val api: WanService, private val context: Context
+    private val api: WanService
 ) : BaseViewModel() {
-    val homeArticleData: MutableLiveData<MutableList<ArticleItemBean>> = MutableLiveData()
+    /**
+     * 首页文章
+     */
+    val homeArticleData = MutableLiveData<MutableList<ArticleItemBean>>()
+
+    /**
+     * banner数据
+     */
+    val bannerLiveData = MutableLiveData<MutableList<BannerBean>>()
 
 
     fun getHomeData() {
@@ -37,5 +46,15 @@ class HomeViewModel @ViewModelInject constructor(
             articleList.await().data?.datas?.addAll(0, topArticleList.await().data!!)
             articleList.await()
         }
+    }
+
+    /**
+     * 获取banner数据
+     */
+    fun getBannerData() {
+        request({ api.getBannerData() },
+            bannerLiveData, {
+
+            })
     }
 }

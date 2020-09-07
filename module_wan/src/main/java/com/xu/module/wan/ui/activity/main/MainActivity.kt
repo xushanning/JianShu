@@ -27,7 +27,7 @@ class MainActivity(
 
             override fun getItemCount() = 3
 
-            override fun getItem(position: Int): Fragment {
+            override fun createFragment(position: Int): Fragment {
                 return when (position) {
                     0 -> ARouter.getInstance().build(ARouterPath.home).navigation() as Fragment
                     1 -> ARouter.getInstance().build(ARouterPath.project).navigation() as Fragment

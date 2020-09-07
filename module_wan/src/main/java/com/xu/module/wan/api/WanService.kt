@@ -34,6 +34,12 @@ interface WanService {
     suspend fun getHomeTopArticleList(): BaseResBean<MutableList<ArticleItemBean>>
 
     /**
+     * 获取首页banner数据
+     */
+    @GET("banner/json")
+    suspend fun getBannerData(): BaseResBean<MutableList<BannerBean>>
+
+    /**
      * 获取首页的文章列表数据
      */
     @GET("article/list/{page}/json")
@@ -51,6 +57,22 @@ interface WanService {
         @Field("password") password: String,
         @Field("repassword") rePassword: String
     ): BaseResBean<String>
+
+
+    /**
+     * 获取项目分类
+     */
+    @GET("project/tree/json")
+    suspend fun getProjectType(): BaseResBean<MutableList<ProjectBean>>
+
+    /**
+     * 获取某一类下的文章列表
+     */
+    @GET("project/list/{page}/json")
+    suspend fun getProjectListByType(
+        @Path("page") page: Int,
+        @Query("cid") id: Int
+    ): BaseResBean<BasePageResBean<MutableList<ArticleItemBean>>>
 
     /**
      *获取公众号列表

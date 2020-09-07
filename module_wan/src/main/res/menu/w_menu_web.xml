@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/web_collect"
+        android:checked="false"
+        android:icon="@drawable/w_vector_un_collect_white"
+        android:title="@string/w_web_collect"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/web_share"
+        android:title="@string/w_web_share" />
+
+    <item
+        android:id="@+id/web_browser"
+        android:title="@string/w_web_browser" />
+
+</menu>
