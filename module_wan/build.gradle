@@ -2,8 +2,8 @@ apply from: "../component_build.gradle"
 
 android {
     resourcePrefix "w_"
-    dataBinding {
-        enabled true
+    buildFeatures {
+        dataBinding = true
     }
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8

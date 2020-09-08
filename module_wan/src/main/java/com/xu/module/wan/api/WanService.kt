@@ -66,6 +66,12 @@ interface WanService {
     suspend fun getProjectType(): BaseResBean<MutableList<ProjectBean>>
 
     /**
+     * 获取最新的文章列表
+     */
+    @GET("article/listproject/{page}/json")
+    suspend fun getLatestProjectList(@Path("page") page: Int): BaseResBean<BasePageResBean<MutableList<ArticleItemBean>>>
+
+    /**
      * 获取某一类下的文章列表
      */
     @GET("project/list/{page}/json")

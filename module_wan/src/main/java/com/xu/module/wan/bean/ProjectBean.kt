@@ -7,12 +7,12 @@ import com.squareup.moshi.JsonClass
  */
 @JsonClass(generateAdapter = true)
 data class ProjectBean(
-    val children: List<Any>,
-    val courseId: Int,
-    val id: Int,
-    val name: String,
-    val order: Int,
-    val parentChapterId: Int,
-    val userControlSetTop: Boolean,
-    val visible: Int
+    val children: List<String> = listOf(),
+    val courseId: Int = 0,
+    val id: Int = -1,
+    val name: String = "",
+    val order: Int = 0,
+    val parentChapterId: Int = 0,
+    val userControlSetTop: Boolean = false,
+    val visible: Int = 0
 )

@@ -9,6 +9,7 @@ import com.xu.commonlib.utlis.extention.getFragment
 import com.xu.commonlib.utlis.extention.observe
 import com.xu.module.wan.BR
 import com.xu.module.wan.R
+import com.xu.module.wan.bean.ProjectBean
 import com.xu.module.wan.constant.ARouterPath
 import com.xu.module.wan.databinding.WFragmentProjectBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,6 +31,8 @@ class ProjectFragment(
     override fun initData() {
         mViewModel.getProjectType()
         observe(mViewModel.typeLiveData) {
+            //添加最新的项目
+            it.add(0, ProjectBean(name = "最新项目"))
             vp_project.adapter = object : FragmentStateAdapter(this) {
 
                 override fun getItemCount(): Int {

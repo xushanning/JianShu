@@ -1,6 +1,8 @@
 package com.xu.module.wan.bean
 
+import com.chad.library.adapter.base.entity.MultiItemEntity
 import com.squareup.moshi.JsonClass
+import com.xu.module.wan.ui.fragment.home.HomeArticleItemQuickAdapter
 
 /**
  *文章item bean
@@ -39,7 +41,15 @@ data class ArticleItemBean(
     val userId: Int,
     val visible: Int,
     val zan: Int
-)
+) : MultiItemEntity {
+    override val itemType: Int
+        //类型逻辑copy
+        get() = if (envelopePic.isEmpty()) {
+            HomeArticleItemQuickAdapter.TYPE_ARTICLE
+        } else {
+            HomeArticleItemQuickAdapter.TYPE_PROJECT
+        }
+}
 
 @JsonClass(generateAdapter = true)
 data class TagBean(

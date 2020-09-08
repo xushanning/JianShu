@@ -6,10 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.orhanobut.logger.Logger
 import com.xu.commonlib.base.mvvm.BaseVmFragment
-import com.xu.commonlib.utlis.extention.go
-import com.xu.commonlib.utlis.extention.observe
-import com.xu.commonlib.utlis.extention.singleDbChildDataItemClick
-import com.xu.commonlib.utlis.extention.singleDbDataItemClick
+import com.xu.commonlib.utlis.extention.*
 import com.xu.module.wan.BR
 import com.xu.module.wan.R
 import com.xu.module.wan.bean.BannerBean
@@ -28,7 +25,7 @@ class HomeFragment(
     override val variableId: Int = BR.vm
 ) : BaseVmFragment<HomeViewModel, WFragmentHomeBinding>() {
 
-    private val quickAdapter = HomeArticleItemQuickAdapter()
+    private val quickAdapter: HomeArticleItemQuickAdapter by lazy { HomeArticleItemQuickAdapter() }
 
     override fun initView(mDataBinding: WFragmentHomeBinding) {
         rv_home.layoutManager = LinearLayoutManager(context)
@@ -36,14 +33,14 @@ class HomeFragment(
 
         quickAdapter.run {
 
-            singleDbDataItemClick {
+            singleDataItemClick {
                 go(ARouterPath.web) {
                     withString("url", it.link)
                     withString("title", it.title)
                 }
             }
 
-            singleDbChildDataItemClick { item, viewId ->
+            singleChildDataItemClick { item, viewId ->
                 if (viewId == R.id.img_collect) {
                     Logger.d("收藏" + item.author)
                 }
