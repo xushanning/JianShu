@@ -35,4 +35,14 @@ object ARouterPath {
      * 广场
      */
     const val square = "/wan/square"
+
+    /**
+     * 微信公众号
+     */
+    const val wePublic = "/wan/square"
+
+    /**
+     * 个人中心
+     */
+    const val mine = "/wan/mine"
 }

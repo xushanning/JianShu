@@ -32,6 +32,8 @@ class MainActivity(
                     0 -> ARouter.getInstance().build(ARouterPath.home).navigation() as Fragment
                     1 -> ARouter.getInstance().build(ARouterPath.project).navigation() as Fragment
                     2 -> ARouter.getInstance().build(ARouterPath.square).navigation() as Fragment
+                    3 -> ARouter.getInstance().build(ARouterPath.wePublic).navigation() as Fragment
+                    4 -> ARouter.getInstance().build(ARouterPath.mine).navigation() as Fragment
                     else -> ARouter.getInstance().build(ARouterPath.home).navigation() as Fragment
                 }
             }
