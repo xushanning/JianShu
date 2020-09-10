@@ -16,12 +16,14 @@ import com.xu.commonlib.base.mvvm.BaseVmFragment
 import com.xu.commonlib.utlis.AssetUtil
 import com.xu.commonlib.utlis.extention.forResult
 import com.xu.commonlib.utlis.extention.go
+import com.xu.commonlib.utlis.extention.observe
 import com.xu.commonlib.utlis.extention.singleDbDataItemClick
 import com.xu.module.wan.BR
 import com.xu.module.wan.R
 import com.xu.module.wan.bean.CommonUseBean
 import com.xu.module.wan.constant.ARouterPath
 import com.xu.module.wan.databinding.WFragmentMineBinding
+import com.xu.module.wan.db.dao.IUserDao
 import com.xu.module.wan.ui.activity.login.LoginActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.w_fragment_mine.*
@@ -32,13 +34,19 @@ import javax.inject.Inject
  */
 @Route(path = ARouterPath.mine)
 @AndroidEntryPoint
-class MineFragment(override val layoutId: Int = R.layout.w_fragment_mine, override val variableId: Int = BR.vm) :
+class MineFragment(
+    override val layoutId: Int = R.layout.w_fragment_mine,
+    override val variableId: Int = BR.vm
+) :
     BaseVmFragment<MineViewModel, WFragmentMineBinding>() {
 
     private val quickAdapter: CommonUseAdapter by lazy { CommonUseAdapter() }
 
     @Inject
     lateinit var moShi: Moshi
+
+    @Inject
+    lateinit var userDao: IUserDao
 
 
     val launcher = forResult {
@@ -62,7 +70,10 @@ class MineFragment(override val layoutId: Int = R.layout.w_fragment_mine, overri
     }
 
     override fun initData() {
+        //paging????
+        observe(userDao.queryUserInfo()) {
 
+        }
     }
 
     private fun getConfig(): MutableList<CommonUseBean> {

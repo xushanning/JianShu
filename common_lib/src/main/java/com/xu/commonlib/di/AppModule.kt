@@ -94,15 +94,15 @@ class AppModule {
     }
 
 
-    //提供room数据库
-    @Provides
-    @Singleton
-    fun provideRoom(context: Context): AppDatabase {
-        return Room
-            .databaseBuilder(context, AppDatabase::class.java, TableConstant.DB_NAME)
-            .build()
-
-    }
+//    //提供room数据库
+//    @Provides
+//    @Singleton
+//    fun provideRoom(context: Context): AppDatabase {
+//        return Room
+//            .databaseBuilder(context, AppDatabase::class.java, TableConstant.DB_NAME)
+//            .build()
+//
+//    }
 
 
     @Provides

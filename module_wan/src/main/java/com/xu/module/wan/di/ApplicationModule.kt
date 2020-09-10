@@ -1,7 +1,13 @@
 package com.xu.module.wan.di
 
+import android.content.Context
+import androidx.room.Room
+
 import com.xu.module.wan.api.WanService
 import com.xu.module.wan.constant.AppConstant
+import com.xu.module.wan.constant.DbConstant
+import com.xu.module.wan.db.AppDatabase
+import com.xu.module.wan.db.dao.IUserDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,6 +28,22 @@ class ApplicationModule {
             .baseUrl(AppConstant.BASE_URL)
             .build()
             .create(WanService::class.java)
+    }
+
+    //提供room数据库
+    @Provides
+    @Singleton
+    fun provideRoom(context: Context): AppDatabase {
+        return Room
+            .databaseBuilder(context, AppDatabase::class.java, DbConstant.DB_NAME)
+            .build()
+
+    }
+
+    @Provides
+    @Singleton
+    fun provideDao(database: AppDatabase): IUserDao {
+        return database.userDao()
     }
 
 
