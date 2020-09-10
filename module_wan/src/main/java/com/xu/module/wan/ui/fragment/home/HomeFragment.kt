@@ -2,6 +2,7 @@ package com.xu.module.wan.ui.fragment.home
 
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.orhanobut.logger.Logger
@@ -12,6 +13,7 @@ import com.xu.module.wan.R
 import com.xu.module.wan.bean.BannerBean
 import com.xu.module.wan.constant.ARouterPath
 import com.xu.module.wan.databinding.WFragmentHomeBinding
+import com.xu.module.wan.viewmodel.ArticleCollectViewModel
 import com.youth.banner.Banner
 import com.youth.banner.indicator.CircleIndicator
 import com.youth.banner.util.BannerUtils
@@ -24,6 +26,8 @@ class HomeFragment(
     override val layoutId: Int = R.layout.w_fragment_home,
     override val variableId: Int = BR.vm
 ) : BaseVmFragment<HomeViewModel, WFragmentHomeBinding>() {
+
+    val collectViewModel: ArticleCollectViewModel by viewModels()
 
     private val quickAdapter: HomeArticleItemQuickAdapter by lazy { HomeArticleItemQuickAdapter() }
 

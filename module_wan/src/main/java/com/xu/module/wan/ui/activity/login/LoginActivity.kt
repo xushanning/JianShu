@@ -1,6 +1,9 @@
 package com.xu.module.wan.ui.activity.login
 
+import android.app.Activity
+import android.content.Intent
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.jaeger.library.StatusBarUtil
 import com.orhanobut.logger.Logger
 import com.xu.commonlib.base.mvvm.BaseVmActivity
 import com.xu.commonlib.utlis.extention.observe
@@ -19,16 +22,17 @@ class LoginActivity(
 ) : BaseVmActivity<LoginViewModel, WActivityLoginBinding>() {
 
 
-    //val viewModel: LoginViewModel by viewModels()
-
-
     override fun initView(mDataBinding: WActivityLoginBinding) {
         mDataBinding.click = OnClick()
+        StatusBarUtil.setLightMode(this)
     }
 
     override fun initData() {
-        observe(mViewModel.userName) {
-            Logger.d(it)
+        observe(mViewModel.loginResult) {
+            if (it) {
+                setResult(Activity.RESULT_OK)
+                finish()
+            }
         }
     }
 
@@ -39,6 +43,10 @@ class LoginActivity(
                 mViewModel.password.value.isEmpty() -> showToast(R.string.w_empty_password)
                 else -> mViewModel.doLogin()
             }
+        }
+
+        fun back() {
+            finish()
         }
     }
 }

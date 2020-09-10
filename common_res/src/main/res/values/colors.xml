@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="res_66">#666666</color>
+    <color name="res_222">#222222</color>
     <color name="res_33">#333333</color>
     <color name="res_99">#999999</color>
     <color name="res_ea">#EAEAEA</color>
     <color name="res_fa">#FAFAFA</color>
     <color name="res_black">#000000</color>
     <color name="res_white">#FFFFFF</color>
+    <color name="res_f8">#f8f8f8</color>
     <color name="res_blue">#63B8FF</color>
+    <color name="res_divide">#FAFAFA</color>
     <color name="res_transparent">#00000000</color>
 </resources>

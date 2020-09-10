@@ -94,7 +94,7 @@ interface WanService {
     @GET("wxarticle/list/{accountId}/{page}/json")
     suspend fun getPublicAccountHistoryById(
         @Path("page") page: Int,
-        @Path("accountId") accountId: String
+        @Path("accountId") accountId: Int
     ): BaseResBean<BasePageResBean<MutableList<ArticleItemBean>>>
 
 

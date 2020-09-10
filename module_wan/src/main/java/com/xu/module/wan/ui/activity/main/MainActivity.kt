@@ -11,7 +11,6 @@ import com.xu.module.wan.R
 import com.xu.module.wan.constant.ARouterPath
 import com.xu.module.wan.databinding.WActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
-import it.sephiroth.android.library.bottomnavigation.BottomNavigation
 import kotlinx.android.synthetic.main.w_activity_main.*
 
 @Route(path = ARouterPath.main)
@@ -25,7 +24,7 @@ class MainActivity(
         vp_main.isUserInputEnabled = false
         vp_main.adapter = object : FragmentStateAdapter(this) {
 
-            override fun getItemCount() = 3
+            override fun getItemCount() = 5
 
             override fun createFragment(position: Int): Fragment {
                 return when (position) {
@@ -38,16 +37,10 @@ class MainActivity(
                 }
             }
         }
-
-        navigation.menuItemSelectionListener =
-            object : BottomNavigation.OnMenuItemSelectionListener {
-                override fun onMenuItemReselect(itemId: Int, position: Int, fromUser: Boolean) {
-                }
-
-                override fun onMenuItemSelect(itemId: Int, position: Int, fromUser: Boolean) {
-                    vp_main.setCurrentItem(position, false)
-                }
-            }
+        navigation.setOnNavigationItemSelectedListener {
+            vp_main.setCurrentItem(it.order, false)
+            true
+        }
     }
 
     override fun initData() {

@@ -1,4 +1,4 @@
-package com.xu.module.wan.ui.fragment.projectlist
+package com.xu.module.wan.ui.fragment.wepublicarticle
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Autowired
@@ -12,20 +12,17 @@ import com.xu.commonlib.utlis.extention.singleDataItemClick
 import com.xu.module.wan.BR
 import com.xu.module.wan.R
 import com.xu.module.wan.constant.ARouterPath
-import com.xu.module.wan.databinding.WFragmentProjectListBinding
+import com.xu.module.wan.databinding.WFragmentWePublicArticleBinding
 import com.xu.module.wan.ui.fragment.home.HomeArticleItemQuickAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.w_fragment_project_list.*
+import kotlinx.android.synthetic.main.w_fragment_we_public_article.*
 
-/**
- * 项目列表fragment
- */
-@Route(path = ARouterPath.projectList)
+@Route(path = ARouterPath.wePublicArticleList)
 @AndroidEntryPoint
-class ProjectListFragment(
-    override val layoutId: Int = R.layout.w_fragment_project_list,
+class WePublicArticleFragment(
+    override val layoutId: Int = R.layout.w_fragment_we_public_article,
     override val variableId: Int = BR.vm
-) : BaseVmFragment<ProjectListViewModel, WFragmentProjectListBinding>() {
+) : BaseVmFragment<WePublicArticleViewModel, WFragmentWePublicArticleBinding>() {
 
     @Autowired(name = "id")
     @JvmField
@@ -33,12 +30,10 @@ class ProjectListFragment(
 
     private val quickAdapter: HomeArticleItemQuickAdapter by lazy { HomeArticleItemQuickAdapter() }
 
-
-    override fun initView(mDataBinding: WFragmentProjectListBinding) {
-
-        rv_project_list.run {
-            layoutManager = LinearLayoutManager(context)
+    override fun initView(mDataBinding: WFragmentWePublicArticleBinding) {
+        rv_article_list.run {
             adapter = quickAdapter
+            layoutManager = LinearLayoutManager(context)
         }
         quickAdapter.run {
             singleDataItemClick {
@@ -54,11 +49,12 @@ class ProjectListFragment(
                 }
             }
         }
+
     }
 
     override fun initData() {
-        mViewModel.getArticleListByType(id!!)
-        observe(mViewModel.projectList) {
+        mViewModel.getHistoryArticleList(id!!)
+        observe(mViewModel.historyArticleLiveData) {
             quickAdapter.setNewInstance(it)
         }
     }

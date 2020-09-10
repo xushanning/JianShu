@@ -1,0 +1,10 @@
+<resources>
+
+    <style name="wLogin" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/res_99</item>
+        <item name="colorControlHighlight">@color/res_99</item>
+        <item name="colorControlActivated">@color/res_99</item>
+        <item name="colorAccent">@color/res_99</item>
+    </style>
+
+</resources>

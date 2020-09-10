@@ -1,31 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:bbn_alwaysShowLabels="false"
-    app:bbn_itemAnimationDuration="200"
-    app:bbn_itemColorActive="@android:color/black"
-    app:bbn_itemColorInactive="#AA000000"
-    app:bbn_rippleColor="#ccffffff">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/bbn_item1"
-        android:icon="@drawable/w_menu_main"
+        android:icon="@drawable/w_vector_home"
+        android:orderInCategory="0"
         android:title="@string/w_navigate_home" />
     <item
         android:id="@+id/bbn_item2"
-        android:icon="@drawable/w_menu_main"
+        android:icon="@drawable/w_vector_project"
+        android:orderInCategory="1"
         android:title="@string/w_navigate_project" />
     <item
         android:id="@+id/bbn_item3"
-        android:icon="@drawable/w_menu_main"
+        android:icon="@drawable/w_vector_square"
+        android:orderInCategory="2"
         android:title="@string/w_navigate_square" />
     <item
         android:id="@+id/bbn_item4"
-        android:icon="@drawable/w_menu_main"
+        android:icon="@drawable/w_vector_we_public"
+        android:orderInCategory="3"
         android:title="@string/w_navigate_we_public" />
     <item
         android:id="@+id/bbn_item5"
-        android:icon="@drawable/w_menu_main"
+        android:icon="@drawable/w_vector_mine"
+        android:orderInCategory="4"
         android:title="@string/w_navigate_mine" />
 
 </menu>

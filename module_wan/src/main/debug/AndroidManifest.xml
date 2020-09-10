@@ -7,6 +7,7 @@
 
     <application
         android:name=".debug.DebugApplication"
+        android:icon="@drawable/w_android"
         android:label="@string/w_app_name"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:replace="android:label">

@@ -5,6 +5,7 @@ import android.content.Context
 import androidx.room.Room
 import com.alibaba.android.arouter.launcher.ARouter
 import com.orhanobut.logger.Logger
+import com.squareup.moshi.Moshi
 import com.xu.commonlib.base.BaseApplication
 import com.xu.commonlib.constant.TableConstant
 import com.xu.commonlib.db.AppDatabase
@@ -116,6 +117,11 @@ class AppModule {
         return EasyLoad.initLocal()
     }
 
+    @Provides
+    @Singleton
+    fun provideMoShi(): Moshi {
+        return Moshi.Builder().build()
+    }
 
 
 }

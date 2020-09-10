@@ -87,7 +87,6 @@ ext {
             banner               : "com.youth.banner:banner:2.1.0",
 
             gifView              : "com.github.Cutta:GifView:1.4",
-            navigation           : "it.sephiroth.android.library.bottomnavigation:bottom-navigation:3.0.0",
             guide                : "com.github.huburt-Hu:NewbieGuide:v2.4.0",
             viewpager2           : "androidx.viewpager2:viewpager2:1.1.0-alpha01",
             slideView            : "com.github.onlyloveyd:SlideToggleView:1.0",

@@ -39,7 +39,12 @@ object ARouterPath {
     /**
      * 微信公众号
      */
-    const val wePublic = "/wan/square"
+    const val wePublic = "/wan/wePublic"
+
+    /**
+     * 微信公众号文章列表
+     */
+    const val wePublicArticleList = "/wan/wePublicArticleList"
 
     /**
      * 个人中心

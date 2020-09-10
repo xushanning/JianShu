@@ -1,7 +1,10 @@
 package com.xu.commonlib.utlis.extention
 
+import android.app.Activity
+import android.content.Context
 import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.Postcard
+import com.alibaba.android.arouter.facade.callback.NavigationCallback
 import com.alibaba.android.arouter.launcher.ARouter
 
 /**
@@ -15,6 +18,19 @@ fun go(path: String, func: Postcard.() -> Unit): Unit = run {
     ARouter.getInstance().build(path).with {
         this.func()
     }.navigation()
+}
+
+/**
+ * 待返回的跳转
+ */
+fun go(path: String, activity: Activity, requestCode: Int) {
+    ARouter.getInstance().build(path).navigation(activity, requestCode)
+}
+
+fun go(path: String, activity: Activity, requestCode: Int, func: Postcard.() -> Unit) {
+    ARouter.getInstance().build(path).with {
+        this.func()
+    }.navigation(activity, requestCode)
 }
 
 private fun Postcard.with(func: Postcard.() -> Unit): Postcard = run {
