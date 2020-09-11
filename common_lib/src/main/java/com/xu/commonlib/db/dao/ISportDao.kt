@@ -9,7 +9,7 @@ import io.reactivex.Single
 /**
  * @author 言吾許
  */
-@Dao
+
 interface ISportDao {
 
     @Query("select * from  sport")

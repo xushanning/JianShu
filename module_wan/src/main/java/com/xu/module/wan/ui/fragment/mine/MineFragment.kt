@@ -1,21 +1,14 @@
 package com.xu.module.wan.ui.fragment.mine
 
-import android.app.Activity
 import android.content.Intent
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContract
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.GridLayoutManager
-import com.alibaba.android.arouter.facade.Postcard
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.alibaba.android.arouter.facade.callback.NavigationCallback
 import com.orhanobut.logger.Logger
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
 import com.xu.commonlib.base.mvvm.BaseVmFragment
 import com.xu.commonlib.utlis.AssetUtil
 import com.xu.commonlib.utlis.extention.forResult
-import com.xu.commonlib.utlis.extention.go
 import com.xu.commonlib.utlis.extention.observe
 import com.xu.commonlib.utlis.extention.singleDbDataItemClick
 import com.xu.module.wan.BR
@@ -72,7 +65,7 @@ class MineFragment(
     override fun initData() {
         //paging????
         observe(userDao.queryUserInfo()) {
-
+            Logger.d(it.size)
         }
     }
 

@@ -9,4 +9,9 @@ object DbConstant {
      * 数据库名
      */
     const val DB_NAME = "wan_db"
+
+    /**
+     * 用户信息表
+     */
+    const val TABLE_USER = "user"
 }

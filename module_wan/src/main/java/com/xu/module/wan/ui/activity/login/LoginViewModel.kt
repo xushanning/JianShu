@@ -3,9 +3,6 @@ package com.xu.module.wan.ui.activity.login
 import android.content.Context
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.map
-import androidx.lifecycle.switchMap
 import com.orhanobut.logger.Logger
 import com.xu.commonlib.base.mvvm.BaseViewModel
 import com.xu.commonlib.livedata.BooleanLiveData
@@ -13,9 +10,12 @@ import com.xu.commonlib.livedata.StringLiveData
 import com.xu.commonlib.utlis.extention.request
 import com.xu.commonlib.utlis.extention.showToast
 import com.xu.module.wan.api.WanService
+import com.xu.module.wan.db.dao.IUserDao
 
 class LoginViewModel @ViewModelInject constructor(
-    private val api: WanService, private val context: Context
+    private val api: WanService,
+    private val context: Context,
+    private val userDao: IUserDao
 ) : BaseViewModel() {
 
 
@@ -47,6 +47,10 @@ class LoginViewModel @ViewModelInject constructor(
      */
     fun doLogin() {
         request({ api.login(userName.value, password.value) }, {
+            Logger.d(it.username)
+//            withContext(Dispatchers.IO) {
+//                userDao.saveUserInfo(UserEntity(it.id, it))
+//            }
             //todo 入库
             loginResult.postValue(true)
         }, {

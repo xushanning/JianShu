@@ -98,7 +98,7 @@ dependencies {
     api rootProject.ext.dependencies["eventBus"]
 
     api rootProject.ext.dependencies["room"]
-    api rootProject.ext.dependencies["roomRx"]
+    api rootProject.ext.dependencies["roomKtx"]
 
     api rootProject.ext.dependencies["coroutines"]
 

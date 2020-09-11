@@ -48,5 +48,9 @@ class LoginActivity(
         fun back() {
             finish()
         }
+        
+        fun forgetPassword(){
+            showToast("密码忘了？重新申请个账号吧~")
+        }
     }
 }

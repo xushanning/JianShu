@@ -19,6 +19,7 @@ dependencies {
     //很奇怪，已经在lib中依赖过了，这里还是得依赖一次
     implementation rootProject.ext.dependencies["hilt"]
 
+    kapt rootProject.ext.dependencies["roomCompiler"]
     kapt rootProject.ext.dependencies["arouterProcessor"]
     kapt rootProject.ext.dependencies["moshiKapt"]
     kapt rootProject.ext.dependencies["hiltKapt"]
