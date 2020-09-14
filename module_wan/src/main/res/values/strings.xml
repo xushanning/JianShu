@@ -4,8 +4,7 @@
     <string name="w_login">登录</string>
     <string name="w_username">账号</string>
     <string name="w_password">密码</string>
-    <string name="w_empty_username">请输入账号</string>
-    <string name="w_empty_password">请输入密码</string>
+
     <string name="w_login_login">账号登陆</string>
     <string name="w_login_des">登陆即表示同意"用户协议"和"隐私政策"</string>
     <string name="w_login_forget_password">忘记密码?</string>
@@ -24,7 +23,7 @@
     <string name="w_web_browser">用浏览器打开</string>
 
     <!--    我的-->
-    <string name="w_mine_common_use">常用</string>
+
     <string name="w_mine_read_history">浏览历史</string>
     <string name="w_mine_collection">收藏</string>
 

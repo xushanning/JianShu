@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <import type="android.view.View" />
 
         <variable
             name="vm"
@@ -18,42 +21,76 @@
         android:layout_height="match_parent"
         android:background="@color/res_f8">
 
-        <TextView
-            android:id="@+id/tv_login"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="36dp"
-            android:background="@drawable/w_shape_red_circle"
-            android:gravity="center"
-            android:onClick="@{()->click.jumpLogin()}"
-            android:text="@string/w_login"
-            android:textColor="@color/res_white"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <View
-            android:id="@+id/v_1"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_header"
             android:layout_width="0dp"
-            android:layout_height="5dp"
-            android:layout_marginTop="24dp"
-            android:background="@color/res_divide"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_login" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/tv_common_use"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:text="@string/w_mine_common_use"
-            android:textColor="@color/res_222"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/v_1" />
+            <TextView
+                android:id="@+id/tv_login"
+                roundUrl="@{vm.userInfoLiveData.icon}"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="36dp"
+                android:background="@drawable/w_shape_red_circle"
+                android:gravity="center"
+                android:onClick="@{()->click.jumpLogin()}"
+                android:text="@string/w_login"
+                android:textColor="@color/res_white"
+                android:textSize="20sp"
+                android:visibility="@{vm.loginStatus.booleanValue()? View.GONE:View.VISIBLE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/img_avatar"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="36dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/w_android" />
+
+            <TextView
+                android:id="@+id/tv_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@{vm.userInfoLiveData.username}"
+                android:textColor="@color/res_black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/img_avatar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/img_avatar"
+                app:layout_constraintTop_toTopOf="@+id/img_avatar"
+                tools:text="南子海涯" />
+
+            <TextView
+                android:id="@+id/tv_public_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{vm.userInfoLiveData.publicName}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_username"
+                tools:text="jddddddddd" />
+
+            <androidx.constraintlayout.widget.Group
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="@{vm.loginStatus.booleanValue()? View.VISIBLE:View.GONE}"
+                app:constraint_referenced_ids="tv_username,tv_public_name" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_common_use"
@@ -66,7 +103,7 @@
             android:paddingBottom="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_common_use" />
+            app:layout_constraintTop_toBottomOf="@+id/cl_header" />
 
 
         <View

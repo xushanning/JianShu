@@ -1,10 +1,7 @@
 package com.xu.module.wan.ui.activity.login
 
-import android.app.Activity
-import android.content.Intent
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.jaeger.library.StatusBarUtil
-import com.orhanobut.logger.Logger
 import com.xu.commonlib.base.mvvm.BaseVmActivity
 import com.xu.commonlib.utlis.extention.observe
 import com.xu.commonlib.utlis.extention.showToast
@@ -30,7 +27,6 @@ class LoginActivity(
     override fun initData() {
         observe(mViewModel.loginResult) {
             if (it) {
-                setResult(Activity.RESULT_OK)
                 finish()
             }
         }
@@ -38,18 +34,14 @@ class LoginActivity(
 
     inner class OnClick {
         fun login() {
-            when {
-                mViewModel.userName.value.isEmpty() -> showToast(R.string.w_empty_username)
-                mViewModel.password.value.isEmpty() -> showToast(R.string.w_empty_password)
-                else -> mViewModel.doLogin()
-            }
+            mViewModel.doLogin()
         }
 
         fun back() {
             finish()
         }
-        
-        fun forgetPassword(){
+
+        fun forgetPassword() {
             showToast("密码忘了？重新申请个账号吧~")
         }
     }
