@@ -97,5 +97,11 @@ interface WanService {
         @Path("accountId") accountId: Int
     ): BaseResBean<BasePageResBean<MutableList<ArticleItemBean>>>
 
+    /**
+     * 查看用户的积分和排名
+     */
+    @GET("lg/coin/userinfo/json")
+    suspend fun getRank(): BaseResBean<RankBean>
+
 
 }

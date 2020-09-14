@@ -90,7 +90,9 @@ class AppModule {
     @Provides
     @Singleton
     fun provideOkHttpClient(): OkHttpClient.Builder {
-        return OkHttpClient.Builder()
+        return OkHttpClient
+            .Builder()
+        //.cookieJar()
     }
 
 

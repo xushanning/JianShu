@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
+import com.jaeger.library.StatusBarUtil
 import com.orhanobut.logger.Logger
 import com.xu.commonlib.base.mvvm.BaseVmActivity
 import com.xu.module.wan.BR
@@ -39,6 +40,10 @@ class MainActivity(
         }
         navigation.setOnNavigationItemSelectedListener {
             vp_main.setCurrentItem(it.order, false)
+            when (it.order) {
+                0, 1, 2, 3, -> StatusBarUtil.setDarkMode(this)
+                4 -> StatusBarUtil.setLightMode(this)
+            }
             true
         }
     }

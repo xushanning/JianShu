@@ -19,6 +19,9 @@ abstract class BaseVmActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppCom
         super.onCreate(savedInstanceState)
         ARouter.getInstance().inject(this)
         StatusBarUtil.setTranslucentForImageViewInFragment(this, 0, null)
+        if (useLightMode()) {
+            StatusBarUtil.setLightMode(this)
+        }
         initDataBind()
         initView(mDataBinding)
         initData()
@@ -33,5 +36,12 @@ abstract class BaseVmActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppCom
     abstract fun initView(mDataBinding: DB)
 
     abstract fun initData()
+
+    /**
+     * 是否开启LightMode
+     */
+    open fun useLightMode(): Boolean {
+        return false
+    }
 
 }

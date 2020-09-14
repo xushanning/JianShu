@@ -31,10 +31,10 @@
 
             <TextView
                 android:id="@+id/tv_login"
-                roundUrl="@{vm.userInfoLiveData.icon}"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_marginTop="36dp"
+                android:layout_marginTop="48dp"
+                android:layout_marginBottom="36dp"
                 android:background="@drawable/w_shape_red_circle"
                 android:gravity="center"
                 android:onClick="@{()->click.jumpLogin()}"
@@ -42,6 +42,7 @@
                 android:textColor="@color/res_white"
                 android:textSize="20sp"
                 android:visibility="@{vm.loginStatus.booleanValue()? View.GONE:View.VISIBLE}"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -49,13 +50,14 @@
 
             <ImageView
                 android:id="@+id/img_avatar"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                roundUrl="@{vm.userInfoLiveData.icon}"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="36dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:src="@drawable/w_android" />
+                tools:src="@drawable/w_vector_default_avatar" />
 
             <TextView
                 android:id="@+id/tv_username"
@@ -73,21 +75,131 @@
                 app:layout_constraintTop_toTopOf="@+id/img_avatar"
                 tools:text="南子海涯" />
 
-            <TextView
-                android:id="@+id/tv_public_name"
+            <ImageView
+                android:id="@+id/img_right_arrow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{vm.userInfoLiveData.publicName}"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/res_right_arrow"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_username"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_username" />
+
+            <TextView
+                android:id="@+id/tv_main_page"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{()->click.jumpPersonPage()}"
+                android:text="@string/w_mine_person_page"
+                android:textColor="@color/res_99"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_username"
+                app:layout_constraintEnd_toStartOf="@+id/img_right_arrow"
+                app:layout_constraintTop_toTopOf="@+id/tv_username" />
+
+
+            <TextView
+                android:id="@+id/w_textview2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="1232"
+                android:textColor="@color/res_black"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@+id/w_textview"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_username"
-                tools:text="jddddddddd" />
+                app:layout_constraintTop_toBottomOf="@+id/img_avatar" />
+
+            <TextView
+                android:id="@+id/w_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="66"
+                android:textColor="@color/res_black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/w_textview2"
+                app:layout_constraintEnd_toStartOf="@+id/w_textview3"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/w_textview2"
+                app:layout_constraintTop_toTopOf="@+id/w_textview2" />
+
+            <TextView
+                android:id="@+id/w_textview3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="55"
+                android:textColor="@color/res_black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/w_textview2"
+                app:layout_constraintEnd_toStartOf="@+id/w_textview4"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/w_textview"
+                app:layout_constraintTop_toTopOf="@+id/w_textview2" />
+
+            <TextView
+                android:id="@+id/w_textview4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textColor="@color/res_black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/w_textview2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/w_textview3"
+                app:layout_constraintTop_toTopOf="@+id/w_textview2" />
+
+            <TextView
+                android:id="@+id/w_textview6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/w_mine_integral"
+                android:textColor="@color/res_99"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/w_textview2"
+                app:layout_constraintStart_toStartOf="@+id/w_textview2"
+                app:layout_constraintTop_toBottomOf="@+id/w_textview2" />
 
             <androidx.constraintlayout.widget.Group
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="@{vm.loginStatus.booleanValue()? View.VISIBLE:View.GONE}"
-                app:constraint_referenced_ids="tv_username,tv_public_name" />
+                app:constraint_referenced_ids="w_textview8,w_textview4,w_textview7,w_textview3,w_textview5,w_textview,w_textview6,w_textview2,img_right_arrow,tv_username,tv_main_page,tv_main_page,img_avatar" />
+
+            <TextView
+                android:id="@+id/w_textview5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/w_mine_rank"
+                android:textColor="@color/res_99"
+                app:layout_constraintBottom_toBottomOf="@+id/w_textview6"
+                app:layout_constraintEnd_toEndOf="@+id/w_textview"
+                app:layout_constraintStart_toStartOf="@+id/w_textview"
+                app:layout_constraintTop_toTopOf="@+id/w_textview6" />
+
+            <TextView
+                android:id="@+id/w_textview7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/w_mine_read_count"
+                android:textColor="@color/res_99"
+                app:layout_constraintBottom_toBottomOf="@+id/w_textview5"
+                app:layout_constraintEnd_toEndOf="@+id/w_textview3"
+                app:layout_constraintStart_toStartOf="@+id/w_textview3"
+                app:layout_constraintTop_toTopOf="@+id/w_textview5" />
+
+            <TextView
+                android:id="@+id/w_textview8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/w_mine_attention"
+                android:textColor="@color/res_99"
+                app:layout_constraintBottom_toBottomOf="@+id/w_textview7"
+                app:layout_constraintEnd_toEndOf="@+id/w_textview4"
+                app:layout_constraintStart_toStartOf="@+id/w_textview4"
+                app:layout_constraintTop_toTopOf="@+id/w_textview7" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

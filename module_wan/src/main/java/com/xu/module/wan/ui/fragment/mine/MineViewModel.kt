@@ -5,6 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import com.xu.commonlib.base.mvvm.BaseViewModel
+import com.xu.commonlib.utlis.extention.request
+import com.xu.module.wan.api.WanService
+import com.xu.module.wan.bean.RankBean
 import com.xu.module.wan.db.AppLiveData
 import com.xu.module.wan.db.AppSp
 import com.xu.module.wan.db.dao.IUserDao
@@ -12,6 +15,7 @@ import com.xu.module.wan.db.entity.UserEntity
 import kotlinx.coroutines.launch
 
 class MineViewModel @ViewModelInject constructor(
+    private val api: WanService,
     private val userDao: IUserDao
 ) : BaseViewModel() {
     val loginStatus = AppLiveData.loginStatusLiveData
@@ -20,11 +24,27 @@ class MineViewModel @ViewModelInject constructor(
         it.userInfoBean
     } as MutableLiveData
 
+    /**
+     * 排名+积分
+     */
+    val rankLiveData = MutableLiveData<RankBean>()
+
 
     fun changeUi() {
         viewModelScope.launch {
             userInfoLiveData.postValue(userDao.queryUserInfo(AppSp.currentUserId)?.userInfoBean)
         }
+    }
+
+    /**
+     * 获取排名和积分
+     */
+    fun getRank() {
+        request({
+            api.getRank()
+        }, rankLiveData, {
+
+        })
     }
 
 }

@@ -23,8 +23,16 @@
     <string name="w_web_browser">用浏览器打开</string>
 
     <!--    我的-->
-
+    <string name="w_mine_person_page">个人主页</string>
     <string name="w_mine_read_history">浏览历史</string>
     <string name="w_mine_collection">收藏</string>
+    <string name="w_mine_integral">积分</string>
+    <string name="w_mine_rank">排名</string>
+    <string name="w_mine_read_count">今日阅读</string>
 
+    <string name="w_mine_attention">关注</string>
+
+
+    <string name="w_home_default">RecyclerView使用 | 快来Start一下项目吧</string>
+    <string name="w_home_publish">发布</string>
 </resources>

@@ -65,7 +65,7 @@ class HomeFragment(
                 val banner = Banner<BannerBean, HomeBannerAdapter>(context).apply {
                     layoutParams = ViewGroup.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
-                        BannerUtils.dp2px(150f).toInt()
+                        BannerUtils.dp2px(200f).toInt()
                     )
                     adapter = HomeBannerAdapter(it)
                     addBannerLifecycleObserver(this@HomeFragment)

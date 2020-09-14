@@ -9,6 +9,7 @@ import com.xu.commonlib.base.mvvm.BaseVmFragment
 import com.xu.commonlib.utlis.AssetUtil
 import com.xu.commonlib.utlis.extention.go
 import com.xu.commonlib.utlis.extention.observe
+import com.xu.commonlib.utlis.extention.showToast
 import com.xu.commonlib.utlis.extention.singleDbDataItemClick
 import com.xu.module.wan.BR
 import com.xu.module.wan.R
@@ -30,8 +31,7 @@ import javax.inject.Inject
 class MineFragment(
     override val layoutId: Int = R.layout.w_fragment_mine,
     override val variableId: Int = BR.vm
-) :
-    BaseVmFragment<MineViewModel, WFragmentMineBinding>() {
+) : BaseVmFragment<MineViewModel, WFragmentMineBinding>() {
 
     private val quickAdapter: CommonUseAdapter by lazy { CommonUseAdapter() }
 
@@ -89,6 +89,13 @@ class MineFragment(
         fun jumpLogin() {
             go(ARouterPath.login)
             // launcher.launch(Intent(context, LoginActivity::class.java))
+        }
+
+        /**
+         * 个人主页
+         */
+        fun jumpPersonPage() {
+            showToast("假的。。别点了")
         }
     }
 }

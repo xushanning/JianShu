@@ -11,9 +11,10 @@ import com.xu.module.wan.R
 object ImgObj {
     @JvmStatic
     @BindingAdapter("roundUrl")
-    fun loadRoundImg(img: ImageView, url: String) {
-        if (url.isEmpty()) {
-            Glide.with(BaseApplication.appContext.applicationContext).load(R.drawable.w_android)
+    fun loadRoundImg(img: ImageView, url: String?) {
+        if (url.isNullOrEmpty()) {
+            Glide.with(BaseApplication.appContext.applicationContext)
+                .load(R.drawable.w_vector_default_avatar)
                 .apply(RequestOptions.circleCropTransform()).into(img);
         } else {
             Glide.with(BaseApplication.appContext.applicationContext).load(url)

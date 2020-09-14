@@ -21,7 +21,6 @@ class LoginActivity(
 
     override fun initView(mDataBinding: WActivityLoginBinding) {
         mDataBinding.click = OnClick()
-        StatusBarUtil.setLightMode(this)
     }
 
     override fun initData() {
@@ -30,6 +29,10 @@ class LoginActivity(
                 finish()
             }
         }
+    }
+
+    override fun useLightMode(): Boolean {
+        return true
     }
 
     inner class OnClick {
