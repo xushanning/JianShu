@@ -18,6 +18,7 @@ class MineViewModel @ViewModelInject constructor(
     private val api: WanService,
     private val userDao: IUserDao
 ) : BaseViewModel() {
+
     val loginStatus = AppLiveData.loginStatusLiveData
 
     val userInfoLiveData = MutableLiveData<UserEntity>().map {

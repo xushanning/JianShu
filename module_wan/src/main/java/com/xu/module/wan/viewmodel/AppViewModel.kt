@@ -1,22 +1,14 @@
 package com.xu.module.wan.viewmodel
 
-import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.map
 import com.xu.commonlib.base.mvvm.BaseViewModel
-import com.xu.module.wan.db.AppSp
-import com.xu.module.wan.db.dao.IUserDao
+import com.xu.module.wan.db.AppLiveData
 
 /**
  * 全局的ViewModel
  */
-class AppViewModel @ViewModelInject constructor(
-    private val userDao: IUserDao,
-) : BaseViewModel() {
+class AppViewModel : BaseViewModel() {
+
+    //val loginStatus = AppLiveData.loginStatusLiveData
 
 
-
-//    val userInfoLiveData = userDao.queryUserInfo().map {
-//
-//    }
 }

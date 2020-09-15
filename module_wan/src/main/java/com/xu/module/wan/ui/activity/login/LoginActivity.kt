@@ -9,6 +9,7 @@ import com.xu.module.wan.BR
 import com.xu.module.wan.R
 import com.xu.module.wan.constant.ARouterPath
 import com.xu.module.wan.databinding.WActivityLoginBinding
+import com.xu.module.wan.weight.state.LoadingState
 import dagger.hilt.android.AndroidEntryPoint
 
 @Route(path = ARouterPath.login)
@@ -37,10 +38,12 @@ class LoginActivity(
 
     inner class OnClick {
         fun login() {
+            mLoadService.showState(LoadingState::class.java)
             mViewModel.doLogin()
         }
 
         fun back() {
+            mLoadService.showSuccess()
             finish()
         }
 

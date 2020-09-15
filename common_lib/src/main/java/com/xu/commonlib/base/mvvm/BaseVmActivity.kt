@@ -9,9 +9,12 @@ import androidx.lifecycle.ViewModelProvider
 import com.alibaba.android.arouter.launcher.ARouter
 import com.jaeger.library.StatusBarUtil
 import com.xu.commonlib.utlis.extention.getVmClazz
+import com.xu.easyload.ext.inject
+import com.xu.easyload.service.ILoadService
 
 abstract class BaseVmActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppCompatActivity() {
     private lateinit var mDataBinding: DB
+    lateinit var mLoadService: ILoadService
     protected val mViewModel: VM by lazy { ViewModelProvider(this).get(getVmClazz(this)) }
     abstract val layoutId: Int
     abstract val variableId: Int
@@ -23,6 +26,9 @@ abstract class BaseVmActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppCom
             StatusBarUtil.setLightMode(this)
         }
         initDataBind()
+        mLoadService = inject(this){
+            showDefault(false)
+        }
         initView(mDataBinding)
         initData()
     }

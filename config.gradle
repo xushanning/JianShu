@@ -24,7 +24,8 @@ ext {
             lifecycle    : "2.2.0",
             hilt         : "2.28.3-alpha",
             versionPlugin: "0.29.0",
-            hiltViewModel: "1.0.0-alpha01"
+            hiltViewModel: "1.0.0-alpha01",
+            ktx          : "1.2.5"
     ]
     dependencies = [
             //kotlin
@@ -63,6 +64,7 @@ ext {
             okhttpLog            : "com.squareup.okhttp3:logging-interceptor:3.8.1",
             moshi                : "com.squareup.moshi:moshi:${dependVersion.moshi}",
             moshiKapt            : "com.squareup.moshi:moshi-kotlin-codegen:${dependVersion.moshi}",
+            cookieJar            : "com.github.franmontiel:PersistentCookieJar:v1.0.1",
 
             //UI
             materialDialog       : "com.afollestad.material-dialogs:core:3.1.0",
@@ -95,7 +97,7 @@ ext {
             //jetPack
             liveData             : "androidx.lifecycle:lifecycle-livedata-ktx:${dependVersion.lifecycle}",
             viewModel            : "androidx.lifecycle:lifecycle-viewmodel-ktx:${dependVersion.lifecycle}",
-            fragmentKtx          : "androidx.fragment:fragment-ktx:1.2.5",
+            fragmentKtx          : "androidx.fragment:fragment-ktx:${dependVersion.ktx}",
 
             //aRouter
             arouterApi           : "com.alibaba:arouter-api:1.4.1",
@@ -114,7 +116,7 @@ ext {
 
             //db
             room                 : "androidx.room:room-runtime:${dependVersion.room}",
-            roomKtx               : "androidx.room:room-ktx:${dependVersion.room}",
+            roomKtx              : "androidx.room:room-ktx:${dependVersion.room}",
             roomCompiler         : "androidx.room:room-compiler:${dependVersion.room}",
 
             //高德地图

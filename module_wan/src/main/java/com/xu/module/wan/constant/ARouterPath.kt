@@ -50,4 +50,14 @@ object ARouterPath {
      * 个人中心
      */
     const val mine = "/wan/mine"
+
+    /**
+     * 设置
+     */
+    const val setting = "/wan/setting"
+
+    /**
+     * 搜索
+     */
+    const val search = "/wan/search"
 }

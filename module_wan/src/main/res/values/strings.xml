@@ -33,6 +33,9 @@
     <string name="w_mine_attention">关注</string>
 
 
-    <string name="w_home_default">RecyclerView使用 | 快来Start一下项目吧</string>
+    <string name="w_home_default">EasyLoad使用 | 快来Start一下项目吧</string>
     <string name="w_home_publish">发布</string>
+
+    <string name="w_setting_right">All Rights Reserved By YanWu</string>
+    <string name="w_setting_exit">退出登录</string>
 </resources>

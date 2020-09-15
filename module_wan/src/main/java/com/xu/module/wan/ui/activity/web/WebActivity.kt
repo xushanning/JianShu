@@ -12,9 +12,9 @@ import com.xu.commonlib.base.mvvm.BaseVmActivity
 import com.xu.module.wan.BR
 import com.xu.module.wan.R
 import com.xu.module.wan.constant.ARouterPath
-import com.xu.module.wan.databinding.WAcitivityWebBinding
+import com.xu.module.wan.databinding.WActivityWebBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.w_acitivity_web.*
+import kotlinx.android.synthetic.main.w_activity_web.*
 
 /**
  * 加载WebView
@@ -22,9 +22,9 @@ import kotlinx.android.synthetic.main.w_acitivity_web.*
 @Route(path = ARouterPath.web)
 @AndroidEntryPoint
 class WebActivity(
-    override val layoutId: Int = R.layout.w_acitivity_web,
+    override val layoutId: Int = R.layout.w_activity_web,
     override val variableId: Int = BR.vm
-) : BaseVmActivity<WebViewModel, WAcitivityWebBinding>() {
+) : BaseVmActivity<WebViewModel, WActivityWebBinding>() {
 
     @Autowired(name = "url")
     @JvmField
@@ -36,7 +36,7 @@ class WebActivity(
 
     private lateinit var web: AgentWeb
 
-    override fun initView(mDataBinding: WAcitivityWebBinding) {
+    override fun initView(mDataBinding: WActivityWebBinding) {
         initWeb()
         tb_web.run {
             Logger.d(this@WebActivity.title)

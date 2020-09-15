@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.orhanobut.logger.Logger
 import com.xu.commonlib.base.mvvm.BaseViewModel
 import com.xu.commonlib.utlis.extention.request
+import com.xu.commonlib.utlis.extention.requestByNoResult
 import com.xu.module.wan.api.WanService
 import com.xu.module.wan.bean.ArticleItemBean
 import com.xu.module.wan.bean.BannerBean
@@ -28,7 +29,7 @@ class HomeViewModel @ViewModelInject constructor(
     val bannerLiveData = MutableLiveData<MutableList<BannerBean>>()
 
 
-    fun getHomeData() {
+    fun getHomeData(isRefresh: Boolean = false) {
         request({
             getCombineArticleList()
         }, {

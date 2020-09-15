@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="w_color_red">#FF3539</color>
+    <color name="w_color_red">#F85959</color>
     <color name="w_color_light_disable">#FFABAB</color>
     <color name="w_color_login_enable">#EF4142</color>
     <color name="w_color_green">#ff669900</color>
+    <color name="w_color_loading">#1A999999</color>
 
 
 </resources>

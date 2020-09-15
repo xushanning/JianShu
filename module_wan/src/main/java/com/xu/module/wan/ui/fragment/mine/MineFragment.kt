@@ -57,7 +57,7 @@ class MineFragment(
         quickAdapter.run {
             setNewInstance(getConfig())
             singleDbDataItemClick {
-
+                go(it.path)
             }
         }
     }
@@ -66,6 +66,7 @@ class MineFragment(
         observe(mViewModel.loginStatus) {
             if (it) {
                 mViewModel.changeUi()
+                mViewModel.getRank()
             }
         }
         observe(mViewModel.userInfoLiveData) {

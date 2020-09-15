@@ -99,29 +99,31 @@
 
             <TextView
                 android:id="@+id/w_textview2"
+                num="@{vm.rankLiveData.coinCount}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="1232"
                 android:textColor="@color/res_black"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@+id/w_textview"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/img_avatar" />
+                app:layout_constraintTop_toBottomOf="@+id/img_avatar"
+                tools:text="555ddd" />
 
             <TextView
                 android:id="@+id/w_textview"
+                num="@{vm.rankLiveData.rank}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="66"
                 android:textColor="@color/res_black"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/w_textview2"
                 app:layout_constraintEnd_toStartOf="@+id/w_textview3"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/w_textview2"
-                app:layout_constraintTop_toTopOf="@+id/w_textview2" />
+                app:layout_constraintTop_toTopOf="@+id/w_textview2"
+                tools:text="555" />
 
             <TextView
                 android:id="@+id/w_textview3"

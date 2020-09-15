@@ -7,7 +7,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.orhanobut.logger.Logger
 import com.xu.commonlib.base.mvvm.BaseVmFragment
-import com.xu.commonlib.utlis.extention.*
+import com.xu.commonlib.utlis.extention.go
+import com.xu.commonlib.utlis.extention.observe
+import com.xu.commonlib.utlis.extention.singleChildDataItemClick
+import com.xu.commonlib.utlis.extention.singleDataItemClick
+import com.xu.easyload.ext.inject
+import com.xu.easyload.service.ILoadService
 import com.xu.module.wan.BR
 import com.xu.module.wan.R
 import com.xu.module.wan.bean.BannerBean
@@ -31,6 +36,8 @@ class HomeFragment(
 
     private val quickAdapter: HomeArticleItemQuickAdapter by lazy { HomeArticleItemQuickAdapter() }
 
+    private lateinit var loadService: ILoadService
+
     override fun initView(mDataBinding: WFragmentHomeBinding) {
         rv_home.layoutManager = LinearLayoutManager(context)
         rv_home.adapter = quickAdapter
@@ -50,13 +57,19 @@ class HomeFragment(
                 }
             }
         }
+
+        swipe_refresh.setOnRefreshListener {
+            mViewModel.getHomeData(true)
+        }
     }
 
     override fun initData() {
+        loadService = inject(rv_home)
         mViewModel.getBannerData()
         mViewModel.getHomeData()
 
         observe(mViewModel.homeArticleData) {
+            loadService.showSuccess()
             quickAdapter.setNewInstance(it)
         }
 

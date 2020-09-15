@@ -23,9 +23,15 @@ interface WanService {
 
     /**
      * 注册
+     * @param username 用户名
+     * @param password 密码
+     * @param rePassword 重复密码
      */
     @POST("user/register")
-    suspend fun register(): BaseResBean<Any>
+    suspend fun register(@Field("username") username: String,
+                         @Field("password") password: String,
+                         @Field("repassword") rePassword: String
+    ): BaseResBean<Any>
 
     /**
      * 获取首页置顶的文章列表
@@ -47,16 +53,9 @@ interface WanService {
 
     /**
      * 登出
-     * @param username 用户名
-     * @param password 密码
-     * @param rePassword 重复密码
      */
-    @POST("user/register")
-    suspend fun logout(
-        @Field("username") username: String,
-        @Field("password") password: String,
-        @Field("repassword") rePassword: String
-    ): BaseResBean<String>
+    @GET("user/logout/json")
+    suspend fun logout(): BaseResBean<Any>
 
 
     /**

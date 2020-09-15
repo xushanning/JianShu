@@ -83,6 +83,7 @@ dependencies {
     api rootProject.ext.dependencies["moshiCoverter"]
     api rootProject.ext.dependencies["moshi"]
     api rootProject.ext.dependencies["okhttpLog"]
+    api rootProject.ext.dependencies["cookieJar"]
 
     api rootProject.ext.dependencies["statusBar"]
 
