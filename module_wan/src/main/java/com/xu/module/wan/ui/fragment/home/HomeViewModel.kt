@@ -2,6 +2,10 @@ package com.xu.module.wan.ui.fragment.home
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.cachedIn
 import com.orhanobut.logger.Logger
 import com.xu.commonlib.base.mvvm.BaseViewModel
 import com.xu.commonlib.utlis.extention.request
@@ -17,6 +21,7 @@ import kotlinx.coroutines.withContext
 
 class HomeViewModel @ViewModelInject constructor(
     private val api: WanService
+
 ) : BaseViewModel() {
     /**
      * 首页文章
@@ -27,6 +32,11 @@ class HomeViewModel @ViewModelInject constructor(
      * banner数据
      */
     val bannerLiveData = MutableLiveData<MutableList<BannerBean>>()
+
+    val pager by lazy {
+        Pager(config = PagingConfig(20, 1),
+            pagingSourceFactory = { ArticleSource(api) }).flow.cachedIn(viewModelScope)
+    }
 
 
     fun getHomeData(isRefresh: Boolean = false) {

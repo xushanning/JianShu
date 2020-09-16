@@ -1,7 +1,6 @@
 package com.xu.commonlib.base.mvvm
 
 import android.os.Bundle
-import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -9,12 +8,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.alibaba.android.arouter.launcher.ARouter
 import com.jaeger.library.StatusBarUtil
 import com.xu.commonlib.utlis.extention.getVmClazz
-import com.xu.easyload.ext.inject
-import com.xu.easyload.service.ILoadService
+import com.xu.commonlib.utlis.extention.observe
 
-abstract class BaseVmActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppCompatActivity() {
+abstract class BaseVmActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppCompatActivity(),
+    IBaseVmView {
     private lateinit var mDataBinding: DB
-    lateinit var mLoadService: ILoadService
     protected val mViewModel: VM by lazy { ViewModelProvider(this).get(getVmClazz(this)) }
     abstract val layoutId: Int
     abstract val variableId: Int
@@ -26,9 +24,7 @@ abstract class BaseVmActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppCom
             StatusBarUtil.setLightMode(this)
         }
         initDataBind()
-        mLoadService = inject(this){
-            showDefault(false)
-        }
+        observeDialogChange()
         initView(mDataBinding)
         initData()
     }
@@ -44,10 +40,24 @@ abstract class BaseVmActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppCom
     abstract fun initData()
 
     /**
+     * 订阅dialog状态变化
+     */
+    private fun observeDialogChange() {
+        observe(mViewModel.showDialog) {
+            showLoading(it)
+        }
+        observe(mViewModel.dismissDialog) {
+            dismissLoading()
+        }
+    }
+
+
+    /**
      * 是否开启LightMode
      */
     open fun useLightMode(): Boolean {
         return false
     }
+
 
 }

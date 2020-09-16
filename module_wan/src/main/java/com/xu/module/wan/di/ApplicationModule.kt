@@ -8,6 +8,7 @@ import com.xu.module.wan.constant.AppConstant
 import com.xu.module.wan.constant.DbConstant
 import com.xu.module.wan.db.AppDatabase
 import com.xu.module.wan.db.dao.IUserDao
+import com.xu.module.wan.viewmodel.AppLiveData
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -44,6 +45,15 @@ class ApplicationModule {
     @Singleton
     fun provideDao(database: AppDatabase): IUserDao {
         return database.userDao()
+    }
+
+    /**
+     * 提供全局LiveData
+     */
+    @Provides
+    @Singleton
+    fun provideAppLiveData(): AppLiveData {
+        return AppLiveData.INSTANCE
     }
 
 

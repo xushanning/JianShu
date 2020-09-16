@@ -4,11 +4,11 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.material.tabs.TabLayoutMediator
-import com.xu.commonlib.base.mvvm.BaseVmFragment
 import com.xu.commonlib.utlis.extention.getFragment
 import com.xu.commonlib.utlis.extention.observe
 import com.xu.module.wan.BR
 import com.xu.module.wan.R
+import com.xu.module.wan.base.BaseFragment
 import com.xu.module.wan.bean.ProjectBean
 import com.xu.module.wan.constant.ARouterPath
 import com.xu.module.wan.databinding.WFragmentProjectBinding
@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.w_fragment_project.*
 class ProjectFragment(
     override val layoutId: Int = R.layout.w_fragment_project,
     override val variableId: Int = BR.vm
-) : BaseVmFragment<ProjectViewModel, WFragmentProjectBinding>() {
+) : BaseFragment<ProjectViewModel, WFragmentProjectBinding>() {
     override fun initView(mDataBinding: WFragmentProjectBinding) {
 
     }

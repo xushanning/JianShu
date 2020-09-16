@@ -1,9 +1,9 @@
 package com.xu.module.wan.ui.activity.search
 
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.xu.commonlib.base.mvvm.BaseVmActivity
 import com.xu.module.wan.BR
 import com.xu.module.wan.R
+import com.xu.module.wan.base.BaseActivity
 import com.xu.module.wan.constant.ARouterPath
 import com.xu.module.wan.databinding.WActivitySearchBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -14,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @Route(path = ARouterPath.search)
 @AndroidEntryPoint
 class SearchActivity(override val layoutId: Int = R.layout.w_activity_search, override val variableId: Int = BR.vm) :
-    BaseVmActivity<SearchViewModel, WActivitySearchBinding>() {
+    BaseActivity<SearchViewModel, WActivitySearchBinding>() {
     override fun initView(mDataBinding: WActivitySearchBinding) {
 
     }

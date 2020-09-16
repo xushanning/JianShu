@@ -4,7 +4,7 @@
     <color name="w_color_light_disable">#FFABAB</color>
     <color name="w_color_login_enable">#EF4142</color>
     <color name="w_color_green">#ff669900</color>
-    <color name="w_color_loading">#1A999999</color>
+    <color name="w_color_loading">#1A000000</color>
 
 
 </resources>

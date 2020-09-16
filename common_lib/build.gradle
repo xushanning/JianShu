@@ -61,6 +61,7 @@ dependencies {
     api rootProject.ext.dependencies["material"]
     api rootProject.ext.dependencies["viewpager2"]
     api rootProject.ext.dependencies["materialDialog"]
+    api rootProject.ext.dependencies["materialLifecycle"]
     api rootProject.ext.dependencies["smartRefreshCore"]
     api rootProject.ext.dependencies["smartRefreshHeader"]
     api rootProject.ext.dependencies["smartRefreshFooter"]
@@ -107,6 +108,8 @@ dependencies {
     api rootProject.ext.dependencies["liveData"]
     api rootProject.ext.dependencies["viewModel"]
     api rootProject.ext.dependencies["fragmentKtx"]
+    api rootProject.ext.dependencies["jStartUp"]
+    api rootProject.ext.dependencies["jPaging"]
 
     api rootProject.ext.dependencies["alpha"]
 

@@ -1,4 +1,4 @@
-package com.xu.module.wan.weight.state
+package com.xu.module.wan.weight
 
 import android.content.Context
 import android.util.AttributeSet

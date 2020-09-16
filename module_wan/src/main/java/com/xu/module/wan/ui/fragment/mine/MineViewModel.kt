@@ -8,7 +8,7 @@ import com.xu.commonlib.base.mvvm.BaseViewModel
 import com.xu.commonlib.utlis.extention.request
 import com.xu.module.wan.api.WanService
 import com.xu.module.wan.bean.RankBean
-import com.xu.module.wan.db.AppLiveData
+import com.xu.module.wan.viewmodel.AppLiveData
 import com.xu.module.wan.db.AppSp
 import com.xu.module.wan.db.dao.IUserDao
 import com.xu.module.wan.db.entity.UserEntity
@@ -16,10 +16,11 @@ import kotlinx.coroutines.launch
 
 class MineViewModel @ViewModelInject constructor(
     private val api: WanService,
-    private val userDao: IUserDao
+    private val userDao: IUserDao,
+    appLiveData: AppLiveData
 ) : BaseViewModel() {
 
-    val loginStatus = AppLiveData.loginStatusLiveData
+    val loginStatus = appLiveData.loginStatusLiveData
 
     val userInfoLiveData = MutableLiveData<UserEntity>().map {
         it.userInfoBean

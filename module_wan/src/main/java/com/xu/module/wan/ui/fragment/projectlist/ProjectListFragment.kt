@@ -4,13 +4,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.orhanobut.logger.Logger
-import com.xu.commonlib.base.mvvm.BaseVmFragment
 import com.xu.commonlib.utlis.extention.go
 import com.xu.commonlib.utlis.extention.observe
 import com.xu.commonlib.utlis.extention.singleChildDataItemClick
 import com.xu.commonlib.utlis.extention.singleDataItemClick
 import com.xu.module.wan.BR
 import com.xu.module.wan.R
+import com.xu.module.wan.base.BaseFragment
 import com.xu.module.wan.constant.ARouterPath
 import com.xu.module.wan.databinding.WFragmentProjectListBinding
 import com.xu.module.wan.ui.fragment.home.HomeArticleItemQuickAdapter
@@ -25,7 +25,7 @@ import kotlinx.android.synthetic.main.w_fragment_project_list.*
 class ProjectListFragment(
     override val layoutId: Int = R.layout.w_fragment_project_list,
     override val variableId: Int = BR.vm
-) : BaseVmFragment<ProjectListViewModel, WFragmentProjectListBinding>() {
+) : BaseFragment<ProjectListViewModel, WFragmentProjectListBinding>() {
 
     @Autowired(name = "id")
     @JvmField

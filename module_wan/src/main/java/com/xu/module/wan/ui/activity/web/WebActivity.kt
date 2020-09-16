@@ -8,9 +8,9 @@ import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.just.agentweb.AgentWeb
 import com.orhanobut.logger.Logger
-import com.xu.commonlib.base.mvvm.BaseVmActivity
 import com.xu.module.wan.BR
 import com.xu.module.wan.R
+import com.xu.module.wan.base.BaseActivity
 import com.xu.module.wan.constant.ARouterPath
 import com.xu.module.wan.databinding.WActivityWebBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.w_activity_web.*
 class WebActivity(
     override val layoutId: Int = R.layout.w_activity_web,
     override val variableId: Int = BR.vm
-) : BaseVmActivity<WebViewModel, WActivityWebBinding>() {
+) : BaseActivity<WebViewModel, WActivityWebBinding>() {
 
     @Autowired(name = "url")
     @JvmField

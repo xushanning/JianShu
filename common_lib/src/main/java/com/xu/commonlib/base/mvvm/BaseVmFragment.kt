@@ -9,9 +9,11 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.alibaba.android.arouter.launcher.ARouter
+import com.xu.commonlib.R
 import com.xu.commonlib.utlis.extention.getVmClazz
+import com.xu.commonlib.utlis.extention.observe
 
-abstract class BaseVmFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment() {
+abstract class BaseVmFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment(), IBaseVmView {
     private lateinit var mDataBinding: DB
     protected val mViewModel: VM by lazy { ViewModelProvider(this).get(getVmClazz(this)) }
     abstract val layoutId: Int
@@ -32,6 +34,7 @@ abstract class BaseVmFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragme
         super.onViewCreated(view, savedInstanceState)
         ARouter.getInstance().inject(this)
         initView(mDataBinding)
+        observeDialogChange()
         initData()
     }
 
@@ -39,4 +42,13 @@ abstract class BaseVmFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragme
     abstract fun initView(mDataBinding: DB)
 
     abstract fun initData()
+
+    private fun observeDialogChange() {
+        observe(mViewModel.showDialog) {
+            showLoading(it)
+        }
+        observe(mViewModel.dismissDialog) {
+            dismissLoading()
+        }
+    }
 }

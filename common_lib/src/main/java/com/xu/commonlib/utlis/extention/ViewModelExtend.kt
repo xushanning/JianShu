@@ -19,18 +19,20 @@ fun <T> BaseViewModel.request(
     block: suspend () -> BaseResponse<T>,
     success: (T) -> Unit,
     error: (ApiException) -> Unit,
-    showLoading: Boolean = true
+    showLoading: Boolean = true,
+    msg: String = "正在加载.."
 ): Job {
     return viewModelScope.launch {
         runCatching {
             if (showLoading) {
-
+                showDialog.postValue(msg)
             }
             block()
         }.onSuccess {
-            //dismiss dialog
+            if (showLoading) {
+                dismissDialog.postValue(true)
+            }
             runCatching {
-                //todo 这里建立在如果成功（code==0），那么data一定非null，如果code==1，并且出现了data==null，就会crash
                 if (it.isSuccess() && it.getResData() != null) {
                     success(it.getResData()!!)
                 } else {
@@ -40,7 +42,9 @@ fun <T> BaseViewModel.request(
                 error(ErrorHandler.handleError(it))
             }
         }.onFailure {
-            Logger.d(it.message)
+            if (showLoading) {
+                dismissDialog.postValue(true)
+            }
             error(ErrorHandler.handleError(it))
         }
     }
@@ -55,18 +59,20 @@ fun <T> BaseViewModel.requestByNoResult(
     block: suspend () -> BaseResponse<T>,
     success: () -> Unit,
     error: (ApiException) -> Unit,
-    showLoading: Boolean = true
+    showLoading: Boolean = true,
+    msg: String = "正在加载.."
 ): Job {
     return viewModelScope.launch {
         runCatching {
             if (showLoading) {
-
+                showDialog.postValue(msg)
             }
             block()
         }.onSuccess {
-            //dismiss dialog
+            if (showLoading) {
+                dismissDialog.postValue(true)
+            }
             runCatching {
-                //todo 这里建立在如果成功（code==0），那么data一定非null，如果code==1，并且出现了data==null，就会crash
                 if (it.isSuccess()) {
                     success()
                 } else {
@@ -77,7 +83,9 @@ fun <T> BaseViewModel.requestByNoResult(
                 error(ErrorHandler.handleError(it))
             }
         }.onFailure {
-            Logger.d(it.message)
+            if (showLoading) {
+                dismissDialog.postValue(false)
+            }
             error(ErrorHandler.handleError(it))
         }
     }
@@ -87,18 +95,20 @@ fun <T> BaseViewModel.request(
     block: suspend () -> BaseResponse<T>,
     result: MutableLiveData<T>,
     error: (ApiException) -> Unit,
-    showLoading: Boolean = true
+    showLoading: Boolean = true,
+    msg: String = "正在加载.."
 ): Job {
     return viewModelScope.launch {
         runCatching {
             if (showLoading) {
-
+                showDialog.postValue(msg)
             }
             block()
         }.onSuccess {
-            //dismiss dialog
+            if (showLoading) {
+                dismissDialog.postValue(true)
+            }
             runCatching {
-                //todo 这里建立在如果成功（code==0），那么data一定非null，如果code==1，并且出现了data==null，就会crash
                 if (it.isSuccess()) {
                     result.postValue(it.getResData())
                 } else {
@@ -108,7 +118,9 @@ fun <T> BaseViewModel.request(
                 error(ErrorHandler.handleError(it))
             }
         }.onFailure {
-            Logger.d(it.message)
+            if (showLoading) {
+                dismissDialog.postValue(true)
+            }
             error(ErrorHandler.handleError(it))
         }
     }

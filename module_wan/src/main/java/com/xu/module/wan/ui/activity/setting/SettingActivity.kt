@@ -1,11 +1,11 @@
 package com.xu.module.wan.ui.activity.setting
 
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.xu.commonlib.base.mvvm.BaseVmActivity
 import com.xu.commonlib.utlis.extention.observe
 import com.xu.commonlib.utlis.extention.showToast
 import com.xu.module.wan.BR
 import com.xu.module.wan.R
+import com.xu.module.wan.base.BaseActivity
 import com.xu.module.wan.constant.ARouterPath
 import com.xu.module.wan.databinding.WActivitySettingBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @Route(path = ARouterPath.setting)
 @AndroidEntryPoint
 class SettingActivity(override val layoutId: Int = R.layout.w_activity_setting, override val variableId: Int = BR.vm) :
-    BaseVmActivity<SettingViewModel, WActivitySettingBinding>() {
+    BaseActivity<SettingViewModel, WActivitySettingBinding>() {
 
 
     override fun initView(mDataBinding: WActivitySettingBinding) {

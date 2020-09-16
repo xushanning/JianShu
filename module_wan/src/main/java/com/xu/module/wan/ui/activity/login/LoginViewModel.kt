@@ -2,6 +2,7 @@ package com.xu.module.wan.ui.activity.login
 
 import android.content.Context
 import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.viewModelScope
 import com.xu.commonlib.base.mvvm.BaseViewModel
@@ -9,8 +10,9 @@ import com.xu.commonlib.livedata.BooleanLiveData
 import com.xu.commonlib.livedata.StringLiveData
 import com.xu.commonlib.utlis.extention.request
 import com.xu.commonlib.utlis.extention.showToast
+import com.xu.module.wan.R
 import com.xu.module.wan.api.WanService
-import com.xu.module.wan.db.AppLiveData
+import com.xu.module.wan.viewmodel.AppLiveData
 import com.xu.module.wan.db.AppSp
 import com.xu.module.wan.db.dao.IUserDao
 import com.xu.module.wan.db.entity.UserEntity
@@ -19,7 +21,8 @@ import kotlinx.coroutines.launch
 class LoginViewModel @ViewModelInject constructor(
     private val api: WanService,
     private val context: Context,
-    private val userDao: IUserDao
+    private val userDao: IUserDao,
+    private val appLiveData: AppLiveData
 ) : BaseViewModel() {
 
 
@@ -53,8 +56,7 @@ class LoginViewModel @ViewModelInject constructor(
         request({ api.login(userName.value, password.value) }, {
             viewModelScope.launch {
                 AppSp.currentUserId = it.id
-                AppLiveData.loginStatus = true
-
+                appLiveData.loginStatusLiveData.postValue(true)
                 val current = userDao.queryUserInfo(it.id)
                 if (current == null) {
                     userDao.saveUserInfo(UserEntity(it.id, it))
@@ -65,6 +67,6 @@ class LoginViewModel @ViewModelInject constructor(
             }
         }, {
             context.showToast(it.errorMsg)
-        })
+        }, msg = context.getString(R.string.w_login_loading))
     }
 }

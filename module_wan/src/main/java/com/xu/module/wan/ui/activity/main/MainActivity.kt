@@ -5,10 +5,9 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.jaeger.library.StatusBarUtil
-import com.orhanobut.logger.Logger
-import com.xu.commonlib.base.mvvm.BaseVmActivity
 import com.xu.module.wan.BR
 import com.xu.module.wan.R
+import com.xu.module.wan.base.BaseActivity
 import com.xu.module.wan.constant.ARouterPath
 import com.xu.module.wan.databinding.WActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,7 +18,7 @@ import kotlinx.android.synthetic.main.w_activity_main.*
 class MainActivity(
     override val layoutId: Int = R.layout.w_activity_main,
     override val variableId: Int = BR.vm
-) : BaseVmActivity<MainViewModel, WActivityMainBinding>() {
+) : BaseActivity<MainViewModel, WActivityMainBinding>() {
 
     override fun initView(mDataBinding: WActivityMainBinding) {
         vp_main.isUserInputEnabled = false
@@ -41,7 +40,7 @@ class MainActivity(
         navigation.setOnNavigationItemSelectedListener {
             vp_main.setCurrentItem(it.order, false)
             when (it.order) {
-                0, 1, 2, 3, -> StatusBarUtil.setDarkMode(this)
+                0, 1, 2, 3 -> StatusBarUtil.setDarkMode(this)
                 4 -> StatusBarUtil.setLightMode(this)
             }
             true
