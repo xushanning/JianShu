@@ -7,4 +7,7 @@
         <item name="colorAccent">@color/res_99</item>
     </style>
 
+    <style name="wLoading">
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
 </resources>

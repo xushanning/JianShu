@@ -5,7 +5,7 @@ import com.xu.module.wan.api.WanService
 import com.xu.module.wan.bean.ArticleItemBean
 import javax.inject.Inject
 
-class ArticleSource(  val api: WanService) : PagingSource<Int, ArticleItemBean>() {
+class ArticleSource @Inject constructor(private val api: WanService) : PagingSource<Int, ArticleItemBean>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ArticleItemBean> {
         //如果是null，那么就是第0页数据

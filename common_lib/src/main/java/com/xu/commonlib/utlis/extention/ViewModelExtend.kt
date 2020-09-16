@@ -19,7 +19,7 @@ fun <T> BaseViewModel.request(
     block: suspend () -> BaseResponse<T>,
     success: (T) -> Unit,
     error: (ApiException) -> Unit,
-    showLoading: Boolean = true,
+    showLoading: Boolean = false,
     msg: String = "正在加载.."
 ): Job {
     return viewModelScope.launch {
@@ -59,7 +59,7 @@ fun <T> BaseViewModel.requestByNoResult(
     block: suspend () -> BaseResponse<T>,
     success: () -> Unit,
     error: (ApiException) -> Unit,
-    showLoading: Boolean = true,
+    showLoading: Boolean = false,
     msg: String = "正在加载.."
 ): Job {
     return viewModelScope.launch {
@@ -95,7 +95,7 @@ fun <T> BaseViewModel.request(
     block: suspend () -> BaseResponse<T>,
     result: MutableLiveData<T>,
     error: (ApiException) -> Unit,
-    showLoading: Boolean = true,
+    showLoading: Boolean = false,
     msg: String = "正在加载.."
 ): Job {
     return viewModelScope.launch {

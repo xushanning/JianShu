@@ -20,6 +20,7 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding> : BaseVmAc
     }
 
     override fun dismissLoading() {
+        Logger.d("=====0000000")
         dismissLoadingExt()
     }
 }

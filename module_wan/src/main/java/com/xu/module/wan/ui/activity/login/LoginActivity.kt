@@ -28,7 +28,7 @@ class LoginActivity(
                 finish()
             }
         }
-        mViewModel.showDialog.postValue("正在登陆")
+        mViewModel.showDialog.postValue("正在登录")
     }
 
     override fun useLightMode(): Boolean {

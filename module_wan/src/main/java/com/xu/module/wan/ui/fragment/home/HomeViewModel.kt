@@ -18,10 +18,11 @@ import com.xu.module.wan.bean.base.BaseResBean
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
 class HomeViewModel @ViewModelInject constructor(
-    private val api: WanService
-
+    private val api: WanService,
+    private val source: ArticleSource
 ) : BaseViewModel() {
     /**
      * 首页文章
@@ -35,7 +36,7 @@ class HomeViewModel @ViewModelInject constructor(
 
     val pager by lazy {
         Pager(config = PagingConfig(20, 1),
-            pagingSourceFactory = { ArticleSource(api) }).flow.cachedIn(viewModelScope)
+            pagingSourceFactory = { source }).flow.cachedIn(viewModelScope)
     }
 
 

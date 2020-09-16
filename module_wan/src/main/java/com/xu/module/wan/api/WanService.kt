@@ -12,7 +12,7 @@ import retrofit2.http.*
 interface WanService {
 
     /**
-     * 登陆
+     * 登录
      */
     @FormUrlEncoded
     @POST("user/login")

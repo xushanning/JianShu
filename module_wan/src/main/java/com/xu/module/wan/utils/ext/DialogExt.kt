@@ -1,21 +1,18 @@
 package com.xu.module.wan.utils.ext
 
+import android.app.Dialog
+import android.view.LayoutInflater
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.callbacks.onCancel
-import com.afollestad.materialdialogs.customview.customView
-import com.afollestad.materialdialogs.customview.getCustomView
-import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
 import com.xu.module.wan.R
 
 
 /**
  * loading dialog
  */
-private var loadingDialog: MaterialDialog? = null
+private var loadingDialog: Dialog? = null
 
 /**
  * Fragment Dialog的扩展
@@ -53,20 +50,19 @@ private fun dismissDialog() {
 
 
 private fun showLoading(context: FragmentActivity, msg: String) {
+    val view = LayoutInflater.from(context).inflate(R.layout.w_view_loading, null)
+    val tvContent = view.findViewById<TextView>(R.id.tv_content)
+    tvContent.text = msg
     if (loadingDialog == null) {
-        loadingDialog = MaterialDialog(context)
-            .cancelable(true)
-            .cancelOnTouchOutside(false)
-            .customView(R.layout.w_view_loading)
-            .lifecycleOwner(context)
-            .onCancel {
+        loadingDialog = Dialog(context, R.style.wLoading)
+        loadingDialog?.run {
+            setCancelable(true)
+            setCanceledOnTouchOutside(false)
+            setContentView(view)
+            setOnCancelListener {
                 loadingDialog = null
             }
-
-    }
-    loadingDialog?.getCustomView()?.run {
-        val tvContent = findViewById<TextView>(R.id.tv_content)
-        tvContent.text = msg
+        }
     }
     loadingDialog?.show()
 }
