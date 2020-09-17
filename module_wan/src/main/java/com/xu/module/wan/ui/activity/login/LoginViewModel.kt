@@ -67,6 +67,6 @@ class LoginViewModel @ViewModelInject constructor(
             }
         }, {
             context.showToast(it.errorMsg)
-        }, msg = context.getString(R.string.w_login_loading))
+        }, showLoading = true, msg = context.getString(R.string.w_login_loading))
     }
 }

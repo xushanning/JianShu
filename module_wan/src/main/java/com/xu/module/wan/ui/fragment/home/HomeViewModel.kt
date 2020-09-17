@@ -27,7 +27,7 @@ class HomeViewModel @ViewModelInject constructor(
     /**
      * 首页文章
      */
-    val homeArticleData = MutableLiveData<MutableList<ArticleItemBean>>()
+   // val homeArticleData = MutableLiveData<MutableList<ArticleItemBean>>()
 
     /**
      * banner数据
@@ -35,20 +35,20 @@ class HomeViewModel @ViewModelInject constructor(
     val bannerLiveData = MutableLiveData<MutableList<BannerBean>>()
 
     val pager by lazy {
-        Pager(config = PagingConfig(20, 1),
+        Pager(config = PagingConfig(20, 10),
             pagingSourceFactory = { source }).flow.cachedIn(viewModelScope)
     }
 
-
-    fun getHomeData(isRefresh: Boolean = false) {
-        request({
-            getCombineArticleList()
-        }, {
-            homeArticleData.postValue(it.datas)
-        }, {
-            Logger.d(it.message)
-        })
-    }
+//
+//    fun getHomeData(isRefresh: Boolean = false) {
+//        request({
+//            getCombineArticleList()
+//        }, {
+//            homeArticleData.postValue(it.datas)
+//        }, {
+//            Logger.d(it.message)
+//        })
+//    }
 
     private suspend fun getCombineArticleList(): BaseResBean<BasePageResBean<MutableList<ArticleItemBean>>> {
         return withContext(Dispatchers.IO) {

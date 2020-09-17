@@ -3,13 +3,13 @@ package com.xu.module.wan.ui.fragment.home
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.orhanobut.logger.Logger
 import com.xu.commonlib.utlis.extention.go
 import com.xu.commonlib.utlis.extention.observe
-import com.xu.commonlib.utlis.extention.singleChildDataItemClick
-import com.xu.commonlib.utlis.extention.singleDataItemClick
 import com.xu.easyload.ext.inject
 import com.xu.easyload.service.ILoadService
 import com.xu.module.wan.BR
@@ -18,12 +18,16 @@ import com.xu.module.wan.base.BaseFragment
 import com.xu.module.wan.bean.BannerBean
 import com.xu.module.wan.constant.ARouterPath
 import com.xu.module.wan.databinding.WFragmentHomeBinding
+import com.xu.module.wan.utils.ext.initFloatButton
 import com.xu.module.wan.viewmodel.ArticleCollectViewModel
 import com.youth.banner.Banner
 import com.youth.banner.indicator.CircleIndicator
 import com.youth.banner.util.BannerUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.w_fragment_home.*
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @Route(path = ARouterPath.home)
 @AndroidEntryPoint
@@ -34,47 +38,73 @@ class HomeFragment(
 
     val collectViewModel: ArticleCollectViewModel by viewModels()
 
-    private val quickAdapter by lazy { HomeArticleItemQuickAdapter() }
 
-    private lateinit var loadService: ILoadService
+    @Inject
+    lateinit var pagingAdapter: ArticlePagingAdapter
+
 
     override fun initView(mDataBinding: WFragmentHomeBinding) {
         rv_home.layoutManager = LinearLayoutManager(context)
-        rv_home.adapter = quickAdapter
+        rv_home.adapter = pagingAdapter
+        rv_home.initFloatButton(float_bt)
 
-        quickAdapter.run {
+        pagingAdapter.run {
+            //todo 增加加载footer
+            //withLoadStateFooter()
+            addLoadStateListener {
 
-            singleDataItemClick {
-                go(ARouterPath.web) {
-                    withString("url", it.link)
-                    withString("title", it.title)
+                when (it.refresh) {
+                    is LoadState.Loading -> {
+                        Logger.d("正在加载")
+                    }
+                    is LoadState.Error -> {
+
+                    }
+                    is LoadState.NotLoading -> {
+                        Logger.d("加载完了")
+                    }
+
                 }
             }
 
-            singleChildDataItemClick { item, viewId ->
-                if (viewId == R.id.img_collect) {
-                    Logger.d("收藏" + item.author)
+            setOnItemClickListener { item, _ ->
+                go(ARouterPath.web) {
+                    withString("url", item.link)
+                    withString("title", item.title)
+                }
+            }
+            setOnItemChildClickListener { item, position, view ->
+                if (view.id == R.id.img_collect) {
+                    Logger.d("收藏被点击了" + position + item.title)
                 }
             }
         }
 
         swipe_refresh.setOnRefreshListener {
-            mViewModel.getHomeData(true)
+            Logger.d("刷新")
+            pagingAdapter.refresh()
         }
     }
 
     override fun initData() {
-        loadService = inject(rv_home)
+//        loadService = inject(rv_home)
         mViewModel.getBannerData()
-        mViewModel.getHomeData()
+        //  mViewModel.getHomeData()
 
-        observe(mViewModel.homeArticleData) {
-            loadService.showSuccess()
-            quickAdapter.setNewInstance(it)
+//        observe(mViewModel.homeArticleData) {
+//            loadService.showSuccess()
+//            quickAdapter.setNewInstance(it)
+//        }
+
+        lifecycleScope.launch {
+            mViewModel.pager.collectLatest {
+                pagingAdapter.submitData(it)
+            }
         }
 
+
         observe(mViewModel.bannerLiveData) {
-            if (quickAdapter.headerLayoutCount == 0) {
+            if (pagingAdapter.headerLayoutCount == 0) {
                 val banner = Banner<BannerBean, HomeBannerAdapter>(context).apply {
                     layoutParams = ViewGroup.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
@@ -93,7 +123,7 @@ class HomeFragment(
                     }
                 }
 
-                quickAdapter.addHeaderView(banner)
+                pagingAdapter.addHeaderView(banner)
             }
         }
 
