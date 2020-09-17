@@ -5,7 +5,12 @@ import com.xu.module.wan.api.WanService
 import com.xu.module.wan.bean.ArticleItemBean
 import javax.inject.Inject
 
-class ArticleSource @Inject constructor(private val api: WanService) :
+/**
+ * 文章列表的source
+ * 这里太坑了~！！！！！
+ * 用了dagger，导致一直是一个实例，然而刷新是需要一个新的实例的，就导致报错
+ */
+class ArticleSource constructor(private val api: WanService) :
     PagingSource<Int, ArticleItemBean>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ArticleItemBean> {

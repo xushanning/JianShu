@@ -10,8 +10,6 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.orhanobut.logger.Logger
 import com.xu.commonlib.utlis.extention.go
 import com.xu.commonlib.utlis.extention.observe
-import com.xu.easyload.ext.inject
-import com.xu.easyload.service.ILoadService
 import com.xu.module.wan.BR
 import com.xu.module.wan.R
 import com.xu.module.wan.base.BaseFragment
@@ -25,7 +23,6 @@ import com.youth.banner.indicator.CircleIndicator
 import com.youth.banner.util.BannerUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.w_fragment_home.*
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -55,12 +52,14 @@ class HomeFragment(
 
                 when (it.refresh) {
                     is LoadState.Loading -> {
+                        swipe_refresh.isRefreshing = true
                         Logger.d("正在加载")
                     }
                     is LoadState.Error -> {
 
                     }
                     is LoadState.NotLoading -> {
+                        swipe_refresh.isRefreshing = false
                         Logger.d("加载完了")
                     }
 
@@ -81,7 +80,6 @@ class HomeFragment(
         }
 
         swipe_refresh.setOnRefreshListener {
-            Logger.d("刷新")
             pagingAdapter.refresh()
         }
     }
@@ -96,12 +94,11 @@ class HomeFragment(
 //            quickAdapter.setNewInstance(it)
 //        }
 
-        lifecycleScope.launch {
-            mViewModel.pager.collectLatest {
+        observe(mViewModel.pager) {
+            lifecycleScope.launch {
                 pagingAdapter.submitData(it)
             }
         }
-
 
         observe(mViewModel.bannerLiveData) {
             if (pagingAdapter.headerLayoutCount == 0) {

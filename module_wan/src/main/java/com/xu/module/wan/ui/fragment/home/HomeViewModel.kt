@@ -2,6 +2,7 @@ package com.xu.module.wan.ui.fragment.home
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -21,23 +22,25 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class HomeViewModel @ViewModelInject constructor(
-    private val api: WanService,
-    private val source: ArticleSource
+    private val api: WanService
 ) : BaseViewModel() {
     /**
      * 首页文章
      */
-   // val homeArticleData = MutableLiveData<MutableList<ArticleItemBean>>()
+    // val homeArticleData = MutableLiveData<MutableList<ArticleItemBean>>()
 
     /**
      * banner数据
      */
     val bannerLiveData = MutableLiveData<MutableList<BannerBean>>()
 
-    val pager by lazy {
-        Pager(config = PagingConfig(20, 10),
-            pagingSourceFactory = { source }).flow.cachedIn(viewModelScope)
-    }
+    /**
+     * 分页数据 liveData
+     */
+    val pager = Pager(
+        config = PagingConfig(20, 10),
+        pagingSourceFactory = { ArticleSource(api) }).flow.cachedIn(viewModelScope).asLiveData()
+
 
 //
 //    fun getHomeData(isRefresh: Boolean = false) {
