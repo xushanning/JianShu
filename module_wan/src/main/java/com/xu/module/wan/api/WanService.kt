@@ -102,5 +102,72 @@ interface WanService {
     @GET("lg/coin/userinfo/json")
     suspend fun getRank(): BaseResBean<RankBean>
 
+    /**
+     * 收藏站内文章
+     */
+    @POST("lg/collect/{articleId}/json")
+    suspend fun collectInnerStationArticle(
+        @Path("articleId") articleId: Int
+    ): BaseResBean<Any>
 
+    /**
+     * 收藏站外文章
+     */
+    @POST("lg/collect/add/json")
+    suspend fun collectOutStationArticle(
+        @Field("title") title: String,
+        @Field("author") author: String,
+        @Field("link") link: String
+    ): BaseResBean<Any>
+
+    /**
+     * 取消收藏
+     * 位置：文章列表用这个
+     */
+    @POST("lg/uncollect_originId/{articleId}/json")
+    suspend fun unCollectArticleList(@Path("articleId") articleId: Int): BaseResBean<Any>
+
+    /**
+     * 取消收藏
+     * 位置：我的收藏页面
+     *originId没有则传-1
+     */
+    @POST("lg/uncollect/{articleId}/json")
+    suspend fun unCollectMyCollectArticle(
+        @Path("articleId") articleId: Int,
+        @Field("originId") originId: Int
+    ): BaseResBean<Any>
+
+    /**
+     * 收藏网站列表
+     *
+     */
+    @GET("lg/collect/usertools/json")
+    suspend fun myCollectWebsiteList(): BaseResBean<MutableList<Any>>
+
+    /**
+     * 收藏网站
+     *
+     */
+    @POST("lg/collect/addtool/json")
+    suspend fun collectWebsite(
+        @Field("name") name: String,
+        @Field("link") link: String
+    ): BaseResBean<Any>
+
+    /**
+     * 编辑收藏的网站
+     */
+    @POST("lg/collect/updatetool/json")
+    suspend fun editCollectWebsite(
+        @Field("id") id: String,
+        @Field("name") name: String,
+        @Field("link") link: String
+    ): BaseResBean<Any>
+
+    /**
+     * 删除收藏的网站
+     */
+    @POST("lg/collect/deletetool/json")
+    suspend fun deleteCollectWebsite(@Field("id") id: String): BaseResBean<Any>
 }
