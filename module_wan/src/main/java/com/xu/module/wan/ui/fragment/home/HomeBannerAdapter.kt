@@ -1,11 +1,9 @@
 package com.xu.module.wan.ui.fragment.home
 
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.orhanobut.logger.Logger
 import com.xu.commonlib.utlis.extention.load
 import com.xu.module.wan.R
 import com.xu.module.wan.bean.BannerBean

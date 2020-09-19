@@ -1,24 +1,21 @@
-package com.xu.module.wan.ui.fragment.home
+package com.xu.module.wan.base
 
 import androidx.paging.PagingSource
-import com.xu.module.wan.api.WanService
-import com.xu.module.wan.bean.ArticleItemBean
-import javax.inject.Inject
+import com.xu.module.wan.bean.base.BasePageResBean
+import com.xu.module.wan.bean.base.BaseResBean
 
 /**
- * 文章列表的source
+ * source 封装
  * 这里太坑了~！！！！！
- * 用了dagger，导致一直是一个实例，然而刷新是需要一个新的实例的，就导致报错
+ * 用了hilt，导致一直是一个实例，然而刷新是需要一个新的实例的，就导致报错
  */
-class ArticleSource constructor(private val api: WanService) :
-    PagingSource<Int, ArticleItemBean>() {
-
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ArticleItemBean> {
+class BaseSource<T : Any>(private val source: suspend (Int) -> BaseResBean<BasePageResBean<MutableList<T>>>) :
+    PagingSource<Int, T>() {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, T> {
         //如果是null，那么就是第0页数据
         val page = params.key ?: 0
-
         return try {
-            val res = api.getHomeArticleList(page)
+            val res = source(page)
             LoadResult.Page(
                 data = res.data?.datas!!,
                 //如果需要上拉加载，那么就设置该参数，否则，不设置
@@ -30,6 +27,5 @@ class ArticleSource constructor(private val api: WanService) :
         } catch (e: Exception) {
             LoadResult.Error(e)
         }
-
     }
 }

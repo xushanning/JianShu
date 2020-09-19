@@ -2,24 +2,17 @@ package com.xu.module.wan.ui.fragment.home
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.cachedIn
-import com.orhanobut.logger.Logger
 import com.xu.commonlib.base.mvvm.BaseViewModel
 import com.xu.commonlib.utlis.extention.request
-import com.xu.commonlib.utlis.extention.requestByNoResult
 import com.xu.module.wan.api.WanService
 import com.xu.module.wan.bean.ArticleItemBean
 import com.xu.module.wan.bean.BannerBean
 import com.xu.module.wan.bean.base.BasePageResBean
 import com.xu.module.wan.bean.base.BaseResBean
+import com.xu.module.wan.utils.ext.createPager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
 class HomeViewModel @ViewModelInject constructor(
     private val api: WanService
@@ -37,9 +30,9 @@ class HomeViewModel @ViewModelInject constructor(
     /**
      * 分页数据 liveData
      */
-    val pager = Pager(
-        config = PagingConfig(20, 10),
-        pagingSourceFactory = { ArticleSource(api) }).flow.cachedIn(viewModelScope).asLiveData()
+    val pager = createPager {
+        api.getHomeArticleList(it)
+    }
 
 
 //

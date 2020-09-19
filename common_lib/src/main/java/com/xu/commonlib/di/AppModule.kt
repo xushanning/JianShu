@@ -70,11 +70,16 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(context: Context): OkHttpClient.Builder {
-        val cookieJar = PersistentCookieJar(SetCookieCache(), SharedPrefsCookiePersistor(context))
+    fun provideOkHttpClient(cookieJar: PersistentCookieJar): OkHttpClient.Builder {
         return OkHttpClient
             .Builder()
             .cookieJar(cookieJar)
+    }
+
+    @Provides
+    @Singleton
+    fun provideCookieJar(context: Context): PersistentCookieJar {
+        return PersistentCookieJar(SetCookieCache(), SharedPrefsCookiePersistor(context))
     }
 
 

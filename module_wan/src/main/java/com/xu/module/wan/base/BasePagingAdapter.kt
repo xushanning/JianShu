@@ -10,14 +10,16 @@ import androidx.annotation.LayoutRes
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.orhanobut.logger.Logger
+import com.xu.module.wan.utils.ext.createDiff
 import java.lang.reflect.Constructor
 import java.lang.reflect.InvocationTargetException
 import java.lang.reflect.Modifier
 import java.lang.reflect.ParameterizedType
 import java.util.*
 
-abstract class BasePagingAdapter<T : Any, VH : BaseViewHolder>(@LayoutRes private val layoutResId: Int, diffCallback: DiffUtil.ItemCallback<T>) :
-    PagingDataAdapter<T, VH>(diffCallback) {
+abstract class BasePagingAdapter<T : Any, VH : BaseViewHolder>(@LayoutRes private val layoutResId: Int, itemsTheSame: (oldItem: T, newItem: T) -> Boolean, contentsTheSame: (oldItem: T, newItem: T) -> Boolean) :
+    PagingDataAdapter<T, VH>(createDiff(itemsTheSame, contentsTheSame)) {
 
     companion object {
         const val HEADER_VIEW = 0x10000111
@@ -31,13 +33,12 @@ abstract class BasePagingAdapter<T : Any, VH : BaseViewHolder>(@LayoutRes privat
     /**
      * child view监听
      */
-    private var onItemChildClickListener: ((item: T, position: Int, view: View) -> Unit)? =
+    private var onItemChildClickListener: ((item: T, position: Int, viewId: Int) -> Unit)? =
         null
 
     private val childClickViewIds = LinkedHashSet<Int>()
 
     private lateinit var mHeaderLayout: LinearLayout
-    // private lateinit var mFooterLayout: LinearLayout
 
     val headerLayoutCount: Int
         get() {
@@ -51,7 +52,6 @@ abstract class BasePagingAdapter<T : Any, VH : BaseViewHolder>(@LayoutRes privat
 
     override fun onBindViewHolder(holder: VH, position: Int) {
         when (holder.itemViewType) {
-
             HEADER_VIEW -> return
             else -> convert(holder, getItem(position - headerLayoutCount)!!)
         }
@@ -108,7 +108,7 @@ abstract class BasePagingAdapter<T : Any, VH : BaseViewHolder>(@LayoutRes privat
                         return@setOnClickListener
                     }
                     position -= headerLayoutCount
-                    it.invoke(getItem(position)!!, position, view)
+                    it.invoke(getItem(position)!!, position, view.id)
                 }
             }
         }
@@ -119,7 +119,7 @@ abstract class BasePagingAdapter<T : Any, VH : BaseViewHolder>(@LayoutRes privat
         if (hasHeader && position == 0) {
             return HEADER_VIEW
         } else {
-            var adjPosition = if (hasHeader) {
+            val adjPosition = if (hasHeader) {
                 position - 1
             } else {
                 position
@@ -276,7 +276,7 @@ abstract class BasePagingAdapter<T : Any, VH : BaseViewHolder>(@LayoutRes privat
     /**
      * item child点击
      */
-    fun setOnItemChildClickListener(onItemChildClickListener: ((item: T, position: Int, view: View) -> Unit)?) {
+    fun setOnItemChildClickListener(onItemChildClickListener: ((item: T, position: Int, viewId: Int) -> Unit)?) {
         this.onItemChildClickListener = onItemChildClickListener
     }
 

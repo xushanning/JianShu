@@ -33,7 +33,7 @@ class HomeFragment(
     override val variableId: Int = BR.vm
 ) : BaseFragment<HomeViewModel, WFragmentHomeBinding>() {
 
-    val collectViewModel: ArticleCollectViewModel by viewModels()
+    private val collectViewModel: ArticleCollectViewModel by viewModels()
 
 
     @Inject
@@ -72,9 +72,13 @@ class HomeFragment(
                     withString("title", item.title)
                 }
             }
-            setOnItemChildClickListener { item, position, view ->
-                if (view.id == R.id.img_collect) {
-                    Logger.d("收藏被点击了" + position + item.title)
+            setOnItemChildClickListener { item, position, viewId ->
+                if (viewId == R.id.img_collect) {
+                    if (item.collect) {
+                        collectViewModel.unCollectArticleList(item.id, position)
+                    } else {
+                        collectViewModel.collectInnerArticle(item.id, position)
+                    }
                 }
             }
         }
@@ -87,18 +91,17 @@ class HomeFragment(
     override fun initData() {
 //        loadService = inject(rv_home)
         mViewModel.getBannerData()
-        //  mViewModel.getHomeData()
 
 //        observe(mViewModel.homeArticleData) {
 //            loadService.showSuccess()
 //            quickAdapter.setNewInstance(it)
 //        }
 
-        observe(mViewModel.pager) {
-            lifecycleScope.launch {
-                pagingAdapter.submitData(it)
-            }
+        observe(collectViewModel.collectStateLiveData) {
+            pagingAdapter.changeCollectState(it)
         }
+
+        observe(pagingAdapter, mViewModel.pager)
 
         observe(mViewModel.bannerLiveData) {
             if (pagingAdapter.headerLayoutCount == 0) {
@@ -120,7 +123,7 @@ class HomeFragment(
                     }
                 }
 
-                pagingAdapter.addHeaderView(banner)
+                //pagingAdapter.addHeaderView(banner)
             }
         }
 

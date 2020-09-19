@@ -9,4 +9,10 @@ object AppSp {
      */
     var currentUserId by Preference("currentUserId", -1)
 
+    /**
+     * 用户登陆状态
+     * 默认为false
+     */
+    var loginState by Preference("loginState", false)
+
 }

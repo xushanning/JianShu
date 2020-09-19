@@ -8,7 +8,7 @@ import com.xu.module.wan.constant.AppConstant
 import com.xu.module.wan.constant.DbConstant
 import com.xu.module.wan.db.AppDatabase
 import com.xu.module.wan.db.dao.IUserDao
-import com.xu.module.wan.viewmodel.AppLiveData
+import com.xu.module.wan.viewmodel.WanLiveData
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -52,8 +52,8 @@ class ApplicationModule {
      */
     @Provides
     @Singleton
-    fun provideAppLiveData(): AppLiveData {
-        return AppLiveData.INSTANCE
+    fun provideModuleLiveData(): WanLiveData {
+        return WanLiveData.INSTANCE
     }
 
 

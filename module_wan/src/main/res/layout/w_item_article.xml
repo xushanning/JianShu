@@ -117,7 +117,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="16dp"
                 android:textColor="@color/res_66"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -127,13 +127,15 @@
 
             <ImageView
                 android:id="@+id/img_collect"
+                collectState="@{item.collect}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:src="@drawable/w_vector_un_collect"
+                android:padding="8dp"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_chapter"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tv_chapter" />
+                app:layout_constraintTop_toTopOf="@+id/tv_chapter"
+                tools:src="@drawable/w_vector_un_collect" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
