@@ -3,14 +3,148 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="vm"
             type="com.xu.module.wan.ui.activity.search.SearchViewModel" />
+
+        <variable
+            name="click"
+            type="com.xu.module.wan.ui.activity.search.SearchActivity.OnClick" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/res_white">
+
+        <TextView
+            android:id="@+id/img_publish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:onClick="@{()->click.onCancel()}"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:text="@string/w_search_cancel"
+            android:textColor="@color/res_black"
+            app:layout_constraintBottom_toBottomOf="@+id/v_1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/v_1" />
+
+        <View
+            android:id="@+id/v_1"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/w_shape_search_gray"
+            app:layout_constraintEnd_toStartOf="@+id/img_publish"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/img_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/w_vector_search"
+            app:layout_constraintBottom_toBottomOf="@+id/v_1"
+            app:layout_constraintStart_toStartOf="@+id/v_1"
+            app:layout_constraintTop_toTopOf="@+id/v_1" />
+
+        <EditText
+            android:id="@+id/tv_search"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="4dp"
+            android:background="@null"
+            android:ellipsize="end"
+            android:hint="@{vm.searchHintLiveData}"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:lines="1"
+            android:maxLines="1"
+            android:text="@={vm.searchLiveData}"
+            android:textColor="@color/res_66"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/v_1"
+            app:layout_constraintEnd_toEndOf="@+id/v_1"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/img_1"
+            app:layout_constraintTop_toTopOf="@+id/v_1" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_hot_key"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/v_1" />
+
+        <View
+            android:id="@+id/v_2"
+            android:layout_width="0dp"
+            android:layout_height="0.75dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/res_f0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rv_hot_key" />
+
+        <TextView
+            android:id="@+id/tv_history"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/w_search_history"
+            android:textColor="@color/res_99"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/v_2" />
+
+        <ImageView
+            android:id="@+id/img_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:onClick="@{()->click.onDeleteClick()}"
+            android:padding="8dp"
+            android:src="@drawable/w_vector_delete_history"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_history"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_history" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_search_history"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_delete" />
+
+        <androidx.constraintlayout.widget.Group
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{vm.uiLiveData?View.VISIBLE:View.GONE}"
+            app:constraint_referenced_ids="rv_hot_key,v_2,tv_history,img_delete,rv_search_history" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_search"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="@{vm.uiLiveData?View.GONE:View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/v_1" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

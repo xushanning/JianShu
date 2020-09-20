@@ -31,7 +31,8 @@ class MineFragment(
     override val variableId: Int = BR.vm
 ) : BaseFragment<MineViewModel, WFragmentMineBinding>() {
 
-    private val quickAdapter by lazy { CommonUseAdapter() }
+    @Inject
+    lateinit var quickAdapter: CommonUseAdapter
 
     @Inject
     lateinit var moShi: Moshi

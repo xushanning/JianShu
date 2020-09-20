@@ -18,6 +18,7 @@ import com.xu.module.wan.constant.ARouterPath
 import com.xu.module.wan.databinding.WFragmentHomeBinding
 import com.xu.module.wan.utils.ext.initFloatButton
 import com.xu.module.wan.viewmodel.ArticleCollectViewModel
+import com.xu.module.wan.viewmodel.HotKeyViewModel
 import com.youth.banner.Banner
 import com.youth.banner.indicator.CircleIndicator
 import com.youth.banner.util.BannerUtils
@@ -34,6 +35,11 @@ class HomeFragment(
 ) : BaseFragment<HomeViewModel, WFragmentHomeBinding>() {
 
     private val collectViewModel: ArticleCollectViewModel by viewModels()
+
+    /**
+     * 热词
+     */
+    private val hotKeyViewModel: HotKeyViewModel by viewModels()
 
 
     @Inject
@@ -91,11 +97,24 @@ class HomeFragment(
     override fun initData() {
 //        loadService = inject(rv_home)
         mViewModel.getBannerData()
+        hotKeyViewModel.getHotKey()
 
 //        observe(mViewModel.homeArticleData) {
 //            loadService.showSuccess()
 //            quickAdapter.setNewInstance(it)
 //        }
+        observe(hotKeyViewModel.hotKeyLiveData) {
+            if (it.size > 0) {
+                var hotKey = ""
+                if (it.size == 1) {
+                    hotKey = it[0].name
+                }
+                if (it.size >= 2) {
+                    hotKey = it[0].name + " | " + it[1].name
+                }
+                v_search.setHotKey(hotKey)
+            }
+        }
 
         observe(collectViewModel.collectStateLiveData) {
             pagingAdapter.changeCollectState(it)

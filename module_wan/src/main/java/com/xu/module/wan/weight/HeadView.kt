@@ -34,4 +34,11 @@ class HeadView : ConstraintLayout {
             go(ARouterPath.search)
         }
     }
+
+    /**
+     * 设置热词
+     */
+    fun setHotKey(key: String) {
+        tv_hot_key.text = key
+    }
 }

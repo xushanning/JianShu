@@ -2,8 +2,8 @@ package com.xu.commonlib.livedata
 
 import androidx.lifecycle.MutableLiveData
 
-class BooleanLiveData : MutableLiveData<Boolean>() {
+class BooleanLiveData(private val default: Boolean = false) : MutableLiveData<Boolean>() {
     override fun getValue(): Boolean {
-        return super.getValue() ?: false
+        return super.getValue() ?: default
     }
 }

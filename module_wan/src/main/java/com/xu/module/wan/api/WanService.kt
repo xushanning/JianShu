@@ -170,4 +170,19 @@ interface WanService {
      */
     @POST("lg/collect/deletetool/json")
     suspend fun deleteCollectWebsite(@Field("id") id: String): BaseResBean<Any>
+
+    /**
+     * 获取搜索热词
+     */
+    @GET("hotkey/json")
+    suspend fun getHotKey(): BaseResBean<MutableList<HotKeyBean>>
+
+    /**
+     * 进行搜索
+     */
+    @POST("article/query/{page}/json")
+    suspend fun doSearch(
+        @Path("page") page: Int,
+        @Query("k") content: String
+    ): BaseResBean<BasePageResBean<MutableList<ArticleItemBean>>>
 }

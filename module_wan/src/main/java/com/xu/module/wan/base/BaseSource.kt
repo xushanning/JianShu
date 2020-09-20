@@ -1,6 +1,7 @@
 package com.xu.module.wan.base
 
 import androidx.paging.PagingSource
+import com.xu.commonlib.http.ApiException
 import com.xu.module.wan.bean.base.BasePageResBean
 import com.xu.module.wan.bean.base.BaseResBean
 
@@ -16,6 +17,9 @@ class BaseSource<T : Any>(private val source: suspend (Int) -> BaseResBean<BaseP
         val page = params.key ?: 0
         return try {
             val res = source(page)
+            if (res.errorCode != 0) {
+                throw ApiException("获取数据失败", null)
+            }
             LoadResult.Page(
                 data = res.data?.datas!!,
                 //如果需要上拉加载，那么就设置该参数，否则，不设置
