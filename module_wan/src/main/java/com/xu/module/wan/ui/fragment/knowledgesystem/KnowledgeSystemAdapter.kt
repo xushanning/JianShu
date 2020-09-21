@@ -22,8 +22,6 @@ class KnowledgeSystemAdapter @Inject constructor() :
         @JvmStatic
         @BindingAdapter("childData")
         fun setChildData(rv: RecyclerView, childData: MutableList<KnowledgeSystemBean>) {
-            Logger.d("开始" + System.currentTimeMillis())
-
 
             rv.run {
                 setHasFixedSize(true)
@@ -33,7 +31,6 @@ class KnowledgeSystemAdapter @Inject constructor() :
                 layoutManager = FlexboxLayoutManager(context)
             }
 
-            Logger.d("结束" + System.currentTimeMillis())
         }
     }
 }

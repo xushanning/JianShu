@@ -69,5 +69,5 @@ object ARouterPath {
     /**
      * 常用站导航
      */
-    const val stationGuide = "/wan/stationGuide"
+    const val stationNavigation = "/wan/stationNavigation"
 }

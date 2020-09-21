@@ -43,7 +43,7 @@ class SearchViewModel @ViewModelInject constructor(
     var pager = createPager {
         val content = if (searchLiveData.value.isEmpty()) {
             //如果没有输入，那么搜索默认的hilt
-            searchHintLiveData.value!!
+            searchHintLiveData.value
         } else {
             searchLiveData.value
         }

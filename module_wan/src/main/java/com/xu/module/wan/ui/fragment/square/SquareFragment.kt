@@ -39,7 +39,7 @@ class SquareFragment(
             override fun createFragment(position: Int): Fragment {
                 return when (position) {
                     0 -> getFragment(ARouterPath.knowledgeSystem)
-                    1 -> getFragment(ARouterPath.knowledgeSystem)
+                    1 -> getFragment(ARouterPath.stationNavigation)
                     else -> getFragment(ARouterPath.knowledgeSystem)
                 }
             }

@@ -21,11 +21,12 @@ class SystemChildAdapter(data: MutableList<KnowledgeSystemBean>) :
 
         @JvmStatic
         @BindingAdapter("randomColor")
-        fun randomColor(tv: TextView, any: KnowledgeSystemBean) {
+        fun randomColor(tv: TextView, name: String) {
             val red = (0..190).random()
             val green = (0..190).random()
             val blue = (0..190).random()
             val color = Color.rgb(red, green, blue)
+            tv.text = name
             tv.setTextColor(color)
         }
     }

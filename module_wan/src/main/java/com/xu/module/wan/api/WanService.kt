@@ -191,4 +191,10 @@ interface WanService {
      */
     @GET("tree/json")
     suspend fun getKnowledgeSystemData(): BaseResBean<MutableList<KnowledgeSystemBean>>
+
+    /**
+     * 获取导航列表数据
+     */
+    @GET("navi/json")
+    suspend fun getNavigationData(): BaseResBean<MutableList<NavigationBean>>
 }
