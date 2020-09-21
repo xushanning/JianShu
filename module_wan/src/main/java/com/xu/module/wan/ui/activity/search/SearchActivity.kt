@@ -93,7 +93,8 @@ class SearchActivity(override val layoutId: Int = R.layout.w_activity_search, ov
         observe(hotKeyViewModel.hotKeyLiveData) {
             adapter.setNewInstance(it)
             if (it.size >= 1) {
-                mViewModel.searchHintLiveData.postValue(it[0].name)
+                val position = (0 until it.size).random()
+                mViewModel.searchHintLiveData.postValue(it[position].name)
             }
         }
     }

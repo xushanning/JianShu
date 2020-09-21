@@ -64,6 +64,6 @@ class ProjectListFragment(
     }
 
     override fun initData() {
-        observe(pagingAdapter,mViewModel.pager(id!!))
+        observe(pagingAdapter, mViewModel.pager(id!!))
     }
 }

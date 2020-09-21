@@ -4,8 +4,6 @@ import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
-import com.xu.commonlib.base.BaseApplication
-import com.xu.commonlib.utlis.extention.load
 import com.xu.module.wan.R
 import com.xu.module.wan.bean.CommonUseBean
 import com.xu.module.wan.databinding.WItemCommonUseBinding
@@ -17,9 +15,7 @@ import javax.inject.Inject
 class CommonUseAdapter @Inject constructor() :
     BaseQuickAdapter<CommonUseBean, BaseDataBindingHolder<WItemCommonUseBinding>>(R.layout.w_item_common_use) {
     override fun convert(holder: BaseDataBindingHolder<WItemCommonUseBinding>, item: CommonUseBean) {
-        val binding = holder.dataBinding
-        binding?.item = item
-        binding?.executePendingBindings()
+          holder.dataBinding?.item = item
     }
 
     companion object {

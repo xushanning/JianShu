@@ -10,7 +10,7 @@ import com.xu.module.wan.bean.base.BaseResBean
  * 这里太坑了~！！！！！
  * 用了hilt，导致一直是一个实例，然而刷新是需要一个新的实例的，就导致报错
  */
-class BaseSource<T : Any>(private val source: suspend (Int) -> BaseResBean<BasePageResBean<MutableList<T>>>) :
+class PagingSource<T : Any>(private val source: suspend (Int) -> BaseResBean<BasePageResBean<MutableList<T>>>) :
     PagingSource<Int, T>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, T> {
         //如果是null，那么就是第0页数据

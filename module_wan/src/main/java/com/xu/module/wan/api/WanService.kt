@@ -185,4 +185,10 @@ interface WanService {
         @Path("page") page: Int,
         @Query("k") content: String
     ): BaseResBean<BasePageResBean<MutableList<ArticleItemBean>>>
+
+    /**
+     * 获取体系数据
+     */
+    @GET("tree/json")
+    suspend fun getKnowledgeSystemData(): BaseResBean<MutableList<KnowledgeSystemBean>>
 }

@@ -1,5 +1,6 @@
 package com.xu.module.wan.ui.fragment.home
 
+import android.text.Html
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -80,6 +81,12 @@ class ArticlePagingAdapter @Inject constructor() :
                 R.drawable.w_vector_un_collect
             }
             img.setImageResource(imgRes)
+        }
+
+        @JvmStatic
+        @BindingAdapter("articleTitle")
+        fun setTitle(tv: TextView, title: String) {
+            tv.text = Html.fromHtml(title,Html.FROM_HTML_MODE_LEGACY)
         }
     }
 

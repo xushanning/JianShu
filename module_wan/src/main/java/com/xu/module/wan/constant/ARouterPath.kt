@@ -60,4 +60,14 @@ object ARouterPath {
      * 搜索
      */
     const val search = "/wan/search"
+
+    /**
+     * 知识体系
+     */
+    const val knowledgeSystem = "/wan/knowledgeSystem"
+
+    /**
+     * 常用站导航
+     */
+    const val stationGuide = "/wan/stationGuide"
 }

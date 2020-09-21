@@ -3,7 +3,7 @@ package com.xu.module.wan.ui.fragment.home
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.ViewModelProvider
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -16,6 +16,7 @@ import com.xu.module.wan.base.BaseFragment
 import com.xu.module.wan.bean.BannerBean
 import com.xu.module.wan.constant.ARouterPath
 import com.xu.module.wan.databinding.WFragmentHomeBinding
+import com.xu.module.wan.utils.ext.getHotKey
 import com.xu.module.wan.utils.ext.initFloatButton
 import com.xu.module.wan.viewmodel.ArticleCollectViewModel
 import com.xu.module.wan.viewmodel.HotKeyViewModel
@@ -24,7 +25,6 @@ import com.youth.banner.indicator.CircleIndicator
 import com.youth.banner.util.BannerUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.w_fragment_home.*
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @Route(path = ARouterPath.home)
@@ -35,11 +35,6 @@ class HomeFragment(
 ) : BaseFragment<HomeViewModel, WFragmentHomeBinding>() {
 
     private val collectViewModel: ArticleCollectViewModel by viewModels()
-
-    /**
-     * 热词
-     */
-    private val hotKeyViewModel: HotKeyViewModel by viewModels()
 
 
     @Inject
@@ -97,23 +92,16 @@ class HomeFragment(
     override fun initData() {
 //        loadService = inject(rv_home)
         mViewModel.getBannerData()
-        hotKeyViewModel.getHotKey()
+        // hotKeyViewModel.getHotKey()
 
 //        observe(mViewModel.homeArticleData) {
 //            loadService.showSuccess()
 //            quickAdapter.setNewInstance(it)
 //        }
+
+        val hotKeyViewModel = ViewModelProvider(requireActivity()).get(HotKeyViewModel::class.java)
         observe(hotKeyViewModel.hotKeyLiveData) {
-            if (it.size > 0) {
-                var hotKey = ""
-                if (it.size == 1) {
-                    hotKey = it[0].name
-                }
-                if (it.size >= 2) {
-                    hotKey = it[0].name + " | " + it[1].name
-                }
-                v_search.setHotKey(hotKey)
-            }
+            v_search.setHotKey(it.getHotKey())
         }
 
         observe(collectViewModel.collectStateLiveData) {

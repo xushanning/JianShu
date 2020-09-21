@@ -4,30 +4,34 @@
 
     <data>
 
-        <variable
-            name="vm"
-            type="com.xu.module.wan.ui.fragment.square.SquareViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.xu.module.wan.weight.HeadView
-            android:id="@+id/v_search"
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:tabIndicator="@drawable/w_layer_tab_indicator"
+            app:tabIndicatorColor="@color/w_color_red"
+            app:tabIndicatorFullWidth="false"
+            app:tabIndicatorHeight="4dp"
+            app:tabMode="scrollable"
+            app:tabRippleColor="@android:color/transparent"
+            app:tabSelectedTextColor="@color/w_color_red" />
 
-        <include
-            layout="@layout/w_include_viewpager"
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/view_pager"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/v_search" />
+            app:layout_constraintTop_toBottomOf="@+id/tab_layout" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

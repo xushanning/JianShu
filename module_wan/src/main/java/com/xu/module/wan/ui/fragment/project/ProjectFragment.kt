@@ -1,6 +1,7 @@
 package com.xu.module.wan.ui.fragment.project
 
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.material.tabs.TabLayoutMediator
@@ -12,11 +13,13 @@ import com.xu.module.wan.base.BaseFragment
 import com.xu.module.wan.bean.ProjectBean
 import com.xu.module.wan.constant.ARouterPath
 import com.xu.module.wan.databinding.WFragmentProjectBinding
+import com.xu.module.wan.utils.ext.getHotKey
+import com.xu.module.wan.viewmodel.HotKeyViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.w_fragment_project.*
 
 /**
- * 广场fragment
+ * 项目fragment
  */
 @Route(path = ARouterPath.project)
 @AndroidEntryPoint
@@ -50,6 +53,10 @@ class ProjectFragment(
             TabLayoutMediator(tl_project, vp_project) { tab, position ->
                 tab.text = it[position].name
             }.attach()
+        }
+        val hotKeyViewModel = ViewModelProvider(requireActivity()).get(HotKeyViewModel::class.java)
+        observe(hotKeyViewModel.hotKeyLiveData) {
+            v_search.setHotKey(it.getHotKey())
         }
     }
 }
