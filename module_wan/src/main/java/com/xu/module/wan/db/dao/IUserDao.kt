@@ -28,9 +28,7 @@ interface IUserDao {
      * 入库
      */
     @Insert
-    suspend
-
-    fun saveUserInfo(user: UserEntity)
+    suspend fun saveUserInfo(user: UserEntity)
 
     /**
      * 更新用户数据

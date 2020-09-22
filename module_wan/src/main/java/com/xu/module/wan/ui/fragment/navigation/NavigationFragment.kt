@@ -26,6 +26,8 @@ class NavigationFragment(override val layoutId: Int = R.layout.w_include_list, o
     lateinit var adapter: NavigationAdapter
     override fun initView(mDataBinding: WIncludeListBinding) {
         rv_list.run {
+            setItemViewCacheSize(200)
+            setHasFixedSize(true)
             adapter = this@NavigationFragment.adapter
             layoutManager = LinearLayoutManager(requireContext())
             initFloatButton(float_bt)

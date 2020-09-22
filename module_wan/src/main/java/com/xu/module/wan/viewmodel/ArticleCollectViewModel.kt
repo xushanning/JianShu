@@ -10,6 +10,7 @@ import com.xu.commonlib.utlis.extention.requestByNoResult
 import com.xu.module.wan.api.WanService
 import com.xu.module.wan.bean.local.CollectStateBean
 import com.xu.module.wan.constant.ARouterPath
+import com.xu.module.wan.utils.ext.createPager
 
 /**
  * 文章收藏、取消收藏view model
@@ -24,6 +25,17 @@ class ArticleCollectViewModel @ViewModelInject constructor(
      */
     val collectStateLiveData by lazy {
         MutableLiveData<CollectStateBean>()
+    }
+
+    /**
+     * 我收藏文章
+     * 分页
+     */
+    val myCollectArticleLiveData by lazy {
+        createPager {
+            checkState()
+            api.myCollectArticleList(it)
+        }
     }
 
     /**
@@ -96,6 +108,7 @@ class ArticleCollectViewModel @ViewModelInject constructor(
 
         })
     }
+
 
     /**
      * 获取收藏网站的列表

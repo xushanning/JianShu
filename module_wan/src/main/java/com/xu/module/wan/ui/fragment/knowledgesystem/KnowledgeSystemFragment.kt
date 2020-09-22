@@ -25,6 +25,8 @@ class KnowledgeSystemFragment(override val layoutId: Int = R.layout.w_include_li
 
     override fun initView(mDataBinding: WIncludeListBinding) {
         rv_list.run {
+            setItemViewCacheSize(200)
+            setHasFixedSize(true)
             adapter = this@KnowledgeSystemFragment.adapter
             layoutManager = LinearLayoutManager(requireContext())
             initFloatButton(float_bt)

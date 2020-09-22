@@ -14,4 +14,9 @@ object DbConstant {
      * 用户信息表
      */
     const val TABLE_USER = "user"
+
+    /**
+     * 浏览历史
+     */
+    const val TABLE_HISTORY = "history"
 }

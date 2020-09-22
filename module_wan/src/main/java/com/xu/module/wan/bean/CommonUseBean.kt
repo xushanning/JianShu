@@ -7,6 +7,7 @@ import com.squareup.moshi.JsonClass
  */
 @JsonClass(generateAdapter = true)
 data class CommonUseBean(
+    val type: Int,
     val name: String,
     val path: String,
     val resource: String

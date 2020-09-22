@@ -42,4 +42,6 @@
 
     <string name="w_search_cancel">取消</string>
     <string name="w_search_history">历史记录</string>
+
+    <string name="w_integral_title">积分Rank榜</string>
 </resources>

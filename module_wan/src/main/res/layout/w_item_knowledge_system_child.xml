@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <data>
-
-        <variable
-            name="item"
-            type="com.xu.module.wan.bean.KnowledgeSystemBean" />
-    </data>
-
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
     <TextView
-        randomColor="@{item.name}"
+        android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
@@ -19,8 +12,5 @@
         android:paddingStart="8dp"
         android:paddingTop="4dp"
         android:paddingEnd="8dp"
-        android:paddingBottom="4dp"
-
-        tools:text="测试测试" />
-
-</layout>
+        android:paddingBottom="4dp" />
+</LinearLayout>

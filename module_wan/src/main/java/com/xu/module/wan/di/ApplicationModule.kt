@@ -7,6 +7,7 @@ import com.xu.module.wan.api.WanService
 import com.xu.module.wan.constant.AppConstant
 import com.xu.module.wan.constant.DbConstant
 import com.xu.module.wan.db.AppDatabase
+import com.xu.module.wan.db.dao.IHistoryDao
 import com.xu.module.wan.db.dao.IUserDao
 import com.xu.module.wan.viewmodel.WanLiveData
 import dagger.Module
@@ -21,7 +22,9 @@ import javax.inject.Singleton
 @Module
 class ApplicationModule {
 
-    //provide api
+    /**
+     * provide api
+     */
     @Provides
     @Singleton
     fun provideApi(builder: Retrofit.Builder): WanService {
@@ -31,7 +34,9 @@ class ApplicationModule {
             .create(WanService::class.java)
     }
 
-    //提供room数据库
+    /**
+     * 提供room数据库
+     */
     @Provides
     @Singleton
     fun provideRoom(context: Context): AppDatabase {
@@ -41,10 +46,22 @@ class ApplicationModule {
 
     }
 
+    /**
+     * 提供UserDao
+     */
     @Provides
     @Singleton
-    fun provideDao(database: AppDatabase): IUserDao {
+    fun provideUserDao(database: AppDatabase): IUserDao {
         return database.userDao()
+    }
+
+    /**
+     * 提供浏览历史Dao
+     */
+    @Provides
+    @Singleton
+    fun provideHistoryDao(database: AppDatabase): IHistoryDao {
+        return database.historyDao()
     }
 
     /**

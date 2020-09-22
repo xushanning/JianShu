@@ -6,18 +6,15 @@ import com.xu.commonlib.base.mvvm.BaseViewModel
 import com.xu.commonlib.utlis.extention.request
 import com.xu.module.wan.api.WanService
 import com.xu.module.wan.bean.ArticleItemBean
+import com.xu.module.wan.utils.ext.createPager
 
 class WePublicArticleViewModel @ViewModelInject constructor(
     private val api: WanService
 ) : BaseViewModel() {
-    val historyArticleLiveData = MutableLiveData<MutableList<ArticleItemBean>>()
-    fun getHistoryArticleList(id: Int) {
-        request({
-            api.getPublicAccountHistoryById(0, id)
-        }, {
-            historyArticleLiveData.postValue(it.datas)
-        }, {
 
-        })
+    fun getHistoryArticleList(id: Int) =createPager {
+        api.getPublicAccountHistoryById(it, id)
     }
+
+
 }

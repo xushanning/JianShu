@@ -24,5 +24,7 @@
         <activity android:name=".ui.activity.web.WebActivity" />
         <activity android:name=".ui.activity.setting.SettingActivity" />
         <activity android:name=".ui.activity.search.SearchActivity" />
+        <activity android:name=".ui.activity.collecthistory.MyCollectHistoryActivity" />
+        <activity android:name=".ui.activity.integral.IntegralActivity"/>
     </application>
 </manifest>

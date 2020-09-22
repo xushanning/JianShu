@@ -103,6 +103,24 @@ interface WanService {
     suspend fun getRank(): BaseResBean<RankBean>
 
     /**
+     * 查看积分排行列表
+     */
+    @GET("coin/rank/{page}/json")
+    suspend fun getRankList(@Path("page") page: Int): BaseResBean<BasePageResBean<MutableList<RankItemBean>>>
+
+    /**
+     * 积分获取的记录
+     */
+    @GET("lg/coin/list/{page}/json")
+    suspend fun getRankRecord(@Path("page") page: Int): BaseResBean<BasePageResBean<MutableList<RankRecordBean>>>
+
+    /**
+     * 收藏的文章列表
+     */
+    @GET("lg/collect/list/{page}/json")
+    suspend fun myCollectArticleList(@Path("page") page: Int): BaseResBean<BasePageResBean<MutableList<MyCollectBean>>>
+
+    /**
      * 收藏站内文章
      */
     @POST("lg/collect/{articleId}/json")

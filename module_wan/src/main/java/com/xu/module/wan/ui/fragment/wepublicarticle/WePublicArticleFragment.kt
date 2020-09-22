@@ -13,6 +13,7 @@ import com.xu.module.wan.R
 import com.xu.module.wan.base.BaseFragment
 import com.xu.module.wan.constant.ARouterPath
 import com.xu.module.wan.databinding.WFragmentWePublicArticleBinding
+import com.xu.module.wan.ui.fragment.home.ArticlePagingAdapter
 import com.xu.module.wan.ui.fragment.home.HomeArticleItemQuickAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.w_fragment_we_public_article.*
@@ -28,7 +29,7 @@ class WePublicArticleFragment(
     @JvmField
     var id: Int? = 0
 
-    private val quickAdapter: HomeArticleItemQuickAdapter by lazy { HomeArticleItemQuickAdapter() }
+    private val quickAdapter by lazy { ArticlePagingAdapter() }
 
     override fun initView(mDataBinding: WFragmentWePublicArticleBinding) {
         rv_article_list.run {
@@ -36,14 +37,13 @@ class WePublicArticleFragment(
             layoutManager = LinearLayoutManager(context)
         }
         quickAdapter.run {
-            singleDataItemClick {
+            setOnItemClickListener { item, _ ->
                 go(ARouterPath.web) {
-                    withString("url", it.link)
-                    withString("title", it.title)
+                    withString("url", item.link)
+                    withString("title", item.title)
                 }
             }
-
-            singleChildDataItemClick { item, viewId ->
+            setOnItemChildClickListener { item, _, viewId ->
                 if (viewId == R.id.img_collect) {
                     Logger.d("收藏" + item.author)
                 }
@@ -53,9 +53,6 @@ class WePublicArticleFragment(
     }
 
     override fun initData() {
-        mViewModel.getHistoryArticleList(id!!)
-        observe(mViewModel.historyArticleLiveData) {
-            quickAdapter.setNewInstance(it)
-        }
+        observe(quickAdapter, mViewModel.getHistoryArticleList(id!!))
     }
 }

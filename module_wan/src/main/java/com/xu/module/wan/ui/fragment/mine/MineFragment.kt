@@ -56,7 +56,7 @@ class MineFragment(
         quickAdapter.run {
             setNewInstance(getConfig())
             singleDbDataItemClick {
-                go(it.path)
+                go(it.path) { withInt("type", it.type) }
             }
         }
     }
@@ -96,6 +96,13 @@ class MineFragment(
          */
         fun jumpPersonPage() {
             showToast("假的。。别点了")
+        }
+
+        /**
+         * 积分排行
+         */
+        fun jumpIntegral() {
+            go(ARouterPath.integral)
         }
     }
 }

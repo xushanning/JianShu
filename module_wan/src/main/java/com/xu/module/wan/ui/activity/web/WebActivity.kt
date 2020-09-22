@@ -34,6 +34,13 @@ class WebActivity(
     @JvmField
     var title: String? = null
 
+    /**
+     * 来源
+     */
+    @Autowired(name = "source")
+    @JvmField
+    var source: Int? = 0
+
     private lateinit var web: AgentWeb
 
     override fun initView(mDataBinding: WActivityWebBinding) {

@@ -1,24 +1,24 @@
 [
   {
-    "id": 0,
+    "type": 0,
     "name": "收藏",
     "resource": "w_vector_collect_red",
-    "path": "/wan/setting"
+    "path": "/wan/myCollectHistory"
   },
   {
-    "id": 1,
+    "type": 1,
     "name": "浏览历史",
     "resource": "w_vector_read_history",
-    "path": "/wan/setting"
+    "path": "/wan/myCollectHistory"
   },
   {
-    "id": 2,
+    "type": 2,
     "name": "系统设置",
     "resource": "w_vector_setting",
     "path": "/wan/setting"
   },
   {
-    "id": 3,
+    "type": 3,
     "name": "夜间模式",
     "resource": "w_vector_night_mode",
     "path": "/wan/setting"

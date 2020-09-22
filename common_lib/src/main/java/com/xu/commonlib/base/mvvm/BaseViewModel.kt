@@ -11,13 +11,12 @@ abstract class BaseViewModel : ViewModel() {
 
     /**
      * 展示dialog的LiveData
-     * 调用AppLiveData单例是因为如果通过by viewModels()方法引入ViewModel的话，就无法控制loading
      */
-    val showDialog: MutableLiveData<String> by lazy { AppLiveData.INSTANCE.showDialog }
+    val showDialog = MutableLiveData<String>()
 
     /**
      *隐藏dialog
      *
      */
-    val dismissDialog: MutableLiveData<Boolean> by lazy { AppLiveData.INSTANCE.dismissDialog }
+    val dismissDialog = MutableLiveData<Boolean>()
 }

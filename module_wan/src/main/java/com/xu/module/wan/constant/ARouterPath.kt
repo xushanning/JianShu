@@ -70,4 +70,24 @@ object ARouterPath {
      * 常用站导航
      */
     const val stationNavigation = "/wan/stationNavigation"
+
+    /**
+     * 我的收藏和浏览历史
+     */
+    const val myCollectHistory = "/wan/myCollectHistory"
+
+    /**
+     * 我的收藏
+     */
+    const val myCollect = "/wan/myCollect"
+
+    /**
+     * 积分排行
+     */
+    const val integral = "/wan/integral"
+
+    /**
+     * 获取积分的记录
+     */
+    const val integralRecord = "/wan/integralRecord"
 }
