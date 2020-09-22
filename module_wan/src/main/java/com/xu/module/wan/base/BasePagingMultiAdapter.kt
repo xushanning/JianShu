@@ -3,9 +3,8 @@ package com.xu.module.wan.base
 import android.util.SparseIntArray
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
-import androidx.recyclerview.widget.DiffUtil
 
-abstract class BasePagingMultiAdapter<T : Any, VH : BaseViewHolder>(itemsTheSame: (oldItem: T, newItem: T) -> Boolean, contentsTheSame: (oldItem: T, newItem: T) -> Boolean) :
+abstract class BasePagingMultiAdapter<T : Any, VH : BasePagingViewHolder>(itemsTheSame: (oldItem: T, newItem: T) -> Boolean, contentsTheSame: (oldItem: T, newItem: T) -> Boolean) :
     BasePagingAdapter<T, VH>(0, itemsTheSame, contentsTheSame) {
     private val layouts: SparseIntArray by lazy(LazyThreadSafetyMode.NONE) { SparseIntArray() }
 

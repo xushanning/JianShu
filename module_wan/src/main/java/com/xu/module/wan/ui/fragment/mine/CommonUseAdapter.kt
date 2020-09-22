@@ -19,11 +19,6 @@ class CommonUseAdapter @Inject constructor() :
     }
 
     companion object {
-        @JvmStatic
-        @BindingAdapter("imgResId")
-        fun loadImage(img: ImageView, resId: String) {
-            val id = img.context.resources.getIdentifier(resId, "drawable", img.context.packageName)
-            img.setImageResource(id)
-        }
+
     }
 }

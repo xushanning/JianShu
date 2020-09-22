@@ -8,9 +8,7 @@ import android.widget.LinearLayout
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import androidx.paging.PagingDataAdapter
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.orhanobut.logger.Logger
 import com.xu.module.wan.utils.ext.createDiff
 import java.lang.reflect.Constructor
 import java.lang.reflect.InvocationTargetException
@@ -18,7 +16,7 @@ import java.lang.reflect.Modifier
 import java.lang.reflect.ParameterizedType
 import java.util.*
 
-abstract class BasePagingAdapter<T : Any, VH : BaseViewHolder>(@LayoutRes private val layoutResId: Int, itemsTheSame: (oldItem: T, newItem: T) -> Boolean, contentsTheSame: (oldItem: T, newItem: T) -> Boolean) :
+abstract class BasePagingAdapter<T : Any, VH : BasePagingViewHolder>(@LayoutRes private val layoutResId: Int, itemsTheSame: (oldItem: T, newItem: T) -> Boolean, contentsTheSame: (oldItem: T, newItem: T) -> Boolean) :
     PagingDataAdapter<T, VH>(createDiff(itemsTheSame, contentsTheSame)) {
 
     companion object {
@@ -202,11 +200,11 @@ abstract class BasePagingAdapter<T : Any, VH : BaseViewHolder>(@LayoutRes privat
         }
         // 泛型擦除会导致z为null
         val vh: VH? = if (z == null) {
-            BaseViewHolder(view) as VH
+            BasePagingViewHolder(view) as VH
         } else {
             createBaseGenericKInstance(z, view)
         }
-        return vh ?: BaseViewHolder(view) as VH
+        return vh ?: BasePagingViewHolder(view) as VH
     }
 
     private fun getInstancedGenericKClass(z: Class<*>): Class<*>? {
@@ -216,12 +214,12 @@ abstract class BasePagingAdapter<T : Any, VH : BaseViewHolder>(@LayoutRes privat
                 val types = type.actualTypeArguments
                 for (temp in types) {
                     if (temp is Class<*>) {
-                        if (BaseViewHolder::class.java.isAssignableFrom(temp)) {
+                        if (BasePagingViewHolder::class.java.isAssignableFrom(temp)) {
                             return temp
                         }
                     } else if (temp is ParameterizedType) {
                         val rawType = temp.rawType
-                        if (rawType is Class<*> && BaseViewHolder::class.java.isAssignableFrom(
+                        if (rawType is Class<*> && BasePagingViewHolder::class.java.isAssignableFrom(
                                 rawType
                             )
                         ) {

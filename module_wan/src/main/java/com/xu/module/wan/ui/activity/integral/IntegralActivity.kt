@@ -7,8 +7,12 @@ import com.xu.commonlib.utlis.extention.observe
 import com.xu.module.wan.BR
 import com.xu.module.wan.R
 import com.xu.module.wan.base.BaseActivity
+import com.xu.module.wan.bean.RankItemBean
 import com.xu.module.wan.constant.ARouterPath
 import com.xu.module.wan.databinding.WActivityIntegralBinding
+import com.xu.module.wan.databinding.WItemIntegralBinding
+import com.xu.module.wan.utils.ext.createAdapter
+import com.xu.module.wan.utils.ext.createPageBindingAdapter
 import com.xu.module.wan.utils.ext.initFloatButton
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.w_include_list.*
@@ -26,11 +30,23 @@ class IntegralActivity(override val layoutId: Int = R.layout.w_activity_integral
      * 积分排行和获取积分记录共用一个recyclerview
      * 正好验证adapter设计模式是剥离业务逻辑
      */
-    @Inject
-    lateinit var rankAdapter: IntegralAdapter
 
-    @Inject
-    lateinit var recordAdapter: IntegralRecordAdapter
+    private val rankAdapter = createPageBindingAdapter<RankItemBean, WItemIntegralBinding>(
+        R.layout.w_item_integral,
+        { oldItem, newItem ->
+            oldItem.rank == newItem.rank
+        },
+        { oldItem, newItem ->
+            oldItem.rank == newItem.rank
+        },
+        { holder, item ->
+            holder.dataBinding?.item = item
+        })
+
+
+//    val recordAdapter = createAdapter<String>(R.layout.w_item_article) { holder, item ->
+//
+//    }
 
     override fun initView(mDataBinding: WActivityIntegralBinding) {
         mDataBinding.click = OnClick()

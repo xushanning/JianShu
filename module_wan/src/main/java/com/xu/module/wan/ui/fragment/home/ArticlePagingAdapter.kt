@@ -9,7 +9,7 @@ import androidx.databinding.DataBindingUtil
 import com.xu.commonlib.utlis.extention.load
 import com.xu.module.wan.R
 import com.xu.module.wan.base.BasePagingMultiAdapter
-import com.xu.module.wan.base.BaseViewHolder
+import com.xu.module.wan.base.BasePagingViewHolder
 import com.xu.module.wan.bean.ArticleItemBean
 import com.xu.module.wan.bean.TagBean
 import com.xu.module.wan.bean.local.CollectStateBean
@@ -18,7 +18,7 @@ import com.xu.module.wan.databinding.WItemProjectBinding
 import javax.inject.Inject
 
 class ArticlePagingAdapter @Inject constructor() :
-    BasePagingMultiAdapter<ArticleItemBean, BaseViewHolder>(
+    BasePagingMultiAdapter<ArticleItemBean, BasePagingViewHolder>(
         { oldItem, newItem ->
             oldItem.id == newItem.id
         }, { oldItem, newItem ->
@@ -96,7 +96,7 @@ class ArticlePagingAdapter @Inject constructor() :
         addChildClickViewIds(R.id.img_collect)
     }
 
-    override fun convert(holder: BaseViewHolder, item: ArticleItemBean) {
+    override fun convert(holder: BasePagingViewHolder, item: ArticleItemBean) {
         when (item.itemType) {
             TYPE_ARTICLE -> {
                 DataBindingUtil.bind<WItemArticleBinding>(holder.itemView)?.item = item

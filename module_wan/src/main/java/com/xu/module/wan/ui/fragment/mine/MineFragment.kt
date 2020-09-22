@@ -16,7 +16,10 @@ import com.xu.module.wan.base.BaseFragment
 import com.xu.module.wan.bean.CommonUseBean
 import com.xu.module.wan.constant.ARouterPath
 import com.xu.module.wan.databinding.WFragmentMineBinding
+import com.xu.module.wan.databinding.WItemCommonUseBinding
 import com.xu.module.wan.db.dao.IUserDao
+import com.xu.module.wan.utils.ext.createAdapter
+import com.xu.module.wan.utils.ext.createBindingAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.w_fragment_mine.*
 import javax.inject.Inject
@@ -31,8 +34,11 @@ class MineFragment(
     override val variableId: Int = BR.vm
 ) : BaseFragment<MineViewModel, WFragmentMineBinding>() {
 
-    @Inject
-    lateinit var quickAdapter: CommonUseAdapter
+
+    private var quickAdapter =
+        createBindingAdapter<CommonUseBean, WItemCommonUseBinding>(R.layout.w_item_common_use) { holder, item ->
+            holder.dataBinding?.item = item
+        }
 
     @Inject
     lateinit var moShi: Moshi
