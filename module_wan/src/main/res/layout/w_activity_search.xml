@@ -138,8 +138,9 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_search_history"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/img_delete" />
@@ -148,7 +149,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="@{vm.uiLiveData?View.VISIBLE:View.GONE}"
-            app:constraint_referenced_ids="rv_hot_key,v_2,tv_history,img_delete,rv_search_history" />
+            app:constraint_referenced_ids="rv_hot_key,v_2,tv_history,img_delete,rv_search_history,tv_22" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_search"

@@ -55,7 +55,7 @@ class SearchViewModel @ViewModelInject constructor(
      */
     fun saveHistory() {
         viewModelScope.launch {
-            val history = dao.querySearchHistory(AppSp.currentUserId)
+            val history = searchHistoryLiveData.value
             val content = getSearchContent()
             if (history == null) {
                 //空，新增一条
@@ -87,7 +87,7 @@ class SearchViewModel @ViewModelInject constructor(
      */
     fun deleteHistory() {
         viewModelScope.launch {
-            val history = dao.querySearchHistory(AppSp.currentUserId)
+            val history = searchHistoryLiveData.value
             if (history != null) {
                 val list = history.history
                 list.clear()

@@ -18,11 +18,7 @@ interface ISearchHistoryDao {
     @Query("select * from search_history where id ==:userId")
     fun querySearchHistoryLiveData(userId: Int): LiveData<SearchHistoryEntity?>
 
-    /**
-     * 查询用户搜索历史
-     */
-    @Query("select * from search_history where id ==:userId")
-    suspend fun querySearchHistory(userId: Int): SearchHistoryEntity?
+
 
     /**
      * 入库

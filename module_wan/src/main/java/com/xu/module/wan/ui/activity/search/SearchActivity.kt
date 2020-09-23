@@ -7,8 +7,8 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.orhanobut.logger.Logger
 import com.xu.commonlib.utlis.extention.observe
-import com.xu.commonlib.utlis.extention.singleClick
 import com.xu.commonlib.utlis.extention.singleDataItemClick
 import com.xu.commonlib.utlis.extention.singleDbDataItemClick
 import com.xu.module.wan.BR
@@ -51,10 +51,6 @@ class SearchActivity(override val layoutId: Int = R.layout.w_activity_search, ov
      */
     private var initPager = false
 
-    /**
-     * 软键盘是否开启
-     */
-    private var softKeyboardOpen = true
 
     /**
      * 热词
@@ -87,20 +83,17 @@ class SearchActivity(override val layoutId: Int = R.layout.w_activity_search, ov
         et_search.requestFocus()
         et_search.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                closeSearch()
                 observeSearch()
                 return@setOnEditorActionListener true
             }
             return@setOnEditorActionListener false
         }
 
-        cl_root.viewTreeObserver.addOnGlobalLayoutListener {
-            val heightDiff = cl_root.rootView.height - cl_root.height
-            softKeyboardOpen = heightDiff > 100
-        }
+
     }
 
     private fun observeSearch() {
+        closeSearch()
         if (!initPager) {
             observe(pagingAdapter, mViewModel.pager)
         } else {
@@ -134,16 +127,31 @@ class SearchActivity(override val layoutId: Int = R.layout.w_activity_search, ov
         return true
     }
 
+    /**
+     * 软键盘可见性
+     */
+    private fun getKeyboardVisible(): Boolean {
+        val imm by lazy { getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager }
+        val windowHeightMethod =
+            InputMethodManager::class.java.getMethod("getInputMethodWindowVisibleHeight")
+        try {
+            return windowHeightMethod.invoke(imm) as Int > 0
+        } catch (e: Exception) {
+            Logger.d(e.message)
+        }
+        return false
+    }
+
 
     inner class OnClick {
 
         fun onCancel() {
-            //逻辑：如果用户主动输入了搜索内容，那么直接关闭页面，如果还没有输入，那么判断
+            //逻辑：如果用户没有输入内容，那么直接关闭页面，如果主动输入了搜索内容，那么判断
             //软键盘是否打开，如果打开了，那么关闭软键盘，否则finish
             if (mViewModel.searchLiveData.value.isEmpty()) {
                 finish()
             } else {
-                if (softKeyboardOpen) {
+                if (getKeyboardVisible()) {
                     closeSearch()
                 } else {
                     finish()
