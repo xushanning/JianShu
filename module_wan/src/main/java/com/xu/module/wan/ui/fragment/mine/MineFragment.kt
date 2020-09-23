@@ -18,6 +18,7 @@ import com.xu.module.wan.constant.ARouterPath
 import com.xu.module.wan.databinding.WFragmentMineBinding
 import com.xu.module.wan.databinding.WItemCommonUseBinding
 import com.xu.module.wan.db.dao.IUserDao
+import com.xu.module.wan.ui.activity.integral.IntegralActivity
 import com.xu.module.wan.utils.ext.createAdapter
 import com.xu.module.wan.utils.ext.createBindingAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -108,7 +109,9 @@ class MineFragment(
          * 积分排行
          */
         fun jumpIntegral() {
-            go(ARouterPath.integral)
+            go(ARouterPath.integral) {
+                withInt("type", IntegralActivity.INTEGRAL_TYPE_RANK)
+            }
         }
     }
 }

@@ -1,8 +1,6 @@
 package com.xu.module.wan.ui.activity.search
 
 import android.content.Context
-import android.graphics.Rect
-import android.util.DisplayMetrics
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
@@ -10,6 +8,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.xu.commonlib.utlis.extention.observe
+import com.xu.commonlib.utlis.extention.singleClick
+import com.xu.commonlib.utlis.extention.singleDataItemClick
 import com.xu.commonlib.utlis.extention.singleDbDataItemClick
 import com.xu.module.wan.BR
 import com.xu.module.wan.R
@@ -17,10 +17,12 @@ import com.xu.module.wan.base.BaseActivity
 import com.xu.module.wan.constant.ARouterPath
 import com.xu.module.wan.databinding.WActivitySearchBinding
 import com.xu.module.wan.ui.fragment.home.ArticlePagingAdapter
+import com.xu.module.wan.utils.ext.createAdapter
 import com.xu.module.wan.viewmodel.HotKeyViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.w_activity_search.*
 import javax.inject.Inject
+
 
 /**
  * 搜索
@@ -37,10 +39,22 @@ class SearchActivity(override val layoutId: Int = R.layout.w_activity_search, ov
     lateinit var pagingAdapter: ArticlePagingAdapter
 
     /**
+     * 搜索历史adapter
+     */
+    private val historyAdapter =
+        createAdapter<String>(R.layout.w_item_hot_key_history) { holder, item ->
+            holder.setText(R.id.tv_content, item)
+        }
+
+    /**
      * 是否observer了pager
      */
     private var initPager = false
 
+    /**
+     * 软键盘是否开启
+     */
+    private var softKeyboardOpen = true
 
     /**
      * 热词
@@ -52,7 +66,7 @@ class SearchActivity(override val layoutId: Int = R.layout.w_activity_search, ov
         rv_hot_key.adapter = adapter
         rv_hot_key.layoutManager = GridLayoutManager(this, 2)
         adapter.singleDbDataItemClick {
-            tv_search.setText(it.name)
+            et_search.setText(it.name)
             observeSearch()
         }
 
@@ -60,16 +74,29 @@ class SearchActivity(override val layoutId: Int = R.layout.w_activity_search, ov
         rv_search.adapter = pagingAdapter
         rv_search.layoutManager = LinearLayoutManager(this)
 
-        tv_search.isFocusable = true
-        tv_search.isFocusableInTouchMode = true
-        tv_search.requestFocus()
-        tv_search.setOnEditorActionListener { _, actionId, _ ->
+
+        rv_search_history.adapter = historyAdapter
+        rv_search_history.layoutManager = GridLayoutManager(this, 2)
+        historyAdapter.singleDataItemClick {
+            et_search.setText(it)
+            observeSearch()
+        }
+
+        et_search.isFocusable = true
+        et_search.isFocusableInTouchMode = true
+        et_search.requestFocus()
+        et_search.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 closeSearch()
                 observeSearch()
                 return@setOnEditorActionListener true
             }
             return@setOnEditorActionListener false
+        }
+
+        cl_root.viewTreeObserver.addOnGlobalLayoutListener {
+            val heightDiff = cl_root.rootView.height - cl_root.height
+            softKeyboardOpen = heightDiff > 100
         }
     }
 
@@ -81,6 +108,7 @@ class SearchActivity(override val layoutId: Int = R.layout.w_activity_search, ov
         }
         initPager = true
         mViewModel.uiLiveData.postValue(false)
+        mViewModel.saveHistory()
     }
 
     private fun closeSearch() {
@@ -97,52 +125,38 @@ class SearchActivity(override val layoutId: Int = R.layout.w_activity_search, ov
                 mViewModel.searchHintLiveData.postValue(it[position].name)
             }
         }
+        observe(mViewModel.searchHistoryLiveData) {
+            historyAdapter.setNewInstance(it?.history)
+        }
     }
 
     override fun useLightMode(): Boolean {
         return true
     }
 
-    /**
-     * 键盘是否展示
-     */
-    private fun isShowSoft(): Boolean {
-        val height = window.decorView.height
-        val rect = Rect()
-        window.decorView.getWindowVisibleDisplayFrame(rect)
-        return (height * 2 / 3 - rect.bottom - getSoftButtonsBarHeight()) != 0
-    }
-
-    private fun getSoftButtonsBarHeight(): Int {
-        val metrics = DisplayMetrics()
-        windowManager.defaultDisplay.getMetrics(metrics)
-        val height = metrics.heightPixels
-        windowManager.defaultDisplay.getRealMetrics(metrics)
-        val realHeight = metrics.heightPixels
-        return if (realHeight > height) {
-            realHeight - height
-        } else {
-            0
-        }
-    }
 
     inner class OnClick {
 
         fun onCancel() {
-            finish()
-            //todo 判断软键盘状态没有适配好。。
-//            if (isShowSoft()) {
-//                closeSearch()
-//            } else {
-//
-//            }
+            //逻辑：如果用户主动输入了搜索内容，那么直接关闭页面，如果还没有输入，那么判断
+            //软键盘是否打开，如果打开了，那么关闭软键盘，否则finish
+            if (mViewModel.searchLiveData.value.isEmpty()) {
+                finish()
+            } else {
+                if (softKeyboardOpen) {
+                    closeSearch()
+                } else {
+                    finish()
+                }
+            }
+
         }
 
         /**
          * 删除搜索记录
          */
         fun onDeleteClick() {
-
+            mViewModel.deleteHistory()
         }
     }
 }

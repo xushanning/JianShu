@@ -7,7 +7,8 @@ import com.xu.module.wan.api.WanService
 import com.xu.module.wan.constant.AppConstant
 import com.xu.module.wan.constant.DbConstant
 import com.xu.module.wan.db.AppDatabase
-import com.xu.module.wan.db.dao.IHistoryDao
+import com.xu.module.wan.db.dao.IReadHistoryDao
+import com.xu.module.wan.db.dao.ISearchHistoryDao
 import com.xu.module.wan.db.dao.IUserDao
 import com.xu.module.wan.viewmodel.WanLiveData
 import dagger.Module
@@ -60,8 +61,17 @@ class ApplicationModule {
      */
     @Provides
     @Singleton
-    fun provideHistoryDao(database: AppDatabase): IHistoryDao {
-        return database.historyDao()
+    fun provideHistoryDao(database: AppDatabase): IReadHistoryDao {
+        return database.readHistoryDao()
+    }
+
+    /**
+     * 搜索历史Dao
+     */
+    @Provides
+    @Singleton
+    fun provideSearchHistoryDao(database: AppDatabase): ISearchHistoryDao {
+        return database.searchHistoryDao()
     }
 
     /**

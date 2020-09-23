@@ -15,16 +15,23 @@
 
         </activity>
         <activity android:name="com.xu.module.wan.ui.activity.main.MainActivity">
+
+        </activity>
+        <activity android:name=".ui.activity.web.WebActivity" />
+        <activity android:name=".ui.activity.setting.SettingActivity" />
+        <activity
+            android:name=".ui.activity.search.SearchActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".ui.activity.collecthistory.MyCollectHistoryActivity" />
+        <activity android:name=".ui.activity.integral.IntegralActivity" />
+        <activity
+            android:name=".ui.activity.splash.SplashActivity"
+            android:theme="@style/wSplash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.web.WebActivity" />
-        <activity android:name=".ui.activity.setting.SettingActivity" />
-        <activity android:name=".ui.activity.search.SearchActivity" />
-        <activity android:name=".ui.activity.collecthistory.MyCollectHistoryActivity" />
-        <activity android:name=".ui.activity.integral.IntegralActivity"/>
     </application>
 </manifest>

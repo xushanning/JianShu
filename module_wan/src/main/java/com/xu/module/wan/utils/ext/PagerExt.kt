@@ -26,3 +26,11 @@ fun <Value : Any> ViewModel.createPager(source: suspend (Int) -> BaseResBean<Bas
     ).flow.cachedIn(viewModelScope)
         .asLiveData()
 }
+
+fun <Value : Any> createPager(source: suspend (Int) -> BaseResBean<BasePageResBean<MutableList<Value>>>):
+        LiveData<PagingData<Value>> {
+    return Pager(
+        config = PagingConfig(20, 20),
+        pagingSourceFactory = { PagingSource(source) }
+    ).flow.asLiveData()
+}

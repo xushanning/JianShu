@@ -6,6 +6,6 @@ import androidx.room.Dao
  * 浏览历史Dao
  */
 @Dao
-interface IHistoryDao {
+interface IReadHistoryDao {
 
 }

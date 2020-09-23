@@ -32,7 +32,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/w_integral_title"
+            android:text="@{vm.titleLiveData}"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="@+id/img_back"
             app:layout_constraintEnd_toEndOf="parent"
@@ -61,6 +61,7 @@
             app:layout_constraintTop_toTopOf="@+id/img_back" />
 
         <ImageView
+            android:id="@+id/img_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
@@ -120,5 +121,11 @@
             app:layout_constraintBottom_toBottomOf="@+id/w_textview10"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/w_textview10" />
+
+        <androidx.constraintlayout.widget.Group
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{vm.rankVisibleLiveData}"
+            app:constraint_referenced_ids="w_textview13,img_1,img_record,v_2,w_textview11,w_textview10" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

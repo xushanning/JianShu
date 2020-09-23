@@ -62,6 +62,11 @@ object ARouterPath {
     const val search = "/wan/search"
 
     /**
+     * 闪屏页
+     */
+    const val splash = "/wan/splash"
+
+    /**
      * 知识体系
      */
     const val knowledgeSystem = "/wan/knowledgeSystem"

@@ -7,8 +7,8 @@ import com.xu.module.wan.constant.DbConstant
 /**
  * 浏览历史Entity
  */
-@Entity(tableName = DbConstant.TABLE_HISTORY)
-data class HistoryEntity(
+@Entity(tableName = DbConstant.TABLE_READ_HISTORY)
+data class ReadHistoryEntity(
     @PrimaryKey
     val id: Int,
     val xx: String

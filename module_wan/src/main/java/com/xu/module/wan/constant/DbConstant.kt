@@ -18,5 +18,10 @@ object DbConstant {
     /**
      * 浏览历史
      */
-    const val TABLE_HISTORY = "history"
+    const val TABLE_READ_HISTORY = "read_history"
+
+    /**
+     * 搜索历史
+     */
+    const val TABLE_SEARCH_HISTORY = "search_history"
 }

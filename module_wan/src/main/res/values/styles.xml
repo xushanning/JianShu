@@ -7,6 +7,12 @@
         <item name="colorAccent">@color/res_99</item>
     </style>
 
+    <style name="wSplash" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@color/res_blue</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
     <style name="wLoading">
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>

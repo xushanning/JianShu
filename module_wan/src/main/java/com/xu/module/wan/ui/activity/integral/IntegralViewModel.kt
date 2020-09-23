@@ -18,6 +18,16 @@ class IntegralViewModel @ViewModelInject constructor(
     val rankLiveData = MutableLiveData<RankBean>()
 
     /**
+     * title
+     */
+    val titleLiveData = MutableLiveData<String>()
+
+    /**
+     * rank独有的ui可见性
+     */
+    val rankVisibleLiveData = MutableLiveData<Int>()
+
+    /**
      * rank 列表 paging
      */
     fun getIntegralRank() = createPager {
