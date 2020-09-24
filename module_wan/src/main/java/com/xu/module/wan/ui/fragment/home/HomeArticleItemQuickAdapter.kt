@@ -7,8 +7,9 @@ import com.xu.module.wan.R
 import com.xu.module.wan.bean.ArticleItemBean
 import com.xu.module.wan.databinding.WItemArticleBinding
 import com.xu.module.wan.databinding.WItemProjectBinding
+import javax.inject.Inject
 
-class HomeArticleItemQuickAdapter :
+class HomeArticleItemQuickAdapter @Inject constructor() :
     BaseMultiItemQuickAdapter<ArticleItemBean, BaseViewHolder>(ArrayList()) {
     init {
         addItemType(TYPE_ARTICLE, R.layout.w_item_article)
@@ -44,7 +45,6 @@ class HomeArticleItemQuickAdapter :
          * 项目
          */
         const val TYPE_PROJECT = 2
-
 
 
     }

@@ -8,7 +8,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.xu.module.wan.base.PagingSource
+import com.xu.module.wan.base.NetPagingSource
 import com.xu.module.wan.bean.base.BasePageResBean
 import com.xu.module.wan.bean.base.BaseResBean
 
@@ -22,7 +22,7 @@ fun <Value : Any> ViewModel.createPager(source: suspend (Int) -> BaseResBean<Bas
         LiveData<PagingData<Value>> {
     return Pager(
         config = PagingConfig(20, 20),
-        pagingSourceFactory = { PagingSource(source) }
+        pagingSourceFactory = { NetPagingSource(source) }
     ).flow.cachedIn(viewModelScope)
         .asLiveData()
 }
@@ -31,6 +31,6 @@ fun <Value : Any> createPager(source: suspend (Int) -> BaseResBean<BasePageResBe
         LiveData<PagingData<Value>> {
     return Pager(
         config = PagingConfig(20, 20),
-        pagingSourceFactory = { PagingSource(source) }
+        pagingSourceFactory = { NetPagingSource(source) }
     ).flow.asLiveData()
 }

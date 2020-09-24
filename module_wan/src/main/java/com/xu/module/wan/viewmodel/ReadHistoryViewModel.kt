@@ -19,7 +19,7 @@ class ReadHistoryViewModel @ViewModelInject constructor(
     /**
      * 阅读历史LiveData
      */
-    val readHistoryLiveData = dao.queryReadHistoryById(AppSp.currentUserId)
+//    val readHistoryLiveData = dao.queryReadHistoryById(AppSp.currentUserId)
 
     /**
      * 保存新的阅读历史

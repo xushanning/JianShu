@@ -1,6 +1,7 @@
 package com.xu.module.wan.db.dao
 
 import androidx.lifecycle.LiveData
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -18,6 +19,12 @@ interface IReadHistoryDao {
      */
     @Query("select * from read_history where userId==:userId")
     fun queryReadHistoryById(userId: Int): LiveData<ReadHistoryEntity?>
+
+    /**
+     * 带有paging返回的查询
+     */
+    @Query("select * from read_history where userId==:userId")
+    fun queryReadHistoryPaging(userId: Int): PagingSource<Int, ReadHistoryEntity>
 
     @Query("select * from read_history where userId==:userId")
     suspend fun queryReadHistory(userId: Int): ReadHistoryEntity?
