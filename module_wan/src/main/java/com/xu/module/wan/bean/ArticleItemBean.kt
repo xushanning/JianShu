@@ -21,6 +21,10 @@ data class ArticleItemBean(
     val descMd: String,
     val envelopePic: String,
     val fresh: Boolean,
+    /**
+     * 文章唯一id
+     * 可以根据此id判断是否是同一篇文章
+     */
     val id: Int,
     val link: String,
     val niceDate: String,

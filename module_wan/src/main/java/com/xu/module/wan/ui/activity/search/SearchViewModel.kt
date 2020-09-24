@@ -59,7 +59,7 @@ class SearchViewModel @ViewModelInject constructor(
             val content = getSearchContent()
             if (history == null) {
                 //空，新增一条
-                val list = ArrayList<String>().apply { add(content) }
+                val list = arrayListOf(content)
                 val entity = SearchHistoryEntity(AppSp.currentUserId, list)
                 dao.saveHistory(entity)
             } else {
@@ -68,8 +68,8 @@ class SearchViewModel @ViewModelInject constructor(
                 val size = list.size
                 val position = list.indexOf(content)
                 if (position == -1) {
-                    //不存在，没有搜索过，如果长度超过了10，那么移除超出的部分
-                    if (size >= 10) {
+                    //不存在，没有搜索过，如果长度超过了9，那么移除超出的部分
+                    if (size >= 9) {
                         list.removeAt(size - 1)
                     }
                 } else {

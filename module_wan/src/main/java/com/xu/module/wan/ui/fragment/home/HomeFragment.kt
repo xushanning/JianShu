@@ -71,6 +71,7 @@ class HomeFragment(
                 go(ARouterPath.web) {
                     withString("url", item.link)
                     withString("title", item.title)
+                    withObject("bean", item)
                 }
             }
             setOnItemChildClickListener { item, position, viewId ->

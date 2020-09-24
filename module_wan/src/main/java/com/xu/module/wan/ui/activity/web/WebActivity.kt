@@ -1,8 +1,10 @@
 package com.xu.module.wan.ui.activity.web
 
+import android.os.CountDownTimer
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.LinearLayout
+import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -11,8 +13,10 @@ import com.orhanobut.logger.Logger
 import com.xu.module.wan.BR
 import com.xu.module.wan.R
 import com.xu.module.wan.base.BaseActivity
+import com.xu.module.wan.bean.ArticleItemBean
 import com.xu.module.wan.constant.ARouterPath
 import com.xu.module.wan.databinding.WActivityWebBinding
+import com.xu.module.wan.viewmodel.ReadHistoryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.w_activity_web.*
 
@@ -34,6 +38,10 @@ class WebActivity(
     @JvmField
     var title: String? = null
 
+    @Autowired(name = "bean")
+    @JvmField
+    var bean: ArticleItemBean? = null
+
     /**
      * 来源
      */
@@ -42,6 +50,11 @@ class WebActivity(
     var source: Int? = 0
 
     private lateinit var web: AgentWeb
+
+    /**
+     * 阅读历史ViewModel
+     */
+    private val readHistoryViewModel: ReadHistoryViewModel by viewModels()
 
     override fun initView(mDataBinding: WActivityWebBinding) {
         initWeb()
@@ -58,7 +71,20 @@ class WebActivity(
     }
 
     override fun initData() {
+        //五秒后，算作阅读
+        object : CountDownTimer(5000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
 
+            }
+
+            override fun onFinish() {
+                if (bean != null) {
+                    Logger.d("开始保存阅读记录")
+                    readHistoryViewModel.saveHistory(bean!!)
+                }
+            }
+
+        }.start()
     }
 
     private fun initWeb() {

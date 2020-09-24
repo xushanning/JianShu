@@ -90,6 +90,7 @@ ext {
             easyload             : "com.xu.easyload:easyload:0.0.2",
             agentWeb             : "com.just.agentweb:agentweb-androidx:4.1.4",
             banner               : "com.youth.banner:banner:2.1.0",
+            bg                   : "com.noober.background:core:1.6.5",
 
             gifView              : "com.github.Cutta:GifView:1.4",
             guide                : "com.github.huburt-Hu:NewbieGuide:v2.4.0",
