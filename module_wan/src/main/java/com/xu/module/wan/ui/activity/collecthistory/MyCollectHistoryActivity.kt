@@ -34,19 +34,16 @@ class MyCollectHistoryActivity(override val layoutId: Int = R.layout.w_activity_
         val tabNames = listOf("文章", "网站", "浏览历史")
         val fragments = listOf(
             getFragment(ARouterPath.myCollect) {
-                withInt(
-                    "type",
-                    0
-                )
+                withInt("type", 0)
             },
             getFragment(ARouterPath.myCollect) {
-                withInt(
-                    "type", 1
-                )
+                withInt("type", 1)
             },
-            getFragment(ARouterPath.myCollect)
+            getFragment(ARouterPath.myCollect) {
+                withInt("type", 2)
+            }
         )
-        vp_collect.init(this,tl_collect,fragments,tabNames)
+        vp_collect.init(this, tl_collect, fragments, tabNames)
     }
 
     override fun initData() {
@@ -56,6 +53,7 @@ class MyCollectHistoryActivity(override val layoutId: Int = R.layout.w_activity_
     override fun useLightMode(): Boolean {
         return true
     }
+
     inner class OnClick {
         fun onBackClick() {
             finish()

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.xu.module.wan.bean.KnowledgeSystemBean" />
+
+        <variable
+            name="util"
+            type="com.xu.commonlib.utlis.ColorUtil" />
+    </data>
+
+    <TextView
+        android:id="@+id/tv_name"
+        colorText="@{item.name}"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@drawable/w_shape_ring"
+        android:paddingStart="8dp"
+        android:paddingTop="4dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="4dp"
+        tools:text="hello" />
+</layout>

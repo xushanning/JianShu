@@ -1,33 +1,37 @@
 package com.xu.module.wan.ui.fragment.knowledgesystem
 
-import androidx.recyclerview.widget.RecyclerView
-import com.chad.library.adapter.base.BaseQuickAdapter
+import androidx.databinding.DataBindingUtil
+import com.chad.library.adapter.base.BaseMultiItemQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
-import com.google.android.flexbox.FlexboxLayoutManager
-import com.xu.commonlib.utlis.extention.go
-import com.xu.commonlib.utlis.extention.singleDataItemClick
-import com.xu.commonlib.utlis.extention.singleItemClick
 import com.xu.module.wan.R
 import com.xu.module.wan.bean.KnowledgeSystemBean
-import com.xu.module.wan.constant.ARouterPath
+import com.xu.module.wan.databinding.WItemKnowledgeContentBinding
+import com.xu.module.wan.databinding.WItemKnowledgeTitleBinding
 import javax.inject.Inject
 
-/**
- * 这里没有用databinding的方式，用了后，就卡成ppt了
- */
 class KnowledgeSystemAdapter @Inject constructor() :
-    BaseQuickAdapter<KnowledgeSystemBean, BaseViewHolder>(R.layout.w_item_knowledge_system) {
+    BaseMultiItemQuickAdapter<KnowledgeSystemBean, BaseViewHolder>() {
+
+    companion object {
+        const val TYPE_TITLE = 1
+        const val TYPE_CONTENT = 2
+    }
+
+    init {
+        addItemType(TYPE_TITLE, R.layout.w_item_knowledge_title)
+        addItemType(TYPE_CONTENT, R.layout.w_item_knowledge_content)
+    }
+
     override fun convert(holder: BaseViewHolder, item: KnowledgeSystemBean) {
-        holder.setText(R.id.tv_name, item.name)
-        holder.getView<RecyclerView>(R.id.rv_knowledge_item).run {
-            setItemViewCacheSize(200)
-            setHasFixedSize(true)
-            adapter = SystemChildAdapter(item.children).apply {
-                singleDataItemClick {
-                    go(ARouterPath.web)
-                }
+        when (item.itemType) {
+            TYPE_TITLE -> {
+                val binding = DataBindingUtil.bind<WItemKnowledgeTitleBinding>(holder.itemView)
+                binding?.item = item
             }
-            layoutManager = FlexboxLayoutManager(context)
+            TYPE_CONTENT -> {
+                val binding = DataBindingUtil.bind<WItemKnowledgeContentBinding>(holder.itemView)
+                binding?.item = item
+            }
         }
     }
 }

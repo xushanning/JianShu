@@ -1,5 +1,6 @@
 package com.xu.module.wan.bean
 
+import com.chad.library.adapter.base.entity.MultiItemEntity
 import com.squareup.moshi.JsonClass
 
 /**

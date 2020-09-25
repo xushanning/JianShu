@@ -40,10 +40,14 @@
     <string name="w_setting_right">All Rights Reserved By YanWu</string>
     <string name="w_setting_exit">退出登录</string>
 
+    <!--    搜索-->
     <string name="w_search_cancel">取消</string>
     <string name="w_search_history">历史记录</string>
     <string name="w_search_all_search">大家都在搜</string>
 
     <string name="w_integral_title">积分Rank榜</string>
     <string name="w_integral_record">积分记录</string>
+
+    <!--    收藏-->
+    <string name="w_collect_login_first">请登录</string>
 </resources>

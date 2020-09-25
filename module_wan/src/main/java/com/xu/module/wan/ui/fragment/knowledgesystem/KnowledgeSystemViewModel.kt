@@ -17,7 +17,14 @@ class KnowledgeSystemViewModel @ViewModelInject constructor(
 
     fun getKnowledgeData() {
         request({ api.getKnowledgeSystemData() },
-            knowledgeLiveData, {
+            {
+                val result = ArrayList<KnowledgeSystemBean>()
+                it.forEach { item ->
+                    result.add(item)
+                    result.addAll(item.children)
+                }
+                knowledgeLiveData.postValue(result)
+            }, {
                 Logger.d(it.message)
             })
     }
