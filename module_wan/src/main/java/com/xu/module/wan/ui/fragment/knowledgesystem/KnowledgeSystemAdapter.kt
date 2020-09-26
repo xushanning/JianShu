@@ -20,6 +20,7 @@ class KnowledgeSystemAdapter @Inject constructor() :
     init {
         addItemType(TYPE_TITLE, R.layout.w_item_knowledge_title)
         addItemType(TYPE_CONTENT, R.layout.w_item_knowledge_content)
+        addChildClickViewIds(R.id.tv_name)
     }
 
     override fun convert(holder: BaseViewHolder, item: KnowledgeSystemBean) {

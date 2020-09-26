@@ -7,10 +7,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import kotlinx.android.synthetic.main.w_activity_collect_history.*
 
 /**
  * float button初始化
@@ -25,12 +25,27 @@ fun RecyclerView.initFloatButton(bt: FloatingActionButton) {
         }
     })
     bt.setOnClickListener {
-        val manager = layoutManager as LinearLayoutManager
-        if (manager.findLastVisibleItemPosition() >= 40) {
-            scrollToPosition(0)
-        } else {
-            smoothScrollToPosition(0)
+        val manager = layoutManager
+        when (layoutManager) {
+            is LinearLayoutManager -> {
+                manager as LinearLayoutManager
+                if (manager.findLastVisibleItemPosition() >= 40) {
+                    scrollToPosition(0)
+                } else {
+                    smoothScrollToPosition(0)
+                }
+            }
+            is FlexboxLayoutManager -> {
+                manager as FlexboxLayoutManager
+                if (manager.findLastVisibleItemPosition() >= 40) {
+                    scrollToPosition(0)
+                } else {
+                    smoothScrollToPosition(0)
+                }
+            }
         }
+
+
     }
 }
 
