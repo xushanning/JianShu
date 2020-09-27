@@ -50,4 +50,8 @@
 
     <!--    收藏-->
     <string name="w_collect_login_first">请登录</string>
+
+
+    <string name="w_load_more_default">正在加载..</string>
+    <string name="w_load_more_retry">点击重新加载</string>
 </resources>

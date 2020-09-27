@@ -7,8 +7,10 @@ import com.xu.commonlib.utlis.extention.observe
 import com.xu.module.wan.BR
 import com.xu.module.wan.R
 import com.xu.module.wan.base.BaseFragment
+import com.xu.module.wan.bean.NavigationBean
 import com.xu.module.wan.constant.ARouterPath
 import com.xu.module.wan.databinding.WIncludeListBinding
+import com.xu.module.wan.utils.ext.createAdapter
 import com.xu.module.wan.utils.ext.initFloatButton
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.w_include_list.*
@@ -24,6 +26,10 @@ class NavigationFragment(override val layoutId: Int = R.layout.w_include_list, o
     BaseFragment<NavigationViewModel, WIncludeListBinding>() {
     @Inject
     lateinit var adapter: NavigationAdapter
+
+  //  private val testAdapter= createAdapter<NavigationBean>(R.layout.)
+
+
     override fun initView(mDataBinding: WIncludeListBinding) {
         rv_list.run {
             setItemViewCacheSize(200)
