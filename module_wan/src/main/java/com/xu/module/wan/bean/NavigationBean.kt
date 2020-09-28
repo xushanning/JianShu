@@ -2,10 +2,25 @@ package com.xu.module.wan.bean
 
 import com.chad.library.adapter.base.entity.MultiItemEntity
 import com.squareup.moshi.JsonClass
+import com.xu.module.wan.ui.fragment.navigation.NavigationAdapter
+import me.jingbin.library.stickyview.StickyHeaderHandler
 
 /**
  * @author 许 on 2020/9/21.
  */
+@JsonClass(generateAdapter = true)
+data class NavigationWrapBean(
+    val titleBean: NavigationBean?,
+    val contentBean: ArticleBean?
+) : MultiItemEntity {
+    override val itemType: Int
+        get() = if (contentBean == null) {
+            StickyHeaderHandler.TYPE_STICKY_VIEW
+        } else {
+            NavigationAdapter.NAVIGATION_TYPE_CONTENT
+        }
+}
+
 @JsonClass(generateAdapter = true)
 data class NavigationBean(
     val articles: MutableList<ArticleBean>,

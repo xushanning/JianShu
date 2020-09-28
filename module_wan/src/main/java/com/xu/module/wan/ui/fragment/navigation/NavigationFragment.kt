@@ -1,19 +1,28 @@
 package com.xu.module.wan.ui.fragment.navigation
 
+import android.view.View
+import android.widget.TextView
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.google.android.flexbox.FlexboxLayoutManager
 import com.orhanobut.logger.Logger
 import com.xu.commonlib.utlis.extention.observe
+import com.xu.commonlib.utlis.extention.singleItemClick
+import com.xu.commonres.sticky.OnStickyChangeListener
+import com.xu.commonres.sticky.StickyItemDecoration
 import com.xu.module.wan.BR
 import com.xu.module.wan.R
 import com.xu.module.wan.base.BaseFragment
 import com.xu.module.wan.bean.NavigationBean
 import com.xu.module.wan.constant.ARouterPath
-import com.xu.module.wan.databinding.WIncludeListBinding
+import com.xu.module.wan.databinding.WFragmentNavigationBinding
 import com.xu.module.wan.utils.ext.createAdapter
-import com.xu.module.wan.utils.ext.initFloatButton
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.w_include_list.*
+import kotlinx.android.synthetic.main.w_fragment_navigation.*
+import kotlinx.android.synthetic.main.w_item_navigation_right_head.*
+import me.jingbin.library.stickyview.StickyGridLayoutManager
 import javax.inject.Inject
 
 /**
@@ -22,29 +31,63 @@ import javax.inject.Inject
  */
 @Route(path = ARouterPath.stationNavigation)
 @AndroidEntryPoint
-class NavigationFragment(override val layoutId: Int = R.layout.w_include_list, override val variableId: Int = BR.vm) :
-    BaseFragment<NavigationViewModel, WIncludeListBinding>() {
+class NavigationFragment(override val layoutId: Int = R.layout.w_fragment_navigation, override val variableId: Int = BR.vm) :
+    BaseFragment<NavigationViewModel, WFragmentNavigationBinding>() {
     @Inject
-    lateinit var adapter: NavigationAdapter
+    lateinit var rightAdapter: NavigationAdapter
 
-  //  private val testAdapter= createAdapter<NavigationBean>(R.layout.)
-
-
-    override fun initView(mDataBinding: WIncludeListBinding) {
-        rv_list.run {
-            setItemViewCacheSize(200)
-            setHasFixedSize(true)
-            adapter = this@NavigationFragment.adapter
-            layoutManager = LinearLayoutManager(requireContext())
-            initFloatButton(float_bt)
+    private lateinit var gridLayoutManager:StickyGridLayoutManager
+    private val leftAdapter =
+        createAdapter<NavigationBean>(R.layout.w_item_navigation_left) { holder, item ->
+            holder.setText(R.id.tv_sort_name, item.name)
         }
-        swipe_refresh.isEnabled = false
+
+
+    override fun initView(mDataBinding: WFragmentNavigationBinding) {
+
+        rv_left.run {
+            adapter = leftAdapter
+        }
+        leftAdapter.singleItemClick {
+            Logger.d(it)
+        }
+        gridLayoutManager = StickyGridLayoutManager(
+            requireContext(),
+            2,
+            GridLayoutManager.VERTICAL,
+            rightAdapter
+        )
+        rv_right.run {
+            layoutManager = gridLayoutManager
+            adapter = rightAdapter
+            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    val position = gridLayoutManager.findFirstVisibleItemPosition()
+                    Logger.d(position)
+                }
+            })
+        }
+
+
     }
 
     override fun initData() {
         mViewModel.getNavigationData()
         observe(mViewModel.navigationLiveData) {
-            adapter.setNewInstance(it)
+            leftAdapter.setNewInstance(it)
+        }
+        observe(mViewModel.rightLiveData) {
+            rightAdapter.setNewData(it)
+        }
+    }
+
+    private fun moveToCenter(position: Int) {
+        val manager = rv_left.layoutManager as LinearLayoutManager
+        val child = rv_left.getChildAt(position - manager.findFirstVisibleItemPosition())
+        if (child != null) {
+            val y = (child.top - rv_left.height) / 2
+            rv_left.smoothScrollBy(0, y)
         }
     }
 }

@@ -15,35 +15,24 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_left"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/vp_navigation"
+        <me.jingbin.library.ByRecyclerView
+            android:id="@+id/rv_right"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:paddingStart="100dp"
+            android:paddingEnd="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/rv_left"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.xu.commonres.sticky.StickyHeadContainer
-            android:id="@+id/sticky_container"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/rv_left"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/tv_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="455454545" />
-        </com.xu.commonres.sticky.StickyHeadContainer>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

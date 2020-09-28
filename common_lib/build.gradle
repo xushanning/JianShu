@@ -72,6 +72,7 @@ dependencies {
     api rootProject.ext.dependencies["banner"]
     api rootProject.ext.dependencies["flex"]
     api rootProject.ext.dependencies["bg"]
+    api rootProject.ext.dependencies["stickyRv"]
 
 
     api rootProject.ext.dependencies["kotlin"]
