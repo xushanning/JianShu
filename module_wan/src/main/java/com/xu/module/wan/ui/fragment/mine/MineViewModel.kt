@@ -8,7 +8,7 @@ import com.xu.commonlib.base.mvvm.BaseViewModel
 import com.xu.commonlib.utlis.extention.request
 import com.xu.module.wan.api.WanService
 import com.xu.module.wan.bean.RankBean
-import com.xu.module.wan.db.AppSp
+import com.xu.module.wan.db.WanSp
 import com.xu.module.wan.db.dao.IUserDao
 import com.xu.module.wan.db.entity.UserEntity
 import com.xu.module.wan.viewmodel.WanLiveData
@@ -34,7 +34,7 @@ class MineViewModel @ViewModelInject constructor(
 
     fun changeUi() {
         viewModelScope.launch {
-            userInfoLiveData.postValue(userDao.queryUserInfo(AppSp.currentUserId)?.userInfoBean)
+            userInfoLiveData.postValue(userDao.queryUserInfo(WanSp.currentUserId)?.userInfoBean)
         }
     }
 

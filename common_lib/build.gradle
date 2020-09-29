@@ -113,6 +113,8 @@ dependencies {
     api rootProject.ext.dependencies["fragmentKtx"]
     api rootProject.ext.dependencies["jStartUp"]
     api rootProject.ext.dependencies["jPaging"]
+//    api rootProject.ext.dependencies["jCompose"]
+//    api rootProject.ext.dependencies["jComposeRt"]
 
     api rootProject.ext.dependencies["alpha"]
 

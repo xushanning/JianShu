@@ -2,7 +2,7 @@ package com.xu.module.wan.db
 
 import com.xu.commonlib.utlis.Preference
 
-object AppSp {
+object WanSp {
 
     /**
      * 当前登录的用户id

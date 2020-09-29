@@ -39,6 +39,8 @@
 
     <string name="w_setting_right">All Rights Reserved By YanWu</string>
     <string name="w_setting_exit">退出登录</string>
+    <string name="w_setting_title">设置</string>
+    <string name="w_setting_night_mode">夜间模式</string>
 
     <!--    搜索-->
     <string name="w_search_cancel">取消</string>

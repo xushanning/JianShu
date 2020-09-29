@@ -26,7 +26,8 @@ ext {
             versionPlugin : "0.29.0",
             hiltViewModel : "1.0.0-alpha01",
             ktx           : "1.2.5",
-            materialDialog: "3.3.0"
+            materialDialog: "3.3.0",
+            comopse       : "0.1.0-dev04"
     ]
     dependencies = [
             //kotlin
@@ -105,6 +106,12 @@ ext {
             fragmentKtx          : "androidx.fragment:fragment-ktx:${dependVersion.ktx}",
             jStartUp             : "androidx.startup:startup-runtime:1.0.0-alpha01",
             jPaging              : "androidx.paging:paging-runtime:3.0.0-alpha06",
+            jCompose             : "androidx.compose:compose-compiler:${dependVersion.comopse}",
+            jComposeRt           : "androidx.compose:compose-runtime:${dependVersion.comopse}",
+            JUiTooling           : "androidx.ui:ui-tooling:${dependVersion.comopse}",
+            JUiLayout            : "androidx.ui:ui-layout${dependVersion.comopse}",
+            JUiMaterial          : "androidx.ui:ui-material${dependVersion.comopse}",
+
 
             //aRouter
             arouterApi           : "com.alibaba:arouter-api:1.4.1",

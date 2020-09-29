@@ -11,7 +11,7 @@ import com.xu.commonlib.utlis.extention.request
 import com.xu.commonlib.utlis.extention.showToast
 import com.xu.module.wan.R
 import com.xu.module.wan.api.WanService
-import com.xu.module.wan.db.AppSp
+import com.xu.module.wan.db.WanSp
 import com.xu.module.wan.db.dao.IUserDao
 import com.xu.module.wan.db.entity.UserEntity
 import com.xu.module.wan.viewmodel.WanLiveData
@@ -54,9 +54,9 @@ class LoginViewModel @ViewModelInject constructor(
     fun doLogin() {
         request({ api.login(userName.value, password.value) }, {
             viewModelScope.launch {
-                AppSp.currentUserId = it.id
+                WanSp.currentUserId = it.id
                 wanLiveData.loginStateLiveData.postValue(true)
-                AppSp.loginState = true
+                WanSp.loginState = true
                 val current = userDao.queryUserInfo(it.id)
                 if (current == null) {
                     userDao.saveUserInfo(UserEntity(it.id, it))

@@ -24,7 +24,7 @@ class SettingActivity(override val layoutId: Int = R.layout.w_activity_setting, 
     }
 
     override fun initData() {
- 
+
         observe(mViewModel.logoutLiveData) {
             if (it) {
                 showToast("退出登录成功~")
@@ -41,6 +41,10 @@ class SettingActivity(override val layoutId: Int = R.layout.w_activity_setting, 
          */
         fun onExit() {
             mViewModel.logout()
+        }
+
+        fun back() {
+            finish()
         }
     }
 }

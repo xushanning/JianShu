@@ -2,18 +2,15 @@ package com.xu.module.wan.ui.activity.search
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.viewModelScope
-import com.orhanobut.logger.Logger
 import com.xu.commonlib.base.mvvm.BaseViewModel
 import com.xu.commonlib.livedata.BooleanLiveData
 import com.xu.commonlib.livedata.StringLiveData
 import com.xu.module.wan.api.WanService
-import com.xu.module.wan.db.AppSp
+import com.xu.module.wan.db.WanSp
 import com.xu.module.wan.db.dao.ISearchHistoryDao
 import com.xu.module.wan.db.entity.SearchHistoryEntity
 import com.xu.module.wan.utils.ext.createPager
 import kotlinx.coroutines.launch
-import java.util.*
-import kotlin.collections.ArrayList
 
 class SearchViewModel @ViewModelInject constructor(
     private val api: WanService,
@@ -41,7 +38,7 @@ class SearchViewModel @ViewModelInject constructor(
     /**
      * 搜索历史
      */
-    val searchHistoryLiveData = dao.querySearchHistoryLiveData(AppSp.currentUserId)
+    val searchHistoryLiveData = dao.querySearchHistoryLiveData(WanSp.currentUserId)
 
     /**
      * 搜索分页
@@ -60,7 +57,7 @@ class SearchViewModel @ViewModelInject constructor(
             if (history == null) {
                 //空，新增一条
                 val list = arrayListOf(content)
-                val entity = SearchHistoryEntity(AppSp.currentUserId, list)
+                val entity = SearchHistoryEntity(WanSp.currentUserId, list)
                 dao.saveHistory(entity)
             } else {
                 //更新

@@ -6,7 +6,7 @@ import com.franmontiel.persistentcookiejar.PersistentCookieJar
 import com.xu.commonlib.base.mvvm.BaseViewModel
 import com.xu.commonlib.utlis.extention.requestByNoResult
 import com.xu.module.wan.api.WanService
-import com.xu.module.wan.db.AppSp
+import com.xu.module.wan.db.WanSp
 import com.xu.module.wan.viewmodel.WanLiveData
 
 class SettingViewModel @ViewModelInject constructor(
@@ -31,8 +31,8 @@ class SettingViewModel @ViewModelInject constructor(
             logoutLiveData.postValue(true)
             //更新全局登录状态
             wanLiveData.loginStateLiveData.postValue(false)
-            AppSp.currentUserId = -1
-            AppSp.loginState = false
+            WanSp.currentUserId = -1
+            WanSp.loginState = false
             //清除cookie
             cookieJar.clear()
         }, {

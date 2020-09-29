@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.orhanobut.logger.Logger
 import com.xu.commonlib.base.mvvm.BaseViewModel
 import com.xu.module.wan.bean.ArticleItemBean
-import com.xu.module.wan.db.AppSp
+import com.xu.module.wan.db.WanSp
 import com.xu.module.wan.db.dao.IReadHistoryDao
 import com.xu.module.wan.db.entity.ReadHistoryEntity
 import kotlinx.coroutines.launch
@@ -19,18 +19,18 @@ class ReadHistoryViewModel @ViewModelInject constructor(
     /**
      * 阅读历史LiveData
      */
-    val readHistoryLiveData = dao.queryReadHistoryById(AppSp.currentUserId)
+    val readHistoryLiveData = dao.queryReadHistoryById(WanSp.currentUserId)
 
     /**
      * 保存新的阅读历史
      */
     fun saveHistory(newRead: ArticleItemBean) {
         viewModelScope.launch {
-            val history = dao.queryReadHistory(AppSp.currentUserId)
+            val history = dao.queryReadHistory(WanSp.currentUserId)
             if (history == null) {
                 Logger.d("一直为null")
                 val list = arrayListOf(newRead)
-                val entity = ReadHistoryEntity(0, AppSp.currentUserId, list)
+                val entity = ReadHistoryEntity(0, WanSp.currentUserId, list)
                 dao.saveHistory(entity)
             } else {
                 val historyList = history.articles

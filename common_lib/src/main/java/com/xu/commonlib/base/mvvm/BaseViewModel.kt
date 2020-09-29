@@ -19,4 +19,16 @@ abstract class BaseViewModel : ViewModel() {
      *
      */
     val dismissDialog = MutableLiveData<Boolean>()
+
+    /**
+     * 夜间模式
+     */
+    val nightMode = AppLiveData.INSTANCE.nightModeLiveData
+
+    /**
+     * 透明度
+     */
+    val nightAlpha = AppLiveData.INSTANCE.nightAlphaLiveData
+
+
 }
