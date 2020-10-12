@@ -2,7 +2,7 @@
 //
 // 示例: 
 //
-// 输入: [-2,1,-3,4,-1,2,1,-5,4]
+// 输入: [-2,1,-3,4,-1,2,1,-5,4],
 //输出: 6
 //解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。
 // 
@@ -11,10 +11,10 @@
 //
 // 如果你已经实现复杂度为 O(n) 的解法，尝试使用更为精妙的分治法求解。 
 // Related Topics 数组 分治算法 动态规划 
-// 👍 2513 👎 0
+// 👍 2157 👎 0
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round4;
 
 //Java：最大子序和
 public class P53MaximumSubarray {
@@ -26,21 +26,20 @@ public class P53MaximumSubarray {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int maxSubArray(int[] nums) {
-            int length = nums.length;
-            if (length == 0) {
+            int len = nums.length;
+            if (len == 0) {
                 return 0;
             }
             int max = nums[0];
-            int[] dp = new int[length];
+            //dp为以i结尾的最大的和
+            int[] dp = new int[len];
             dp[0] = nums[0];
-            //  输入: [-2,1,-3,4,-1,2,1,-5,4]
-            for (int i = 1; i < length; i++) {
-                dp[i] = Math.max(nums[i], dp[i - 1] + nums[i]);
-                if (dp[i] > max) {
-                    max = dp[i];
-                }
+            for (int i = 1; i < len; i++) {
+                dp[i] = Math.max(nums[i], nums[i] + dp[i - 1]);
+                max = Math.max(max, dp[i]);
             }
             return max;
+
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

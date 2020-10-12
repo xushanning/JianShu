@@ -11,14 +11,10 @@
 //因为 nums[0] + nums[1] = 2 + 7 = 9
 //所以返回 [0, 1]
 // 
-// Related Topics 数组 哈希表 
-// 👍 9338 👎 0
+// Related Topics 数组 哈希表
 
 
-package leetcode.editor.cn;
-
-import java.util.HashMap;
-import java.util.Map;
+package leetcode.editor.cn.round4;
 
 //Java：两数之和
 public class P1TwoSum {
@@ -30,22 +26,20 @@ public class P1TwoSum {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int[] twoSum(int[] nums, int target) {
-            int length = nums.length;
-            if (length == 0) {
+            int len = nums.length;
+
+            if (len == 0) {
                 return nums;
             }
-            //key为第i个位置的数，value是位置。
-            Map<Integer, Integer> map = new HashMap<>();
-            for (int i = 0; i < length; i++) {
-                int a = target - nums[i];
-                //如果map中有需要的需要的那个值（与第i个相匹配的值，那么找到了）
-                if (map.containsKey(a)) {
-                    return new int[]{map.get(a), i};
-                } else {
-                    map.put(nums[i], i);
+            //nums = [2, 7, 11, 15], target = 9  [0, 1]
+            for (int i = 1; i < len; i++) {
+                for (int j = 0; j < i; j++) {
+                    if (nums[i] + nums[j] == target) {
+                        return new int[]{i, j};
+                    }
                 }
             }
-            throw new IllegalArgumentException("灭有这两数");
+            throw new IllegalArgumentException("No two sum solution");
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

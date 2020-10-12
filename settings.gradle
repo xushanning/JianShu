@@ -2,7 +2,7 @@
 include ':common_lib',
         //':module_easyload',
         ':common_res',
-        ':module_wan'
+        ':module_wan',
         //':module_video',
         //':vrouter_api',
         //':vrouter_complier',
@@ -10,7 +10,7 @@ include ':common_lib',
         //简书demo
         //':module_jianshu'
         //算法模块
-        // ':module_algorithm'
+          ':module_algorithm'
         //壳模块
         //':app'
         //运动模块

@@ -9,5 +9,11 @@ dependencies {
     androidTestImplementation 'androidx.test:core:1.2.0'
     testImplementation 'androidx.test.ext:junit:1.1.1'
     implementation project(path: ':common_res')
+    implementation rootProject.ext.dependencies["hilt"]
+    kapt rootProject.ext.dependencies["roomCompiler"]
+    kapt rootProject.ext.dependencies["arouterProcessor"]
+    kapt rootProject.ext.dependencies["moshiKapt"]
+    kapt rootProject.ext.dependencies["hiltKapt"]
+    kapt rootProject.ext.dependencies["hiltViewModelCompiler"]
 
 }

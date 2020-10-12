@@ -41,10 +41,10 @@
 //}
 // 
 // Related Topics 数组 双指针 
-// 👍 1674 👎 0
+// 👍 1527 👎 0
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round4;
 
 //Java：删除排序数组中的重复项
 public class P26RemoveDuplicatesFromSortedArray {
@@ -56,19 +56,19 @@ public class P26RemoveDuplicatesFromSortedArray {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int removeDuplicates(int[] nums) {
-            int length = nums.length;
-            if (length < 1) {
-                return length;
+            int len = nums.length;
+            if (len == 0) {
+                return 0;
             }
             int left = 0;
-            for (int right = 1; right < length; right++) {
-                if (nums[left] != nums[right]) {
+            //nums = [0,0,1,1,1,2,2,3,3,4],
+            for (int right = 1; right < len; right++) {
+                if (nums[right] != nums[left]) {
                     left++;
                     nums[left] = nums[right];
                 }
             }
             return left + 1;
-
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
