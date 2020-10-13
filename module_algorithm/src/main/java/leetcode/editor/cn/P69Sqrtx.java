@@ -33,7 +33,28 @@ public class P69Sqrtx {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int mySqrt(int x) {
+            //异常判断
+            if (x < 2) {
+                return x;
+            }
 
+            long start = 0;
+            long end = x;
+
+            while (start < end) {
+                //重要，最重要的是别越界
+                long middle = start + (end - start + 1) / 2;
+                long square = middle * middle;
+                if (square > x) {
+                    //重要
+                    end = middle - 1;
+                } else if (square < x) {
+                    start = middle;
+                } else {
+                    return (int) middle;
+                }
+            }
+            return (int) start;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

@@ -1,6 +1,11 @@
 package com.xu.module.algorithm.proxy;
 
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+
 import com.xu.module.algorithm.PrintUtil;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -9,7 +14,9 @@ import java.lang.reflect.Proxy;
 /**
  * @author 言吾許
  */
-public class Test {
+
+
+public class ProxyTest {
     @org.junit.Test
     public void test() {
         //比如说，这个JavaDeveloper是别人或者第三方的一个类
@@ -39,10 +46,10 @@ public class Test {
         developerProxy.debug();
 
         //第二种实现方式:不用匿名内部类的话，用这种
-        JavaDeveloper developer2 = new JavaDeveloper("xu");
-        Developer developerProxy2 = (Developer) Proxy.newProxyInstance(developer2.getClass().getClassLoader(), developer2.getClass().getInterfaces(), new JavaProxy(developer2));
-        developerProxy2.code();
-        developerProxy2.debug();
+//        JavaDeveloper developer2 = new JavaDeveloper("xu");
+//        Developer developerProxy2 = (Developer) Proxy.newProxyInstance(developer2.getClass().getClassLoader(), developer2.getClass().getInterfaces(), new JavaProxy(developer2));
+//        developerProxy2.code();
+//        developerProxy2.debug();
 
     }
 }
