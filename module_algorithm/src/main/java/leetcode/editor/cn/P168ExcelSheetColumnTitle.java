@@ -48,17 +48,12 @@ public class P168ExcelSheetColumnTitle {
             if (n <= 0) {
                 return "";
             }
-            String[] str = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
             StringBuilder sb = new StringBuilder();
-            while (n > 26) {
-                int m = n % 26 - 1;
-                sb.append(str[m]);
-                n = n / 26;
+            while (n != 0) {
+                n--;
+                sb.append((char) ('A' + n % 26));
+                n /= 26;
             }
-            if (n != 0) {
-                sb.append(str[n - 1]);
-            }
-
             return sb.reverse().toString();
         }
     }
