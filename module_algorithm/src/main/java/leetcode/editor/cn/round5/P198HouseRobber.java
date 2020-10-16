@@ -32,7 +32,7 @@
 // 👍 1114 👎 0
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round5;
 
 //Java：打家劫舍
 public class P198HouseRobber {

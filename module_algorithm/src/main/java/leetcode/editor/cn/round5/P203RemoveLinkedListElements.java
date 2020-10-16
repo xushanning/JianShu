@@ -9,7 +9,9 @@
 // 👍 463 👎 0
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round5;
+
+import leetcode.editor.cn.ListNode;
 
 //Java：移除链表元素
 public class P203RemoveLinkedListElements {

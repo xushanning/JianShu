@@ -35,7 +35,7 @@
 // 👍 178 👎 0
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round5;
 
 //Java：Excel表列序号
 public class P171ExcelSheetColumnNumber {

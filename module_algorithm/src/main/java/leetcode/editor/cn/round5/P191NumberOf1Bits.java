@@ -40,7 +40,7 @@
 // 👍 228 👎 0
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round5;
 
 //Java：位1的个数
 public class P191NumberOf1Bits {

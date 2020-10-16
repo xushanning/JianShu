@@ -18,9 +18,8 @@
 // 👍 765 👎 0
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round5;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 //Java：多数元素

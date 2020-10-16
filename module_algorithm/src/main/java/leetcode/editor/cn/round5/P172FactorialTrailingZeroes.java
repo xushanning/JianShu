@@ -17,7 +17,7 @@
 // 👍 369 👎 0
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round5;
 
 //Java：阶乘后的零
 public class P172FactorialTrailingZeroes {

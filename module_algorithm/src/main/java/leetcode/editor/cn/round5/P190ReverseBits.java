@@ -35,7 +35,7 @@
 // 👍 219 👎 0
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round5;
 
 //Java：颠倒二进制位
 public class P190ReverseBits {
