@@ -27,6 +27,10 @@
 
 package leetcode.editor.cn;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 //Java：两个数组的交集
 public class P349IntersectionOfTwoArrays {
     public static void main(String[] args) {
@@ -37,14 +41,22 @@ public class P349IntersectionOfTwoArrays {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int[] intersection(int[] nums1, int[] nums2) {
-            int len1 = nums1.length;
-            int len2 = nums2.length;
-            int[] res = new int[Math.max(len1, len2)];
-            if (len1 == 0 || len2 == 0) {
-                return res;
+            Set<Integer> s1 = new HashSet<>();
+            Set<Integer> s2 = new HashSet<>();
+            for (int n : nums1) {
+                s1.add(n);
             }
-
-            return res;
+            for (int n : nums2) {
+                s2.add(n);
+            }
+            int[] res = new int[s1.size()];
+            int index = 0;
+            for (Integer s : s1) {
+                if (s2.contains(s)) {
+                    res[index++] = s;
+                }
+            }
+            return Arrays.copyOf(res, index);
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
