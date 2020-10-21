@@ -12,7 +12,7 @@
 // 👍 697 👎 0
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round5;
 
 //Java：下一个排列
 public class P31NextPermutation {

@@ -17,7 +17,7 @@
 // 👍 630 👎 0
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round5;
 
 //Java：在排序数组中查找元素的第一个和最后一个位置
 public class P34FindFirstAndLastPositionOfElementInSortedArray {

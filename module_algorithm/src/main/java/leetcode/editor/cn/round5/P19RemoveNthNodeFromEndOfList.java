@@ -18,7 +18,9 @@
 // 👍 1077 👎 0
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round5;
+
+import leetcode.editor.cn.ListNode;
 
 //Java：删除链表的倒数第N个节点
 public class P19RemoveNthNodeFromEndOfList {

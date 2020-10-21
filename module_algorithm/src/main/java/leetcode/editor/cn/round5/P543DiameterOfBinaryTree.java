@@ -21,7 +21,9 @@
 // 👍 514 👎 0
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round5;
+
+import leetcode.editor.cn.TreeNode;
 
 //Java：二叉树的直径
 public class P543DiameterOfBinaryTree {

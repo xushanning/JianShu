@@ -61,7 +61,7 @@
 // 👍 874 👎 0
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round5;
 
 //Java：字符串转换整数 (atoi)
 public class P8StringToIntegerAtoi {

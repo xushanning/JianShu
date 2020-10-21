@@ -40,7 +40,7 @@
 // 👍 1025 👎 0
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round5;
 
 //Java：搜索旋转排序数组
 public class P33SearchInRotatedSortedArray {

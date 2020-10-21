@@ -16,7 +16,7 @@
 // 👍 2815 👎 0
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round5;
 
 //Java：最长回文子串
 public class P5LongestPalindromicSubstring {

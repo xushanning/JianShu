@@ -27,7 +27,9 @@
 // 👍 554 👎 0
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round5;
+
+import leetcode.editor.cn.TreeNode;
 
 //Java：合并二叉树
 public class P617MergeTwoBinaryTrees {

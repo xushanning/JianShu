@@ -14,7 +14,9 @@
 // 👍 5114 👎 0
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round5;
+
+import leetcode.editor.cn.ListNode;
 
 //Java：两数相加
 public class P2AddTwoNumbers {
