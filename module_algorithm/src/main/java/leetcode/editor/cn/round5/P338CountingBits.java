@@ -21,7 +21,7 @@
 // 👍 432 👎 0
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round5;
 
 //Java：比特位计数
 public class P338CountingBits {

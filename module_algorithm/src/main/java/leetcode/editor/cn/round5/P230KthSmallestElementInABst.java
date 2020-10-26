@@ -31,10 +31,12 @@
 // 👍 302 👎 0
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round5;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import leetcode.editor.cn.TreeNode;
 
 //Java：二叉搜索树中第K小的元素
 public class P230KthSmallestElementInABst {

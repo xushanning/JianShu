@@ -32,10 +32,12 @@
 // p、q 为不同节点且均存在于给定的二叉树中。 
 // 
 // Related Topics 树 
-// 👍 801 👎 0
+// 👍 798 👎 0
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round5;
+
+import leetcode.editor.cn.TreeNode;
 
 //Java：二叉树的最近公共祖先
 public class P236LowestCommonAncestorOfABinaryTree {
@@ -55,6 +57,9 @@ public class P236LowestCommonAncestorOfABinaryTree {
      * }
      */
     class Solution {
+        private TreeNode res;
+
+        //https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/solution/236-er-cha-shu-de-zui-jin-gong-gong-zu-xian-hou-xu/
         public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
             if (root == null || root == p || root == q) {
                 return root;
@@ -69,6 +74,8 @@ public class P236LowestCommonAncestorOfABinaryTree {
             }
             return root;
         }
+
+
     }
 //leetcode submit region end(Prohibit modification and deletion)
 

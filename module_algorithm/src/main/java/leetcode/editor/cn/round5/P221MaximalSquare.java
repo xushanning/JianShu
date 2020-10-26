@@ -14,7 +14,7 @@
 // 👍 594 👎 0
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round5;
 
 //Java：最大正方形
 public class P221MaximalSquare {

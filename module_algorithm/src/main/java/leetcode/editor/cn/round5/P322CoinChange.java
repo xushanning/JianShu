@@ -52,7 +52,7 @@
 // 👍 879 👎 0
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round5;
 
 import java.util.Arrays;
 

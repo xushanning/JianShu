@@ -33,7 +33,7 @@
 // 👍 84 👎 0
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round5;
 
 //Java：最后一块石头的重量
 public class P1046LastStoneWeight {

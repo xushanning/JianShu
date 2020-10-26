@@ -20,7 +20,7 @@
 // 👍 619 👎 0
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round5;
 
 //Java：除自身以外数组的乘积
 public class P238ProductOfArrayExceptSelf {

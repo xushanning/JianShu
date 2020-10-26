@@ -25,7 +25,7 @@
 // 👍 458 👎 0
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round5;
 
 //Java：搜索二维矩阵 II
 public class P240SearchA2dMatrixIi {

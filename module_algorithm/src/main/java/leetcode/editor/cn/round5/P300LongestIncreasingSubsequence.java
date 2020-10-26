@@ -18,7 +18,7 @@
 // 👍 1102 👎 0
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round5;
 
 //Java：最长上升子序列
 public class P300LongestIncreasingSubsequence {
