@@ -53,7 +53,9 @@ public class P543DiameterOfBinaryTree {
             if (node == null) {
                 return 0;
             }
+            //是左child的深度
             int left = deep(node.left);
+            //和右儿子的深度
             int right = deep(node.right);
             max = Math.max(max, left + right);
             return Math.max(left, right) + 1;
