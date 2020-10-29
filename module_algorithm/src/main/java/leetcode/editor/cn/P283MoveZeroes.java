@@ -37,6 +37,7 @@ public class P283MoveZeroes {
             for (int i = 0; i < len; i++) {
                 //如果i位置为0，那么++，不管
                 //不为0,交换
+                //可以理解为把右边遇到的不为0的移动到左边去，j位置的不管是不是0，都交换
                 if (nums[i] != 0) {
                     int temp = nums[i];
                     nums[i] = nums[j];
