@@ -46,18 +46,38 @@
 
 
 package leetcode.editor.cn;
+
 //Java：旋转图像
-public class P48RotateImage{
+public class P48RotateImage {
     public static void main(String[] args) {
         Solution solution = new P48RotateImage().new Solution();
         // TO TEST
     }
-    //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public void rotate(int[][] matrix) {
 
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public void rotate(int[][] matrix) {
+            int n = matrix.length;
+
+            //对角旋转
+            for (int i = 0; i < n; i++) {
+                //这里的j=i，因为只取半壁江山，然后和另外一半进行交换
+                //如果j=0开始的话，两层循环下来相当于数组没变
+                for (int j = i; j < n; j++) {
+                    int temp = matrix[i][j];
+                    matrix[i][j] = matrix[j][i];
+                    matrix[j][i] = temp;
+                }
+            }
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n / 2; j++) {
+                    int temp = matrix[i][j];
+                    matrix[i][j] = matrix[i][n - j - 1];
+                    matrix[i][n - j - 1] = temp;
+                }
+            }
+        }
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }
