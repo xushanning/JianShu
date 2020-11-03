@@ -18,7 +18,7 @@
 //     由于返回类型是整数，小数部分将被舍去。
 // 
 // Related Topics 数学 二分查找 
-// 👍 528 👎 0
+// 👍 531 👎 0
 
 
 package leetcode.editor.cn;
@@ -37,16 +37,16 @@ public class P69Sqrtx {
                 return x;
             }
             long left = 0;
-            long end = x;
-            while (left < end) {
-                long mid = (left + end) / 2;
+            long right = x / 2 + 1;
+            while (left < right) {
+                long mid = (left + right + 1) >>> 1;
                 long square = mid * mid;
                 if (square == x) {
-                    return (int) square;
+                    return (int) mid;
                 } else if (square > x) {
-                    end = square - 1;
+                    right = mid - 1;
                 } else {
-                    left = square + 1;
+                    left = mid;
                 }
             }
             return (int) left;

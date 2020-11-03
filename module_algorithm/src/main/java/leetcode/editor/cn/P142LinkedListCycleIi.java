@@ -53,7 +53,7 @@
 // pos 的值为 -1 或者链表中的一个有效索引 
 // 
 // Related Topics 链表 双指针 
-// 👍 734 👎 0
+// 👍 743 👎 0
 
 
 package leetcode.editor.cn;
@@ -80,11 +80,10 @@ public class P142LinkedListCycleIi {
     public class Solution {
         public ListNode detectCycle(ListNode head) {
             if (head == null) {
-                return null;
+                return head;
             }
-            ListNode fast = head;
             ListNode slow = head;
-            //a=c+(n−1)(b+c)
+            ListNode fast = head;
             while (fast != null) {
                 slow = slow.next;
                 if (fast.next != null) {
@@ -98,8 +97,9 @@ public class P142LinkedListCycleIi {
                         fast = fast.next;
                         slow = slow.next;
                     }
-                    return fast;
+                    return slow;
                 }
+
             }
             return null;
         }

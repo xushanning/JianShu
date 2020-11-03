@@ -13,7 +13,7 @@
 //  5     4       <---
 // 
 // Related Topics 树 深度优先搜索 广度优先搜索 
-// 👍 347 👎 0
+// 👍 349 👎 0
 
 
 package leetcode.editor.cn;
@@ -39,24 +39,29 @@ public class P199BinaryTreeRightSideView {
      * }
      */
     class Solution {
-        private List<Integer> res = new ArrayList<>();
-
         public List<Integer> rightSideView(TreeNode root) {
-            dfs(root, 0);
+//
+//   1            <---
+// /   \
+//2     3         <---
+// \     \
+//  5     4       <---
+            List<Integer> res = new ArrayList<>();
+            dfs(res, root, 0);
             return res;
         }
 
-        //这个题和层序遍历很像
-        private void dfs(TreeNode node, int deep) {
-            if (node == null) {
+        //
+        private void dfs(List<Integer> res, TreeNode root, int depth) {
+            if (root == null) {
                 return;
             }
-            if (res.size() == deep) {
-                res.add(node.val);
+            if (res.size() == depth) {
+                res.add(root.val);
             }
+            dfs(res, root.right, depth + 1);
+            dfs(res, root.left, depth + 1);
 
-            dfs(node.right, deep + 1);
-            dfs(node.left, deep + 1);
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

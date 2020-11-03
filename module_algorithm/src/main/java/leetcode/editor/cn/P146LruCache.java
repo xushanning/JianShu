@@ -27,7 +27,7 @@
 //cache.get(4);       // 返回  4
 // 
 // Related Topics 设计 
-// 👍 961 👎 0
+// 👍 974 👎 0
 
 
 package leetcode.editor.cn;
@@ -38,88 +38,88 @@ import java.util.Map;
 //Java：LRU缓存机制
 public class P146LruCache {
     public static void main(String[] args) {
-        // Solution solution = new P146LruCache().new Solution();
+        //Solution solution = new P146LruCache().new Solution();
         // TO TEST
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class LRUCache {
         private int capacity;
-        private int size = 0;
-        private Map<Integer, ListNode> data;
-        private ListNode head;
-        private ListNode tail;
+        private int size;
+        private Map<Integer, Node> data;
+        private Node head;
+        private Node tail;
 
         public LRUCache(int capacity) {
-            this.capacity = capacity;
             data = new HashMap<>();
-            head = new ListNode();
-            tail = new ListNode();
+            this.capacity = capacity;
+            head = new Node();
+            tail = new Node();
             head.next = tail;
             tail.pre = head;
         }
 
         public int get(int key) {
-            ListNode node = data.get(key);
-            if (node == null) {
+            Node cur = data.get(key);
+            if (cur == null) {
                 return -1;
+            } else {
+                moveToTop(cur);
+                return cur.value;
             }
-            moveToTop(node);
-            return node.value;
         }
 
         public void put(int key, int value) {
-            ListNode node = data.get(key);
-            if (node == null) {
-                ListNode newNode = new ListNode();
+            Node cur = data.get(key);
+            if (cur == null) {
+                Node newNode = new Node();
                 newNode.key = key;
                 newNode.value = value;
-                addNode(newNode);
                 size++;
+                add(newNode);
                 if (size > capacity) {
-                    ListNode tail = popTail();
+                    Node tail = popTail();
                     data.remove(tail.key);
                     size--;
                 }
             } else {
-                //说明存在
-                node.value = value;
-                moveToTop(node);
+                cur.value = value;
+                moveToTop(cur);
             }
         }
 
-        private ListNode popTail() {
-            ListNode node = tail.pre;
+        private Node popTail() {
+            Node node = tail.pre;
             deleteNode(node);
             return node;
         }
 
-        private void moveToTop(ListNode node) {
-            deleteNode(node);
-            addNode(node);
+        private void moveToTop(Node cur) {
+            deleteNode(cur);
+            add(cur);
         }
 
-        private void deleteNode(ListNode node) {
-            ListNode pre = node.pre;
-            ListNode next = node.next;
+        private void deleteNode(Node cur) {
+            Node pre = cur.pre;
+            Node next = cur.next;
             pre.next = next;
             next.pre = pre;
         }
 
-
-        private void addNode(ListNode newNode) {
-            ListNode next = head.next;
+        private void add(Node newNode) {
+            Node next = head.next;
             head.next = newNode;
             newNode.next = next;
             next.pre = newNode;
             newNode.pre = head;
         }
 
-        class ListNode {
+        private class Node {
             int key;
             int value;
-            ListNode pre;
-            ListNode next;
+            Node pre;
+            Node next;
+
         }
     }
 

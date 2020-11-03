@@ -35,10 +35,10 @@
 //
 // 示例 5: 
 //
-// 输入: "{[()]}"
+// 输入: "{[]}"
 //输出: true 
 // Related Topics 栈 字符串 
-// 👍 1942 👎 0
+// 👍 1951 👎 0
 
 
 package leetcode.editor.cn;
@@ -55,14 +55,13 @@ public class P20ValidParentheses {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public boolean isValid(String s) {
-// 输入: "{[()]}"
             int len = s.length();
-            if (len == 0) {
+            if (len < 2) {
                 return false;
             }
             Stack<Character> stack = new Stack<>();
             for (char c : s.toCharArray()) {
-                if (c == '[' || c == '{' || c == '(') {
+                if (c == '(' || c == '[' || c == '{') {
                     stack.push(c);
                 } else {
                     if (stack.isEmpty()) {

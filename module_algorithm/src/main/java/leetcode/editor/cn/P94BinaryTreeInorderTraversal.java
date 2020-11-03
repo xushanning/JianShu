@@ -13,7 +13,7 @@
 //
 // 进阶: 递归算法很简单，你可以通过迭代算法完成吗？ 
 // Related Topics 栈 树 哈希表 
-// 👍 757 👎 0
+// 👍 763 👎 0
 
 
 package leetcode.editor.cn;
@@ -45,27 +45,19 @@ public class P94BinaryTreeInorderTraversal {
      * }
      */
     class Solution {
-//   1
-//    \
-//     2
-//    /
-//   3
-//
-//输出: [1,3,2]
-
         public List<Integer> inorderTraversal(TreeNode root) {
             List<Integer> res = new ArrayList<>();
-            dfs(root, res);
+            dfs(res, root);
             return res;
         }
 
-        private void dfs(TreeNode node, List<Integer> cur) {
+        private void dfs(List<Integer> cur, TreeNode node) {
             if (node == null) {
                 return;
             }
-            dfs(node.left, cur);
+            dfs(cur, node.left);
             cur.add(node.val);
-            dfs(node.right, cur);
+            dfs(cur, node.right);
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

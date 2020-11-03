@@ -56,7 +56,7 @@
 // 程序尽量满足 O(n) 时间复杂度，且仅用 O(1) 内存。 
 // 
 // Related Topics 链表 
-// 👍 851 👎 0
+// 👍 859 👎 0
 
 
 package leetcode.editor.cn;
@@ -100,7 +100,6 @@ public class P160IntersectionOfTwoLinkedLists {
                 }
             }
             return p1;
-
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

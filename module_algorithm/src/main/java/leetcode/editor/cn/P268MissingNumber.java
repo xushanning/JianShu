@@ -64,11 +64,12 @@ public class P268MissingNumber {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int missingNumber(int[] nums) {
-            //nums = [9,6,4,2,3,5,7,0,1]  8
+//输入：nums = [9,6,4,2,3,5,7,0,1]
+//输出：8
             int len = nums.length;
             int res = len;
             for (int i = 0; i < len; i++) {
-                res = res ^ i ^ nums[i];
+                res = res ^ nums[i] ^ i;
             }
             return res;
         }

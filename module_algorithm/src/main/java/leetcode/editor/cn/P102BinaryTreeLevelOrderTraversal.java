@@ -21,7 +21,7 @@
 //]
 // 
 // Related Topics 树 广度优先搜索 
-// 👍 675 👎 0
+// 👍 678 👎 0
 
 
 package leetcode.editor.cn;
@@ -47,34 +47,22 @@ public class P102BinaryTreeLevelOrderTraversal {
      * }
      */
     class Solution {
-        private List<List<Integer>> res = new ArrayList<>();
-
         public List<List<Integer>> levelOrder(TreeNode root) {
-            dfs(root, 0);
-
+            List<List<Integer>> res = new ArrayList<>();
+            dfs(res, root, 0);
             return res;
         }
 
-        //     3
-        //   / \
-        //  9  20
-        //    /  \
-        //   15   7
-        private void dfs(TreeNode node, int deep) {
+        private void dfs(List<List<Integer>> res, TreeNode node, int depth) {
             if (node == null) {
                 return;
             }
-            //最关键的地方
-            //两次都是判断get(deep)==null如果为null，那么增加
-            //这里会出问题，因为res的size为0，如果直接取0，会报空指针
-            if (res.size() <= deep) {
+            if (depth == res.size()) {
                 res.add(new ArrayList<>());
             }
-
-            res.get(deep).add(node.val);
-            dfs(node.left, deep + 1);
-            dfs(node.right, deep + 1);
-
+            res.get(depth).add(node.val);
+            dfs(res, node.left, depth + 1);
+            dfs(res, node.right, depth + 1);
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

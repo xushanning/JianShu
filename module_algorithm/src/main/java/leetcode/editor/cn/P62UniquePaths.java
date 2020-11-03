@@ -35,7 +35,7 @@
 // 题目数据保证答案小于等于 2 * 10 ^ 9 
 // 
 // Related Topics 数组 动态规划 
-// 👍 730 👎 0
+// 👍 733 👎 0
 
 
 package leetcode.editor.cn;
@@ -50,9 +50,6 @@ public class P62UniquePaths {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int uniquePaths(int m, int n) {
-            if (m == 0 || n == 0) {
-                return 0;
-            }
             int[][] dp = new int[m][n];
             for (int i = 0; i < m; i++) {
                 dp[i][0] = 1;

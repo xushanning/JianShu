@@ -15,7 +15,7 @@
 //
 // 你能尝试使用一趟扫描实现吗？ 
 // Related Topics 链表 双指针 
-// 👍 1092 👎 0
+// 👍 1095 👎 0
 
 
 package leetcode.editor.cn;
@@ -46,21 +46,23 @@ public class P19RemoveNthNodeFromEndOfList {
             if (head == null) {
                 return head;
             }
-            ListNode fast = head;
+            ListNode cur = head;
             for (int i = 0; i < n; i++) {
-                fast = fast.next;
+                cur = cur.next;
             }
-            //1->2  2
-            if (fast == null) {
+            if (cur == null) {
+                //用head.next而不是cur.next
                 return head.next;
             }
-            ListNode slow = head;
-            while (fast.next != null) {
-                slow = slow.next;
-                fast = fast.next;
+            ListNode pre = head;
+
+            while (cur.next != null) {
+                cur = cur.next;
+                pre = pre.next;
             }
-            slow.next = slow.next.next;
+            pre.next = pre.next.next;
             return head;
+
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
