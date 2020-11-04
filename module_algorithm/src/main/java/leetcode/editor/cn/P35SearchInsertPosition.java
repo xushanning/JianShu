@@ -36,11 +36,13 @@ public class P35SearchInsertPosition {
     public static void main(String[] args) {
         Solution solution = new P35SearchInsertPosition().new Solution();
         // TO TEST
+        solution.searchInsert(new int[]{1, 3, 5, 6}, 2);
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int searchInsert(int[] nums, int target) {
+            //相当于求第一个大于等于target值的位置
 // 输入: [1,3,5,6], 2
 //输出: 1
             int len = nums.length;
