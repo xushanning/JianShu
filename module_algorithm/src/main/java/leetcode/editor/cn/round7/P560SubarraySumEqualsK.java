@@ -14,13 +14,10 @@
 // 数组中元素的范围是 [-1000, 1000] ，且整数 k 的范围是 [-1e7, 1e7]。 
 // 
 // Related Topics 数组 哈希表 
-// 👍 655 👎 0
+// 👍 670 👎 0
 
 
-package leetcode.editor.cn.round6;
-
-import java.util.HashMap;
-import java.util.Map;
+package leetcode.editor.cn.round7;
 
 //Java：和为K的子数组
 public class P560SubarraySumEqualsK {
@@ -32,24 +29,22 @@ public class P560SubarraySumEqualsK {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int subarraySum(int[] nums, int k) {
-
-            //key为前i项的和，value为在数组中的位置，这个是为了比如说下面这个数组
-            //[1,2,3,-2,-3,3,2,4,8]
-            //前3项和为6，map<6,6>
-            //前7项和也为6，map<6,6>
-            //那么如果k为6的话，就有两种了
-            Map<Integer, Integer> map = new HashMap<>();
-            int res = 0;
-            int cur = 0;
-            //前缀和0首现出现1次，即：在-1位置（空数组）
-            map.put(0, 1);
-            for (int i = 0; i < nums.length; i++) {
-                cur += nums[i];
-                if (map.containsKey(cur - k)) {
-                    res += map.get(cur - k);
-                }
-                map.put(cur, map.getOrDefault(cur, 0) + 1);
+            //前缀和的进化过程
+            int len = nums.length;
+            int[] sum = new int[len + 1];
+            sum[0] = 0;
+            for (int i = 0; i < len; i++) {
+                sum[i + 1] = nums[i] + sum[i];
             }
+            int res = 0;
+            for (int i = 0; i < len; i++) {
+                for (int j = i; j < len; j++) {
+                    if (sum[j + 1] - sum[i] == k) {
+                        res++;
+                    }
+                }
+            }
+            //用hashmap降低复杂度
             return res;
         }
     }
