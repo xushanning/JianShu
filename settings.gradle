@@ -8,7 +8,7 @@ include ':common_lib',
         //':vrouter_complier',
         //':vrouter_annotation',
         //简书demo
-        //':module_jianshu'
+        ':module_jianshu',
         //算法模块
           ':module_algorithm'
         //壳模块

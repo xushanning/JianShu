@@ -12,8 +12,7 @@ dependencies {
     implementation project(path: ':common_res')
     implementation rootProject.ext.dependencies["hilt"]
 
-    kapt rootProject.ext.dependencies["daggerProcessor"]
-    kapt rootProject.ext.dependencies["daggerCompiler"]
+
     kapt rootProject.ext.dependencies["arouterProcessor"]
     kapt rootProject.ext.dependencies["moshiKapt"]
     kapt rootProject.ext.dependencies["hiltKapt"]
