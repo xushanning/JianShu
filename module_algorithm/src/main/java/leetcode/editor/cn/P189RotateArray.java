@@ -29,18 +29,34 @@
 
 
 package leetcode.editor.cn;
+
 //Java：旋转数组
-public class P189RotateArray{
+public class P189RotateArray {
     public static void main(String[] args) {
         Solution solution = new P189RotateArray().new Solution();
         // TO TEST
     }
-    //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public void rotate(int[] nums, int k) {
 
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public void rotate(int[] nums, int k) {
+            k %= nums.length;
+            revers(nums, 0, nums.length - 1);
+            revers(nums, 0, k - 1);
+            revers(nums, k, nums.length - 1);
+        }
+
+        private void revers(int[] nums, int left, int right) {
+
+            while (right > left) {
+                int temp = nums[left];
+                nums[left] = nums[right];
+                nums[right] = temp;
+                right--;
+                left++;
+            }
+        }
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }
