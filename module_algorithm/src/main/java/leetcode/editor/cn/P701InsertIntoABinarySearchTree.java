@@ -41,12 +41,10 @@
 // 新值和原始二叉搜索树中的任意节点值都不同 
 // 
 // Related Topics 树 
-// 👍 136 👎 0
+// 👍 141 👎 0
 
 
-package leetcode.editor.cn.round7;
-
-import leetcode.editor.cn.TreeNode;
+package leetcode.editor.cn;
 
 //Java：二叉搜索树中的插入操作
 public class P701InsertIntoABinarySearchTree {

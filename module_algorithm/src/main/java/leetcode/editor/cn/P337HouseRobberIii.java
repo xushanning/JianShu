@@ -30,15 +30,13 @@
 //解释: 小偷一晚能够盗取的最高金额 = 4 + 5 = 9.
 // 
 // Related Topics 树 深度优先搜索 
-// 👍 611 👎 0
+// 👍 634 👎 0
 
 
-package leetcode.editor.cn.round5;
-
-import leetcode.editor.cn.TreeNode;
+package leetcode.editor.cn;
 
 //Java：打家劫舍 III
-public class  P337HouseRobberIii {
+public class P337HouseRobberIii {
     public static void main(String[] args) {
         Solution solution = new P337HouseRobberIii().new Solution();
         // TO TEST
@@ -57,17 +55,15 @@ public class  P337HouseRobberIii {
     class Solution {
         public int rob(TreeNode root) {
             int[] res = dfs(root);
-            return Math.max(res[0], res[1]);
+            return Math.max(res[1], res[0]);
         }
 
         private int[] dfs(TreeNode node) {
+            //定义数组第0个元素为不偷，第1个元素为偷
             int[] res = new int[2];
             if (node == null) {
                 return res;
             }
-            //定义数组第0个元素为不偷，第1个元素为偷,所以
-            //如果当前节点选择偷的时候，当前节点能偷的最大钱数=当前节点的钱+左孩子不偷时候的钱+右孩子不偷时候的钱
-            //如果当前节点选择不偷，这个时候子节点可以选择偷，也可以选择不偷，那么当前节点能偷的最大钱数=左孩子能偷的最大钱数+右孩子最大钱数
             int[] left = dfs(node.left);
             int[] right = dfs(node.right);
             res[1] = node.val + left[0] + right[0];

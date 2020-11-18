@@ -27,6 +27,7 @@ public class P5LongestPalindromicSubstring {
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
+        //本题和第647题可以算作同一个题，就几行不一样的代码
         public String longestPalindrome(String s) {
             int len = s.length();
             if (len == 0) {
