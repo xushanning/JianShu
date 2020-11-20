@@ -59,6 +59,7 @@ public class P98ValidateBinarySearchTree {
             if (root == null) {
                 return true;
             }
+            //左树是二叉搜索树，那么整个树不一定是二叉搜索树，但是如果左树不是二叉搜索树，那么整棵树肯定不是二叉搜索树
             if (!isValidBST(root.left)) {
                 return false;
             }
