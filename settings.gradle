@@ -1,4 +1,8 @@
-
+setBinding(new Binding([gradle: this]))
+evaluate(new File(
+        settingsDir,
+        'module_wan_flutter/.android/include_flutter.groovy'
+))
 include ':common_lib',
         //':module_easyload',
         ':common_res',
