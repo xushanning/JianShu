@@ -3,8 +3,6 @@ import 'package:retrofit/http.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:retrofit/retrofit.dart';
 
-part 'example.g.dart';
-
 ///api 类
 class Api {
   ///登陆
@@ -18,6 +16,9 @@ class Api {
 
   ///首页文章列表
   static const String homeArticle = "article/list";
+
+  ///获取公众号列表
+  static const String publicAccountList = "wxarticle/chapters/json";
 }
 
 // @RestApi(baseUrl: "xxx")

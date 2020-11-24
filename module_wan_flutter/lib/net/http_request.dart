@@ -29,26 +29,29 @@ class HttpRequest {
   }
 
   ///get请求
-  get(url, {data, Function success, Function error}) async {
+  Future get(url, {
+    data,
+  }) async {
     Response res;
     try {
       res = await dio.get(url, queryParameters: data);
-    } on DioError catch (e) {}
-    if (res.data != null) {
-      BaseRes baseRes = BaseRes.fromJson(json.decode(res.data));
-      switch (baseRes.errorCode) {
-        case 0:
-          success(jsonEncode(baseRes.data));
-          break;
-        case -1001:
+      if (res.data != null) {
+        BaseRes baseRes = BaseRes.fromJson(json.decode(res.data));
+        switch (baseRes.errorCode) {
+          case 0:
+            return baseRes.data;
+            break;
+          case -1001:
 
           ///跳转登陆
 
-          break;
-        default:
-          error(baseRes.errorCode, baseRes.errorMessage);
-          break;
+            break;
+          default:
+            break;
+        }
       }
+    } on DioError catch (e) {
+
     }
   }
 

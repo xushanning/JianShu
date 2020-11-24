@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:module_wan_flutter/net/http_request.dart';
+import 'package:module_wan_flutter/net/net_util.dart';
 
+///代码千万行，注释第一行，代码不规范，同事两行泪
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -45,6 +47,13 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _getData();
+  }
+
   void _incrementCounter() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
@@ -54,6 +63,10 @@ class _MyHomePageState extends State<MyHomePage> {
       // called again, and so nothing would appear to happen.
       _counter++;
     });
+  }
+
+  void _getData() async {
+     NetUtil.instance.getPublicAccount();
   }
 
   @override
