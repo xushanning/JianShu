@@ -1,10 +1,9 @@
-import 'package:dio/dio.dart';
-import 'package:retrofit/http.dart';
-import 'package:json_annotation/json_annotation.dart';
-import 'package:retrofit/retrofit.dart';
 
 ///api 类
 class Api {
+  ///base url
+  static const String baseUrl = "https://wanandroid.com/";
+
   ///登陆
   static const String login = "user/login";
 
@@ -21,15 +20,3 @@ class Api {
   static const String publicAccountList = "wxarticle/chapters/json";
 }
 
-// @RestApi(baseUrl: "xxx")
-// abstract class RestClient {
-//
-//   factory RestClient(Dio dio, {String baseUrl}) =xxx;
-//
-// // @GET("xx")
-// // Future <List<Task>> getList();
-// }
-//
-// @JsonSerializable()
-// class Task {
-// }
