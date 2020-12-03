@@ -14,7 +14,7 @@ ext {
             okdownload    : "1.0.5",
             rxCache       : "2.3.5",
             rxlifecycle   : "3.0.0",
-            buildGradle   : "4.0.1",
+            buildGradle   : '4.1.1',
             kotlinVersion : "1.4.0",
             room          : "2.3.0-alpha02",
             dagger        : "2.28.3",
