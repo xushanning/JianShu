@@ -8,15 +8,13 @@
 // 进阶: 
 //你可以迭代或递归地反转链表。你能否用两种方法解决这道题？ 
 // Related Topics 链表 
-// 👍 1347 👎 0
+// 👍 1380 👎 0
 
 
-package leetcode.editor.cn.round8;
-
-import leetcode.editor.cn.ListNode;
+package leetcode.editor.cn;
 
 //Java：反转链表
-public class  P206ReverseLinkedList {
+public class P206ReverseLinkedList {
     public static void main(String[] args) {
         Solution solution = new P206ReverseLinkedList().new Solution();
         // TO TEST
@@ -33,6 +31,9 @@ public class  P206ReverseLinkedList {
      */
     class Solution {
         public ListNode reverseList(ListNode head) {
+            if (head == null) {
+                return null;
+            }
             ListNode pre = null;
             ListNode cur = head;
             while (cur != null) {
