@@ -15,10 +15,10 @@
 //
 // 进阶: 你能将算法的时间复杂度降低到 O(n log n) 吗? 
 // Related Topics 二分查找 动态规划 
-// 👍 1155 👎 0
+// 👍 1201 👎 0
 
 
-package leetcode.editor.cn.round8;
+package leetcode.editor.cn;
 
 //Java：最长上升子序列
 public class P300LongestIncreasingSubsequence {
@@ -31,10 +31,9 @@ public class P300LongestIncreasingSubsequence {
     class Solution {
         public int lengthOfLIS(int[] nums) {
             int len = nums.length;
-            if (len == 0) {
-                return 0;
+            if (len < 2) {
+                return len;
             }
-            //定义dp[i]为以第i项结尾的最长上升子序列的长度
             int[] dp = new int[len];
             dp[0] = 1;
             int max = 0;
@@ -45,11 +44,9 @@ public class P300LongestIncreasingSubsequence {
                         dp[i] = Math.max(dp[i], dp[j] + 1);
                     }
                 }
-                max = Math.max(max, dp[i]);
+                max = Math.max(dp[i], max);
             }
-
             return max;
-
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
