@@ -8,7 +8,7 @@
 // 进阶: 
 //你可以迭代或递归地反转链表。你能否用两种方法解决这道题？ 
 // Related Topics 链表 
-// 👍 1380 👎 0
+// 👍 1426 👎 0
 
 
 package leetcode.editor.cn;
@@ -31,9 +31,6 @@ public class P206ReverseLinkedList {
      */
     class Solution {
         public ListNode reverseList(ListNode head) {
-            if (head == null) {
-                return null;
-            }
             ListNode pre = null;
             ListNode cur = head;
             while (cur != null) {

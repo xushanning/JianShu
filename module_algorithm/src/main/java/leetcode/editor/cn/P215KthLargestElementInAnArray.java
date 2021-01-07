@@ -15,7 +15,7 @@
 //
 // 你可以假设 k 总是有效的，且 1 ≤ k ≤ 数组的长度。 
 // Related Topics 堆 分治算法 
-// 👍 811 👎 0
+// 👍 843 👎 0
 
 
 package leetcode.editor.cn;
@@ -32,6 +32,8 @@ public class P215KthLargestElementInAnArray {
         private int len;
         private int[] nums;
 
+        //建立大顶堆，然后从堆顶移除k个数字，就是
+        //或者建立大小为k的小顶堆，
         public int findKthLargest(int[] nums, int k) {
             len = nums.length;
             this.nums = nums;
@@ -44,30 +46,27 @@ public class P215KthLargestElementInAnArray {
                 len--;
                 heapify(0);
             }
-
             return nums[0];
         }
 
         private void buildHeap() {
-            //注意点①
             for (int i = len / 2 - 1; i >= 0; i--) {
                 heapify(i);
             }
         }
 
-        private void heapify(int i) {
-            int max = i;
-            int left = 2 * i + 1;
-            int right = 2 * i + 2;
-            //注意点②
+        private void heapify(int index) {
+            int max = index;
+            int left = 2 * index + 1;
+            int right = 2 * index + 2;
             if (left < len && nums[left] > nums[max]) {
                 max = left;
             }
             if (right < len && nums[right] > nums[max]) {
                 max = right;
             }
-            if (max != i) {
-                swap(max, i);
+            if (max != index) {
+                swap(max, index);
                 heapify(max);
             }
         }
@@ -77,6 +76,7 @@ public class P215KthLargestElementInAnArray {
             nums[i] = nums[j];
             nums[j] = temp;
         }
+
     }
 //leetcode submit region end(Prohibit modification and deletion)
 
