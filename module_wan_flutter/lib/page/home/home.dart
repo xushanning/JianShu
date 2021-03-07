@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:module_wan_flutter/bean/banner_bean.dart';
@@ -17,6 +15,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   //banner数据
   List<BannerBean> bannerData = List();
+
+  //首页数据
+  List<String> homeListData = List();
 
   @override
   void initState() {
@@ -36,30 +37,34 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      body: ListView.builder(
-        itemBuilder: (context, index) {
-          return index == 0
-              ? Container(
-                  height: 200,
-                  child: bannerData.length != 0
-                      ? Swiper(
-                          autoplayDelay: 3000,
-                          itemHeight: 200,
-                          itemCount: bannerData.length,
-                          itemBuilder: (context, index) {
-                            return Image.network(
-                              bannerData[index].imagePath,
-                              fit: BoxFit.fill,
-                            );
-                          },
-                        )
-                      : SizedBox(
-                          width: 0,
-                          height: 0,
-                        ))
-              : Text("ddd");
-        },
+    return Scaffold(
+      body: Column(
+        children: [
+
+          Container(
+              height: 200,
+              child: bannerData.length != 0
+                  ? Swiper(
+                      autoplayDelay: 3000,
+                      itemHeight: 200,
+                      itemCount: bannerData.length,
+                      itemBuilder: (context, index) {
+                        return Image.network(
+                          bannerData[index].imagePath,
+                          fit: BoxFit.fill,
+                        );
+                      },
+                    )
+                  : SizedBox(
+                      width: 0,
+                      height: 0,
+                    )),
+          // ListView.builder(
+          //   itemBuilder: (context, index) {
+          //     return Text("ddd");
+          //   },
+          // ),
+        ],
       ),
     );
   }
