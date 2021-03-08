@@ -34,7 +34,7 @@
 // 👍 743 👎 0
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round10;
 
 //Java：合并两个有序数组
 public class P88MergeSortedArray {

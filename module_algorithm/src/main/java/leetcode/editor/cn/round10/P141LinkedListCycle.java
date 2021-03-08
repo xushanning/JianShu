@@ -53,7 +53,9 @@
 // 👍 914 👎 0
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round10;
+
+import leetcode.editor.cn.ListNode;
 
 //Java：环形链表
 public class P141LinkedListCycle {

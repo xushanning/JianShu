@@ -36,7 +36,9 @@
 // 👍 1488 👎 0
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round10;
+
+import leetcode.editor.cn.ListNode;
 
 //Java：合并两个有序链表
 public class P21MergeTwoSortedLists {

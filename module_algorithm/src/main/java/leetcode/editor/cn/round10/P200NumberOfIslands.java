@@ -44,7 +44,7 @@
 // 👍 944 👎 0
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round10;
 
 //Java：岛屿数量
 public class P200NumberOfIslands {

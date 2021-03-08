@@ -21,7 +21,7 @@
 // 👍 577 👎 0
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round10;
 
 //Java：x 的平方根
 public class P69Sqrtx {

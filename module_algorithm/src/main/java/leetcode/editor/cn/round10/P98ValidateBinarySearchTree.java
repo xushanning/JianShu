@@ -33,7 +33,10 @@
 // 👍 901 👎 0
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round10;
+
+import leetcode.editor.cn.TreeNode;
+
 //Java：验证二叉搜索树
 public class P98ValidateBinarySearchTree{
     public static void main(String[] args) {

@@ -25,7 +25,7 @@
 // 👍 592 👎 0
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round10;
 
 import java.util.ArrayList;
 import java.util.List;

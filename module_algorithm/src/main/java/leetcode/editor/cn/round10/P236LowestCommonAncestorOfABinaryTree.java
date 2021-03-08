@@ -35,7 +35,9 @@
 // 👍 903 👎 0
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round10;
+
+import leetcode.editor.cn.TreeNode;
 
 //Java：二叉树的最近公共祖先
 public class P236LowestCommonAncestorOfABinaryTree {

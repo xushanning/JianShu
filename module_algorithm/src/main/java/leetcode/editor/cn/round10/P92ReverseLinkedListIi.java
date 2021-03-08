@@ -11,7 +11,9 @@
 // 👍 649 👎 0
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round10;
+
+import leetcode.editor.cn.ListNode;
 
 //Java：反转链表 II
 public class P92ReverseLinkedListIi {

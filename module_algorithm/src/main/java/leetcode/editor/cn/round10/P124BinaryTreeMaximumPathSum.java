@@ -33,7 +33,9 @@
 // 👍 858 👎 0
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round10;
+
+import leetcode.editor.cn.TreeNode;
 
 //Java：二叉树中的最大路径和
 public class P124BinaryTreeMaximumPathSum {

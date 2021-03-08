@@ -24,7 +24,7 @@
 // 👍 1396 👎 0
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round10;
 
 //Java：买卖股票的最佳时机
 public class P121BestTimeToBuyAndSellStock {

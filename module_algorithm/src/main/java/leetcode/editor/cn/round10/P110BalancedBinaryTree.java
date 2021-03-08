@@ -41,7 +41,9 @@
 // 👍 555 👎 0
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round10;
+
+import leetcode.editor.cn.TreeNode;
 
 //Java：平衡二叉树
 public class P110BalancedBinaryTree {

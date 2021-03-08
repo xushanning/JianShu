@@ -26,10 +26,12 @@
 // 👍 748 👎 0
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round10;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import leetcode.editor.cn.TreeNode;
 
 //Java：二叉树的层序遍历
 public class P102BinaryTreeLevelOrderTraversal {

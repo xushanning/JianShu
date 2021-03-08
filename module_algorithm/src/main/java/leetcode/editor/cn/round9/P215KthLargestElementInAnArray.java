@@ -39,6 +39,7 @@ public class P215KthLargestElementInAnArray {
                 return 0;
             }
             buildHeap();
+            //把最后一个数和第0个数交换，一共交换k次
             for (int i = nums.length - 1; i >= nums.length - k + 1; i--) {
                 swap(i, 0);
                 len--;

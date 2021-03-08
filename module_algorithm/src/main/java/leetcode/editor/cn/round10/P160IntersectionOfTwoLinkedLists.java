@@ -59,7 +59,9 @@
 // 👍 938 👎 0
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round10;
+
+import leetcode.editor.cn.ListNode;
 
 //Java：相交链表
 public class P160IntersectionOfTwoLinkedLists {

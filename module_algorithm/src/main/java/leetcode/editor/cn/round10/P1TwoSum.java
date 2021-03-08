@@ -42,7 +42,7 @@
 // 👍 10072 👎 0
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round10;
 
 import java.util.HashMap;
 import java.util.Map;

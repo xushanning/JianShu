@@ -18,7 +18,9 @@
 // 👍 767 👎 0
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round10;
+
+import leetcode.editor.cn.TreeNode;
 
 //Java：二叉树的最大深度
 public class P104MaximumDepthOfBinaryTree {

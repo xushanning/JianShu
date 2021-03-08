@@ -14,7 +14,7 @@
 // 👍 2815 👎 0
 
 
-package leetcode.editor.cn;
+package leetcode.editor.cn.round10;
 
 //Java：最大子序和
 public class P53MaximumSubarray {
