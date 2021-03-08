@@ -43,10 +43,10 @@
 // s 由英文字母、数字、符号和空格组成 
 // 
 // Related Topics 哈希表 双指针 字符串 Sliding Window 
-// 👍 4645 👎 0
+// 👍 5085 👎 0
 
 
-package leetcode.editor.cn.round9;
+package leetcode.editor.cn;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -61,19 +61,20 @@ public class P3LongestSubstringWithoutRepeatingCharacters {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int lengthOfLongestSubstring(String s) {
-//输入: s = "pwwkew"
-//输出: 3
+            //s = "pwwkew"
             int len = s.length();
             if (len <= 1) {
                 return len;
             }
             Map<Character, Integer> map = new HashMap<>();
-            int left = 0, max = 0;
+            int max = 0;
+            int left = 0;
+
             for (int i = 0; i < len; i++) {
                 char c = s.charAt(i);
                 if (map.containsKey(c)) {
-                    //这里为什么要用max？
                     left = Math.max(left, map.get(c) + 1);
+                    //left = map.get(c) + 1;
                 }
                 max = Math.max(max, i - left + 1);
                 map.put(c, i);
