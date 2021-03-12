@@ -1,22 +1,14 @@
 package com.xu.module.jianshu.debug
 
 import com.xu.commonlib.base.BaseApplication
-import com.xu.module.easyload.EasyLoad
-import com.xu.module.jianshu.ui.easyload.state.ErrorState
-import com.xu.module.jianshu.ui.easyload.state.LoadingState
-import com.xu.module.jianshu.ui.easyload.state.GlobalDefaultState
-import dagger.android.AndroidInjector
-import dagger.android.DaggerApplication
+import dagger.hilt.android.HiltAndroidApp
 
 /**
  * @author 言吾許
  */
+@HiltAndroidApp
 class DebugApplication : BaseApplication() {
-    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
-        val injector = DaggerAppComponent.factory().create(this)
-        injector.inject(this)
-        return injector
-    }
+
 
     override fun onCreate() {
         super.onCreate()
@@ -25,12 +17,12 @@ class DebugApplication : BaseApplication() {
 
     private fun initEasyLoad() {
         //初始化全局
-        EasyLoad.instance
-            .beginBuilder()
-            .addGlobalState(LoadingState())
-            .addGlobalState(ErrorState())
-            .addGlobalState(GlobalDefaultState())
-            .setGlobalDefaultState(GlobalDefaultState::class.java)
+//        EasyLoad.instance
+//            .beginBuilder()
+//            .addGlobalState(LoadingState())
+//            .addGlobalState(ErrorState())
+//            .addGlobalState(GlobalDefaultState())
+//            .setGlobalDefaultState(GlobalDefaultState::class.java)
     }
 
 }

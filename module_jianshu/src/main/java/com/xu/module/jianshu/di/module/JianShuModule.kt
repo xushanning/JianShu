@@ -5,7 +5,7 @@ import dagger.Module
 /**
  * @author 言吾許
  */
-@Module
+//@Module
 class JianShuModule {
 
 }
