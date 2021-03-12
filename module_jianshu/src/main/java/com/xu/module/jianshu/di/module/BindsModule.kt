@@ -6,12 +6,12 @@ import com.xu.module.jianshu.ui.coroutine.ICoroutineContract
 import dagger.Binds
 import dagger.Module
 
-@Module
+//@Module
 abstract class BindsModule {
 
-    @Binds
+    //    @Binds
     abstract fun provideCoroutinePresenter(coroutinePresenter: CoroutinePresenter): ICoroutineContract.ICoroutinePresenter
 
-    @Binds
+    //    @Binds
     abstract fun provideCoroutineModel(coroutineModel: CoroutineModel): ICoroutineContract.ICoroutineModel
 }

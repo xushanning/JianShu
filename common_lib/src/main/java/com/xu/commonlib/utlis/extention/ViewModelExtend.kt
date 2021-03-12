@@ -22,32 +22,7 @@ fun <T> BaseViewModel.request(
     showLoading: Boolean = false,
     msg: String = "正在加载.."
 ): Job {
-    return viewModelScope.launch {
-        runCatching {
-            if (showLoading) {
-                showDialog.postValue(msg)
-            }
-            block()
-        }.onSuccess {
-            if (showLoading) {
-                dismissDialog.postValue(true)
-            }
-            runCatching {
-                if (it.isSuccess() && it.getResData() != null) {
-                    success(it.getResData()!!)
-                } else {
-                    throw ApiException(it.getResCode(), it.getResMsg(), null)
-                }
-            }.onFailure {
-                error(ErrorHandler.handleError(it))
-            }
-        }.onFailure {
-            if (showLoading) {
-                dismissDialog.postValue(true)
-            }
-            error(ErrorHandler.handleError(it))
-        }
-    }
+    return request(block, {}, success, null, error, showLoading, msg)
 }
 
 /**
@@ -58,6 +33,28 @@ fun <T> BaseViewModel.request(
 fun <T> BaseViewModel.requestByNoResult(
     block: suspend () -> BaseResponse<T>,
     success: () -> Unit,
+    error: (ApiException) -> Unit,
+    showLoading: Boolean = false,
+    msg: String = "正在加载.."
+): Job {
+    return this.request(block, success, {}, null, error, showLoading, msg)
+}
+
+fun <T> BaseViewModel.request(
+    block: suspend () -> BaseResponse<T>,
+    result: MutableLiveData<T>,
+    error: (ApiException) -> Unit,
+    showLoading: Boolean = false,
+    msg: String = "正在加载.."
+): Job {
+    return request(block, {}, {}, result, error, showLoading, msg)
+}
+
+private fun <T> BaseViewModel.request(
+    block: suspend () -> BaseResponse<T>,
+    success: () -> Unit?,
+    successT: (T) -> Unit,
+    result: MutableLiveData<T>?,
     error: (ApiException) -> Unit,
     showLoading: Boolean = false,
     msg: String = "正在加载.."
@@ -75,42 +72,8 @@ fun <T> BaseViewModel.requestByNoResult(
             runCatching {
                 if (it.isSuccess()) {
                     success()
-                } else {
-                    throw ApiException(it.getResCode(), it.getResMsg(), null)
-                }
-            }.onFailure {
-                Logger.d(it.message)
-                error(ErrorHandler.handleError(it))
-            }
-        }.onFailure {
-            if (showLoading) {
-                dismissDialog.postValue(false)
-            }
-            error(ErrorHandler.handleError(it))
-        }
-    }
-}
-
-fun <T> BaseViewModel.request(
-    block: suspend () -> BaseResponse<T>,
-    result: MutableLiveData<T>,
-    error: (ApiException) -> Unit,
-    showLoading: Boolean = false,
-    msg: String = "正在加载.."
-): Job {
-    return viewModelScope.launch {
-        runCatching {
-            if (showLoading) {
-                showDialog.postValue(msg)
-            }
-            block()
-        }.onSuccess {
-            if (showLoading) {
-                dismissDialog.postValue(true)
-            }
-            runCatching {
-                if (it.isSuccess()) {
-                    result.postValue(it.getResData())
+                    successT(it.getResData()!!)
+                    result?.postValue(it.getResData())
                 } else {
                     throw ApiException(it.getResCode(), it.getResMsg(), null)
                 }
