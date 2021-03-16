@@ -24,7 +24,7 @@ class SettingViewModel @ViewModelInject constructor(
 
 
     fun logout() {
-        this.requestByNoResult({
+         requestByNoResult({
             api.logout()
         }, {
             //更新登出结果

@@ -9,35 +9,40 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<HomeModel>(
-      create: (_) => HomeModel(),
-      builder: (context, child) {
-        HomeModel bannerModel = Provider.of(context);
-
-        return Scaffold(
-          body: Column(
-            children: [
-              Container(
-                  height: 200,
-                  child: bannerModel.bannerData.length != 0
-                      ? Swiper(
-                          autoplayDelay: 3000,
-                          itemHeight: 200,
-                          itemCount: bannerModel.bannerData.length,
-                          itemBuilder: (context, index) {
-                            return Image.network(
-                              bannerModel.bannerData[index].imagePath,
-                              fit: BoxFit.fill,
-                            );
-                          },
-                        )
-                      : SizedBox(
-                          width: 0,
-                          height: 0,
-                        )),
-            ],
-          ),
-        );
-      },
-    );
+        create: (_) => HomeModel(),
+        builder: (context, child) {
+          HomeModel model = Provider.of(context);
+          return Scaffold(
+            body: Column(
+              children: [
+                Container(
+                    height: 200,
+                    child: model.bannerData.length != 0
+                        ? Swiper(
+                            autoplayDelay: 3000,
+                            itemHeight: 200,
+                            itemCount: model.bannerData.length,
+                            itemBuilder: (context, index) {
+                              return Image.network(
+                                model.bannerData[index].imagePath,
+                                fit: BoxFit.fill,
+                              );
+                            },
+                          )
+                        : SizedBox(
+                            width: 0,
+                            height: 0,
+                          )),
+                Expanded(
+                  child: ListView.builder(
+                      itemCount: 50,
+                      itemBuilder: (context, index) {
+                        return Text(model.itemData[index].title);
+                      }),
+                )
+              ],
+            ),
+          );
+        });
   }
 }
