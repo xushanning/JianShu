@@ -7,14 +7,14 @@ import 'package:module_wan_flutter/net/BaseRes.dart';
 import 'package:module_wan_flutter/net/api.dart';
 
 class Net {
-  Dio dio;
-  static Net instance;
+  Dio _dio;
+  static Net _instance;
 
   static Net getInstance() {
-    if (instance == null) {
-      instance = Net();
+    if (_instance == null) {
+      _instance = Net();
     }
-    return instance;
+    return _instance;
   }
 
   Net() {
@@ -23,9 +23,9 @@ class Net {
         connectTimeout: 5000,
         receiveTimeout: 5000,
         responseType: ResponseType.plain);
-    dio = Dio(options);
+    _dio = Dio(options);
 
-    dio.interceptors.add(CookieManager(CookieJar()));
+    _dio.interceptors.add(CookieManager(CookieJar()));
   }
 
   ///get请求
@@ -33,7 +33,7 @@ class Net {
     Response res;
     try {
       print("请求地址:" + Api.baseUrl + url);
-      res = await dio.get(url, queryParameters: params);
+      res = await _dio.get(url, queryParameters: params);
       print("请求返回" + res.data);
       if (res.data != null) {
         //decode可以将json字符串转换成Map<String,dynamic>类型
@@ -61,7 +61,7 @@ class Net {
   post(url, {data, Function success, Function error}) async {
     Response res;
     try {
-      res = await dio.post(url, queryParameters: data);
+      res = await _dio.post(url, queryParameters: data);
     } on DioError catch (e) {}
   }
 }
