@@ -1,32 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:module_wan_flutter/page/project/project_model.dart';
+import 'package:provider/provider.dart';
 
-class ProjectPage extends StatefulWidget {
+class ProjectPage extends StatelessWidget {
   final String name;
 
   ProjectPage({this.name = "这是project页面"});
 
   @override
-  State<StatefulWidget> createState() {
-    return _ProjectState();
-  }
-}
-
-class _ProjectState extends State<ProjectPage> {
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      //可以直接通过widget获取属性值
-      body: Column(
-        children: [
-          Text(widget.name),
-          Text(widget.name),
-          Text(widget.name),
-          Text(widget.name),
-          Text(widget.name),
-          Text(widget.name),
-        ],
-      ),
+    return ChangeNotifierProvider<ProjectModel>(
+      create: (_) => ProjectModel(),
+      builder: (context, child) {
+        ProjectModel _model = Provider.of(context, listen: true);
+
+        return Scaffold(
+          body: Column(
+            children: [
+              Text(name),
+              Text("${_model.count}"),
+              Text(name),
+              Text(name),
+              Consumer<ProjectModel>(
+                builder: (context, notifier, child) {
+                  return Text("${notifier.count}");
+                },
+              ),
+              RaisedButton(
+                child: Text("点击"),
+                onPressed: () => {context.read<ProjectModel>().increase()},
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

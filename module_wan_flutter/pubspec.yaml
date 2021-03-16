@@ -29,6 +29,10 @@ dependencies:
   flutter_swiper: ^1.1.6
   #Json解析
   json_annotation: ^3.1.1
+  #状态管理
+  provider: ^5.0.0
+  #string格式化
+  sprintf: ^6.0.0
 
 
   #cupertino_icons: ^1.0.1
