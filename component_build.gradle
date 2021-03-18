@@ -1,5 +1,6 @@
 if (isDebug.toBoolean()) {
     apply plugin: 'com.android.application'
+    apply plugin: 'com.alibaba.arouter'
 } else {
     apply plugin: 'com.android.library'
 }
