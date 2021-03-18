@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'home_item_bean.dart';
+part of 'article_bean.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-HomeItemBean _$HomeItemBeanFromJson(Map<String, dynamic> json) {
-  return HomeItemBean(
+ArticleBean _$ArticleBeanFromJson(Map<String, dynamic> json) {
+  return ArticleBean(
     json['apkLink'] as String,
     json['audit'] as int,
     json['author'] as String,
@@ -47,7 +47,7 @@ HomeItemBean _$HomeItemBeanFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$HomeItemBeanToJson(HomeItemBean instance) =>
+Map<String, dynamic> _$ArticleBeanToJson(ArticleBean instance) =>
     <String, dynamic>{
       'apkLink': instance.apkLink,
       'audit': instance.audit,

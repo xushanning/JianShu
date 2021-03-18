@@ -82,9 +82,10 @@ public class P2AddTwoNumbers {
                 if (l2 != null) {
                     l2 = l2.next;
                 }
-                if (carry != 0) {
-                    cur.next = new ListNode(carry);
-                }
+
+            }
+            if (carry != 0) {
+                cur.next = new ListNode(carry);
             }
             return dummy.next;
         }

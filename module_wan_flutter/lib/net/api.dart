@@ -1,4 +1,3 @@
-
 ///api 类
 class Api {
   ///base url
@@ -13,10 +12,12 @@ class Api {
   ///首页banner数据
   static const String homeBanner = "banner/json";
 
+  ///首页top
+  static const String homeTop = "article/top/json";
+
   ///首页文章列表
   static const String homeArticle = "article/list/%s/json";
 
   ///获取公众号列表
   static const String publicAccountList = "wxarticle/chapters/json";
 }
-

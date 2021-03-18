@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'home_item_bean.g.dart';
+part 'article_bean.g.dart';
 
 @JsonSerializable()
-class HomeItemBean extends Object {
+class ArticleBean extends Object {
   @JsonKey(name: 'apkLink')
   String apkLink;
 
@@ -103,7 +103,7 @@ class HomeItemBean extends Object {
   @JsonKey(name: 'zan')
   int zan;
 
-  HomeItemBean(
+  ArticleBean(
     this.apkLink,
     this.audit,
     this.author,
@@ -139,10 +139,10 @@ class HomeItemBean extends Object {
     this.zan,
   );
 
-  factory HomeItemBean.fromJson(Map<String, dynamic> srcJson) =>
-      _$HomeItemBeanFromJson(srcJson);
+  factory ArticleBean.fromJson(Map<String, dynamic> srcJson) =>
+      _$ArticleBeanFromJson(srcJson);
 
-  Map<String, dynamic> toJson() => _$HomeItemBeanToJson(this);
+  Map<String, dynamic> toJson() => _$ArticleBeanToJson(this);
 }
 
 @JsonSerializable()

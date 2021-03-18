@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:module_wan_flutter/bean/home_item_bean.dart';
+import 'package:module_wan_flutter/bean/article_bean.dart';
+import 'package:module_wan_flutter/widgets/search_head.dart';
 import 'package:provider/provider.dart';
 
 import 'home_model.dart';
@@ -47,7 +48,7 @@ class HomePage extends StatelessWidget {
         });
   }
 
-  Card _getItem(HomeItemBean bean) {
+  Card _getItem(ArticleBean bean) {
     return Card(
       margin: EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8),
       elevation: 3,
@@ -68,7 +69,8 @@ class HomePage extends StatelessWidget {
           Text(
             bean.title,
             textAlign: TextAlign.left,
-          )
+          ),
+          MyView().getText()
         ],
       ),
     );
