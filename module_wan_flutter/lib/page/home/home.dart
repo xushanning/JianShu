@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:module_wan_flutter/bean/article_bean.dart';
+import 'package:module_wan_flutter/theme/color_theme.dart';
 import 'package:module_wan_flutter/widgets/search_head.dart';
 import 'package:provider/provider.dart';
 
@@ -17,6 +18,7 @@ class HomePage extends StatelessWidget {
           return Scaffold(
             body: Column(
               children: [
+                SearchHead("测试测试"),
                 Container(
                     height: 200,
                     child: model.bannerData.length != 0
@@ -70,7 +72,6 @@ class HomePage extends StatelessWidget {
             bean.title,
             textAlign: TextAlign.left,
           ),
-          MyView().getText()
         ],
       ),
     );
@@ -84,10 +85,10 @@ class HomePage extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(2)),
           //背景颜色
-          border: Border.all(width: 1, color: Color(0xffF85959))),
+          border: Border.all(width: 1, color: ThemeColor.colorRed)),
       child: Text(
         content,
-        style: TextStyle(color: Color(0xffF85959)),
+        style: TextStyle(color: ThemeColor.colorRed),
       ),
     );
   }
