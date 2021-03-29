@@ -6,6 +6,7 @@ import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.FormatStrategy
 import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
+import com.tencent.mmkv.MMKV
 import com.xu.commonlib.BuildConfig
 import com.xu.commonlib.utlis.LoggerStrategy
 
@@ -13,7 +14,7 @@ import com.xu.commonlib.utlis.LoggerStrategy
 /**
  * @author 言吾許
  */
-abstract class BaseApplication :  Application() {
+abstract class BaseApplication : Application() {
 
     companion object {
         lateinit var appContext: Application
@@ -24,6 +25,8 @@ abstract class BaseApplication :  Application() {
         appContext = this
         initLogger()
         initARouter()
+        //tencent mmkv
+        val dir = MMKV.initialize(this)
 
     }
 

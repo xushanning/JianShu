@@ -144,7 +144,8 @@ ext {
             eventBusProcessor    : "org.greenrobot:eventbus-annotation-processor:3.1.1",
 
             //util
-            alpha                : "com.alibaba.android:alpha:1.0.0.1@aar"
+            alpha                : "com.alibaba.android:alpha:1.0.0.1@aar",
+            mmkv                 : "com.tencent:mmkv-static:1.2.7"
 
     ]
 }

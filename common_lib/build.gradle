@@ -117,6 +117,7 @@ dependencies {
 //    api rootProject.ext.dependencies["jComposeRt"]
 
     api rootProject.ext.dependencies["alpha"]
+    api rootProject.ext.dependencies["mmkv"]
 
 
 }
