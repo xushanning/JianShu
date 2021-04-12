@@ -21,18 +21,22 @@
 
 
 package leetcode.editor.cn;
+
+import java.util.List;
+
 //Java：字母异位词分组
-public class P49GroupAnagrams{
+public class P49GroupAnagrams {
     public static void main(String[] args) {
         Solution solution = new P49GroupAnagrams().new Solution();
         // TO TEST
     }
-    //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public List<List<String>> groupAnagrams(String[] strs) {
 
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public List<List<String>> groupAnagrams(String[] strs) {
+            return null;
+        }
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

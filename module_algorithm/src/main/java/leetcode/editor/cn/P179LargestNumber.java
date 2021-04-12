@@ -44,18 +44,20 @@
 
 
 package leetcode.editor.cn;
+
 //Java：最大数
-public class P179LargestNumber{
+public class P179LargestNumber {
     public static void main(String[] args) {
         Solution solution = new P179LargestNumber().new Solution();
         // TO TEST
     }
-    //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public String largestNumber(int[] nums) {
 
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public String largestNumber(int[] nums) {
+            return "";
+        }
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

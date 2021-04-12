@@ -63,18 +63,20 @@
 
 
 package leetcode.editor.cn;
+
 //Java：解码方法
-public class P91DecodeWays{
+public class P91DecodeWays {
     public static void main(String[] args) {
         Solution solution = new P91DecodeWays().new Solution();
         // TO TEST
     }
-    //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int numDecodings(String s) {
 
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public int numDecodings(String s) {
+            return 0;
+        }
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

@@ -14,6 +14,7 @@
             <option value="$PROJECT_DIR$/common_lib" />
             <option value="$PROJECT_DIR$/common_res" />
             <option value="$PROJECT_DIR$/module_algorithm" />
+            <option value="$PROJECT_DIR$/module_video" />
             <option value="$PROJECT_DIR$/module_wan" />
             <option value="$PROJECT_DIR$/module_wan_flutter/.android/Flutter" />
           </set>

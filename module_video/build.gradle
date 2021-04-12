@@ -10,8 +10,12 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     implementation project(path: ':common_res')
 
-    kapt rootProject.ext.dependencies["daggerProcessor"]
-    kapt rootProject.ext.dependencies["daggerCompiler"]
+    implementation rootProject.ext.dependencies["hilt"]
+//    kapt rootProject.ext.dependencies["daggerProcessor"]
+//    kapt rootProject.ext.dependencies["daggerCompiler"]
     kapt rootProject.ext.dependencies["arouterProcessor"]
     kapt rootProject.ext.dependencies["glideProcessor"]
+    kapt rootProject.ext.dependencies["moshiKapt"]
+    kapt rootProject.ext.dependencies["hiltKapt"]
+    kapt rootProject.ext.dependencies["hiltViewModelCompiler"]
 }

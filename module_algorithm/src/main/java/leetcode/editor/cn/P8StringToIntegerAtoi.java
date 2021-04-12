@@ -112,18 +112,20 @@
 
 
 package leetcode.editor.cn;
+
 //Java：字符串转换整数 (atoi)
-public class P8StringToIntegerAtoi{
+public class P8StringToIntegerAtoi {
     public static void main(String[] args) {
         Solution solution = new P8StringToIntegerAtoi().new Solution();
         // TO TEST
     }
-    //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int myAtoi(String s) {
 
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public int myAtoi(String s) {
+            return 0;
+        }
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

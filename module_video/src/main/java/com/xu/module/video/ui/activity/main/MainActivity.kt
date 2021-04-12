@@ -20,12 +20,14 @@ import com.xu.commonlib.utlis.extention.load
 import com.xu.commonlib.utlis.extention.singleClick
 import com.xu.module.video.R
 import com.xu.module.video.bean.VideoInfoBean
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.v_activity_main.*
 
 /**
  * @author 言吾許
  */
 @Route(path = ARouterPath.videoMain)
+@AndroidEntryPoint
 class MainActivity : BaseMvpActivity<IMainContract.IMainView, IMainContract.IMainPresenter>(),
     IMainContract.IMainView, ClipboardManager.OnPrimaryClipChangedListener {
 

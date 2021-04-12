@@ -12,27 +12,27 @@ import javax.inject.Singleton
 /**
  * @author 言吾許
  */
-@Module
+//@Module
 class VideoModule {
 
-    @Module
+//    @Module
     companion object {
         /**
          * 提供videoApi
          */
-        @JvmStatic
-        @Provides
-        @Singleton
+//        @JvmStatic
+//        @Provides
+//        @Singleton
         fun provideVideoApi(builder: Retrofit.Builder): VideoApi {
             return builder.baseUrl(VideoApi.BASE_URL).build().create(VideoApi::class.java)
         }
 
-        //提供运动dao
-        @JvmStatic
-        @Provides
-        @Singleton
-        fun provideVideoDao(database: AppDatabase): IVideoDao {
-            return database.videoDao()
-        }
+//        //提供运动dao
+//        @JvmStatic
+//        @Provides
+//        @Singleton
+//        fun provideVideoDao(database: AppDatabase): IVideoDao {
+//            return database.videoDao()
+//        }
     }
 }
