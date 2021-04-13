@@ -11,12 +11,22 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:replace="android:theme,android:label">
         <activity android:name=".ui.activity.audio.AudioRecordActivity">
+
+        </activity>
+        <activity android:name=".ui.activity.picture.Camera1PictureActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.activity.picture.Camera2PictureActivity">
+
+        </activity>
+        <activity android:name=".ui.activity.picture.CameraXPictureActivity">
+
+        </activity>
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.xu.module.video.fileprovider"

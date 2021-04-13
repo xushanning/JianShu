@@ -1,6 +1,10 @@
 package com.xu.module.video.ui.activity.audio
 
 import android.content.Intent
+import android.media.AudioAttributes
+import android.media.AudioFormat
+import android.media.AudioManager
+import android.media.AudioTrack
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -11,7 +15,9 @@ import com.xu.commonlib.base.BaseActivity
 import com.xu.commonlib.utlis.extention.singleClick
 import com.xu.module.video.R
 import kotlinx.android.synthetic.main.v_activity_audio_record.*
+import java.io.ByteArrayOutputStream
 import java.io.File
+import java.io.FileInputStream
 
 /**
  *进行音频录制
@@ -28,6 +34,12 @@ class AudioRecordActivity : BaseActivity() {
     private var playThread: AudioPlayThread? = null
 
     private var wavName = "test"
+    private var pcmName = "test"
+
+    /**
+     * 采样率为44100
+     */
+    private val audioRate = 44100
 
     companion object {
         val path = Environment.getExternalStorageDirectory().absolutePath + "/VideoRecord"
@@ -57,11 +69,14 @@ class AudioRecordActivity : BaseActivity() {
         }
 
         tv_play_pcm_stream.singleClick {
-
+            playThread?.down()
+            playThread = null
+            playThread = AudioPlayThread(pcmName)
+            playThread?.start()
         }
 
         tv_play_pcm_static.singleClick {
-
+            playPcm2()
         }
     }
 
@@ -92,6 +107,42 @@ class AudioRecordActivity : BaseActivity() {
         } else {
             showToast("先录制")
         }
+
+    }
+
+    //static和stream最大的区别，就是一次性的全部写进去
+    private fun playPcm2() {
+        val file = File(path, "$pcmName.pcm")
+        val input = FileInputStream(file)
+        val baos = ByteArrayOutputStream()
+        var len = 0
+        val buffer = ByteArray(1024)
+        while (input.read(buffer).also { len = it } > 0) {
+            baos.write(buffer, 0, len)
+        }
+        //拿到音频数据
+        val bytes = baos.toByteArray()
+        val channelConfig = AudioFormat.CHANNEL_IN_STEREO
+        val attributes = AudioAttributes.Builder()
+            .setUsage(AudioAttributes.USAGE_MEDIA)
+            .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+            .build()
+
+        val format = AudioFormat.Builder()
+            .setSampleRate(audioRate)
+            .setEncoding(AudioFormat.ENCODING_PCM_16BIT)
+            .setChannelMask(channelConfig)
+            .build()
+
+        val audioTrack = AudioTrack(
+            attributes,
+            format,
+            bytes.size,
+            AudioTrack.MODE_STATIC,
+            AudioManager.AUDIO_SESSION_ID_GENERATE
+        )
+        audioTrack.write(bytes, 0, bytes.size)
+        audioTrack.play()
 
     }
 }
