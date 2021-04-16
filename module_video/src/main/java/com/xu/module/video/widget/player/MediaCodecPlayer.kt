@@ -53,7 +53,7 @@ class MediaCodecPlayer : FrameLayout, IVideoPlayer {
             videoDecoder?.release()
             videoDecoder = null
         }
-        videoDecoder = VideoDecoder()
+        videoDecoder = VideoDecoder(surface)
     }
 
     override fun prepare() {

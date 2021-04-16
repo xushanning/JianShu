@@ -41,84 +41,32 @@ android {
     }
 }
 
+def kaptDependencies = rootProject.ext.kaptDependencies
+def apiDependencies = rootProject.ext.dependencies
+def debugDependencies = rootProject.ext.debugDependencies
+def testDependencies = rootProject.ext.testDependencies
+
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api fileTree(dir: 'libs', include: ['*.jar'])
 
-    androidTestImplementation 'androidx.test:core:1.1.0'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
+    apiDependencies.each { k, v ->
+        api v
+    }
 
+    kaptDependencies.each { k, v ->
+        kapt v
+    }
 
-    kapt rootProject.ext.dependencies["roomCompiler"]
-    kapt rootProject.ext.dependencies["glideProcessor"]
-    kapt rootProject.ext.dependencies["moshiKapt"]
-    kapt rootProject.ext.dependencies["hiltKapt"]
-    kapt rootProject.ext.dependencies["hiltViewModelCompiler"]
+    debugDependencies.each { k, v ->
+        debugApi v
+    }
 
-
-    api rootProject.ext.dependencies["appcompat"]
-    api rootProject.ext.dependencies["swip"]
-    api rootProject.ext.dependencies["constraintLayout"]
-    api rootProject.ext.dependencies["recyclerView"]
-    api rootProject.ext.dependencies["material"]
-    api rootProject.ext.dependencies["viewpager2"]
-    api rootProject.ext.dependencies["materialDialog"]
-    api rootProject.ext.dependencies["materialLifecycle"]
-    api rootProject.ext.dependencies["smartRefreshCore"]
-    api rootProject.ext.dependencies["smartRefreshHeader"]
-    api rootProject.ext.dependencies["smartRefreshFooter"]
-    api rootProject.ext.dependencies["popwindow"]
-    api rootProject.ext.dependencies["glide"]
-    api rootProject.ext.dependencies["easyload"]
-    api rootProject.ext.dependencies["agentWeb"]
-    api rootProject.ext.dependencies["banner"]
-    api rootProject.ext.dependencies["flex"]
-    api rootProject.ext.dependencies["bg"]
-    api rootProject.ext.dependencies["stickyRv"]
-
-
-    api rootProject.ext.dependencies["kotlin"]
-    api rootProject.ext.dependencies["rxJava"]
-    api rootProject.ext.dependencies["rxAndroid"]
-    api rootProject.ext.dependencies["rxBinding"]
-    api rootProject.ext.dependencies["rxlifecycle"]
-    api rootProject.ext.dependencies["rxlifecycleComponents"]
-    api rootProject.ext.dependencies["rxPermission"]
-
-    api rootProject.ext.dependencies["retrofit"]
-    api rootProject.ext.dependencies["moshiCoverter"]
-    api rootProject.ext.dependencies["moshi"]
-    api rootProject.ext.dependencies["okhttpLog"]
-    api rootProject.ext.dependencies["cookieJar"]
-
-    api rootProject.ext.dependencies["statusBar"]
-
-    api rootProject.ext.dependencies["quickAdapter"]
-
-    api rootProject.ext.dependencies["logger"]
-    debugApi rootProject.ext.dependencies["leakCanary"]
-
-    api rootProject.ext.dependencies["hiltViewModel"]
-    api rootProject.ext.dependencies["hilt"]
-    api rootProject.ext.dependencies["arouterApi"]
-
-    api rootProject.ext.dependencies["eventBus"]
-
-    api rootProject.ext.dependencies["room"]
-    api rootProject.ext.dependencies["roomKtx"]
-
-    api rootProject.ext.dependencies["coroutines"]
-
-    //JetPack
-    api rootProject.ext.dependencies["liveData"]
-    api rootProject.ext.dependencies["viewModel"]
-    api rootProject.ext.dependencies["fragmentKtx"]
-    api rootProject.ext.dependencies["jStartUp"]
-    api rootProject.ext.dependencies["jPaging"]
-//    api rootProject.ext.dependencies["jCompose"]
-//    api rootProject.ext.dependencies["jComposeRt"]
-
-    api rootProject.ext.dependencies["alpha"]
-    api rootProject.ext.dependencies["mmkv"]
+    testDependencies.each { k, v ->
+        testApi v
+    }
+    androidTestDependencies.each { k, v ->
+        androidTestApi v
+    }
 
 
 }

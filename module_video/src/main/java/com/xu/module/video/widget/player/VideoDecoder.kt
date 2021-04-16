@@ -81,7 +81,7 @@ class VideoDecoder(private val surface: Surface) {
     private fun getTrack(mineType: String): Int {
         for (index in 0 until mediaExt!!.trackCount) {
             val mine = mediaExt!!.getTrackFormat(index).getString(MediaFormat.KEY_MIME)
-            if (mine.startsWith(mineType)) {
+            if (mine!!.startsWith(mineType)) {
                 return index
             }
         }
