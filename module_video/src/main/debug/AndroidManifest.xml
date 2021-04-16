@@ -26,6 +26,9 @@
         <activity android:name=".ui.activity.picture.CameraXPictureActivity">
 
         </activity>
+        <activity android:name=".ui.activity.media.MediaRecordActivity">
+
+        </activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"

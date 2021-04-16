@@ -22,7 +22,7 @@ class AudioRecordThread(private val wavName: String) : Thread() {
     private var isDone = false
 
     /**
-     *
+     *缓冲区
      *双声道
      *采样位数为16bit
      */
@@ -34,6 +34,11 @@ class AudioRecordThread(private val wavName: String) : Thread() {
 
     /**
      * 新建record实例，并用他取录音
+     * 1、数据源：麦克风
+     * 2、采样率：一秒钟对麦克风的采样次数
+     * 3、声道数：单声道还是双声道
+     * 4、采样位数大小：16bit，代表每个声音单元占用了两个字节
+     * 5、缓冲区大小
      */
     private var record = AudioRecord(
         MediaRecorder.AudioSource.MIC,
