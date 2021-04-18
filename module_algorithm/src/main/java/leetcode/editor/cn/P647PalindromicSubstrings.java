@@ -29,18 +29,20 @@
 
 
 package leetcode.editor.cn;
+
 //Java：回文子串
-public class P647PalindromicSubstrings{
+public class P647PalindromicSubstrings {
     public static void main(String[] args) {
         Solution solution = new P647PalindromicSubstrings().new Solution();
         // TO TEST
     }
-    //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int countSubstrings(String s) {
 
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public int countSubstrings(String s) {
+            return 0;
+        }
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

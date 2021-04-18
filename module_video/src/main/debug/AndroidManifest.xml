@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name=".debug.DebugApplication"
@@ -14,11 +15,7 @@
 
         </activity>
         <activity android:name=".ui.activity.picture.Camera1PictureActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".ui.activity.picture.Camera2PictureActivity">
 
@@ -28,6 +25,16 @@
         </activity>
         <activity android:name=".ui.activity.media.MediaRecordActivity">
 
+        </activity>
+        <activity android:name=".ui.activity.opengl.OpenGlActivity">
+
+        </activity>
+        <activity android:name=".ui.activity.opengl.shape.ShapeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <provider
