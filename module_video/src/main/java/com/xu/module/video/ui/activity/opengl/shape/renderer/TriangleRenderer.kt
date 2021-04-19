@@ -2,7 +2,6 @@ package com.xu.module.video.ui.activity.opengl.shape.renderer
 
 import android.opengl.GLES20
 import android.opengl.GLSurfaceView
-import com.orhanobut.logger.Logger
 import com.xu.commonlib.utlis.AssetUtil
 import com.xu.module.video.ui.activity.opengl.OpenGLUtils
 import java.nio.ByteBuffer
@@ -24,7 +23,7 @@ class TriangleRenderer : GLSurfaceView.Renderer {
     //设置颜色，依次为红绿蓝和透明通道
     private val color = floatArrayOf(1.0f, 0f, 1.0f, 1.0f)
 
-    //坐标
+    //坐标，3D三维数据，
     private val vertex = floatArrayOf(
         1f, 1f, 0.0f,//顶点的x y z
         0f, 0f, 0.0f,//左下角的 x y z
@@ -32,8 +31,6 @@ class TriangleRenderer : GLSurfaceView.Renderer {
     )
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
-        val ids = IntArray(1)
-        GLES20.glGenTextures(1, ids, 0)
         val vertexShader = AssetUtil.getAssetJson("shape/shape_triangle_vertex.vsh")
         val fragmentShader = AssetUtil.getAssetJson("shape/shape_triangle_fragment.fsh")
         programId = OpenGLUtils.loadProgram(vertexShader, fragmentShader)
@@ -42,6 +39,7 @@ class TriangleRenderer : GLSurfaceView.Renderer {
         vColor = GLES20.glGetUniformLocation(programId!!, "vColor")
 
 
+        //准备位置数据
         mGLVertexBuffer =
                 //每个浮点数占四个字节
             ByteBuffer.allocateDirect(vertex.size * 4).order(ByteOrder.nativeOrder())
@@ -52,16 +50,18 @@ class TriangleRenderer : GLSurfaceView.Renderer {
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
+
     }
 
     override fun onDrawFrame(gl: GL10?) {
-        Logger.d("onDrawFrame")
         //清除颜色
         GLES20.glClearColor(0.5f, 0.5f, 0.5f, 1.0f)
+        //将程序加载到opengles2.0环境中
         GLES20.glUseProgram(programId!!)
         //启用三角形顶点的句柄
         GLES20.glEnableVertexAttribArray(vPosition!!)
-        GLES20.glVertexAttribPointer(vPosition!!, 2, GLES20.GL_FLOAT, false, 12, mGLVertexBuffer)
+        //给句柄赋值坐标数据
+        GLES20.glVertexAttribPointer(vPosition!!, 3, GLES20.GL_FLOAT, false, 12, mGLVertexBuffer)
         //设置绘制三角形的颜色
         GLES20.glUniform4fv(vColor!!, 1, color, 0)
         //绘制三角形,除以3，是因为采用的，每个点用三个坐标表示

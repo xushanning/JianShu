@@ -1,28 +1,12 @@
 package com.xu.module.video.ui.activity.opengl
 
-import android.content.Context
 import android.opengl.GLES20
-import java.io.BufferedReader
-import java.io.InputStreamReader
-import java.lang.StringBuilder
 
 /**
  * @author 许 on 2021/4/18.
  */
 object OpenGLUtils {
 
-    fun readRawTextFile(context: Context, rawId: Int): String {
-        val inputStream = context.resources.openRawResource(rawId)
-        val br = BufferedReader(InputStreamReader(inputStream))
-        var line: String?
-        val sb = StringBuilder()
-        while (br.readLine().also { line = it } != null) {
-            sb.append(line)
-            sb.append("\n")
-        }
-        br.close()
-        return sb.toString()
-    }
 
     /**
      * 编译成GPU程序

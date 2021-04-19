@@ -8,6 +8,7 @@ import android.opengl.GLSurfaceView
 import android.util.AttributeSet
 import android.view.Surface
 import androidx.camera.core.Preview
+import com.xu.commonlib.utlis.AssetUtil
 import com.xu.module.video.R
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
@@ -64,8 +65,8 @@ class CameraView : GLSurfaceView, GLSurfaceView.Renderer {
         surfaceTexture?.setOnFrameAvailableListener {
             requestRender()
         }
-        val vertexShader = OpenGLUtils.readRawTextFile(context, R.raw.camera_vert)
-        val fragmentShader = OpenGLUtils.readRawTextFile(context, R.raw.camera_frag)
+        val vertexShader = AssetUtil.getAssetJson("camera/camera_vert.vsh")
+        val fragmentShader = AssetUtil.getAssetJson("camera/camera_frag.fsh")
 
         programId = OpenGLUtils.loadProgram(vertexShader, fragmentShader)
 
@@ -109,8 +110,8 @@ class CameraView : GLSurfaceView, GLSurfaceView.Renderer {
         surfaceTexture?.getTransformMatrix(textureMatrix)
 
         //step0、清屏
-        GLES20.glClearColor(1f, 0f, 0f, 0f)
-        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT)
+//        GLES20.glClearColor(1f, 0f, 0f, 0f)
+//        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT)
 
         //step1、使用着色器
         GLES20.glUseProgram(programId!!)
