@@ -26,14 +26,17 @@ class SquareRenderer : GLSurfaceView.Renderer {
      * 正方形坐标 x y z
      */
     private val vertex = floatArrayOf(
-        -0.5f, 0.5f, 0.0f,
-        -0.5f, -0.5f, 0.0f,
-        0.5f, -0.5f, 0.0f,
-        0.5f, 0.5f, 0.0f
+        -0.5f, 0.5f, 0.0f,//第一个点
+        -0.5f, -0.5f, 0.0f,//第二个点
+        0.5f, -0.5f, 0.0f,//第三个点
+        0.5f, 0.5f, 0.0f//第四个点
     )
 
-    //索引
-    private val index = shortArrayOf(0, 1, 2, 0, 2, 3)
+    //索引,每次取三个值，这个值是一个索引，代表在vertex中的位置
+    //比如：0,1,2 这个对应的vertex中的一、二、三，这三个点，然后绘制出一个三角形
+    //然后在2,3,0, 这个对应vertex中的二、三、一，这三个点，按照逆时针顺序绘制出一个三角形
+    //两个三角形，想拼接，就出了一个正方形
+    private val index = shortArrayOf(0, 1, 2, 2, 3, 0)
 
     /**
      * 颜色
@@ -85,7 +88,7 @@ class SquareRenderer : GLSurfaceView.Renderer {
          *索引法绘制正方形
          * 1、绘制方式
          * 2、绘制数量
-         * 3、索引的数据类型
+         * 3、索引的数据类型：必须是GL_UNSIGNED_BYTE或GL_UNSIGNED_SHORT
          * 4、索引缓冲
          */
         GLES20.glDrawElements(

@@ -1,10 +1,13 @@
 package com.xu.module.video.ui.activity.opengl.shape
 
+import android.Manifest
 import android.os.Bundle
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.orhanobut.logger.Logger
+import com.permissionx.guolindev.PermissionX
 import com.xu.commonlib.base.BaseActivity
 import com.xu.commonlib.utlis.extention.createAdapter
+import com.xu.commonlib.utlis.extention.permission
 import com.xu.commonlib.utlis.extention.singleDataItemClick
 import com.xu.module.video.R
 import com.xu.module.video.bean.ShapeBean
@@ -29,11 +32,20 @@ class ShapeActivity : BaseActivity() {
         rv_shape.run {
             adapter = shapeAdapter
             layoutManager = FlexboxLayoutManager(this@ShapeActivity)
-            shapeAdapter.singleDataItemClick {
+            shapeAdapter.singleDataItemClick(10) {
                 //重新刷新，onPause和onResume后，会重新走onSurfaceCreated，这样在一个页面就能重新刷新了
                 sv_shape.onPause()
                 sv_shape.onResume()
                 sv_shape.refresh(it.id)
+            }
+        }
+        permission(
+            Manifest.permission.CAMERA
+        ) { allGranted ->
+            if (allGranted) {
+                Logger.d("权限全过了")
+            } else {
+                Logger.d("给个权限吧。。")
             }
         }
     }
