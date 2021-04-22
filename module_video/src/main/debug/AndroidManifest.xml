@@ -27,14 +27,14 @@
 
         </activity>
         <activity android:name=".ui.activity.opengl.OpenGlActivity">
+
+        </activity>
+        <activity android:name=".ui.activity.opengl.shape.ShapeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".ui.activity.opengl.shape.ShapeActivity">
-
         </activity>
 
         <provider

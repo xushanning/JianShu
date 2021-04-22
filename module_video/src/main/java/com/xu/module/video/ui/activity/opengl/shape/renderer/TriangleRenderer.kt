@@ -114,9 +114,9 @@ class TriangleRenderer : GLSurfaceView.Renderer {
         //绘制三角形,除以3，是因为采用的，每个点用三个坐标表示
 //        GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, vertex.size / 3)
         //GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, vertex.size)
-        Logger.d(vertex)
+        //Logger.d(vertex)
         GLES20.glDrawArrays(GLES20.GL_TRIANGLE_FAN, 0, vertex.size)
-        Logger.d(vertex.size)
+        //Logger.d(vertex.size)
         GLES20.glDisableVertexAttribArray(vPosition!!)
     }
 }
