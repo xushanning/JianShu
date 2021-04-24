@@ -79,6 +79,7 @@ class ColorTriangleRenderer : GLSurfaceView.Renderer {
                 .asFloatBuffer()
         positionBuffer?.clear()
         positionBuffer?.put(vertex)
+        //定位指针位置，从该位置开始读取顶点数据
         positionBuffer?.position(0)
 
 
@@ -92,16 +93,30 @@ class ColorTriangleRenderer : GLSurfaceView.Renderer {
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
-
+        //视口的宽高比
         val ratio = width.toFloat() / height
         //todo 矩阵变换有点蒙
         val mViewMatrix = FloatArray(16)
         val mProjectMatrix = FloatArray(16)
 
+        //设置视口
+        //gl?.glViewport(0, 0, width, height)
 
-        //设置透视投影
+//        设置矩阵模式为投影模式
+        //gl?.glMatrixMode(GL10.GL_PROJECTION)
+
+        //加载单位矩阵
+        //gl?.glLoadIdentity()
+
+        //设置平截体视口
+        //不太清楚和Matrix.frustumM的关系？
+        // 如果规定宽是1的话，那么高度就是ratio
+        //3为近平面距离，7为远平面距离
+        //gl?.glFrustumf(-1f, 1f, -ratio, ratio, 3f, 7f)
+
+        //设置透视投影，物体越远越小
         Matrix.frustumM(mProjectMatrix, 0, -ratio, ratio, -1f, 1f, 3f, 7f)
-        //设置相机位置
+        //设置相机位置，一般把centerx放在0 0 0的位置
         Matrix.setLookAtM(mViewMatrix, 0, 0f, 0f, 7.0f, 0f, 0f, 0f, 0f, 1.0f, 0.0f)
         //计算变换矩阵
         Matrix.multiplyMM(matrix, 0, mProjectMatrix, 0, mViewMatrix, 0)
