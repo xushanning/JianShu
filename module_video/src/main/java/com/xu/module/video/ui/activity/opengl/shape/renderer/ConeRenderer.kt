@@ -4,7 +4,7 @@ import android.opengl.GLES20
 import android.opengl.GLSurfaceView
 import android.opengl.Matrix
 import com.xu.commonlib.utlis.AssetUtil
-import com.xu.module.video.ui.activity.opengl.OpenGLUtils
+import com.xu.module.video.utils.OpenGLUtils
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.FloatBuffer

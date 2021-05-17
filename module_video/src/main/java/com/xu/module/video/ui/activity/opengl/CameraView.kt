@@ -9,7 +9,7 @@ import android.util.AttributeSet
 import android.view.Surface
 import androidx.camera.core.Preview
 import com.xu.commonlib.utlis.AssetUtil
-import com.xu.module.video.R
+import com.xu.module.video.utils.OpenGLUtils
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.FloatBuffer

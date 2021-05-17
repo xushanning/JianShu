@@ -62,6 +62,7 @@ class ShapeActivity : BaseActivity() {
         list.add(ShapeBean(8, "圆柱"))
         list.add(ShapeBean(9, "球体"))
         list.add(ShapeBean(10, "带光源的球体"))
+        list.add(ShapeBean(11, "Bitmap"))
         shapeAdapter.setNewInstance(list)
     }
 

@@ -47,6 +47,7 @@ class ShapeSurfaceView : GLSurfaceView, GLSurfaceView.Renderer {
             8 -> CylinderRenderer()
             9 -> SphereRenderer()
             10 -> LightSphereRenderer()
+            11 -> BitmapRenderer()
             else -> TriangleRenderer()
         }
         shapeRenderer?.onSurfaceCreated(gl, config)
