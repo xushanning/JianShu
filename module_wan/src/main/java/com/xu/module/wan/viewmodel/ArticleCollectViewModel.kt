@@ -4,7 +4,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import com.orhanobut.logger.Logger
 import com.xu.commonlib.base.mvvm.BaseViewModel
-import com.xu.commonlib.utlis.extention.go
+import com.xu.commonlib.utlis.extention.navigate
 import com.xu.commonlib.utlis.extention.request
 import com.xu.commonlib.utlis.extention.requestByNoResult
 import com.xu.module.wan.api.WanService
@@ -44,7 +44,7 @@ class ArticleCollectViewModel @ViewModelInject constructor(
     private fun checkState() {
         if (!wanLiveData.loginStateLiveData.value!!) {
             //未登录，跳转登录
-            go(ARouterPath.login)
+            navigate(ARouterPath.login)
             return
         }
     }

@@ -117,8 +117,9 @@ class ZhiFuBaoActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
         val moshi = Moshi.Builder().build()
         val type = Types.newParameterizedType(List::class.java, ItemBean::class.java)
         val adapter = moshi.adapter<List<ItemBean>>(type)
-        val itemData = adapter.fromJson(AssetUtil.getAssetJson("zfbConfig.json"))
-        quickAdapter.setNewData(itemData)
+//        val itemData: MutableList<ItemBean> =
+//            adapter.fromJson(AssetUtil.getAssetJson("zfbConfig.json"))
+//        quickAdapter.setNewData(itemData)
     }
 
     override fun onOffsetChanged(p0: AppBarLayout, p1: Int) {

@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.orhanobut.logger.Logger
-import com.xu.commonlib.utlis.extention.go
+import com.xu.commonlib.utlis.extention.navigate
 import com.xu.commonlib.utlis.extention.observe
 import com.xu.module.wan.BR
 import com.xu.module.wan.R
@@ -35,7 +35,7 @@ class WePublicArticleFragment(
         }
         quickAdapter.run {
             setOnItemClickListener { item, _ ->
-                go(ARouterPath.web) {
+                navigate(ARouterPath.web) {
                     withString("url", item.link)
                     withString("title", item.title)
                 }

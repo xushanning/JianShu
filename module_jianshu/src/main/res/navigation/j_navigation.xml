@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/j_navigation"
+    app:startDestination="@+id/fragment_1">
+    <fragment
+        android:id="@+id/fragment_1"
+        android:name="com.xu.module.jianshu.ui.navigation.Fragment1" />
+    <action
+        android:id="@+id/action1"
+        app:destination="@id/fragment_2" />
+
+    <fragment
+        android:id="@+id/fragment_2"
+        android:name="com.xu.module.jianshu.ui.navigation.Fragment2" />
+</navigation>

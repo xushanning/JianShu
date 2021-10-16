@@ -1,6 +1,6 @@
 package com.xu.module.jianshu.ui.easyload.state
 
-import com.xu.module.easyload.state.BaseState
+import com.xu.easyload.state.BaseState
 import com.xu.module.jianshu.R
 
 /**

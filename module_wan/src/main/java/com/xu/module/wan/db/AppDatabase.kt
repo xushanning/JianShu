@@ -12,10 +12,10 @@ import com.xu.module.wan.db.entity.UserEntity
 /**
  * @author 许 on 2020/9/10.
  */
-@Database(
-    entities = [UserEntity::class, ReadHistoryEntity::class, SearchHistoryEntity::class],
-    version = 1
-)
+//@Database(
+//    entities = [UserEntity::class, ReadHistoryEntity::class, SearchHistoryEntity::class],
+//    version = 1
+//)
 abstract class AppDatabase : RoomDatabase() {
     /**
      * 用户信息Dao

@@ -1,21 +1,21 @@
-setBinding(new Binding([gradle: this]))
-evaluate(new File(
-        settingsDir,
-        'module_wan_flutter/.android/include_flutter.groovy'
-))
+//setBinding(new Binding([gradle: this]))
+//evaluate(new File(
+//        settingsDir,
+//        'module_wan_flutter/.android/include_flutter.groovy'
+//))
 include ':common_lib',
         //':module_easyload',
         ':common_res',
-        ':module_wan',
-        ':module_video',
-        //':vrouter_api',
-        //':vrouter_complier',
-        //':vrouter_annotation',
-        //简书demo
-        //':module_jianshu',
-        //算法模块
-          ':module_algorithm'
-        //壳模块
-        //':app'
-        //运动模块
-        //':module_sport'
+        ':module_wan'
+//':module_video'
+//':vrouter_api',
+//':vrouter_complier',
+//':vrouter_annotation',
+//简书demo
+//':module_jianshu'
+//算法模块
+//  ':module_algorithm',
+//壳模块
+//':app'
+//运动模块
+//':module_sport'

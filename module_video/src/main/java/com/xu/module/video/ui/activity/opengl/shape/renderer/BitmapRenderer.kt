@@ -56,7 +56,6 @@ class BitmapRenderer : GLSurfaceView.Renderer {
         pointBuffer?.put(pointVertex)
         pointBuffer?.position(0)
 
-        textureBuffer=
 
 
 

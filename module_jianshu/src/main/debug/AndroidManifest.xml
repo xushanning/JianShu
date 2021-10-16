@@ -73,14 +73,17 @@
 
         </activity>
         <activity android:name=".ui.coroutine.CoroutineActivity">
+
+        </activity>
+        <activity android:name=".ui.motionlayout.MotionLayoutActivity">
+
+        </activity>
+        <activity android:name=".ui.navigation.NavigationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".ui.motionlayout.MotionLayoutActivity">
-
         </activity>
     </application>
 </manifest>

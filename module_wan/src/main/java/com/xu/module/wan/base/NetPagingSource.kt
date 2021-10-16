@@ -1,6 +1,7 @@
 package com.xu.module.wan.base
 
 import androidx.paging.PagingSource
+import androidx.paging.PagingState
 import com.xu.commonlib.http.ApiException
 import com.xu.module.wan.bean.base.BasePageResBean
 import com.xu.module.wan.bean.base.BaseResBean
@@ -31,5 +32,9 @@ class NetPagingSource<T : Any>(private val source: suspend (Int) -> BaseResBean<
         } catch (e: Exception) {
             LoadResult.Error(e)
         }
+    }
+
+    override fun getRefreshKey(state: PagingState<Int, T>): Int? {
+        return null
     }
 }

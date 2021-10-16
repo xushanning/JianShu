@@ -6,7 +6,7 @@ import com.orhanobut.logger.Logger
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
 import com.xu.commonlib.utlis.AssetUtil
-import com.xu.commonlib.utlis.extention.go
+import com.xu.commonlib.utlis.extention.navigate
 import com.xu.commonlib.utlis.extention.observe
 import com.xu.commonlib.utlis.extention.showToast
 import com.xu.commonlib.utlis.extention.singleDbDataItemClick
@@ -19,7 +19,6 @@ import com.xu.module.wan.databinding.WFragmentMineBinding
 import com.xu.module.wan.databinding.WItemCommonUseBinding
 import com.xu.module.wan.db.dao.IUserDao
 import com.xu.module.wan.ui.activity.integral.IntegralActivity
-import com.xu.module.wan.utils.ext.createAdapter
 import com.xu.module.wan.utils.ext.createBindingAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.w_fragment_mine.*
@@ -63,7 +62,7 @@ class MineFragment(
         quickAdapter.run {
             setNewInstance(getConfig())
             singleDbDataItemClick {
-                go(it.path) { withInt("type", it.type) }
+                navigate(it.path) { withInt("type", it.type) }
             }
         }
     }
@@ -94,7 +93,7 @@ class MineFragment(
          * 去登陆
          */
         fun jumpLogin() {
-            go(ARouterPath.login)
+            navigate(ARouterPath.login)
             // launcher.launch(Intent(context, LoginActivity::class.java))
         }
 
@@ -109,7 +108,7 @@ class MineFragment(
          * 积分排行
          */
         fun jumpIntegral() {
-            go(ARouterPath.integral) {
+            navigate(ARouterPath.integral) {
                 withInt("type", IntegralActivity.INTEGRAL_TYPE_RANK)
             }
         }

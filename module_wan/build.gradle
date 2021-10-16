@@ -17,7 +17,7 @@ dependencies {
     //很奇怪，已经在lib中依赖过了，这里还是得依赖一次
     implementation rootProject.ext.dependencies["hilt"]
     //flutter module
-    implementation project(path: ':flutter')
+    //implementation project(path: ':flutter')
 
     kaptDependencies.each { k, v ->
         kapt v

@@ -10,11 +10,11 @@ import com.alibaba.android.arouter.launcher.ARouter
 /**
  * aRouter扩展
  */
-fun go(path: String) {
+fun navigate(path: String) {
     ARouter.getInstance().build(path).navigation()
 }
 
-fun go(path: String, func: Postcard.() -> Unit): Unit = run {
+fun navigate(path: String, func: Postcard.() -> Unit): Unit = run {
     ARouter.getInstance().build(path).with {
         this.func()
     }.navigation()
@@ -23,11 +23,11 @@ fun go(path: String, func: Postcard.() -> Unit): Unit = run {
 /**
  * 待返回的跳转
  */
-fun go(path: String, activity: Activity, requestCode: Int) {
+fun navigate(path: String, activity: Activity, requestCode: Int) {
     ARouter.getInstance().build(path).navigation(activity, requestCode)
 }
 
-fun go(path: String, activity: Activity, requestCode: Int, func: Postcard.() -> Unit) {
+fun navigate(path: String, activity: Activity, requestCode: Int, func: Postcard.() -> Unit) {
     ARouter.getInstance().build(path).with {
         this.func()
     }.navigation(activity, requestCode)

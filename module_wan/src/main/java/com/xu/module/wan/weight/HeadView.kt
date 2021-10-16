@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.xu.commonlib.utlis.extention.go
+import com.xu.commonlib.utlis.extention.navigate
 import com.xu.commonlib.utlis.extention.singleClick
 import com.xu.module.wan.R
 import com.xu.module.wan.constant.ARouterPath
@@ -31,7 +31,7 @@ class HeadView : ConstraintLayout {
     private fun initLayout() {
         LayoutInflater.from(context).inflate(R.layout.w_view_head, this)
         v_1.singleClick {
-            go(ARouterPath.search)
+            navigate(ARouterPath.search)
         }
     }
 

@@ -41,7 +41,7 @@ class AppModule {
         builder.addInterceptor { chain ->
             val request = chain.request()
             //请求地址
-            Logger.d("请求地址:" + request.url())
+            Logger.d("请求地址:" + request.url)
             chain.proceed(request)
         }
         val resInterceptor = HttpLoggingInterceptor { s ->

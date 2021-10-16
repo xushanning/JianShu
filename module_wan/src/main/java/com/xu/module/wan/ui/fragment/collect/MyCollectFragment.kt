@@ -5,15 +5,13 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.orhanobut.logger.Logger
-import com.xu.commonlib.utlis.extention.go
+import com.xu.commonlib.utlis.extention.navigate
 import com.xu.commonlib.utlis.extention.observe
 import com.xu.module.wan.BR
 import com.xu.module.wan.R
 import com.xu.module.wan.base.BaseFragment
 import com.xu.module.wan.constant.ARouterPath
 import com.xu.module.wan.databinding.WFragmentCollectBinding
-import com.xu.module.wan.ui.fragment.home.ArticlePagingAdapter
 import com.xu.module.wan.ui.fragment.home.HomeArticleItemQuickAdapter
 import com.xu.module.wan.utils.ext.initFloatButton
 import com.xu.module.wan.viewmodel.ArticleCollectViewModel
@@ -89,7 +87,7 @@ class MyCollectFragment(override val layoutId: Int = R.layout.w_fragment_collect
     inner class OnClick {
 
         fun login() {
-            go(ARouterPath.login)
+            navigate(ARouterPath.login)
         }
     }
 

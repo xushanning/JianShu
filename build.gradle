@@ -5,6 +5,8 @@ buildscript {
     apply from: "config.gradle"
     repositories {
         google()
+        mavenCentral()
+        gradlePluginPortal()
         jcenter()
     }
     dependencies {
@@ -21,11 +23,12 @@ buildscript {
 allprojects {
     repositories {
         google()
+        mavenCentral()
         jcenter()
         maven { url 'https://jitpack.io' }
-        maven {
-            url "https://dl.bintray.com/zhangsl/maven"
-        }
+//        maven {
+//            url "https://dl.bintray.com/zhangsl/maven"
+//        }
     }
 }
 
