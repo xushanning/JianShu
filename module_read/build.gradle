@@ -1,5 +1,5 @@
 apply from: "../component_build.gradle"
 
 android {
-    resourcePrefix "w_"
+    resourcePrefix "r_"
 }

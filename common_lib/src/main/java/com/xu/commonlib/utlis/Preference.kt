@@ -1,7 +1,6 @@
 package com.xu.commonlib.utlis
 
-import android.content.Context
-import com.xu.commonlib.base.BaseApplication
+import com.tencent.mmkv.MMKV
 
 import kotlin.reflect.KProperty
 
@@ -10,9 +9,8 @@ import kotlin.reflect.KProperty
  */
 
 class Preference<T>(private val key: String, private val default: T) {
-    private val fileName: String = "xiang_tang_data"
-    private val prefs by lazy {
-        BaseApplication.appContext.getSharedPreferences(fileName, Context.MODE_PRIVATE)
+    private val kv by lazy {
+        MMKV.defaultMMKV()
     }
 
     operator fun setValue(thisRef: Any?, property: KProperty<*>, value: T) {
@@ -28,44 +26,44 @@ class Preference<T>(private val key: String, private val default: T) {
      * @param key key值
      * @param data object类型数据
      */
-    fun putSharePreferences(key: String, data: T) = with(prefs.edit()) {
+    private fun putSharePreferences(key: String, data: T) = with(kv) {
         when (data) {
             is String -> {
-                putString(key, data)
+                encode(key, data)
             }
             is Long -> {
-                putLong(key, data)
+                encode(key, data)
             }
             is Int -> {
-                putInt(key, data)
+                encode(key, data)
             }
             is Float -> {
-                putFloat(key, data)
+                encode(key, data)
             }
             is Boolean -> {
-                putBoolean(key, data)
+                encode(key, data)
             }
             else -> throw IllegalArgumentException("不能被保存的类型！")
-        }.apply()
+        }
     }
 
     @Suppress("UNCHECKED_CAST")
-    fun getSharePreferences(key: String, default: T): T = with(prefs) {
+    private fun getSharePreferences(key: String, default: T): T = with(kv) {
         return when (default) {
             is String -> {
-                getString(key, default)
+                decodeString(key, default)
             }
             is Long -> {
-                getLong(key, default)
+                decodeLong(key, default)
             }
             is Float -> {
-                getFloat(key, default)
+                decodeFloat(key, default)
             }
             is Int -> {
-                getInt(key, default)
+                decodeInt(key, default)
             }
             is Boolean -> {
-                getBoolean(key, default)
+                decodeBool(key, default)
             }
             else -> throw IllegalArgumentException("不能获取的类型!")
         } as T

@@ -19,3 +19,4 @@ include ':common_lib',
 //':app'
 //运动模块
 //':module_sport'
+include ':module_read'

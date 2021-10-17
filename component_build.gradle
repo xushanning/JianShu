@@ -57,11 +57,24 @@ android {
     packagingOptions {
         exclude 'META-INF/library_release.kotlin_module'
     }
-
+    buildFeatures {
+        dataBinding = true
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
 
 }
 kapt {
     arguments {
         arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+
+dependencies {
+    implementation project(path: ':common_res')
+    implementation rootProject.ext.dependencies["hilt"]
+    rootProject.ext.kaptDependencies.each { k, v ->
+        kapt v
     }
 }
