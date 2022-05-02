@@ -10,12 +10,13 @@
         android:layout_height="400dp"
         android:background="@color/res_99">
 
-        <com.xu.module.jianshu.ui.eventdispatch.ChildView1
-            android:id="@+id/v_child"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:background="@color/res_black" />
+
     </com.xu.module.jianshu.ui.eventdispatch.FatherView>
 
+    <com.xu.module.jianshu.ui.eventdispatch.ChildView1
+        android:id="@+id/v_child"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:background="@color/res_black" />
 
 </com.xu.module.jianshu.ui.eventdispatch.GrandfatherView>

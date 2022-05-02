@@ -3,3 +3,8 @@ apply from: "../component_build.gradle"
 android {
     resourcePrefix "r_"
 }
+dependencies {
+    testImplementation 'junit:junit:4.12'
+    //腾讯优量汇 目前只在当前项目引入
+    implementation('com.qq.e.union:union:4.420.1290')
+}

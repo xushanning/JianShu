@@ -3,6 +3,7 @@ package com.xu.module.jianshu.ui.viewdraw
 import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
+import android.view.MotionEvent
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.orhanobut.logger.Logger
@@ -15,10 +16,14 @@ class ParentView : LinearLayout {
 
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
 
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr
+    )
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-       // measureChildren(widthMeasureSpec, heightMeasureSpec)
+        // measureChildren(widthMeasureSpec, heightMeasureSpec)
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
 //        Logger.d(MeasureSpec.getSize(heightMeasureSpec))
 //        when (MeasureSpec.getMode(heightMeasureSpec)) {
@@ -36,6 +41,16 @@ class ParentView : LinearLayout {
 //            }
 //
 //        }
+    }
+
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        return false
+    }
+
+
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        Logger.d("parentView ontouch" + event?.action)
+        return true
     }
 
 

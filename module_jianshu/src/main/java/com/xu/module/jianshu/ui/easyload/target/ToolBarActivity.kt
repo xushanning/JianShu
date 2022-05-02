@@ -2,8 +2,8 @@ package com.xu.module.jianshu.ui.easyload.target
 
 import android.os.Bundle
 import com.xu.commonlib.base.BaseActivity
-import com.xu.module.easyload.EasyLoad
-import com.xu.module.easyload.state.SuccessState
+import com.xu.easyload.EasyLoad
+import com.xu.easyload.state.SuccessState
 import com.xu.module.jianshu.R
 import com.xu.module.jianshu.ui.easyload.DelayUtil
 
@@ -20,9 +20,8 @@ class ToolBarActivity : BaseActivity() {
     }
 
     override fun initView(savedInstanceState: Bundle?) {
-        val service = EasyLoad.instance
-                .beginBuilder()
-                .inject(this)
+        val service = EasyLoad.initLocal()
+            .inject(this)
         DelayUtil.delay(service, SuccessState::class.java)
     }
 

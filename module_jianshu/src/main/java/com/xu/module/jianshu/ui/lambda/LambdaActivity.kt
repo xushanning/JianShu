@@ -7,6 +7,7 @@ import com.orhanobut.logger.Logger
 import com.xu.commonlib.base.BaseActivity
 import com.xu.commonlib.constant.ARouterPath
 import com.xu.module.jianshu.R
+import com.xu.module.jianshu.ui.lambda.dsl.create
 import io.reactivex.Observable
 import io.reactivex.ObservableOnSubscribe
 import io.reactivex.functions.Function
@@ -154,6 +155,15 @@ class LambdaActivity : BaseActivity() {
         }).map {
 
         }.subscribe()
+
+        create { "wodemingzi" }.map {
+            Logger.d(this)
+            3
+        }.map {
+
+            Logger.d(this)
+            5
+        }
     }
 
     private fun testInterface() {

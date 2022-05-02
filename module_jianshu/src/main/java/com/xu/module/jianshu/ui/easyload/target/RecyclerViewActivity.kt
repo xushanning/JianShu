@@ -22,7 +22,8 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.orhanobut.logger.Logger
-import com.xu.module.easyload.EasyLoad
+import com.xu.easyload.EasyLoad
+
 import com.xu.module.jianshu.R
 import kotlinx.android.synthetic.main.j_activity_easy_load_recycler.*
 
@@ -36,16 +37,15 @@ class RecyclerViewActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.j_activity_easy_load_recycler)
-        val service = EasyLoad.instance
-                .beginBuilder()
-                .inject(rv_content)
+        val service = EasyLoad.initLocal()
+            .inject(rv_content)
         rv_content.layoutManager = GridLayoutManager(this, 2)
         rv_content.adapter = adapter
         Handler(Looper.getMainLooper()).postDelayed(
-                {
-                    service.showSuccess()
-                    setData()
-                }, 2000
+            {
+                service.showSuccess()
+                setData()
+            }, 2000
         )
 
     }
@@ -53,13 +53,18 @@ class RecyclerViewActivity : Activity() {
     private fun setData() {
         val data = ArrayList<String>()
         for (i in 0..100) {
-            data.add(String.format("https://www.thiswaifudoesnotexist.net/example-%d.jpg", (Math.random() * 100000).toInt()))
+            data.add(
+                String.format(
+                    "https://www.thiswaifudoesnotexist.net/example-%d.jpg",
+                    (Math.random() * 100000).toInt()
+                )
+            )
         }
         adapter.setNewData(data)
     }
 
     class MyAdapter(var context: Context, var data: List<String> = ArrayList()) :
-            RecyclerView.Adapter<MyViewHolder>() {
+        RecyclerView.Adapter<MyViewHolder>() {
 
         var result = SparseBooleanArray()
 
@@ -70,7 +75,7 @@ class RecyclerViewActivity : Activity() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
             val view = LayoutInflater.from(context)
-                    .inflate(R.layout.j_item_easy_load_recycler, parent, false)
+                .inflate(R.layout.j_item_easy_load_recycler, parent, false)
             return MyViewHolder(context, view)
         }
 
@@ -94,43 +99,42 @@ class RecyclerViewActivity : Activity() {
         fun loadImage(url: String, position: Int, result: SparseBooleanArray) {
             if (result.get(position)) {
                 Glide.with(context)
-                        .load(url)
-                        .listener(object : RequestListener<Drawable> {
+                    .load(url)
+                    .listener(object : RequestListener<Drawable> {
 
-                            override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
-                                Logger.d(e?.message)
-                                return false
-                            }
+                        override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+                            Logger.d(e?.message)
+                            return false
+                        }
 
-                            override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
-                                Logger.d("加载成功")
-                                return false
-                            }
+                        override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                            Logger.d("加载成功")
+                            return false
+                        }
 
-                        })
-                        .into(imgContent)
+                    })
+                    .into(imgContent)
             } else {
-                val service = EasyLoad.instance
-                        .beginBuilder()
-                        .inject(imgContent)
+                val service = EasyLoad.initLocal()
+                    .inject(imgContent)
                 Glide.with(context)
-                        .load(url)
-                        .listener(object : RequestListener<Drawable> {
+                    .load(url)
+                    .listener(object : RequestListener<Drawable> {
 
-                            override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
-                                Logger.d(e?.message)
-                                return false
-                            }
+                        override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+                            Logger.d(e?.message)
+                            return false
+                        }
 
-                            override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
-                                Logger.d("加载成功")
-                                result.put(position, true)
-                                service.showSuccess()
-                                return false
-                            }
+                        override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                            Logger.d("加载成功")
+                            result.put(position, true)
+                            service.showSuccess()
+                            return false
+                        }
 
-                        })
-                        .into(imgContent)
+                    })
+                    .into(imgContent)
             }
         }
     }

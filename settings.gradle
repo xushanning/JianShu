@@ -6,13 +6,13 @@
 include ':common_lib',
         //':module_easyload',
         ':common_res',
-        ':module_wan'
+//':module_wan',
 //':module_video'
 //':vrouter_api',
 //':vrouter_complier',
 //':vrouter_annotation',
 //简书demo
-//':module_jianshu'
+        ':module_jianshu'
 //算法模块
 //  ':module_algorithm',
 //壳模块

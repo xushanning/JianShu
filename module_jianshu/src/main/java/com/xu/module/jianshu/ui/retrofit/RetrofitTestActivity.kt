@@ -44,7 +44,7 @@ class RetrofitTestActivity : BaseActivity() {
                     }
 
                     override fun onResponse(call: Call, response: Response) {
-                        val res = response.body()?.source()?.readUtf8()
+                        val res = response.body?.source()?.readUtf8()
                         Logger.d(res)
                     }
                 })

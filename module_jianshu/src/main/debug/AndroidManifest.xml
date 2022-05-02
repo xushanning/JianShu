@@ -22,8 +22,12 @@
         <activity android:name=".ui.lambda.LambdaActivity">
 
         </activity>
-        <activity android:name=".ui.eventdispatch.EventDispatchActivity">
+        <activity android:name=".ui.lambda.LambdaActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".ui.coordinatorlayout.CoordinatorLayoutActivity">
 
@@ -52,6 +56,7 @@
         <activity android:name=".ui.viewdraw.ViewDrawActivity">
 
         </activity>
+        <activity android:name=".ui.scroller.ScrollerViewActivity"></activity>
         <activity android:name=".ui.easyload.target.PlaceHolderActivity">
 
         </activity>
@@ -78,12 +83,9 @@
         <activity android:name=".ui.motionlayout.MotionLayoutActivity">
 
         </activity>
-        <activity android:name=".ui.navigation.NavigationActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".ui.navigation.NavigationActivity"></activity>
+        <activity android:name=".ui.viewdrag.ViewDragActivity">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 </manifest>

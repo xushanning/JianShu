@@ -43,9 +43,9 @@ class ReferenceActivity : BaseActivity() {
         private var weakReference = WeakReference(activity)
 
 
-        override fun handleMessage(msg: Message?) {
+        override fun handleMessage(msg: Message) {
             super.handleMessage(msg)
-            if (msg?.what == 1) {
+            if (msg.what == 1) {
                 weakReference.get()?.bt_home?.text = "hello world"
             }
         }
